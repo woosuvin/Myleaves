@@ -1,0 +1,73 @@
+@charset "UTF-8";
+/*헤더 영역*/
+header {
+	height: 60px;
+}
+
+/* 푸터영역 */
+/* footer 하단 고정 [S] */
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+#body-wrapper {
+	min-height: 100%;
+	position: relative;
+}
+
+#body-content {
+	margin-top: 100px;
+	padding-bottom: 200px; /* footer의 높이 */
+}
+
+footer {
+	width: 100%;
+	height: 3px; /* footer의 높이 */
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+
+/*푸터 설명 줄바꿈*/
+.basic {
+	margin: 0px;
+}
+
+/*링크 이미지(깃허브, 아이티윌)*/
+.github {
+	width: 40px;
+	height: auto
+}
+
+/* 상단 하단 이동 버튼 */
+.moveTopBtn {
+	position: fixed;
+	bottom: 7rem;
+	right: 2rem;
+	width: 4rem;
+	height: 4rem;
+	color: #fff;
+}
+
+.moveBottomBtn {
+	position: fixed;
+	bottom: 3rem;
+	right: 2rem;
+	width: 4rem;
+	height: 4rem;
+	color: #fff;
+}
+
+.topBtnImage {
+	width: 85px;
+	height: 85px;
+		
+}
+
+.bottomBtnImage {
+	width: 85px;
+	height: 85px;
+}
