@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html  xmlns:th="http:://www.thymeleaf.org"
+           xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+           >
+       
+<div th:fragment="mngr_sidebar"> 
+	<!-- Sidebar Menu -->
+	<div class="d-flex flex-column flex-shrink-0 p-3 container-fluid">
+		<!-- Sidebar -->
+		<div class="flex-column">   <!-- text-center -->
+			<a href=""
+				class="text-decoration-none">
+				<img alt="내풀잎스"
+					class="img-fluid">
+			</a>
+		</div>
+		<hr>
+		
+		<ul class="nav nav-pills flex-column mb-auto mt-2" id="sideBar">
+			<li>
+				<a class="nav-link">
+					회원관리  
+				</a>
+			</li>
+			<li>
+				<a class="nav-link ">
+					판매관리			
+				</a>
+			</li>
+			<li>
+				<a class="nav-link">
+					플렌테리어 관리 
+				</a>
+			</li>
+			<li>
+				<a class="nav-link ">
+					공지사항  			
+				</a>
+			</li>
+					<li>
+				<a class="nav-link">
+					FAQ 
+				</a>
+			</li>
+			<li>
+				<a class="nav-link ">
+					QNA 		
+				</a>
+			</li>
+		</ul>
+		<hr/>
+		<div class="d-flex align-items-center text-decoration-none ">
+			<a href="#"
+				class="">
+				<!-- 관리자 프로필 -->
+				<img src="/images/common/authorization.png" alt="" width="60" height="60"
+					class="rounded-circle me-2">
+			</a>
+			<a class="" href="#">로그아웃</a>
+		</div>
+	</div>	
+</div>      
