@@ -19,19 +19,8 @@ public class HomeController {
 	public String home(Model model) {
 		log.info("home");
 		
-		return "/main/index";
+		return "/main/home";
 	}
 	
-	 /**
-	 * 관리자 home page
-	 * 
-	 * @return
-	 */
-	@GetMapping("/mngr")
-	public String mngr(Model model) {
-		log.info("mngr");
-
-		return "/main/mngrHome";
-	}
 	
 }

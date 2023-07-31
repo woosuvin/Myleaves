@@ -1,4 +1,4 @@
-package com.itwill.myleaves.web.mypage;
+package com.itwill.myleaves.web.mngr;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/mypage")
-public class MyPageHomeController {
+@RequestMapping("/mngr")
+public class MngrOrderController {
 
-	@GetMapping
-	public String mypage(Model model) {
-		log.info("mypage");
+	@GetMapping("/order")
+	public void mngrHome(Model model) {
+		log.info("mngr order");
 		
-		return "/mypage/home";
 	}
 	
 	

@@ -37,7 +37,7 @@
 		<div class="flex-column">   <!-- text-center -->
 			<a href=""
 				class="text-decoration-none">
-				<img src="images/common/logo2.png" alt="내풀잎스"
+				<img src="/images/common/logo2.png" alt="내풀잎스"
 					class="img-fluid">
 			</a>
 		</div>
@@ -45,32 +45,37 @@
 		
 		<ul class="nav nav-pills flex-column mb-auto mt-2" id="sideBar">
 			<li>
-				<a class="nav-link" th:href="@{/member}" >
-					회원관리  
+				<a class="nav-link" th:href="@{/mngr/member}" >
+					회원 관리  
 				</a>
 			</li>
 			<li>
-				<a class="nav-link" th:href="@{/sales}">
-					판매관리			
+				<a class="nav-link" th:href="@{/mngr/order}">
+					주문 관리			
 				</a>
 			</li>
 			<li>
-				<a class="nav-link" th:href="@{/planterior}">
+				<a class="nav-link" th:href="@{/mngr/store}">
+					상품 관리			
+				</a>
+			</li>
+			<li>
+				<a class="nav-link" th:href="@{/mngr/planterior}">
 					플렌테리어 관리 
 				</a>
 			</li>
 			<li>
-				<a class="nav-link" th:href="@{/notice}">
+				<a class="nav-link" th:href="@{/mngr/notice}">
 					공지사항  			
 				</a>
 			</li>
 					<li>
-				<a class="nav-link" th:href="@{/faq}">
+				<a class="nav-link" th:href="@{/mngr/faq}">
 					FAQ 
 				</a>
 			</li>
 			<li>
-				<a class="nav-link" th:href="@{/qna}">
+				<a class="nav-link" th:href="@{/mngr/qna}">
 					QNA 		
 				</a>
 			</li>
