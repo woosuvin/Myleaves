@@ -15,6 +15,14 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageSellBuyController {
 
 	@GetMapping("/wish_list")
-	public void read(Model model) {
+	public void wishList(Model model) {
+	}
+	
+	@GetMapping("/sell_list")
+	public void sellList(Model model) {
+	}
+	
+	@GetMapping("/buy_list")
+	public void buyList(Model model) {
 	}
 }

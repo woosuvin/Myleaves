@@ -1,9 +1,4 @@
 @charset "UTF-8";
-/*헤더 영역*/
-header {
-	height: 60px;
-}
-
 /* 푸터영역 */
 /* footer 하단 고정 [S] */
 html, body {
@@ -18,7 +13,6 @@ html, body {
 }
 
 #body-content {
-	margin-top: 100px;
 	padding-bottom: 200px; /* footer의 높이 */
 }
 
@@ -30,6 +24,20 @@ footer {
 	left: 0;
 }
 
+.nav-link-login{
+	color: black;
+	margin: 0px 10px;
+	font-weight: lighter;
+	text-decoration-line: none;
+	font-size: 12px;
+}
+
+
+.nav-link{
+	color: black;
+	margin: 0px 10px;
+	font-weight: lighter
+}
 
 /*푸터 설명 줄바꿈*/
 .basic {

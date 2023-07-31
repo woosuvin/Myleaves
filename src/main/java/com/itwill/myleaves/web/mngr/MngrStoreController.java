@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/mngr")
 public class MngrStoreController {
 
-	@GetMapping("/store")
+	@GetMapping("/store/list")
 	public void mngrHome(Model model) {
 		log.info("mngr store");
 		
