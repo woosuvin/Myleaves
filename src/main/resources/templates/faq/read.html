@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/base_layout}">
+<main layout:fragment="main">
+<div class="my-2 p-3 text-center">
+		<h1 class="titleBolder">FAQ</h1>
+	</div>
+	<!-- <ul>
+        <li th:each="faq : ${faqs}">
+            <strong th:text="${faq.question}"></strong>: <span th:text="${faq.answer}"></span>
+        </li>
+    </ul -->> 
+    <span id="faq-title">자주 묻는 질문(FAQ)</span>
+		<div class="faq-content">
+			<button class="question" id="que-1">
+				<span id="que-1-toggle">+</span><span>'HTML'이란 무엇인가요?</span>
+			</button>
+			<div class="answer" id="ans-1">하이퍼텍스트 마크업 언어(HyperText Markup
+				Language)입니다.</div>
+		</div>
+		<div class="faq-content">
+			<button class="question" id="que-2">
+				<span id="que-2-toggle">+</span><span>'CSS'란 무엇인가요?</span>
+			</button>
+			<div class="answer" id="ans-2">캐스케이딩 스타일 시트(Cascading Style
+				Sheets)입니다.</div>
+		</div>
+		<div class="faq-content">
+			<button class="question" id="que-3">
+				<span id="que-3-toggle">+</span><span>'JavaScript'란 무엇인가요?</span>
+			</button>
+			<div class="answer" id="ans-3">자바스크립트는 객체(Object)를 기초로 하는 스크립트
+				프로그래밍 언어입니다.</div>
+		</div>
+
+
+</main>    
+</html>
