@@ -17,9 +17,9 @@ public class HomeController {
 	 */
 	@GetMapping("/")
 	public String home(Model model) {
-		log.info("home()");
+		log.info("home");
 		
-		return "/common/main";
+		return "/main/index";
 	}
 	
 	 /**
@@ -27,11 +27,11 @@ public class HomeController {
 	 * 
 	 * @return
 	 */
-	@GetMapping("mngr")
+	@GetMapping("/mngr")
 	public String mngr(Model model) {
-		log.info("mngr()");
+		log.info("mngr");
 
-		return "/common/mngrHome";
+		return "/main/mngrHome";
 	}
 	
 }
