@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/mngr_base_layout}">
-    
-	<main layout:fragment="mngrHome">
-    <h1>주문 관리</h1>
-    <div>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/mngr_base_layout}">
+
+<main layout:fragment="mngrHome">
+	<h1>주문 관리</h1>
+	<div>
 		<form action="/shape/mngr/user/list" method="get" id="searchForm">
 			<div class="input-group mb-2">
-				<span class="input-group-text">주문 날짜</span> <input type="text"
-					class="form-control" name="searchOrderDateStart"> <span
-					class="input-group-text">~</span> <input type="text"
-					class="form-control" name="searchOrderDateEnd">
+				<span class="input-group-text">주문 날짜</span> 
+				<input type="date" id="mt_date" name="mt_date" class="form-control" placeholder="날짜">
+				<p>~</p>
+				<input type="date" id="mt_date" name="mt_date" class="form-control" placeholder="날짜">
 			</div>
 
 			<div class="input-group mb-2">
@@ -74,7 +74,7 @@
 			</tbody>
 		</table>
 	</div>
-    
-	</main>
-	
+
+</main>
+
 </html>
