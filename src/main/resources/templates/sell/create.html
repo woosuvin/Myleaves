@@ -4,7 +4,50 @@
     layout:decorate="~{layout/mngr_base_layout}">
     
 	<main layout:fragment="main">
-    <h1>내 풀잎 분양</h1>
+		<div>
+			<div>
+				<h2>내풀잎🍀등록</h2>
+			</div>
+			
+			<form>
+				<label>제목</label>
+				<div>
+					<input type="text" placeholder="제목을 입력하세요." required />
+				</div>
+				
+				<label>가격</label>
+				<div>
+					<input type="number" required />
+				</div>
+				<small>
+					0원 입력 시 무료나눔
+				</small>
+				
+				<label>대표 사진</label>
+				<div>
+					<input type="file" />
+				</div>
+				
+				<label>상세 설명</label>
+				<div>
+					<textarea id="summernote"></textarea>
+				</div>
+				
+				<label>거래 장소</label>
+				<div>
+					<select name="sido"></select>
+					<select name="sigungu"></select>
+				</div>
+				<div>
+					<input type="text" placeholder="상세 주소 및 장소명을 입력해 주세요." required />
+				</div>
+				
+				<div>
+					<button>취소</button>
+					<button>등록</button>
+				</div>
+			</form>
+		</div>
 	</main>
 	
 </html>

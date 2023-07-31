@@ -4,7 +4,50 @@
     layout:decorate="~{layout/mngr_base_layout}">
     
 	<main layout:fragment="mngrHome">
-    <h1>상품 관리 수정</h1>
+    	<div>
+			<div>
+				<h2>스토어 상품 수정</h2>
+			</div>
+			
+			<form>
+				
+				<label>상품</label>
+				<div>
+					<input type="text" required />
+				</div>
+				
+				<label>가격</label>
+				<div>
+					<input type="number" required />
+				</div>
+				
+				<label>대표 사진</label>
+				<div>
+					<input type="file" />
+				</div>
+				
+				<label>상세 설명</label>
+				<div>
+					<textarea id="summernote"></textarea>
+				</div>
+				
+				<label>수량</label>
+				<div>
+					<input type="number" required />
+				</div>
+				
+				<div>
+					<label for="checkbox">판매 중단</label>
+					<input type="checkbox" id="checkbox" value="N"/>
+				</div>
+				
+				<div>
+					<button>삭제</button>
+					<button>목록</button> <!-- 리스트로 이동 -->
+					<button>수정 완료</button>
+				</div>
+			</form>
+		</div>
 	</main>
 	
 </html>
