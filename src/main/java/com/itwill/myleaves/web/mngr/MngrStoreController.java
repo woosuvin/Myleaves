@@ -20,5 +20,11 @@ public class MngrStoreController {
 		
 	}
 	
+	@GetMapping("/store/create")
+	public void storeCreate(Model model) {
+		log.info("storeCreate");
+		
+	}
+	
 	
 }

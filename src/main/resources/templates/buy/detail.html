@@ -1,10 +1,146 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/mngr_base_layout}">
-    
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/mngr_base_layout}">
+
 	<main layout:fragment="main">
-    <h1>내 풀잎 분양 상세 페이지</h1>
+		<h1>내 풀잎 분양 상세 페이지</h1>
 	</main>
-	
+<div>
+	<div>
+		<div style="float: left;">
+			<img src="/images/sample1.png" alt="" width="300" height="300" />
+		</div>
+		<div class="infoArea">
+			<div class="prd-detail-infobox">
+				<div class="xans-element- xans-product xans-product-detaildesign">
+					<table border="1" summary=""
+						style="border: none; border-collapse: collapse;">
+						<tbody>
+							<tr>
+								<td colspan="3" style="padding: 8px; font-size: 12px;">서울시
+									강남구</td>
+							</tr>
+							<tr class=" xans-record-">
+								<td colspan="3" class="modi-title"
+									style="padding: 8px; font-size: 16px; font-weight: bold;">몬스테라
+									분양합니다.</td>
+							</tr>
+							<tr
+								class="xans-record- modi-price modi-price-tr last-modi-price-tr">
+								<td colspan="3"><span
+									style="font-size: 12px; color: #555555;"><strong
+										id="span_product_price_text">5,000원</strong></span></td>
+							</tr>
+							<!-- 								<tr class=" xans-record-">
+									<td><span style="font-size: 12px; color: #555555;">크기
+											| 조각당 20~35mm, 총 길이 3.2m<br> 소재 | 리무버블<br>
+									</span></td>
+								</tr> -->
+						</tbody>
+					</table>
+				</div>
+
+				<!-- 				<div id="totalProducts" class="">
+					<p class="displaynone ec-base-help txtWarn txt11 ">수량을 선택해주세요.</p>
+					<p class="ec-base-help txtWarn txt11 displaynone"> 위 옵션선택 박스를 선택하시면 아래에 상품이 추가됩니다.</p>
+					<table border="1" summary="" class="qty-table">
+						<caption>상품 목록</caption>
+						<colgroup>
+							<col style="width: 284px;">
+							<col style="width: 80px;">
+							<col style="width:0px;" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th scope="col">상품명</th>
+								<th scope="col">상품수</th>
+								<th scope="col">가격</th>
+							</tr>
+						</thead>
+						<tbody class="">
+							<tr>
+								<td>[다이노탱] SNACK BAR MASKING TAPE</td>
+								<td><span class="quantity"> <input id="quantity"
+										name="quantity_opt[]" style="" value="1" type="text">
+										<a href="#none" class="single-qty qty-up"><img
+											src="/web/imgs/qty-single-up@2x.png" alt="수량증가"
+											class="QuantityUp up"></a> <a href="#none"
+										class="single-qty qty-down"><img
+											src="/web/imgs/qty-single-down@2x.png" alt="수량감소"
+											class="QuantityDown down"></a>
+								</span></td>
+								<td class="right"><span class="quantity_price">5,000원<input
+										type="hidden" name="option_box_price" class="option_box_price"
+										value="5000" item_code="P0000NLL000A"></span><span
+									class="mileage ">(<img
+										src="//img.echosting.cafe24.com/design/skin/admin/ko_KR/ico_product_point.gif">
+										&nbsp;<span class="mileage_price">50원</span>)
+								</span></td>
+							</tr>
+						</tbody> -->
+				<!-- 옵션선택 또는 세트상품 선택시 상품이 추가되는 영역입니다. 쇼핑몰 화면에는 아래와 같은 마크업구조로 표시됩니다. 삭제시 기능이 정상동작 하지 않습니다. -->
+				<tbody>
+					<!-- tr>
+                                <td>
+                                    <p class="product">
+                                        $상품명<br />
+                                        <span>$옵션</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <span class="quantity">
+                                        <input type="text" class="quantity_opt" />
+                                        &nbsp;<a href="#none"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_up.gif" alt="수량증가" class="up" /></a>
+                                        <a href="#none"><img src="//img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_down.gif" alt="수량감소" class="down" /></a>
+                                    </span>
+                                    <a href="#none"><img src="//img.echosting.cafe24.com/design/skin/default/product/btn_price_delete.gif" alt="삭제" class="option_box_del" /></a>
+                                </td>
+                                <td class="right">
+                                    <span>$가격</span>
+                                    <span class="mileage">(<img src="//img.echosting.cafe24.com/design/skin/admin/ko_KR/product/ico_pay_point.gif" /> &nbsp;<span class="mileage_price">$적립금</span>)</span>
+                                </td>
+                            </tr -->
+					<!-- </tbody>
+						// 옵션선택 또는 세트상품 선택시 상품이 추가되는 영역입니다. 쇼핑몰 화면에는 아래와 같은 마크업구조로 표시됩니다. 삭제시 기능이 정상동작 하지 않습니다.
+					</table>
+				</div>
+
+				<div id="totalPrice" class="totalPrice">
+					<strong>총 상품금액</strong>(수량) : <span class="total"><strong><em>5,000원</em></strong>
+						(1개)</span>
+				</div>
+				<p class="ec-base-help txt11 ">할인가가 적용된 최종 결제예정금액은 주문 시 확인할 수
+					있습니다.</p>
+
+				<div
+					class="xans-element- xans-product xans-product-additional pdp-banner banner-open">
+					🍋팝업 주문 개별 배송 🛎 5만원 이상 무료배송</div> -->
+
+					<div>
+						<div class="ec-base-button gColumn" style="float: left;">
+							<a href="#none" class="btnNormal btnGrowing  "
+								onclick="product_submit(2, '/exec/front/order/basket/', this)">관심
+								상품에 추가</a>
+							<!-- <span class="btnNormal  displaynone">SOLD OUT</span> -->
+						</div>
+						<div>
+							<a href="#none" class="btnNormal btnInvert "
+								onclick="openChatRoom()">판매자와 대화하기</a>
+						</div>
+						<div class="app-payment-flex-group"></div>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div>
+	<hr>
+</div>
+<div>몬스테라 수형이 넘 이뻐요. 무늬도 볼.매 인 것 같습니다. 구멍이 적절하게 뚫려 잎 모양새도 좋아요.
+	저렴하게 분양합니다.</div>
+
+<th:block layout:fragment="myscripts">
+	<script src="/js/chat.js"></script>
+</th:block>
 </html>

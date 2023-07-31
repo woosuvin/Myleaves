@@ -9,39 +9,48 @@
 				<h2>스토어 상품 등록</h2>
 			</div>
 			
-			<form>
-				
+			<form action="" method="post" class="form-box" id="createForm" encType="multipart/form-data">
 				<label>상품</label>
-				<div>
-					<input type="text" placeholder="제목을 입력하세요." required />
+				<div class="input-group">
+					<input type="text" id="item_name" name="item_name" class="form-control" placeholder="상품 이름 입력" autofocus required />
 				</div>
 				
 				<label>가격</label>
-				<div>
-					<input type="number" required />
+				<div class="input-group">
+					<input type="number" class="form-control" id="price" name="price"
+										placeholder="상품 가격 입력" aria-label="상품 가격 입력" />
 				</div>
 				
 				<label>대표 사진</label>
-				<div>
-					<input type="file" />
+				<div class="input-group">
+					<input class="form-control file-input" type="file" id="thumbnail" name="thumbnail" accept="image/*"/>
 				</div>
 				
 				<label>상세 설명</label>
-				<div>
-					<textarea id="summernote"></textarea>
+				<div class="input-group">
+					<textarea class="form-control" id="summernote" name="content" placeholder="상품 상세설명"></textarea>
 				</div>
 				
 				<label>수량</label>
-				<div>
-					<input type="number" required />
+				<div class="input-group">
+					<input type="number" class="form-control" id="inven" name="inven"
+										placeholder="상품 수량 입력" aria-label="상품 수량 입력" />
 				</div>
 				
-				<div>
-					<button>취소</button> <!-- 리스트로 이동 -->
-					<button>등록</button>
+				<div class="my-2 text-center">
+					<a class="btn btn-secondary" id="btnCancel">취소</a> <!-- 리스트로 이동 -->
+					<input class="btn btn-classic" type="submit"
+										id="btnCreate" value="등록" />
 				</div>
 			</form>
 		</div>
 	</main>
-	
+	<th:block layout:fragment="myscripts">
+	<link
+		href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+		rel="stylesheet">
+	<script
+		src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	<script src="../static/summernote/lang/summernote-ko-KR.js"></script>
+	</th:block>
 </html>
