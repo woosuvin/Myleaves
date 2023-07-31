@@ -5,6 +5,76 @@
     
 	<main layout:fragment="mngrHome">
     <h1>주문 관리</h1>
+    <div>
+		<form action="/shape/mngr/user/list" method="get" id="searchForm">
+			<div class="input-group mb-2">
+				<span class="input-group-text">주문 날짜</span> <input type="text"
+					class="form-control" name="searchOrderDateStart"> <span
+					class="input-group-text">~</span> <input type="text"
+					class="form-control" name="searchOrderDateEnd">
+			</div>
+
+			<div class="input-group mb-2">
+				<span class="input-group-text">주문 상태</span> <select
+					class="form-select" name="searchOrderStatus">
+					<option selected disabled>선택</option>
+					<option value="1">입금 대기</option>
+					<option value="2">입금 확인</option>
+					<option value="3">상품 준비중</option>
+					<option value="4">배송중</option>
+					<option value="5">배송 완료</option>
+				</select>
+			</div>
+
+			<div class="input-group mb-2">
+				<span class="input-group-text">회원 ID</span> <input type="text"
+					class="form-control" name="searchUserId">
+			</div>
+
+			<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+				<button id="btnSearch" class="btn btn-outline-dark" type="button">검색</button>
+				<button id="btnResetSearch" class="btn btn-outline-dark"
+					type="button">초기화</button>
+			</div>
+		</form>
+	</div>
+	<div class="mt-5">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center bg-transparent" scope="col">주문 번호</th>
+					<th class="text-center bg-transparent" scope="col">주문 회원 ID</th>
+					<th class="text-center bg-transparent" scope="col">주문 날짜</th>
+					<th class="text-center bg-transparent" scope="col">결제 금액</th>
+					<th class="text-center bg-transparent" scope="col">주문 상태</th>
+					<th class="text-center bg-transparent" scope="col">변경</th>
+				</tr>
+			</thead>
+			<tbody class="table-group-divider">
+				<tr th:each="post: ${ posts }" class="border-dark">
+					<th scope="row" class="text-center bg-transparent"
+						th:text="${ post.id }"></th>
+					<td class="text-center bg-transparent" th:text="${ post.author }"></td>
+					<td class="text-center bg-transparent"
+						th:text="${ #temporals.format(post.createdTime, 'yy/MM/dd HH:mm:ss')}"></td>
+					<td class="text-center bg-transparent">24,000원</td>
+					<td class="col-2 text-center bg-transparent"><select
+						class="text-center form-select form-select-sm">
+							<option selected disabled>선택</option>
+							<option value="1">입금 대기</option>
+							<option value="2">입금 확인</option>
+							<option value="3">상품 준비중</option>
+							<option value="4">배송중</option>
+							<option value="5">배송 완료</option>
+					</select></td>
+					<td class="text-center bg-transparent">
+						<button type="button" class="btn btn-sm btn-outline-dark">저장</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+    
 	</main>
 	
 </html>

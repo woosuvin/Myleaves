@@ -5,6 +5,34 @@
     
 	<main layout:fragment="mngrHome">
     <h1>상품 관리 리스트</h1>
+    <div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center bg-transparent" scope="col">No</th>
+					<th class="text-center bg-transparent" scope="col">제품명</th>
+					<th class="text-center bg-transparent" scope="col">재고</th>
+					<th class="text-center bg-transparent" scope="col">가격</th>
+				</tr>
+			</thead>
+			<tbody class="table-group-divider">
+				<tr th:each="post: ${ posts }" class="border-dark">
+					<th scope="row" class="text-center bg-transparent"
+						th:text="${ post.id }"></th>
+					<td class="text-center bg-transparent"><a
+						th:href="@{/post/details?id={id} (id=${post.id}) }"
+						th:text="${ post.title }"
+						class="link-dark link-underline-opacity-0"></a></td>
+					<td class="text-center bg-transparent">20개</td>
+					<td class="text-center bg-transparent">12,000원</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="text-end">
+			<button type="button" class="btn btn-outline-dark">상품 등록</button>
+		</div>
+	</div>
+    
 	</main>
 	
 </html>

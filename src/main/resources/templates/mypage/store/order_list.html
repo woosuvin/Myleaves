@@ -5,6 +5,30 @@
     
 <main layout:fragment="main">
 <h1>구매 내역</h1>
+<div>
+	<table class="table table-hover ">
+		<thead>
+			<tr>
+				<th class="text-center bg-transparent" scope="col">주문일자</th>
+				<th class="text-center bg-transparent" scope="col">상품</th>
+				<th class="text-center bg-transparent" scope="col">가격</th>
+				<th class="text-center bg-transparent" scope="col">상태</th>
+			</tr>
+		</thead>
+		<tbody class="table-group-divider">
+			<tr th:each="post: ${ posts }" class="border-dark">
+				<td class="col-3 text-center bg-transparent"
+					th:text="${ #temporals.format(post.createdTime, 'yy/MM/dd HH:mm:ss')}"></td>
+				<td class="col text-center bg-transparent"><a
+					th:href="@{/post/details?id={id} (id=${post.id}) }"
+					th:text="${ post.title }"
+					class="link-dark link-underline-opacity-0"></a></td>
+				<td class="col-2 text-center bg-transparent">12,000원</td>
+				<td class="col-2 text-center bg-transparent">배송중</td>
 
+			</tr>
+		</tbody>
+	</table>
+</div>
 </main>
 </html>
