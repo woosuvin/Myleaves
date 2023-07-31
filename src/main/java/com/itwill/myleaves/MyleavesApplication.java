@@ -14,7 +14,6 @@ public class MyleavesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MyleavesApplication.class, args);
-		log.info("main started");
 	}
 
 }
