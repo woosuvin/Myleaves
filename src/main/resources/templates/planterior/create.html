@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+<th:block layout:fragment="mycsses">
+	<link th:href="@{/css/planterior.css}" rel="stylesheet" />
+</th:block>
+<!-- 상세보기 한다면 영문이름과 카테고리 사이에 내용 추가하기 -->
+<main layout:fragment="main">
+	<div class="container">
+		<div class=" createTitle">
+			<h1 class="text-center">작성하기</h1>
+		</div>
+		<form action="" method="post" class="form-box" id="createForm"
+			encType="multipart/form-data">
+			<dl>
+				<div>
+					<!-- <th:block sec:authorize="isAuthenticated()"> -->
+					<input type="hidden" id="crtr_id" name="crtr_id" value="" />
+					<!-- value 속성에 사용자 id: "sec:authentication='name'" 추가-->
+					<!-- </th:block> -->
+				</div>
+				<dt align="left" class="dt_class">
+					플랜테리어 사진 <span class="highlight">* 1개만 선택 가능</span>
+				</dt>
+				<!-- 사진 input과 button에 m-2없는 버전 물어보기 -->
+				<dd align="left">
+					<div id="inputContainer">
+						<div class="input-group mb-3">
+							<input class="form-control file-input m-2" type="file" id="formFile"
+								name="formFile" accept="image/*" onchange="imageUpload(this);" autofocus required>
+							<img class="imagePreview" id="imagePreview1">
+							<button class="btn btn-primary m-2" type="button" id="deleteButton">삭제</button>
+						</div>
+					</div>
+				</dd>
+				<br>
+
+				<dt align="left" class="dt_class">식물 이름(한글)</dt>
+				<dd align="left">
+					<div class="input-group">
+						<input type="text" id="PlantkoreanName" name="PlantkoreanName"
+							class="form-control" placeholder="식물의 이름을 입력하세요"
+							oninput="updateCharCount()"  required />
+					</div>
+				</dd>
+				<br>
+				<dt align="left" class="dt_class">식물 이름(영문)</dt>
+				<dd align="left">
+					<div class="input-group">
+						<input type="text" id="PlantEnglishName" name="PlantEnglishName"
+							class="form-control" placeholder="식물의 영문을 입력하세요"
+							oninput="updateCharCount()"  required />
+					</div>
+				</dd>
+				<br>
+				<!-- 내용 부분: 상세페이지 구현 시 -->
+
+				<dt align="left" class="dt_class">카테고리</dt>
+				<dd align="left">
+					<span class="highlight-left">* 1개만 선택 가능</span> <br>
+					<div class="input-group">
+						<ul class="filterLists">
+							<button id="filterBtn" type="button">거실</button>
+							<button id="filterBtn" type="button">주방</button>
+							<button id="filterBtn" type="button">욕실</button>
+							<button id="filterBtn" type="button">방</button>
+							<button id="filterBtn" type="button">베란다</button>
+						</ul>
+					</div>
+					<!-- js 처리하기 -->
+					<div class="secondFilter"></div>
+				</dd>
+			</dl>
+			<div>
+				<div>
+					<div class="my-2 text-center">
+						<a class="btn btn-secondary" id="btnCancel">취소</a> <input
+							class="btn btn-classic" type="submit" id="btnCreate" value="등록" />
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</main>
+<th:block layout:fragment="myscripts">
+	<script src="/js/planterior.js"></script>
+</th:block>
+</html>

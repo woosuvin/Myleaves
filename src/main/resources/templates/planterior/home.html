@@ -8,7 +8,7 @@
 <main layout:fragment="main">
 
 	<div class="container plants__page" id="palnts__page">
-		<section class="plants__title__section">
+		<section class="plants_title_section">
 			<p class="plants_title">
 				어떤 종류의 식물을 <br> 찾고 있나요?
 			</p>
@@ -17,7 +17,7 @@
 		<!-- 카테고리 -->
 		<section class="plants_filter_section" id="first_filter">
 			<div class="plants_filter_section" id="first_filter">
-				<ul class="filter_lists">
+				<ul class="filterLists">
 					<button id="filter_reset_btn" type="button">
 						<img th:src="@{/images/common/reset.svg}" />
 					</button>
@@ -28,25 +28,74 @@
 					<button id="filterBtn" type="button">베란다</button>
 				</ul>
 			</div>
+			<!-- first 필터 입력시 second 나오게 js처리: 댓글 처럼 js로 넣기 -->
 			<div class="secondFilterSection" id="secondFilter">
 				<div class="filterDivision"></div>
 				<!-- for문 돌리기 가지고 온 수 만큼. -->
+			<!-- <div th:each="category: ${category}"> -->
 				<ul class="filterLists">
+					<!-- th:text="${category.name}" -->
 					<button class="filterBtn" type="button"></button>
 				</ul>
+				<!-- </div> -->
 			</div>
 
 		</section>
 		<!-- 식물 데이터 수 div -->
-		<div>
-			<span>식물 데이터</span> 
-			<span id="plantData"></span>종 <!-- th:text="${count()}" -->
+		<div class="plantDataCount">
+			<span>식물 데이터</span> <span id="plantData"></span>종
+			<!-- th:text="${count()}" -->
 		</div>
 		<div>
-			<span>이 달의 MD 픽</span> 
+			<span class="pick">이 달의 MD 픽</span>
+		</div>
+
+		<!-- 캐러셀 -->
+		<div class="row m-2">
+			<div class="col-xl-3 col-lg-3 col-md-6">
+				<div class="card">
+					<img th:src="@{/images/planterior/eucalyptus.png}" />
+					<div class="card-body">
+						<p class="card-text">Some quick example text to build on the
+							card title and make up the bulk of the card's content.</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="p-4"></div>
+
+		<!-- 사용자 All card -->
+		<div class="m-2">
+			<span class="m-2">All</span>
+			<a class="float-end btn btn-success" th:href="@{/planterior/create}" type="button">
+				글쓰기
+			</a>
+		</div>
+		<br>
+		<div class="row m-2">
+		<!-- <div th:each="list: ${cardList}"> -->
+					<!-- <img th:text="${list.img}" /> -->
+						<!-- <p th:text="${list.name}" /> -->
+			<div class="col-xl-3 col-lg-3 col-md-6">
+				<div class="card">
+					<img th:src="@{/images/planterior/eucalyptus.png}" />
+					<div class="card-body">
+						<p class="card-text">Some quick example text to build on the
+							card title and make up the bulk of the card's content.</p>
+					</div>
+				</div>
+			</div>
+		<!--  </div> -->
+		</div>
+		<!-- 더보기 버튼 -->
+		<div class="d-flex justify-content-center">
+			<button class="m-4 btn btn-success rounded ">더보기</button>
 		</div>
 
 	</div>
+	<!-- end -->
 
 </main>
 </html>

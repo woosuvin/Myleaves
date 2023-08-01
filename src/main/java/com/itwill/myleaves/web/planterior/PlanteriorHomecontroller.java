@@ -20,5 +20,11 @@ public class PlanteriorHomecontroller {
 		
 		return "/planterior/home";
 	}
+	
+	@GetMapping("/create")
+	public void create() {
+		log.info("planteriorCreate");
+		
+	}
 
 }
