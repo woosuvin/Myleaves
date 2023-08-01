@@ -1,75 +1,126 @@
 @charset "UTF-8";
 
+/*플랜테리어 메인 페이지 css*/
 /*상단 제목*/
-.plants__page#plants__page section.plants_title_section {
-    margin-top: 42px;
-    margin-bottom: 20px
+.plants_title_section {
+	margin-top: 42px;
+	margin-bottom: 20px
 }
 
-.plants__page#plants__page section.plants_title_section p.plants_title {
-    font-size: 32px;
-    font-weight: bold;
-    line-height: 1.44;
-    letter-spacing: -1.6px;
-    color: #000
+p.plants_title {
+	font-size: 32px;
+	font-weight: bold;
+	line-height: 1.44;
+	letter-spacing: -1.6px;
+	color: #000
 }
 
 /*카테고리*/
-.plants__page#plants__page section.plants_filter_section .filterDivision {
-    border: 1px dashed #eaeaea;
-    margin: 8px 0 16px 0
+.filterDivision {
+	border: 1px dashed #eaeaea;
+	margin: 8px 0 16px 0
 }
 
-.plants__page#plants__page section.plants_filter_section .secondFilterSection {
-    display: none
+button#filterBtn {
+	position: relative;
+	margin: 0 auto;
+	width: var(- -btn-w);
+	color: var(- -primary);
+	border: .15em solid var(- -primary);
+	border-radius: 5em;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 1.3em;
+	line-height: 2em;
+	cursor: pointer;
 }
 
-.plants__page#plants__page section.plants_filter_section .secondFilterSection.active {
-    display: block
+.plants__page#plants__page section.plants_filter_section .secondFilterSection
+	{
+	display: none
 }
 
-
+.plants__page#plants__page section.plants_filter_section .secondFilterSection.active
+	{
+	display: block
+}
 
 .plants__page#plants__page section.plants_filter_section .filterLists {
-    display: flex;
-    flex-wrap: wrap
+	display: flex;
+	flex-wrap: wrap
 }
 
-.plants__page#plants__page section.plants_filter_section .filterLists button {
-    padding: 6px 18px;
-    border: 1px solid #aaa;
-    border-radius: 50px;
-    font-size: 16px;
-    line-height: 1.5;
-    letter-spacing: -0.8px;
-    text-align: center;
-    color: #666;
-    margin-bottom: 8px
+.plants__page#plants__page section.plants_filter_section .filterLists button
+	{
+	padding: 6px 18px;
+	border: 1px solid #aaa;
+	border-radius: 50px;
+	font-size: 16px;
+	line-height: 1.5;
+	letter-spacing: -0.8px;
+	text-align: center;
+	color: #666;
+	margin-bottom: 8px
 }
 
-.plants__page#plants__page section.plants_filter_section .filterLists button:not(:last-child) {
-    margin-right: 4px
+.plants__page#plants__page section.plants_filter_section .filterLists button:not(:last-child)
+	{
+	margin-right: 4px
 }
 
-.plants__page#plants__page section.plants_filter_section .filterLists button.active {
-    border: 1px solid #00b564;
-    color: #00b564
+.plants__page#plants__page section.plants_filter_section .filterLists button.active
+	{
+	border: 1px solid #00b564;
+	color: #00b564
 }
 
-.plants__page#plants__page section.plants_filter_section .filterLists button.filterBtn {
-    position: relative
+button.filterBtn
+	{
+	position: relative
 }
 
-.plants__page#plants__page section.plants_filter_section .filter_lists button#filter_reset_btn {
-    border: 1px solid #00b564;
-    background: #00b564;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center
+/*
+button#filter_reset_btn
+	{
+	border: 1px solid #00b564;
+	background: #00b564;
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center
+}*/
+
+button#filter_reset_btn img
+	{
+	display: inline-block;
+	width: 20px
 }
 
-.plants__page#plants__page section.plants_filter_section .filter_lists button#filter_reset_btn img {
-    display: inline-block;
-    width: 20px
+div.plantDataCount {
+	margin: 10px
 }
+
+span.pick {
+	margin: 10px;
+	color: #00b564;
+	display: flex;
+	font-size: 25px;
+}
+
+
+/*작성하기 + 수정하기 페이지 적용*/
+
+/*상단 제목*/
+.createTitle {
+	margin-top: 42px;
+	margin-bottom: 20px
+}
+.highlight {
+	color: red;
+	float: right;
+}
+.highlight-left {
+	color: red;
+	float: left;
+}
+
