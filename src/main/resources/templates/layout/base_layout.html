@@ -21,42 +21,41 @@
 	<nav>
 		<ul class="mb-2 nav nav-tab justify-content-end">
 			<th:block sec:authorize="isAuthenticated()">
-			<li class="nav-item">
-			    <a class="nav-link-login" th:href="@{/chat}">채팅</a>
-			</li>
-			<li class="nav-item">
-			    <a class="nav-link-login" th:href="@{/cart}">장바구니</a>
-			</li>
-			<li class="nav-item">
-			    <a class="nav-link-login fw-normal" th:href="@{/mypage}">[<span sec:authentication="name"></span>] 마이페이지</a>
-			</li>
-			<li class="nav-item">
-			     <!-- 로그인한 username 표시 --> 
-			    <a class="nav-link-login" th:href="@{/logout}">로그아웃</a>
-			</li>
+				<li class="nav-item"><a class="nav-link-login"
+					onclick="openChatList()">채팅</a></li>
+				<li class="nav-item"><a class="nav-link-login"
+					th:href="@{/cart/list}">장바구니</a></li>
+				<li class="nav-item"><a class="nav-link-login fw-normal"
+					th:href="@{/mypage}">[<span sec:authentication="name"></span>]
+						마이페이지
+				</a></li>
+				<li class="nav-item">
+					<!-- 로그인한 username 표시 --> <a class="nav-link-login"
+					th:href="@{/logout}">로그아웃</a>
+				</li>
 			</th:block>
-			
-			
+
+
 			<!-- 익명 사용자이면(로그인 하지 않은 상태이면)-->
-			 
+
 			<th:block sec:authorize="isAnonymous()">
-				<li class="nav-item">
-					<a class="nav-link-login" th:href="@{/login}">로그인</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link-login" th:href="@{/member/signup}">회원가입</a>
-				</li>
+				<li class="nav-item"><a class="nav-link-login"
+					th:href="@{/login}">로그인</a></li>
+				<li class="nav-item"><a class="nav-link-login"
+					th:href="@{/member/signup}">회원가입</a></li>
 			</th:block>
-			            
+
 		</ul>
 	</nav>
 	<nav class="">
 		<ul class="nav nav-tab justify-content-center">
 			<li class="nav-item"><a class="nav-link"
 				th:href="@{/planterior}">플랜테리어</a></li>
-			<li class="nav-item"><a class="nav-link" th:href="@{/sell/create}">분양</a></li>
+			<li class="nav-item"><a class="nav-link"
+				th:href="@{/sell/create}">분양</a></li>
 			<li class="nav-item"><a class="nav-link" th:href="@{/buy/list}">입양</a></li>
-			<li class="nav-item"><a class="nav-link" th:href="@{/store/list}">스토어</a></li>
+			<li class="nav-item"><a class="nav-link"
+				th:href="@{/store/list}">스토어</a></li>
 			<li class="nav-item"><a class="nav-link" th:href="@{/community}">커뮤니티</a></li>
 			<li class="nav-item btn-group"><a
 				class="nav-link dropdown-toggle" id="dropInfo"
@@ -127,6 +126,7 @@
 	<!-- 자바스크립 파일 추가할 위치 -->
 	<th:block layout:fragment="myscripts">
 		<script src="/js/moveButtons.js"></script>
+		<script src="/js/chat.js"></script>
 	</th:block>
 </body>
 

@@ -3,8 +3,10 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/base_layout}">
     
+<link rel="stylesheet" href="/css/cart.css">
+
 	<main layout:fragment="main">
-    <h1>장바구니 리스트 페이지</h1>
+    <h2>장바구니 리스트 페이지</h2>
     
     <h3 class="mb-3">장바구니(cart 테이블 user_id의 cnt 합계)</h3>
 	<hr />
@@ -18,7 +20,7 @@
 		<div class="col">
 			<a th:href="@{/post/details?id={id} (id=${post.id}) }"
 				class="link-dark link-underline-opacity-0"> 
-				<span th:text="${ post.title }" class="card-title text-truncate fw-medium"></span>
+				<span th:text="${ cart. }" class="card-title text-truncate fw-medium"></span>
 			</a> 
 			<span id="plusMinus" class="input-group mt-1" style="width: 4.7rem;">
 				<!-- 수량 줄이기 -->
@@ -60,7 +62,7 @@
 		</div>
 	</div>
 	<div class="text-center mt-3">
-		<button type="button" class="btn btn-outline-dark">구매하기</button>
+		<a class="btn" th:href="@{/cart/order}" >구매하기</a>
 	</div>
     
     

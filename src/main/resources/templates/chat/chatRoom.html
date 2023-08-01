@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/chat.css">
+<style>
+h2 {
+	text-align: center;
+}
+</style>
+</head>
+<div>
+	<h2>식물이좋다</h2>
+</div>
+<div style="float: right;">
+	<select class="form-select" id="select" name="select">
+		<option value="판매중">판매중</option>
+		<option value="거래중">거래중</option>
+		<option value="판매완료">판매완료</option>
+	</select>
+</div>
+<div class="list" style="float: left;">
+	<img src="/images/common/chat_sample1.png" alt="" width="80"
+		height="80">
+</div>
+<div>
+	<table>
+		<tbody>
+			<tr>
+				<td style="font-size: 16px; font-weight: bold;">몬스테라 분양합니다.</td>
+			</tr>
+			<tr>
+				<td style="font-size: 16px; font-weight: bold;">분양자이름</td>
+			</tr>
+			<tr class="xans-record- modi-price modi-price-tr last-modi-price-tr">
+				<td>5,000원</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<hr>
+<!-- 채팅 -->
+<div class="chat_wrap">
+	<div class="chat">
+		<ul>
+			<!-- 동적 생성 -->
+		</ul>
+	</div>
+	<div class="input-div">
+		<div class="input2" style="float: left;">
+			<textarea placeholder="채팅을 입력해주세요."></textarea>
+			<button>보내기</button>
+		</div>
+	</div>
+
+	<!-- format -->
+
+	<div class="chat format">
+		<ul>
+			<li>
+				<div class="sender">
+					<span></span>
+				</div>
+				<div class="message">
+					<span></span>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<th:block layout:fragment="myscripts">
+	<script src="/js/chat.js"></script>
+</th:block>
+</html>

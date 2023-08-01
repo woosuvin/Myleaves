@@ -3,12 +3,20 @@
  * 정지언 채팅
  */
 
+function openCenteredWindow(url, width, height) {
+  var left = (screen.width - width) / 2;
+  var top = (screen.height - height) / 2;
+  var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
+  window.open(url, '_blank', options);
+}
+
+// Usage example:
 function openChatList() {
-    var chatListWindow = window.open('chatList', '_blank', 'width=600,height=400');
+  openCenteredWindow('/chat/chatList', 600, 400);
 }
 
 function openChatRoom() {
-    var chatRoomWindow = window.open('chatRoom', '_blank', 'width=600,height=400');
+  openCenteredWindow('/chat/chatRoom', 600, 400);
 }
 
 const Chat = (function(){

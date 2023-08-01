@@ -16,4 +16,10 @@ public class CartController {
 	public void read(Model model) {
 		log.info("cart list:GET");
 	}
+	
+	@GetMapping("/order")
+	public void order(Model model) {
+		log.info("order:GET");
+	}
+	
 }
