@@ -3,8 +3,10 @@ package com.itwill.myleaves.service.store;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.store.StoreCreateDto;
+import com.itwill.myleaves.dto.store.StoreUpdateDto;
 import com.itwill.myleaves.repository.store.Store;
 import com.itwill.myleaves.repository.store.StoreRepository;
 
@@ -45,10 +47,28 @@ public class StoreService {
 	/**
 	 * detail
 	 */
+	@Transactional(readOnly = true)
 	public Store read(long itemId) {
 		log.info("read(itemId={})", itemId);
 		//return storeRepository.findById(itemId).orElseThrow();
 		return storeRepository.findByItemId(itemId);
 	}
 	
+	/**
+	 * update
+	 */
+	@Transactional
+	public void update(StoreUpdateDto dto) {
+		log.info("update(dto={})", dto);
+		Store entity = storeRepository.findByItemId(dto.getItemId());
+		entity.update(dto);
+	}
+	
+	/**
+	 * delete
+	 */
+	public void delete(long itemId) {
+		Store entity = storeRepository.findByItemId(itemId);
+		storeRepository.delete(entity);
+	}
 }

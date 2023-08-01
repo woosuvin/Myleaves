@@ -13,6 +13,7 @@ import com.itwill.myleaves.service.store.StoreService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+// 수빈
 @Slf4j
 @Controller
 @RequiredArgsConstructor

@@ -1,6 +1,10 @@
 package com.itwill.myleaves.repository.store;
 
-import com.itwill.myleaves.repository.CreatedTimeEntity;
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+
+import com.itwill.myleaves.dto.store.StoreUpdateDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +28,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "STORE")
 @SequenceGenerator(name = "STORE_SEQ_GEN", sequenceName = "STORE_SEQ1", allocationSize = 1)
-public class Store extends CreatedTimeEntity {
+public class Store {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "STORE_SEQ_GEN")
@@ -48,4 +52,16 @@ public class Store extends CreatedTimeEntity {
 	@Column(nullable = true)
 	private long inven;
 	
+	@CreatedDate
+	private LocalDateTime createdDate;
+	
+	public Store update(StoreUpdateDto dto) {
+		this.itemName = dto.getItemName();
+		//this.thumbnail = dto.getThumbnail();
+		this.content = dto.getContent();
+		this.price = dto.getPrice();
+		//this.sold = dto.getSold();
+		this.inven = dto.getInven();
+		return this;
+	}
 }

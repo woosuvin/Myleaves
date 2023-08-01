@@ -28,7 +28,7 @@ div {
 	                           <td th:text="${store.itemName}" style="padding: 8px; font-size: 16px; font-weight: bold;"></td>
 	                        </tr>
 	                        <tr>
-	                           <td th:text="${store.price}" style="padding: 8px; font-size: 16px;"></td>
+	                           <td id="price" th:text="${store.price}" style="padding: 8px; font-size: 16px;"></td>
 	                        </tr>
 	                     </tbody>
 	                  </table>
@@ -41,19 +41,19 @@ div {
 	                           		3,000원
 	                           		<br/>
 	                          		제주 및 도서 산간 2,500원
-	                           </td> <!-- 이러면 되나 -->
+	                           </td>
 	                        </tr>
 	                        <tr>
 	                           <th scope="col">수량</th>
 	                           <td>
-		                           <span id="plusMinus" class="input-group mt-1" style="width: 4.7rem;"> 
+		                           <span id="plusMinus" class="input-group mt-1" style="width: 5.3rem;"> 
 		                           		 <!-- 수량 줄이기 -->
 		                                 <button id="btnMinus" class="btn btn-sm btn-outline-secondary" type="button"
 		                                    style="height: 1.5rem; font-size: 7pt;">-</button> 
 		                                 
 		                                 <!-- 장바구니> 각상품의 수량 -->
 		                                 <input id="productCnt" type="text" class="form-control"
-		                                 value="1" style="height: 1.5rem; font-size: 7pt;" /> 
+		                                 value="1" style="height: 1.5rem; font-size: 7pt; text-align: center;" />
 		                                 
 		                                 <!-- 수량 더하기 -->
 		                                 <button id="btnPlus" class="btn btn-sm btn-outline-secondary"
@@ -65,15 +65,17 @@ div {
 	                  </table>
 	               </div>
 	
-	               <div id="totalPrice" class="totalPrice">
+	               <div id="totalPriceDiv" class="totalPriceDiv">
 	                  <strong>총 상품금액</strong>
-	                  	(수량) : 
+	                    : 
 	                  	<span class="total">
-	                  		<strong th:text="${store.price * 2}"><em>5,000원</em></strong>
-	                    	(1개)
+	                  		<strong id="totalPrice"></strong>
 	                    </span>
 	               </div>
-	
+					
+					<!-- 재고 개수 -->
+					<div class="d-none" id="inven" th:text="${store.inven}"></div>	
+						
 	               <div>
 	                  <div class="ec-base-button gColumn" style="float: left;">
 	                     <a href="#none" class="btnNormal btnGrowing  "
@@ -90,13 +92,12 @@ div {
 	         </div>
 	      </div>
 	   </div>
-	   <div>
 	      <hr>
-	   </div>
-	   <div id="summernote" name="content">팝니다</div>
+	   <div id="summernote" name="content" th:text="${store.content}"></div>
 	</main>
 	   
 	<th:block layout:fragment="myscripts">
 	      <script src="/js/chat.js"></script>
+	      <script src="/js/storeDetail.js"></script>
 	   </th:block>
 </html>

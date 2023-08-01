@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- 수빈 -->
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/mngr_base_layout}">
@@ -10,15 +10,19 @@
 			</div>
 			
 			<form id="storeModifyForm">
+	      		<label class="form-label" for="itemId">NO</label>
+                <div>
+                	<input class="form-control" id="itemId" name="itemId" th:value="${store.itemId}" readonly/>
+				</div>
 				
 				<label class="form-label">상품</label>
 				<div>
-					<input class="form-control" type="text" id="itemName" name="itemName" required />
+					<input class="form-control" type="text" id="itemName" name="itemName" th:value="${store.itemName}" required />
 				</div>
 				
 				<label class="form-label">가격</label>
 				<div>
-					<input class="form-control" type="number" id="price" name="price" required />
+					<input class="form-control" type="number" id="price" name="price" th:value="${store.price}" required />
 				</div>
 				
 				<label class="form-label">대표 사진</label>
@@ -28,29 +32,29 @@
 				
 				<label class="form-label">상세 설명</label>
 				<div>
-					<textarea class="form-control" id="summernote" name="content" required></textarea>
+					<textarea class="form-control" id="summernote" name="content" th:text="${store.content}" required></textarea>
 				</div>
 				
 				<label class="form-label">수량</label>
 				<div>
-					<input class="form-control" type="number" id="inven" name="inven" required />
+					<input class="form-control" type="number" id="inven" name="inven" th:value="${store.inven}" required />
 				</div>
 				
 				<div>
 					<label for="checkbox">판매 중단</label>
-					<input type="checkbox" id="checkbox" value="N"/>
-				</div>
-				
-				<div>
-					<button>삭제</button>
-					<button>목록</button> <!-- 리스트로 이동 -->
-					<button>수정 완료</button>
+					<input type="checkbox" name="sold" id="checkbox" value="Y"/>
 				</div>
 			</form>
+		
+			<div class="my-2 text-center">
+				<button class="btn btn-secondary" id="btnDelete">삭제</button>
+				<a class="btn btn-outline-info" th:href="@{/mngr/store/list}">목록</a>
+				<button class="btn btn-outline-info" id="btnUpdate">수정 완료</button>
+			</div>
 		</div>
 	</main>
 	
 	<th:block layout:fragment="myscripts">
-		<script src="</js/storeSummernote.js"></script>
+		<script src="/js/storeModify.js"></script>
 	</th:block>
 </html>
