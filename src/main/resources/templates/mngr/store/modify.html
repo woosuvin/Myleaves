@@ -9,31 +9,31 @@
 				<h2>스토어 상품 수정</h2>
 			</div>
 			
-			<form>
+			<form id="storeModifyForm">
 				
-				<label>상품</label>
+				<label class="form-label">상품</label>
 				<div>
-					<input type="text" required />
+					<input class="form-control" type="text" id="itemName" name="itemName" required />
 				</div>
 				
-				<label>가격</label>
+				<label class="form-label">가격</label>
 				<div>
-					<input type="number" required />
+					<input class="form-control" type="number" id="price" name="price" required />
 				</div>
 				
-				<label>대표 사진</label>
+				<label class="form-label">대표 사진</label>
 				<div>
-					<input type="file" />
+					<input class="form-control" type="file" id="thumbnail" name="thumbnail" />
 				</div>
 				
-				<label>상세 설명</label>
+				<label class="form-label">상세 설명</label>
 				<div>
-					<textarea id="summernote"></textarea>
+					<textarea class="form-control" id="summernote" name="content" required></textarea>
 				</div>
 				
-				<label>수량</label>
+				<label class="form-label">수량</label>
 				<div>
-					<input type="number" required />
+					<input class="form-control" type="number" id="inven" name="inven" required />
 				</div>
 				
 				<div>
@@ -50,4 +50,7 @@
 		</div>
 	</main>
 	
+	<th:block layout:fragment="myscripts">
+		<script src="</js/storeSummernote.js"></script>
+	</th:block>
 </html>

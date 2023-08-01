@@ -1,38 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/mngr_base_layout}">
+    layout:decorate="~{layout/base_layout}">
     
 	<main layout:fragment="main">
-    <h1>스토어 리스트</h1>
+	<div class="py-4 text-center">
+    	<h1>내풀잎🍀스토어</h1>
+    </div>
     <!-- 1. 품절 시 하얗게 / 문구 가운데 -->
 	<div class="bg-transparent border-dark">
 		<div class="row row-cols-1 row-cols-md-4 g-4 mb-2">
-			<div class="col" th:each="post: ${ posts }">
-				<div class="container p-0"
-					style="position: relative; text-align: center; color: black;">
-					<a th:href="@{/post/details?id={id} (id=${post.id}) }"> 
-						<!-- if문 시작 위치 판매종료(buy>sold.equals("판매 종료"), 품절(store>inven==0) 흰색/문구 가운데 -->
-						<img class="rounded mb-1"
-							style="width: 100%; height: 100%; opacity: 50%;"
-							src="images/common/main.jpeg" /> 
-						<span class="link-dark centered"
-							style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 10pt">
+			<div class="col" th:each="store: ${stores}">
+				
+				<!-- sold값으로 switch문 -->
+				<div th:switch="${store.sold}" 
+					class="container p-0" style="position: relative; text-align: center; color: black;">
+					<a th:href="@{/store/detail?itemId={itemId} (itemId=${store.itemId})}"> 
+						<!-- Y, 품절일 경우 -->
+						<th:block th:case="Y">
+							<img class="rounded mb-1" style="width: 100%; height: 100%; opacity: 50%;" 
+								src="/images/common/store.jpg" /> 
+							<span class="link-dark centered"
+								style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 10pt">
 								<i>품절</i>
-						</span>
-						<!-- if문 품절이 아닐 
-						<img class="rounded mb-1" style="width: 100%; height: 100%;"
-							src="images/common/main.jpeg" />
-						-->
+							</span>
+						</th:block>
+						
+						<!-- N, 판매중일 경우 -->
+						<th:block th:case="N">
+							<img class="rounded mb-1" style="width: 100%; height: 100%;"
+								src="/images/common/store2.jpg" />
+						</th:block>
 					</a>
-				</div>
+				</div> <!-- 사진 div end -->
+				
 				<div class="text-truncate">
-					<a th:href="@{/post/details?id={id} (id=${post.id}) }"
-						class="link-dark link-underline-opacity-0"> <span
-						th:text="${ post.title }" class="card-title text-truncate"></span>
+					<a th:href="@{/store/detail?itemId={itemId} (itemId=${store.itemId})}"
+						class="link-dark link-underline-opacity-0"> 
+						<span th:text="${store.itemName}" class="card-title text-truncate"></span>
 					</a>
-					<p class="card-text">0원</p>
-				</div>
+					<p class="card-text" th:text="|${store.price}원|"></p>
+				</div> <!-- 이름 가격 div end -->
+				
 			</div>
 		</div>
 	</div>

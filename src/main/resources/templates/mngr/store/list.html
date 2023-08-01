@@ -16,20 +16,20 @@
 				</tr>
 			</thead>
 			<tbody class="table-group-divider">
-				<tr th:each="post: ${ posts }" class="border-dark">
-					<th scope="row" class="text-center bg-transparent"
-						th:text="${ post.id }"></th>
-					<td class="text-center bg-transparent"><a
-						th:href="@{/post/details?id={id} (id=${post.id}) }"
-						th:text="${ post.title }"
-						class="link-dark link-underline-opacity-0"></a></td>
-					<td class="text-center bg-transparent">20개</td>
-					<td class="text-center bg-transparent">12,000원</td>
+				<tr th:each="store: ${stores}" class="border-dark">
+					<th scope="row" class="text-center bg-transparent" th:text="${ store.itemId }"></th>
+					<td class="text-center bg-transparent" th:text="${store.itemName}">
+						<!-- <a class="link-offset-2 link-underline-opacity-0 link-dark" 
+							th:href="@{/mngr/store/detail?itemId={itemId} (itemId=${store.itemId)}" th:text="${store.itemName}">
+						</a> -->
+					</td>
+					<td class="text-center bg-transparent" th:text="${store.inven}"></td>
+					<td class="text-center bg-transparent" th:text="${store.price}"></td>
 				</tr>
 			</tbody>
 		</table>
 		<div class="text-end">
-			<a class="btn btn-outline-primary" th:href="@{ /mngr/store/create}">상품 등록</a>
+			<a class="btn" th:href="@{/mngr/store/create}" style="background: deeppink;">상품 등록</a>
 		</div>
 	</div>
     
