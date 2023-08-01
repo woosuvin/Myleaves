@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/mngr_base_layout}">
+    
+	<main layout:fragment="mngrHome">
+	<h1>FAQ 작성하기</h1>
+	<section class="card">
+		<form method="post">
+			<div class="card-body">
+				<div class="my-4">
+					<label class="form-label" for="question">질문</label> <input
+						class="form-control" type="text" id="question" name="question"
+						required />
+				</div>
+				<div>
+					<label class="form-label" for="answer">답변</label>
+					<textarea class="form-control" id="answer" name="answer" required></textarea>
+				</div>
+
+				<div class="my-2 text-center">
+					<input type="submit" class="btn btn-primary" value="작성 완료" />
+					<!-- <c:url var="faqListPage" value="/mngr/faq/list"></c:url> -->
+					<a class="btn btn-primary" th:href="@{/mngr/faq/list}">취소</a>
+				</div>
+			</div>
+		</form>
+	</section>
+</main>
+</html>

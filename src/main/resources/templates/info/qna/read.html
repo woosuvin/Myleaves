@@ -14,23 +14,28 @@
                             <th>번호</th>
                             <th>제목</th>
                             <th>작성자</th>
-                            <th>수정시간</th>
+                            <th>작성일</th>
+                            <th>진행상태</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr th:each="post :${posts}">
-                            <td th:text="${post.id}"></td> 
+                        <tr>
+                            <td>1</td> 
                             <td>
-                                <a th:href="@{/post/details?id={id} (id = ${post.id}) }" 
-                                th:text="${post.title}"></a>
+                            	제목 TEST
+                                <!-- <a th:href="@{/post/details?id={id} (id = ${post.id}) }" 
+                                th:text="${post.title}"></a> -->
                             </td> 
                            
-                            <td th:text="${post.author}"></td>
-                            <td th:text="${ #temporals.format(post.modifiedTime , 'yyyy-MM-dd HH:mm:ss' ) }"></td>                                 
+                            <td>작성자 TEST</td>
+                            <td>작성일 TEST 2020-10-10</td>
+                            <td>진행상태 TEST 확인중</td>                                 
                         </tr>
-                         -->
                     </tbody>
                 </table>
+                <div style="text-align: center;">
+                 	<a class="form-control btn btn-outline-primary" th:href="@{/info/qna/create}">문의하기</a>
+                </div>
             </div>
          </div>
 	</main>

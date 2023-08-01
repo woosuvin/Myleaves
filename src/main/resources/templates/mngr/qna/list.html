@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/mngr_base_layout}">
+    
+	<main layout:fragment="mngrHome">
+    <h1>QnA 관리자 페이지</h1>
+    	<table class="table center">
+		<thead>
+			<tr>
+				<th scope="col">No</th>
+				<th scope="col">제목</th>
+				<th scope="col">작성일</th>
+				<th scope="col">작성상태</th>
+			</tr>
+		</thead>
+		<tbody class="table-group-divider">
+			<tr>
+				<th scope="row">1</th>
+				<td>제목 test</td>
+				<td>작성test</td>
+				<td>
+					<a class="btn btn-primary" th:href="@{/mngr/qna/modify}">답변확인중</a>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">2</th>
+				<td>제목 test</td>
+				<td>작성test</td>
+				<td>
+					<a class="btn btn-primary" th:href="@{/mngr/qna/modify}">답변확인중</a>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">3</th>
+				<td>제목 test</td>
+				<td>작성test</td>
+				<td>
+					<a class="btn btn-primary" th:href="@{/mngr/qna/modify}">답변확인중</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="text-end">
+	</div>
+	</main>
+</html>

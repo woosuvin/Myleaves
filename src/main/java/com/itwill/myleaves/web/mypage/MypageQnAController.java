@@ -1,4 +1,4 @@
-package com.itwill.myleaves.web.info;
+package com.itwill.myleaves.web.mypage;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,17 +9,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequiredArgsConstructor
 @Controller
-@RequestMapping("/info/faq")
-public class FaQController {
+@RequiredArgsConstructor
+@RequestMapping("/mypage/qna")
+public class MypageQnAController {
+	
 	/*
-	 * FaQ 메인 페이지
+	 * 내가 쓴 QnA 리스트 페이지
 	 */
-	@GetMapping
-	public String readFaQ(Model model) {
-		log.info("FaQ read()");
-		
-		return "info/faq/read";
+	@GetMapping("/qna_list")
+	public void qnaList(Model model) {
 	}
 }

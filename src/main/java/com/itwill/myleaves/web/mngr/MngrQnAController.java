@@ -1,4 +1,4 @@
-package com.itwill.myleaves.web.info;
+package com.itwill.myleaves.web.mngr;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +11,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/info/faq")
-public class FaQController {
-	/*
-	 * FaQ 메인 페이지
-	 */
-	@GetMapping
-	public String readFaQ(Model model) {
-		log.info("FaQ read()");
-		
-		return "info/faq/read";
+@RequestMapping("/mngr/qna")
+public class MngrQnAController {
+	
+	
+	@GetMapping({"/list", "/modify"})
+	public void mngrqna(Model model) {
+		log.info("mngrqna list");		
 	}
+	/*
+	 * 어차피 나중에 modify 나눠야 힘
+	 */
 }

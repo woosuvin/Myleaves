@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/base_layout}">
+	<main layout:fragment="main">
+		<h1>내가 작성한 (나)문희</h1>
+   	<table class="table center">
+		<thead>
+			<tr>
+				<th scope="col">No</th>
+				<th scope="col">제목</th>
+				<th scope="col">작성일</th>
+			</tr>
+		</thead>
+		<tbody class="table-group-divider">
+			<tr>
+				<th scope="row">1</th>
+				<td>제목 test</td>
+				<td>작성test</td>
+			</tr>
+			<tr>
+				<th scope="row">2</th>
+				<td>제목 test</td>
+				<td>작성test</td>
+			</tr>
+			<tr>
+				<th scope="row">3</th>
+				<td>제목 test</td>
+				<td>작성test</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="text-end">
+	</div>
+	<!-- 페이징, 체크박스 삭제 넣기 -->
+	</main>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/mngr_base_layout}">
+    
+	<main layout:fragment="mngrHome">
+		<h1>FAQ 수정 페이지</h1>
+	<div class="card">
+		<form id="faqModifyForm">
+			<div class="card-body" id="modifyForm">
+				<div class="my-4">
+					<label class="form-label" for="fid">NO.</label> <input
+						class="form-control" id="fid" name="fid" />
+				</div>
+				<div>
+					<label class="form-label" for="question">question</label> 
+					<input class="form-control" id="question" name="question" value="질문수정"/>
+				</div>
+				<div>
+					<label class="form-label" for="answer">answer</label>
+					<textarea class="form-control" id="answer" name="answer">답변수정</textarea>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="card-footer my-2 text-center">
+		<a class="btn btn-primary" th:href="@{/mngr/faq/list}">목록</a>
+		<button class="btn btn-primary" id="btnFaqUpdate">수정 확인</button> <!-- 자바스크립트 -->
+	</div>
+</main>
+</html>
