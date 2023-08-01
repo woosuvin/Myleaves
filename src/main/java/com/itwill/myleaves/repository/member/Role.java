@@ -1,8 +1,8 @@
 package com.itwill.myleaves.repository.member;
 
 public enum Role {
-    USER("ROLE_MEMBER", "M"),
-    ADMIN("ROLE_ADMIN", "A");
+    USER("ROLE_MEMBER", "USER"),
+    ADMIN("ROLE_ADMIN", "ADMIN");
 
     private final String key;
     private final String name;

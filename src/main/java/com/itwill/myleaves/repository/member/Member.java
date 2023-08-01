@@ -83,7 +83,6 @@ public class Member implements UserDetails {
 		return pwd;
 	}
 
-
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
