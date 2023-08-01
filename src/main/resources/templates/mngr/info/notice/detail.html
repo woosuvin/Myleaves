@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/mngr_base_layout}">
+    
+<main layout:fragment="mngrHome">
+	<h1>공지사항 상세보기</h1>	
+   	<div class="my-2 p-3 card">
+		<table class="table">
+			<colgroup>
+				<col width="15%">
+				<col>
+				<col width="15%">
+				<col>
+			</colgroup>
+			<tbody>
+				<tr>
+					<th>제목</th>
+					<td></td>
+					<th>고정여부</th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>내용</th>
+					<td colspan="3"></td>
+				</tr>
+				<tr>
+					<th>첨부파일</th>
+					<td>
+						<table id="attachFiles" class="mt-1 w-100">
+							<tr>
+								<td class="w90"><a
+									href="/download/attach/c6560f852f7211eeb724529c313fb8c9">eclipsec.exe</a></td>
+								<td><input type="button" value="삭제"
+									onclick="deleteFile(this)" class="btn btn-danger btn-sm"></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+			<a class="btn btn-primary" th:href="@{/mngr/notice/list}">목록</a>
+		</div>
+	</div>
+</main>
+
+
+	
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/mngr_base_layout}">
+    
+<main layout:fragment="mngrHome">
+	<h1>공지사항 작성</h1>	
+   	<div class="my-2 card">
+		<div class="card-body">
+			<div class="my-2">
+				<label for="title" class="form-label">제목</label>
+				<input id="title" name="title" type="text" required
+						class="form-control"/>
+			</div>
+			<div class="my-2">
+				<label for="summernote" class="form-label">내용</label>
+				<textarea id="summernote" name="content" class="form-control" required></textarea>
+			</div>
+			<div class="my-2 form-check">
+				<input class="form-check-input" type="checkbox" value="0"
+					id="fix"> <label class="form-check-label"
+					for="fix">고정여부</label>
+			</div>
+			<div class="my-2 d-none">
+				<label class="form-label" for="author">작성자</label>
+				<!-- <input class="form-control" id="author"
+                       type="text" name="author" th:value="${ #authentication.name }" /> -->
+				<input class="form-control" id="author" type="text" name="author" />
+			</div>				
+			<div class="my-2">
+				<form id="attachFileForm" class="d-none">
+					<input type="file" id="fileInput" name="fileInput">
+					<input type="hidden" name="afBundleId" id="afBundleId">
+				</form>
+				<input type="button" value="추가" id="af-add" class="btn btn-primary btn-sm">
+				<table width="100%" border="0" id="attachFiles" class="mt10"></table>
+			</div>
+			
+			<div class="d-grid gap-2 d-md-flex col-6 mx-auto justify-content-md-center">
+				<a class="btn btn-primary" type="button" th:href="@{/mngr/notice/list}">목록</a>
+				<button class="btn btn-primary" type="button" id="SaveBtn">저장</button>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="/js/info/notice/notice-summernote.js"></script>
+	<script src="/js/info/notice/notice-write.js"></script>
+	</main>
+
+</html>
