@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+<th:block layout:fragment="mycsses">
+	<link th:href="@{/css/community.css}" rel="stylesheet" />
+</th:block>
+<main layout:fragment="main">
+	<div>
+		<h1 class="text-center">커뮤니티</h1>
+	</div>
+    <a th:href="@{/community/create}" class="btn btn-success float-end">글쓰기</a>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col"><input type="checkbox"/></th>
+				<th scope="col">말머리</th>
+				<th scope="col">제목</th>
+				<th scope="col">작성자</th>
+				<th scope="col">작성일</th>
+			</tr>
+		</thead>
+		<tbody class="table-group-divider">
+			<tr th:each="post : ${posts}">
+				<td><input type="checkbox" id="checkAll"></td>
+				<td th:text="${post.hrsHd}"></td>
+				<td> <a th:href="@{/post/detail?id={id} (id = ${post.communityId})}"
+						th:text="${post.title}"></a></td>
+				<td th:text="${post.userId}"></td>
+				<td th:text="${ #temporals.format(post.createdTime, 'yy-MM-dd HH:mm:ss')}"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+</main>
+</html>

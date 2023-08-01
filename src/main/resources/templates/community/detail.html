@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<htm xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+<main layout:fragment="main">
+	<div class="text-center">
+		<h1 th:text="{$post.title}"></h1>
+	</div>
+	<div>
+		<label class="form-label" for="author">작성자</label>
+		<label th:value="{$post.author}"></label>
+	</div>
+	<div>   
+	</div>
+	<div>
+		내용 + 사
+	</div>
+</main>
+</html>
