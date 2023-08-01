@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/base_layout}">
+    
+<main layout:fragment="main">
+	<div class="head">
+		<h1>회원가입 페이지</h1>
+	</div>
+	<div class="body">
+		<form method="post" th:action="@{ /member/signup }">
+			<div>
+				<strong>아이디</strong>
+				<input type="text"
+					   class="form-control"
+					   name="userId"
+					   placeholder="사용자 ID"
+					   required autofocus />
+			</div>
+			<div>
+				<strong>비밀번호</strong>
+				<input type="password"
+					   class="form-control"
+					   name="pwd"
+					   placeholder="비밀번호"
+					   required />
+			</div>
+			<div>
+				<strong>이름</strong>
+				<input type="text"
+					   class="form-control"
+					   name="name"
+					   placeholder="이름"
+					   required />
+			</div>
+			<div>
+				<strong>생년월일</strong>
+				<input type="text"
+					   class="form-control"
+					   name="birth"
+					   placeholder="생년월일"
+					   required />
+			</div>
+			<div>
+				<strong>성별</strong>
+				<input type="radio"
+					   name="gender"
+					   value="M">남자
+				<input type="radio"
+					   name="gender"
+					   value="F">여자
+			</div>
+			<div>
+				<strong>이메일</strong>
+				<input type="email"
+					   class="form-control"
+					   name="email"
+					   placeholder="email"
+					   required />
+			</div>
+			<div>
+				<strong>전화번호</strong>
+				<input type="text"
+					   class="form-control"
+					   name="phone"
+					   placeholder="전화번호"
+					   required />
+				<input type="submit"
+					   class="form-control"
+					   value="전송">
+			</div>
+			<!--<div>
+				<strong>인증번호</strong>
+				<input type="text"
+					   class="form-control"
+					   name="certification_number"
+					   placeholder="인증번호"
+					   required />
+				<input type="submit"
+					   class="form-control"
+					   value="확인">
+			</div>
+			-->
+			<div>
+				<input type="submit"
+					   class="form-control btn btn-outline-success"
+					   value="가입 완료"/>
+			</div>
+		</form>
+	</div>
+</main>
+</html>
