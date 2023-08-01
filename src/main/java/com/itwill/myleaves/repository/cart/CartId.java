@@ -14,5 +14,4 @@ public class CartId implements Serializable {
 	private Store store;
 //	private User user;
 
-	
 }
