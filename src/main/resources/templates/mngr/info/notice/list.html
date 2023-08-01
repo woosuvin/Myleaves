@@ -2,37 +2,74 @@
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/mngr_base_layout}">
-    
+
 <main layout:fragment="mngrHome">
    	<h1>공지사항</h1>
    	<table class="table">
-		<thead>
+		<thead class="text-center">
 			<tr>
-				<th scope="col">No</th>
-				<th scope="col">제목</th>
-				<th scope="col">작성일</th>
+				<th>No</th>
+				<th>제목</th>
+				<th>작성일</th>
 			</tr>
 		</thead>
-		<tbody class="table-group-divider">
-			<tr>
-				<th scope="row">1</th>
-				<td>Mark</td>
-				<td>Otto</td>
+		<tbody class="table-group-divider text-center">
+			<tr th:each="fix : ${fixList}">
+				<td>
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-megaphone-fill" viewBox="0 0 16 16">
+						<path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-11zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25.222 25.222 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56V3.224zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009a68.14 68.14 0 0 1 .496.008 64 64 0 0 1 1.51.048zm1.39 1.081c.285.021.569.047.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a65.81 65.81 0 0 1 1.692.064c.327.017.65.037.966.06z"/>
+					</svg>
+				</td>
+				<td class="text-start">
+					<a th:href="@{ /notice/detail?nid={nid} (nid = ${fix.nid}) }"
+						th:text="${fix.title}"></a>
+				</td>
+				<td th:text="${ #temporals.format(fix.createdDate, 'yyyy-MM-dd') }"></td>
 			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>Larry the Bird</td>
-				<td>Otto</td>
+			<tr th:each="nfix : ${notFixList}">
+				<td th:text="${nfix.rn}"></td>
+				<td class="text-start">
+					<a th:href="@{ /notice/detail?nid={nid} (nid = ${nfix.nid}) }"
+						th:text="${nfix.title}"></a>
+				</td>
+				<td th:text="${ #temporals.format(nfix.createdDate, 'yyyy-MM-dd') }"></td>
 			</tr>
 		</tbody>
 	</table>
-	<div class="text-end">
+	<div class="d-grid gap-2">
+		<div class="d-md-flex col-12">
+			<div class="col-3"></div>
+			<div class="col-6">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-md-center"
+						th:with="start = ${paging.startPage}, end = ${paging.endPage}, pageNum = ${paging.offset + 1}">
+						<li class="page-item" th:if="${start > 1}">
+							<a class="page-link" href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li th:each="page : ${#numbers.sequence(start, end)}" class="page-item"
+							th:classappend="${pageNum == page} ? 'active' : ''">
+							<a class="page-link" href="#" th:text="${page}" th:value="${page}"></a>
+						</li>
+						<li class="page-item" th:if="${end < paging.total}">
+							<a class="page-link" href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<form id='actionForm' method='get'>
+					<input type='hidden' name='offset' th:value='${ paging.offset }' />
+					<input type='hidden' name='rows' value='${ paging.rows }' />
+				</form>
+			</div>
+			<div class="col-3 text-end">
+				<a class="btn btn-primary" th:href="@{/mngr/notice/write}">공지사항 작성</a>
+			</div>
+		</div>
 	</div>
+	<script src="/js/info/notice/notice-paging.js"></script>
 </main>
 	
 </html>
