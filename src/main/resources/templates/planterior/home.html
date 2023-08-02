@@ -32,7 +32,7 @@
 			<div class="secondFilterSection" id="secondFilter">
 				<div class="filterDivision"></div>
 				<!-- for문 돌리기 가지고 온 수 만큼. -->
-			<!-- <div th:each="category: ${category}"> -->
+				<!-- <div th:each="category: ${category}"> -->
 				<ul class="filterLists">
 					<!-- th:text="${category.name}" -->
 					<button class="filterBtn" type="button"></button>
@@ -69,25 +69,38 @@
 		<!-- 사용자 All card -->
 		<div class="m-2">
 			<span class="m-2">All</span>
-			<a class="float-end btn btn-success" th:href="@{/planterior/create}" type="button">
-				글쓰기
-			</a>
+			<!-- 로그인 하지 않은 사용자이면 -->
+			<th:block sec:authorize="isAnonymous()">
+				<a class="float-end btn btn-success notCreate" type="button">
+					글쓰기 </a>
+			</th:block>
+			<th:block sec:authorize="isAuthenticated()">
+				<a class="float-end btn btn-success" th:href="@{/planterior/create}"
+					type="button"> 글쓰기 </a>
+			</th:block>
 		</div>
 		<br>
-		<div class="row m-2">
-		<!-- <div th:each="list: ${cardList}"> -->
-					<!-- <img th:text="${list.img}" /> -->
-						<!-- <p th:text="${list.name}" /> -->
-			<div class="col-xl-3 col-lg-3 col-md-6">
-				<div class="card">
-					<img th:src="@{/images/planterior/eucalyptus.png}" />
-					<div class="card-body">
-						<p class="card-text">Some quick example text to build on the
-							card title and make up the bulk of the card's content.</p>
+		<div class="m-2">
+			<div class="row row-cols-1 row-cols-md-4 g-4">
+				<div class="col" th:each="list: ${cardList}">
+					<div class="card">
+						<img th:src="@{/images/planterior/eucalyptus.png}" />
+						<!-- <img th:text="${list.img}" />  -->
+						<div class="card-body float-start"> <!-- 일렬로 맞추기 -->
+							<p th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+							<!--ROLE_ADMIN 권한을 갖는다면 보임-->
+							<div sec:authorize="hasRole('ADMIN')">
+								<input class="form-check-input float-end" type="checkbox" th:value="${list.planteriorId}" 
+									id="reverseCheck1"> 
+							</div>
+							<!--ROLE_USER 권한을 갖는다면 보임-->
+							<div sec:authorize="hasRole('USER')">
+								
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		<!--  </div> -->
 		</div>
 		<!-- 더보기 버튼 -->
 		<div class="d-flex justify-content-center">
@@ -96,6 +109,8 @@
 
 	</div>
 	<!-- end -->
-
 </main>
+<th:block layout:fragment="myscripts">
+	<script src="/js/planterior.js"></script>
+</th:block>
 </html>
