@@ -20,11 +20,11 @@ public class EmailServiceImpl implements EmailService{
     @Autowired
     JavaMailSender emailSender;
  
-    public static final String ePw = createKey();
+    public static final String AUTH_CODE = createKey();
  
     private MimeMessage createMessage(String to)throws Exception{
         System.out.println("보내는 대상 : " + to);
-        System.out.println("인증 번호(ePw) : " + ePw);
+        System.out.println("인증 번호(ePw) : " + AUTH_CODE);
         
         MimeMessage message = emailSender.createMimeMessage();
  
@@ -43,7 +43,7 @@ public class EmailServiceImpl implements EmailService{
         msgg+= "<h3 style='color:blue;'>회원가입 인증 코드입니다.</h3>";
         msgg+= "<div style='font-size:130%'>";
         msgg+= "CODE : <strong>";
-        msgg+= ePw + "</strong><div><br/> ";
+        msgg+= AUTH_CODE + "</strong><div><br/> ";
         msgg+= "</div>";
         message.setText(msgg, "utf-8", "html");//내용
         message.setFrom(new InternetAddress(to, "myleaves"));//보내는 사람
@@ -92,6 +92,6 @@ public class EmailServiceImpl implements EmailService{
             es.printStackTrace();
             throw new IllegalArgumentException();
         }
-        return ePw;
+        return AUTH_CODE;
     }
 }
