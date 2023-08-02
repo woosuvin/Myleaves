@@ -1,39 +1,58 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/mngr_base_layout}">
-    
-	<main layout:fragment="main">
-    <h1>내 풀잎 입양 리스트</h1>
-    <!-- 1. 품절 시 하얗게 / 문구 가운데 -->
-	<div class="bg-transparent border-dark">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+
+<main layout:fragment="main">
+	<h1>내 풀잎 입양 리스트</h1>
+	<!-- 1. 품절 시 하얗게 / 문구 가운데 -->
+	<div class="container bg-transparent border-dark">
 		<div class="row row-cols-1 row-cols-md-4 g-4 mb-2">
-			<div class="col" th:each="post: ${ posts }">
+			<div class="col" th:each="sell: ${ sells }">
 				<div class="container p-0"
 					style="position: relative; text-align: center; color: black;">
-					<a th:href="@{/post/details?id={id} (id=${post.id}) }"> 
+					<a th:switch="${sell.sold}"
+						th:href="@{/buy/detail?sellId={sellId} (sellId=${sell.sellId}) }">
 						<!-- 판매종료(buy>sold.equals("판매 종료"), 품절(store>inven==0) 흰색/문구 가운데 -->
-						<img class="rounded mb-1"
-							style="width: 100%; height: 100%; opacity: 50%;"
-							src="images/common/main.jpeg" /> 
-						<span class="link-dark centered"
-							style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 10pt">
-								<i>품절</i>
-						</span>
-						<!-- if문 돌릴 위치 -->
+						<th:block th:case="1">
+							<img class="rounded mb-1" style="width: 100%; height: 100%;"
+								src="/images/sellbuy/main.jpeg" />
+								<!-- th:src="@{'/display/image/' + ${sell.sellId}}" /> -->
+							<span class="link-dark centered rounded"
+								style="background: deeppink; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
+								분양중</span>
+						</th:block> <th:block th:case="2">
+							<img class="rounded mb-1" style="width: 100%; height: 100%;"
+								src="/images/sellbuy/main.jpeg" />
+							<span class="link-dark centered rounded"
+								style="background: mediumaquamarine; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
+								거래중</span>
+						</th:block> <th:block th:case="3">
+							<img class="rounded mb-1"
+								style="width: 100%; height: 100%; opacity: 50%;"
+								src="/images/sellbuy/main.jpeg" />
+							<span class="link-dark centered rounded"
+								style="background: darkgray; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
+								분양 종료</span>
+						</th:block> <!-- if문 돌릴 위치 -->
 					</a>
 				</div>
 				<div class="text-truncate">
-					<a th:href="@{/post/details?id={id} (id=${post.id}) }"
+					<a
+						th:href="@{/buy/detail?sellId={sellId} (sellId=${sell.sellId}) }"
 						class="link-dark link-underline-opacity-0"> <span
-						th:text="${ post.title }" class="card-title text-truncate"></span>
+						th:text="${ sell.title }" class="card-title text-truncate"></span>
 					</a>
-					<p class="card-text">0원</p>
+					<p class="card-text"
+						th:text="|${#numbers.formatInteger(sell.price, 0, 'COMMA')}원|"></p>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	</main>
-	
+</main>
+<th:block layout:fragment="myscripts">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+</th:block>
 </html>

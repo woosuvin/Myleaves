@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/mngr_base_layout}">
-    
-	<main layout:fragment="main">
-		<div>
-			<div>
-				<h2>내풀잎🍀등록</h2>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+
+<main layout:fragment="main">
+	<div>
+		<h2>내풀잎🍀등록</h2>
+		<form  method="post" class="container">
+			<div class="input-group mb-2">
+				<span class="input-group-text">제목</span> <input type="text"
+					name="title" id="title" class="form-control" placeholder="제목을 입력하세요." required>
 			</div>
-			
-			<form>
-				<label>제목</label>
-				<div>
-					<input type="text" placeholder="제목을 입력하세요." required />
-				</div>
-				
-				<label>가격</label>
-				<div>
-					<input type="number" required />
-				</div>
-				<small>
-					0원 입력 시 무료나눔
-				</small>
-				
-				<label>대표 사진</label>
-				<div>
-					<input type="file" />
-				</div>
-				
-				<label>상세 설명</label>
-				<div>
-					<textarea id="summernote"></textarea>
-				</div>
-				
-				<label>거래 장소</label>
-				<div>
-					<select name="sido"></select>
-					<select name="sigungu"></select>
-				</div>
-				<div>
-					<input type="text" placeholder="상세 주소 및 장소명을 입력해 주세요." required />
-				</div>
-				
-				<div>
-					<button>취소</button>
-					<button>등록</button>
-				</div>
-			</form>
-		</div>
-	</main>
-	
+			<input class="form-control bg-transparent border-dark d-none" id="userId"
+          	 name="userId" value="user1" required />
+			<div class="input-group mb-2">
+				<span class="input-group-text">가격</span> <input class="form-control"
+					name="price" id="price" type="number" placeholder="0원 입력 시 무료나눔" required> <span
+					class="input-group-text">원</span>
+			</div>
+
+			<div class="input-group mb-2">
+				<label class="input-group-text" for="thumbnail">대표 사진</label> <input
+					name="thumbnail" id="thumbnail" type="file" class="form-control">
+			</div>
+
+			<div class="form-floating mb-2">
+				<textarea class="form-control bg-transparent border-tertiary"
+					style="height: 300px;" id="content" name="content"
+					placeholder="Leave a comment here" required></textarea>
+				<label for="content">상세 설명</label>
+			</div>
+
+			<div class="input-group mb-1">
+				<span class="input-group-text">거래 장소</span> 
+				<select name="sido" id="sido" class="form-select"></select> 
+				<select name="gungu" id="gungu" class="form-select"></select>
+				<input class="form-control bg-transparent border-tertiary" id="loc"
+					name="loc" placeholder="상세 주소 및 장소명을 입력해 주세요." required></input>
+			</div>
+			<nav class="text-end"><small>예) 강남역 1번 출구, 아이티윌 앞</small></nav>
+			<div class="text-center">
+				<button class="btn btn-outline-dark" type="submit">분양 등록</button>
+			</div>
+		</form>
+	</div>
+</main>
+<th:block layout:fragment="myscripts">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+    <script src="/js/sellbuy/sell_create.js"></script>
+</th:block>
 </html>
