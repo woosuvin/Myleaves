@@ -27,7 +27,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "STORE")
-@SequenceGenerator(name = "STORE_SEQ_GEN", sequenceName = "STORE_SEQ1", allocationSize = 1)
+@SequenceGenerator(name = "STORE_SEQ_GEN", sequenceName = "STORE_SEQ", allocationSize = 1)
 public class Store {
 	
 	@Id

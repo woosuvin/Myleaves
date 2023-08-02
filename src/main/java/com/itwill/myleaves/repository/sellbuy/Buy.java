@@ -25,7 +25,7 @@ import lombok.ToString;
 @SequenceGenerator(name = "BUY_SEQ_GEN", sequenceName = "BUY_SEQ", allocationSize = 1)
 public class Buy {
 // 지현
-// 입양 테이블은 채팅창에서 판매자가 '거래 완료'로 상태 변경을 했을 때 create됨.
+// 입양 테이블은 채팅창에서 판매자가 '거래 완료'로 상태 변경을 했을 때 insert됨.
 // 만약 판매자가 채팅창에서 '거래중' 혹은 '판매중'으로 상태 변경 시 테이블에서 해당 데이터 삭제됨.
 	
 	@Id
