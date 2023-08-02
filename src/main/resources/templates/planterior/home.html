@@ -86,17 +86,20 @@
 					<div class="card">
 						<img th:src="@{/images/planterior/eucalyptus.png}" />
 						<!-- <img th:text="${list.img}" />  -->
-						<div class="card-body float-start"> <!-- 일렬로 맞추기 -->
-							<p th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+						<div class="card-body float-start">
+							<!-- 일렬로 맞추기 -->
+							<p
+								th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
 							<!--ROLE_ADMIN 권한을 갖는다면 보임-->
 							<div sec:authorize="hasRole('ADMIN')">
-								<input class="form-check-input float-end" type="checkbox" th:value="${list.planteriorId}" 
-									id="reverseCheck1"> 
+								<input class="form-check-input float-end" type="checkbox"
+									th:value="${list.planteriorId}" id="reverseCheck1">
 							</div>
 							<!--ROLE_USER 권한을 갖는다면 보임-->
-							<div sec:authorize="hasRole('USER')">
-								
-							</div>
+							<!-- 각 버튼에 아이디 값 주고 비어있으면 차고 차있으면 비게 만들기 -> db에 업뎃(조인하기) -->
+							<button type="imgButton">
+								<img th:src="@{/images/planterior/bookmark.svg}" />
+							</button>
 						</div>
 					</div>
 				</div>
