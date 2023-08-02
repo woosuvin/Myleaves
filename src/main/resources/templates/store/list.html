@@ -16,8 +16,8 @@
 				<div th:switch="${store.sold}" 
 					class="container p-0" style="position: relative; text-align: center; color: black;">
 					<a th:href="@{/store/detail?itemId={itemId} (itemId=${store.itemId})}"> 
-						<!-- Y, 품절일 경우 -->
-						<th:block th:case="Y">
+						<!-- 1, 품절일 경우 -->
+						<th:block th:case="1">
 							<img class="rounded mb-1" style="width: 100%; height: 100%; opacity: 50%;" 
 								src="/images/common/store.jpg" /> 
 							<span class="link-dark centered"
@@ -26,8 +26,8 @@
 							</span>
 						</th:block>
 						
-						<!-- N, 판매중일 경우 -->
-						<th:block th:case="N">
+						<!-- 0, 판매중일 경우 -->
+						<th:block th:case="0">
 							<img class="rounded mb-1" style="width: 100%; height: 100%;"
 								src="/images/common/store2.jpg" />
 						</th:block>

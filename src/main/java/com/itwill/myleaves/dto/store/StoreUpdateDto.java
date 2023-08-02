@@ -16,7 +16,7 @@ public class StoreUpdateDto {
 	private String content;
 	private long price;
 	private long inven;
-	//private String sold;
+	private int sold;
 	
 	public Store toEntity() {
 		return Store.builder()
@@ -25,7 +25,7 @@ public class StoreUpdateDto {
 				.content(content)
 				.price(price)
 				.inven(inven)
-				//.sold(sold)
+				.sold(sold)
 				.build();
 	}
 	
