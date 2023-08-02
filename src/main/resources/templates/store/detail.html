@@ -1,103 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-   layout:decorate="~{layout/base_layout}">
-<style>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+<!-- <style>
 h2 {
-   text-align: center;
+	text-align: center;
 }
 
 div {
-   display: table-row;
+	display: table-row;
 }
-</style>
-	
-	<main layout:fragment="main">
-	   <h2>상품 상세보기</h2>
-	   <div>
-	      <div>
-	         <div style="float: left;">
-	            <img src="/images/common/store.jpg" width="300" height="300" />
-	         </div>
-	         <div>
-	            <div>
-	               <div>
-	                  <table>
-	                     <tbody>
-	                        <tr>
-	                           <td th:text="${store.itemName}" style="padding: 8px; font-size: 16px; font-weight: bold;"></td>
-	                        </tr>
-	                        <tr>
-	                           <td id="price" th:text="${store.price}" style="padding: 8px; font-size: 16px;"></td>
-	                        </tr>
-	                     </tbody>
-	                  </table>
-	                  
-	                  <table>
-	                     <tbody>
-	                        <tr>
-	                           <th scope="col">배송비</th>
-	                           <td>
-	                           		3,000원
-	                           		<br/>
-	                          		제주 및 도서 산간 2,500원
-	                           </td>
-	                        </tr>
-	                        <tr>
-	                           <th scope="col">수량</th>
-	                           <td>
-		                           <span id="plusMinus" class="input-group mt-1" style="width: 5.3rem;"> 
-		                           		 <!-- 수량 줄이기 -->
-		                                 <button id="btnMinus" class="btn btn-sm btn-outline-secondary" type="button"
-		                                    style="height: 1.5rem; font-size: 7pt;">-</button> 
-		                                 
-		                                 <!-- 장바구니> 각상품의 수량 -->
-		                                 <input id="productCnt" type="text" class="form-control"
-		                                 value="1" style="height: 1.5rem; font-size: 7pt; text-align: center;" />
-		                                 
-		                                 <!-- 수량 더하기 -->
-		                                 <button id="btnPlus" class="btn btn-sm btn-outline-secondary"
-		                                    type="button" style="height: 1.5rem; font-size: 7pt;">+</button>
-		                           </span>
-	                           </td>
-	                        </tr>
-	                     </tbody>
-	                  </table>
-	               </div>
-	
-	               <div id="totalPriceDiv" class="totalPriceDiv">
-	                  <strong>총 상품금액</strong>
-	                    : 
-	                  	<span class="total">
-	                  		<strong id="totalPrice"></strong>
-	                    </span>
-	               </div>
+</style> -->
+
+<main layout:fragment="main">
+	<h2>상품 상세보기</h2>
+	<div class="container">
+		<form id="storeForm">
+			<table class="table table-borderless">
+				<tbody>
+					<tr>
+						<td rowspan="2" width=300><img class="rounded" width=100% src="/images/common/store.jpg" /></td>
+						<td style="vertical-align: middle">
+							<h3 id="itemName" name="itemName" th:text="${store.itemName}"></h3>
+							<div id="itemPrice" th:text="${store.price}"></div>
+						</td>
+						<td style="vertical-align: middle">
+							<span>배송비: </span><span>3,000원</span>
+							<br/>
+							<span>제주 및 도서 산간 2,500원</span>
+						</td>
+						<td style="vertical-align: middle">
+							<span id="plusMinus" class="input-group mt-1" style="width: 5.3rem;"> 
+								<!-- 수량 줄이기 -->
+								<button id="btnMinus" class="btn btn-sm btn-outline-secondary"
+									type="button" style="height: 1.5rem; font-size: 7pt;">-</button>
+									
+								<!-- submit 할 때 필요한거 1: 상품의 수량 --> 
+								<input id="cnt" name="cnt" type="text" class="form-control" value="1"
+								style="height: 1.5rem; font-size: 7pt; text-align: center;" />
+		
+								<!-- 수량 더하기 -->
+								<button id="btnPlus" class="btn btn-sm btn-outline-secondary"
+									type="button" style="height: 1.5rem; font-size: 7pt;">+</button>
+							</span>
+						</td>
+						<td style="vertical-align: middle">
+							<strong>총 상품금액</strong> : 
+							<span class="total"><strong id="totalPrice"></strong></span>
+						</td>
+					</tr>
 					
-					<!-- 재고 개수 -->
-					<div class="d-none" id="inven" th:text="${store.inven}"></div>	
-						
-	               <div>
-	                  <div class="ec-base-button gColumn" style="float: left;">
-	                     <a href="#none" class="btnNormal btnGrowing  "
-	                        onclick="product_submit(2, '/exec/front/order/basket/', this)">
-	                        관심 상품에 추가
-	                     </a>
-	                  </div>
-	                  <div>
-	                     <a href="#none" class="btnNormal btnInvert ">장바구니에 담기</a>
-	                  </div>
-	                  <div class="app-payment-flex-group"></div>
-	               </div>
-	            </div>
-	         </div>
-	      </div>
-	   </div>
-	      <hr>
-	   <div id="summernote" name="content" th:text="${store.content}"></div>
-	</main>
-	   
-	<th:block layout:fragment="myscripts">
-	      <script src="/js/chat.js"></script>
-	      <script src="/js/storeDetail.js"></script>
-	   </th:block>
+					<tr style="vertical-align: bottom">
+						<td>
+							<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+								<button class="btn btn-outline-dark" id="addWishBtn" name="addWishBtn">
+									관심 상품에 추가
+								</button>
+								<button class="btn btn-outline-dark" id="addCartBtn" name="addCartBtn">
+									장바구니에 담기
+								</button>
+							</div>
+						</td>
+					</tr>			
+				</tbody>
+			</table>
+			
+			<div id="summernote" name="content" th:text="${store.content}"></div>
+			
+			<!-- 재고 개수 -->
+			<input class="d-none" type="text" id="inven" name="inven" th:value="${store.inven}" />
+			<!-- submit 할 때 필요한거 2: 상품 아이디 -->
+			<input class="d-none" type="text" id="itemId" name="itemId" th:value="${store.itemId}" />
+		</form>
+	</div>
+	
+
+</main>
+
+<th:block layout:fragment="myscripts">
+	<script src="/js/chat.js"></script>
+	<script src="/js/store/storeDetail.js"></script>
+</th:block>
 </html>

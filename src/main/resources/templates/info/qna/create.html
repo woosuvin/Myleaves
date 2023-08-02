@@ -10,14 +10,15 @@
 		<form method="post"> 
 			<div class="card-body">
 				<div class="my-2">
-				<div class="form-check my-2">
-					<input class="form-check-input" type="checkbox" id="checkbox"
-					 checked> <label class="form-check-label" for="checkbox">
-					 비밀글 </label>
-				</div>
-				<textarea class="form-control d-none" id="secret" name="secret"></textarea>
-				
-				<label class="form-label" for="title">제목</label> <input
+					<div class="form-check my-2">
+						<input class="form-check-input" type="checkbox" id="checkbox"
+							checked> <label class="form-check-label" for="checkbox">
+							비밀글 </label>
+					</div>
+					<textarea class="form-control d-none" id="secret" name="secret"></textarea>
+					
+					<!-- 제목 -->	
+					<label class="form-label" for="title">제목</label> <input
 						class="form-control" type="text" id="title" name="title" required
 						autofocus />
 				</div>
@@ -29,20 +30,21 @@
 				</div>
 				
 				<div class="my-2">
-					<label class="form-label d-none" for="writer">작성자 아이디</label>
+					<label class="form-label" for="user_id">작성자 아이디</label>
 					<!-- 시큐리티 아이디 들어감 -->
-					<input class="form-control d-none" type="text" id="writer"
-						name="writer" readonly />
+					<input class="form-control" type="text" id="user_id"
+						name="user_id" value="test" readonly />
 				</div>
 				
 			</div>
 			<div class="mb-3 me-3 d-grid gap-2 d-md-flex justify-content-md-end">
-				<input class=" btn btn-primary justify-content-md-end" id="btnSubmit"
-					type="submit" value="등록" />
-				<a class=" btn btn-primary justify-content-md-end"
-					type="submit" th:href="@{/info/qna}">취소</a>	
+					<input class="btn btn-classic justify-content-md-end" id="btnSubmit"
+						type="submit" value="등록" />
 			</div>
-		</form>
-	</div>     
+			<a class=" btn btn-primary justify-content-md-end" type="submit" th:href="@{/info/qna}">취소</a>	
+			
+			</form>
+		</div>
+		<script src="/js/info/qna/qna_create.js"></script>         
 	</main>
 </html>

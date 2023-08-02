@@ -19,16 +19,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td> 
+                        <tr th:each="qna :${qnas}">
+                            <td th:text="${qna.qid}"></td> 
                             <td>
-                            	제목 TEST
-                                <!-- <a th:href="@{/post/details?id={id} (id = ${post.id}) }" 
-                                th:text="${post.title}"></a> -->
+                           		<a th:href="@{/info/qna/detail?qid={id} (id = ${qna.qid}) }" th:text="${qna.title}"></a>
                             </td> 
                            
-                            <td>작성자 TEST</td>
-                            <td>작성일 TEST 2020-10-10</td>
+                            <td th:text="${qna.user_id}"></td>
+                            <td th:text ="${#temporals.format(qna.createdDate, 'yy-mm-dd HH:mm' ) }"></td>
+                            <!-- 관리자 페이지에 확인 할 거임 -->
                             <td>진행상태 TEST 확인중</td>                                 
                         </tr>
                     </tbody>
