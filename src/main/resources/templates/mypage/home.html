@@ -8,6 +8,7 @@
 	<div class="container text-center">
 		<div class="m-5">
 			<h1>000님, 안녕하세요!</h1> <!-- '/mypage' -->
+			<input class="d-none" id="userId" value="test" />
 			<h4>
 				<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/myinfo}">&raquo;내 정보 보기</a>
 			</h4>
@@ -28,7 +29,7 @@
 				<h5>분양/입양</h5>
 				<ul style="display:block; list-style: none; padding: 0">
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/sellbuy/wish_list}">관심 상품</a>
+						<a class="text-uppercase nav-link link-dark" th:href="|@{/mypage/sellbuy/wish_list?userId=}test|">관심 상품</a>
 					</li>
 					<li>
 						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/sellbuy/sell_list}">분양 내역</a>
