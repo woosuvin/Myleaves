@@ -18,10 +18,9 @@
 			<tbody class="table-group-divider">
 				<tr th:each="store: ${stores}" class="border-dark">
 					<th scope="row" class="text-center bg-transparent" th:text="${ store.itemId }"></th>
-					<td class="text-center bg-transparent" th:text="${store.itemName}">
-						<!-- <a class="link-offset-2 link-underline-opacity-0 link-dark" 
-							th:href="@{/mngr/store/detail?itemId={itemId} (itemId=${store.itemId)}" th:text="${store.itemName}">
-						</a> -->
+					<td class="text-center bg-transparent">
+						<a th:href="@{/mngr/store/detail?itemId={itemId} (itemId=${store.itemId})}" th:text="${store.itemName}"
+						 class="link-offset-2 link-underline-opacity-0 link-dark"></a>
 					</td>
 					<td class="text-center bg-transparent" th:text="${store.inven}"></td>
 					<td class="text-center bg-transparent" th:text="${store.price}"></td>

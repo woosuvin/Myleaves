@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.myleaves.dto.store.StoreCreateDto;
+import com.itwill.myleaves.dto.store.StoreUpdateDto;
 import com.itwill.myleaves.repository.store.Store;
 import com.itwill.myleaves.service.store.StoreService;
 
@@ -55,4 +56,16 @@ public class MngrStoreController {
 		model.addAttribute("store", store); // model에 저장
 	}
 	
+	@PostMapping("/update")
+	public String update(StoreUpdateDto dto) {
+		storeService.update(dto);
+		return "redirect:/mngr/store/list";
+	}
+	
+	@PostMapping("/delete")
+	public String delete(long itemId) {
+		log.info("delete(itemId={})", itemId);
+		storeService.delete(itemId);
+		return "redirect:/mngr/store/list";
+	}
 }
