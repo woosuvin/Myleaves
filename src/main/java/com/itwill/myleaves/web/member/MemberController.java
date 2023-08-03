@@ -35,7 +35,7 @@ public class MemberController {
         
         // 회원 가입 서비스 호출
         String id = memberService.registerMember(dto);
-        log.info("회원 가입 id= {}", id);
+        log.info("회원 가입 id={}", id);
         
         // 회원가입 이후에 로그인 화면으로 이동
        return "redirect:/login"; 
