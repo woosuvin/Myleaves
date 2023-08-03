@@ -1,7 +1,5 @@
 package com.itwill.myleaves.dto.qna;
 
-import java.time.LocalDateTime;
-
 import com.itwill.myleaves.repository.qna.QnA;
 
 import lombok.Data;

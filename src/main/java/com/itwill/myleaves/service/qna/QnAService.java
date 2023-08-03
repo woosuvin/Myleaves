@@ -34,29 +34,29 @@ public class QnAService {
      */
     @Transactional(readOnly = true)
     public QnA read(Long qid) {
-        log.info("read(id={})" , qid);
-        // 그 리스트들 중 포스트 ID 값을 찾는 값을 리턴
+        log.info("read(qid={})" , qid);
         return qnaRepository.findById(qid).orElseThrow();
     }
 	
 	/*
 	 * QnA 글 새로 작성하기
 	 */
+    @Transactional(readOnly = true)
 	public QnA create(QnACreateDto dto) {
 		log.info("QnA(dto={})" , dto);
 		
 		QnA entity = dto.toEntity();
-		log.info("entity={}" , entity);
+		log.info("before entity={}" , entity);
 		
-		qnaRepository.save(entity);
-		log.info("entity={}" , entity);
+		qnaRepository.saveAndFlush(entity);
+		log.info("after entity={}" , entity);
 		
 		return entity;
 	}
 	/*
 	 * QnA 글 수정하기
 	 */
-	@Transactional // (1)
+    @Transactional
     public void update(QnAUpdateDto dto) {
         log.info("update(dto={})" , dto);
         
@@ -65,5 +65,12 @@ public class QnAService {
         entity.update(dto); 
         
     }
+	/*
+	 * QnA 글 삭제하기
+	 */
+	public void delete(Long qid) {
+	       log.info("delete{}" , qid);
+	       qnaRepository.deleteById(qid);   
+	    }
 	
 }	
