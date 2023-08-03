@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.myleaves.repository.sellbuy.Sell;
-import com.itwill.myleaves.repository.sellbuy.WishList;
-import com.itwill.myleaves.service.mypage.MypageService;
+import com.itwill.myleaves.repository.sellbuy.BuyWish;
+import com.itwill.myleaves.service.mypage.MypageSellBuyService;
 import com.itwill.myleaves.service.sellbuy.SellService;
 
 import lombok.RequiredArgsConstructor;
@@ -25,13 +25,13 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageSellBuyController {
 	
 	private final SellService sellService;
-	private final MypageService mypageService;
+	private final MypageSellBuyService mypageService;
 
-	@GetMapping("/wish_list")
-	public void read(WishList wishList, Model model) {
+	@GetMapping("/buyWish")
+	public void read(BuyWish wishList, Model model) {
 		log.info("read()");
 		
-		List<WishList> list = mypageService.read(wishList);
+		List<BuyWish> list = mypageService.read(wishList);
 		
 //		Map<Long, String> productBase64Images = new HashMap<>();
 //        for(Sell sell: list){               
@@ -41,7 +41,7 @@ public class MyPageSellBuyController {
 		model.addAttribute("wishSell", list);
 	}
 	
-	@GetMapping("/sell_list")
+	@GetMapping("/sellList")
 	public void sellList(Model model) {
 		log.info("read()");
 		List<Sell> list = sellService.read();
@@ -54,7 +54,7 @@ public class MyPageSellBuyController {
 		model.addAttribute("sells", list);
 	}
 	
-	@GetMapping("/buy_list")
+	@GetMapping("/buyList")
 	public void read(Model model) {
 		log.info("read()");
 		List<Sell> list = sellService.read();

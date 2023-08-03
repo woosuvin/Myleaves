@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface WishListRepository extends JpaRepository<WishList, WishListPK> {
+public interface BuyWishRepository extends JpaRepository<BuyWish, BuyWishId> {
 	
-	List<WishList> findByUserId(String userId);
+	List<BuyWish> findByUserId(String userId);
 	
 }

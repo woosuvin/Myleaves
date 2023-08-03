@@ -10,9 +10,9 @@ import lombok.Data;
 // 정지언
 @Entity
 @Data
-@IdClass(WishListPK.class)
+@IdClass(BuyWishId.class)
 @Table(name = "WISH_SELL")
-public class WishList {
+public class BuyWish {
 	
 	@Id
 	@Column(name = "user_id")

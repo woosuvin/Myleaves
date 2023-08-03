@@ -6,7 +6,7 @@ import lombok.Data;
 
 // 정지언
 @Data
-public class WishListPK implements Serializable {
+public class BuyWishId implements Serializable {
 	private String userId;
 	private Long sellId;
 
