@@ -25,7 +25,7 @@
 				<li class="nav-item"><a class="nav-link-login"
 					onclick="openChatList()">채팅</a></li>
 				<li class="nav-item"><a class="nav-link-login"
-					th:href="@{/cart/list}">장바구니</a></li>
+					th:href="@{/cart/list(param='${authentication.userId}')}">장바구니</a></li>
 				<li class="nav-item"><a class="nav-link-login fw-normal"
 					th:href="@{/mypage}">[<span sec:authentication="name"></span>]
 						마이페이지
