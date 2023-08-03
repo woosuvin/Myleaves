@@ -7,18 +7,23 @@
 	<div class="container">
 		<table class="table table-borderless">
 			<tbody>
-				<tr>
+				<tr th:switch="${ sell.sold }">
 					<td rowspan="2" width=300><img class="rounded" width=100%
-						src="/images/sellbuy/main.jpeg" /></td>
+						src="/images/sellbuy/onsale.jpeg" /></td>
 					<td style="vertical-align: middle"><small> <span
 							th:text="${ sell.sido }" class=""></span> <span
 							th:text="${ sell.gungu }" class=""></span> <span
 							th:text="${ sell.loc }" class=""></span>
 					</small>
 						<h3 th:text="${ sell.title }" class=""></h3>
-						<div
-							th:text="|${#numbers.formatInteger(sell.price, 0, 'COMMA')}원|"
-							class=""></div></td>
+						<div th:text="|${#numbers.formatInteger(sell.price, 0, 'COMMA')}원|" class=""></div>
+						<th:block th:case="1"><p>분양중</p>
+						</th:block>
+						<th:block th:case="2"><p>거래중</p>
+						</th:block>
+						<th:block th:case="3"><p>분양 완료</p>
+						</th:block>
+					</td>
 				</tr>
 				<tr>
 					<td style="vertical-align: bottom">
