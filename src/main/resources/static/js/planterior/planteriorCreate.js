@@ -1,12 +1,8 @@
 /**
- * 플랜테리어 js
+ * planterior create page
  */
 document.addEventListener('DOMContentLoaded', () => {
-
-	/**
-	 *  planterior create page
-	 */
-
+	
 	// 플랜테리어 작성 취소 버튼
 	const createForm = document.querySelector('#createForm');
 	const btnCancel = document.querySelector('#btnCancel');
@@ -18,14 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 
 	// 플랜테리어 작성: 영문/한문
-	const formFile = document.querySelector('#formFile').value;
+	let formFile = document.querySelector('#formFile').value;
 	const btnCreate = document.querySelector('#btnCreate');
 	btnCreate.addEventListener('click', () => {
 		event.preventDefault();
-		const PlantkoreanName = document.querySelector('#PlantkoreanName').value;
-		const PlantEnglishName = document.querySelector('#PlantEnglishName').value;
+		const plantName = document.querySelector('#plantName').value; // 한글만 가능하게 설정
+		const plantNameEnglish = document.querySelector('#plantNameEnglish').value; // 영어만 가능하게 설정
+		const userId = document.querySelector('#userId').value;
+		
 		// 카테고리 삽입 가능성 존재
-		if (PlantkoreanName === '' || PlantEnglishName === '' || !formFile) {
+		// 이미지 성공시 !formFile 넣기
+		if (plantName === '' || plantNameEnglish === '') {
 			alert('비어있는 부분을 입력해주세요')
 			return;
 		}
@@ -51,31 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			preview.src = "";
 		}
 	}
-	/* 
-	const inputContainer = document.getElementById('inputContainer');
-	deleteButton.addEventListener('click', () => {
-
-		if (!formFile) {
-			alert('파일을 첨부해 주세요')
-			return false;
-		} else {
-			const fileInput = inputContainer.querySelector('.input-group');
-			inputContainer.removeChild(fileInput);
-		}
-
-	})
-	*/
 	
-	/**
-	 *  planterior main
-	 */
-
-
+	
+	
 })
-
-
-
-
-
-
-

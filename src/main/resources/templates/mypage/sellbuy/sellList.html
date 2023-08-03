@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/base_layout}">
+    
+<main layout:fragment="main">
+<h1>분양 내역</h1>
+<div class="container bg-transparent border-dark">
+	<div class="row row-cols-1 row-cols-md-4 g-4 mb-2">
+		<div class="col" th:each="sell: ${ sells }"> <!-- buy테이블 이름으로 바꿔야 함. -->
+			<div class="container p-0"
+				style="position: relative; text-align: center; color: black;">
+				<a th:switch="${sell.sold}"
+					th:href="@{/buy/detail?sellId={sellId} (sellId=${sell.sellId}) }">
+					<!-- 판매종료(buy>sold.equals("판매 종료"), 품절(store>inven==0) 흰색/문구 가운데 -->
+					<th:block th:case="1">
+						<img class="rounded mb-1" style="width: 100%; height: 100%;"
+							src="/images/sellbuy/main.jpeg" />
+							<!-- th:src="@{'/display/image/' + ${sell.sellId}}" /> -->
+						<span class="link-dark centered rounded"
+							style="background: deeppink; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
+							분양중</span>
+					</th:block> <th:block th:case="2">
+						<img class="rounded mb-1" style="width: 100%; height: 100%;"
+							src="/images/sellbuy/main.jpeg" />
+						<span class="link-dark centered rounded"
+							style="background: mediumaquamarine; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
+							거래중</span>
+					</th:block> <th:block th:case="3">
+						<img class="rounded mb-1"
+							style="width: 100%; height: 100%; opacity: 50%;"
+							src="/images/sellbuy/main.jpeg" />
+						<span class="link-dark centered rounded"
+							style="background: darkgray; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
+							분양 종료</span>
+					</th:block> <!-- if문 돌릴 위치 -->
+				</a>
+			</div>
+			<div class="text-truncate">
+				<a
+					th:href="@{/buy/detail?sellId={sellId} (sellId=${sell.sellId}) }"
+					class="link-dark link-underline-opacity-0"> <span
+					th:text="${ sell.title }" class="card-title text-truncate"></span>
+				</a>
+				<p class="card-text"
+					th:text="|${#numbers.formatInteger(sell.price, 0, 'COMMA')}원|"></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+</main>
+</html>

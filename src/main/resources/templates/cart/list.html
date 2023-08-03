@@ -10,43 +10,58 @@
     
     <h3 class="mb-3">장바구니(cart 테이블 user_id의 cnt 합계)</h3>
 	<hr />
-	<div class="row p-2 ps-5 pe-5" th:each="post: ${ posts }">
-		<!-- 사진 -->
-		<div class="me-3 cartProductImage" style="width: 4rem;">
-			<img class="rounded" style="width: 4rem; height: 4rem;"
-				src="images/common/main.jpeg" />
+	
+	<form>
+		<div th:each="cart: ${carts}">
+			<span th:text="${cart.itemId}"></span>
 		</div>
-		<!-- 상품명, 수량 버튼 -->
+		<div th:each="store:${stores}">
+			<span th:text="${store.itemName}"></span>
+		</div>
+		
+	</form>
+	
+	<!-- <div class="row p-2 ps-5 pe-5" th:each="cart: ${carts}">
+		사진
+		<div class="me-3 cartProductImage" style="width: 4rem;">
+			<img class="rounded" style="width: 4rem; height: 4rem;" src="images/common/main.jpeg" />
+		</div>
+		상품명, 수량 버튼
 		<div class="col">
-			<a th:href="@{/post/details?id={id} (id=${post.id}) }"
-				class="link-dark link-underline-opacity-0"> 
-				<span th:text="${ cart. }" class="card-title text-truncate fw-medium"></span>
+			<a th:href="@{/store/details?itemId={itemId} (itemId=${cart.itemId})}" class="link-dark link-underline-opacity-0"> 
+				<span th:text="${cart.itemName}" class="card-title text-truncate fw-medium"></span>
 			</a> 
-			<span id="plusMinus" class="input-group mt-1" style="width: 4.7rem;">
-				<!-- 수량 줄이기 -->
-				<button id="btnMinus" class="btn btn-sm btn-outline-secondary" type="button"
-					style="height: 1.5rem; font-size: 7pt;">-</button> 
-				<!-- 장바구니> 각상품의 수량 -->
-				<input id="productCnt" type="text" class="form-control" value="1" style="height: 1.5rem; font-size: 7pt;" />
-				<!-- 수량 더하기 -->
-				<button id="btnPlus" class="btn btn-sm btn-outline-secondary" type="button"
-					style="height: 1.5rem; font-size: 7pt;">+</button>
+			<span id="plusMinus" class="input-group mt-1" style="width: 5.3rem;"> 
+				수량 줄이기
+				<button id="btnMinus" class="btn btn-sm btn-outline-secondary"
+					type="button" style="height: 1.5rem; font-size: 7pt;">-</button>
+									
+				<input id="cnt" name="cnt" type="text" class="form-control" value="1"
+				style="height: 1.5rem; font-size: 7pt; text-align: center;" />
+
+				수량 더하기
+				<button id="btnPlus" class="btn btn-sm btn-outline-secondary"
+					type="button" style="height: 1.5rem; font-size: 7pt;">+</button>
 			</span>
 		</div>
-		<!-- 가격 -->
+		가격
 		<p class="text-end" style="width: 8rem;">
 			<br />상품 id>가격
 		</p>
-		<!-- 삭제 버튼 -->
+		삭제 버튼
 		<div id="" class="btn text-end" style="border: none; outline: none; width: 2rem;">
 			<img src="images/common/x-lg.svg" />
 		</div>
 	</div>
+	
 	<hr />
+	
 	<div class="text-center">
 		<p>가격 sum(상품가격*cnt) + 배송비 3,000원(제주 및 도서 산간 2,500원 추가)</p>
 	</div>
+	
 	<hr />
+	
 	<div class="ps-5 pe-5">
 		<div class="row">
 			<span class="col">상품 합계</span> <span class="col text-end">sum(상품가격*cnt)</span>
@@ -55,16 +70,18 @@
 			<span class="col">배송비</span> <span class="col text-end">3,000원</span>
 		</div>
 	</div>
+	
 	<hr />
+	
 	<div class="ps-5 pe-5 fw-bold">
 		<div class="row">
 			<span class="col">합계</span> <span class="col text-end">=sum(상품가격*cnt)+3,000원</span>
 		</div>
 	</div>
+	
 	<div class="text-center mt-3">
 		<a class="btn" th:href="@{/cart/order}" >구매하기</a>
-	</div>
-    
+	</div> -->
     
 	</main>
 	

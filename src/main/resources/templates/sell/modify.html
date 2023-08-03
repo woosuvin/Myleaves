@@ -1,50 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/mngr_base_layout}">
-    
-	<main layout:fragment="main">
-		<div>
-			<div>
-				<h2>내풀잎🍀등록</h2>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+
+<main layout:fragment="main">
+	<div>
+		<h2>내풀잎🍀수정</h2>
+		<form id="sellModifyForm" class="container">
+			<input class="d-none" name="sellId" id="sellId" th:value="${sell.sellId}"></input>
+			<div class="input-group mb-2">
+				<span class="input-group-text">제목</span> <input type="text"
+					th:value="${sell.title}" name="title" id="title" class="form-control"
+					placeholder="제목을 입력하세요." required>
 			</div>
-			
-			<form>
-				<label>제목</label>
-				<div>
-					<input type="text" required />
-				</div>
-				
-				<label>가격</label>
-				<div>
-					<input type="number" required />
-				</div>
-				<small>
-					0원 입력 시 무료나눔
-				</small>
-				
-				<label>대표 사진</label>
-				<div>
-					<input type="file" />
-				</div>
-				
-				<label>상세 설명</label>
-				<div>
-					<textarea id="summernote"></textarea>
-				</div>
-				
-				<label>거래 장소</label>
-				<div>
-					<input type="text" placeholder="장소 수정 불가/저장된 장소 뿌려주기" readonly />
-				</div>
-				
-				<div>
-					<button>삭제</button>
-					<button>목록</button> <!-- 리스트로 이동 -->
-					<button>수정 완료</button>
-				</div>
-			</form>
-		</div>
-	</main>
-	
+			<input class="form-control bg-transparent border-dark d-none"
+				id="userId" name="userId" th:value="${sell.userId}" required />
+			<div class="input-group mb-2">
+				<span class="input-group-text">가격</span> <input class="form-control"
+					th:value="${sell.price}" name="price" id="price" type="number" placeholder="0원 입력 시 무료나눔"
+					required> <span class="input-group-text">원</span>
+			</div>
+
+			<div class="input-group mb-2">
+				<label class="input-group-text" for="thumbnail">대표 사진</label> <input
+					th:value="${sell.thumbnail}" name="thumbnail" id="thumbnail" type="file" class="form-control">
+			</div>
+
+			<div class="form-floating mb-2">
+				<textarea class="form-control bg-transparent border-tertiary"
+					th:text="${sell.content}" style="height: 300px;" id="content" name="content"
+					placeholder="Leave a comment here" required></textarea>
+				<label for="content">상세 설명</label>
+			</div>
+
+			<div class="input-group mb-1">
+				<span class="input-group-text">거래 장소</span> <select name="sido"
+					th:value="${sell.sido}" id="sido" class="form-select"></select> <select name="gungu"
+					th:value="${sell.gungu}" id="gungu" class="form-select"></select> <input
+					class="form-control bg-transparent border-tertiary" id="loc"
+					th:value="${sell.loc}" name="loc" placeholder="상세 주소 및 장소명을 입력해 주세요." required></input>
+			</div>
+			<nav class="text-end">
+				<small>예) 강남역 1번 출구, 아이티윌 앞</small>
+			</nav>
+			<!-- <div class="text-center mt-2" th:if="${sell.userId} == ${#authentication.name}"> -->
+            <div class="text-center mt-2">
+                <a class="btn btn-outline-dark" id="btnUpdate">수정 등록</a>
+                <a class="btn btn-outline-dark" id="btnDelete">삭제</a>
+            </div>
+		</form>
+	</div>
+</main>
+<th:block layout:fragment="myscripts">
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/sellbuy/modify.js"></script>
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+    <script src="/js/sellbuy/sell_modify.js"></script>
+</th:block>
 </html>

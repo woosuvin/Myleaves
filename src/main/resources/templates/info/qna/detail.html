@@ -4,41 +4,47 @@
 	layout:decorate="~{layout/base_layout}">
 <main layout:fragment="main">
 	<h1>QNA 상세페이지</h1>
-	<section class="card">
-		<form class="card-body" id="modifyForm">
-			<!-- 사용자 문의 출력 -->
-			<div class="my-2">
-				<label class="form-label d-none" for="qid">번호</label> <input
-					class="form-control d-none" id="qid" readonly />
-			</div>
-			<!-- 제목 -->
-			<div class="card mb-3">
-				<div class="card-body">
-					<h2 class="card-text">작성한 제목</h2>
-					<!-- 작성자 -->
-					<p id="author" class="card-text">작성자</p>
-					<!-- 내용 -->
-					<hr />
-					<div class="my-2">
-						<label class="form-label d-none" for="content">내용</label>
-						<div class="card-text" id="content" style="height: 10rem">작성자가
-							작성한 내용</div>
-					</div>
-					<hr />
-					<!-- 작성날짜 -->
-					<!-- <fmt:formatDate value="${ infoQnA.created_date }"
-						pattern="yyyy-MM-dd" var="created" />
-					<p class="card-text text-end small" id="created_date">${ created }</p> -->
+	<div class="card">
+			<form class="card-body" id="qnaModifyForm">
+				<!-- 사용자 문의 출력 -->
+				<div class="my-2">
+					<label class="form-label d-none" for="qid">번호</label> 
+					<input class="form-control d-none" id="qid" th:value="${qna.qid}" readonly />
 				</div>
+				<!-- 제목 -->
+				<div class="card">
+					<div class="card-body">
+						<div class="card-text">
+							<label class="form-label" for="title">제목</label>
+	                        <input class="form-control" id="title" th:value="${qna.title}" readonly />
+						</div>
+						<!-- 내용 -->
+						<br/>
+						<div class="my-2">
+							<div class="card-text">
+								<label class="form-label" for="content">내용</label>
+	                        	<textarea class="form-control" id="content" th:text="${qna.content}" readonly></textarea>
+							</div>
+						</div>
+						<br />
+						<!-- 작성자 -->
+						<div class="card-text d-none">
+							<label class="form-label" for="user_id">작성자</label>
+	                        <input class="form-control" id="user_id" th:value="${qna.user_id}" readonly />
+						</div>
+						<br />
+						<!-- 작성날짜 -->
+					</div>
+				</div>
+			</form>
 				<div style="text-align: right;">
 					<!-- 수정버튼은 관리자가 확인중일시 수정 버튼 가능 c:if 써야함 -->
-					<a class="btn btn-outline-primary" th:href="@{/info/qna/update}">수정</a>
-					<a class="btn btn-outline-primary" th:href="@{/info/qna/delete}">삭제</a>
-				</div>
+					<a class="btn btn-outline-primary" th:href="@{/info/qna/modify?qid={id} (id = ${qna.qid}) }">수정</a>
 			</div>
+			
 			<!-- 관리자 페이지 답변 -->
 			<!--  확인중이 아닐 시 답변  c:if 써야함-->
-			<div class="my-2">
+			<!-- <div class="my-2">
 				<label class="form-label d-none" for="an_title">제목</label> 
 				<input class="form-control d-none" id="an_title" readonly />
 			</div>
@@ -47,15 +53,13 @@
 					<h4 class="card-text">답변 제목</h4>
 						<div class="card-text" id="content" style="height: 10rem">답변 내용</div>
 				</div>
-				<!-- 관리자가 답변한 답변 날짜 -->
-						<!-- <fmt:formatDate value="${ infoQnA.answer_date }"
-								pattern="yyyy-MM-dd" var="answered" /> -->
-				<!-- <hr /> -->
-				<!-- <p class="card-text text-end small mb-3 me-3" id="answer_date">관리자 답변</p>	 -->
-			</div>	
-								
-		</form>
-		<a class="btn btn-outline-primary" th:href="@{/info/qna}">목록</a>
-	</section>
-</main>
+				관리자가 답변한 답변 날짜
+						<fmt:formatDate value="${ infoQnA.answer_date }"
+								pattern="yyyy-MM-dd" var="answered" />
+				<hr />
+				<p class="card-text text-end small mb-3 me-3" id="answer_date">관리자 답변</p>	
+			</div> -->							
+			<a class="btn btn-outline-primary" th:href="@{/info/qna}">목록</a>
+		</div>
+	</main>
 </html>

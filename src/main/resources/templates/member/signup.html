@@ -2,13 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/base_layout}">
-    
+<head>
+    <script defer src="/js/member/signup.js"></script>
+</head>
+
 <main layout:fragment="main">
 	<div class="head">
 		<h1>회원가입 페이지</h1>
 	</div>
 	<div class="body">
-		<form method="post" th:action="@{ /member/signup }">
+		<form id="signup-form" method="post" th:action="@{ /member/signup }">
 			<div>
 				<strong>아이디</strong>
 				<input type="text"
@@ -51,42 +54,46 @@
 					   value="F">여자
 			</div>
 			<div>
+				<strong>전화번호</strong>
+				<input type="text"
+					   class="form-control"
+					   placeholder="전화번호"
+					   name="phone"
+					   required />
+			</div>
+			<div>
 				<strong>이메일</strong>
 				<input type="email"
 					   class="form-control"
 					   name="email"
 					   placeholder="email"
 					   required />
+				<button type="button" class="btn btn-secondary" id="btnSend">전송</button>
 			</div>
 			<div>
-				<strong>전화번호</strong>
-				<input type="text"
-					   class="form-control"
-					   name="phone"
-					   placeholder="전화번호"
-					   required />
-				<input type="submit"
-					   class="form-control"
-					   value="전송">
-			</div>
-			<!--<div>
 				<strong>인증번호</strong>
 				<input type="text"
 					   class="form-control"
-					   name="certification_number"
 					   placeholder="인증번호"
 					   required />
-				<input type="submit"
-					   class="form-control"
-					   value="확인">
+				<button type="button" class="btn btn-primary" id="btnConfirm">확인</button>
 			</div>
-			-->
 			<div>
 				<input type="submit"
-					   class="form-control btn btn-outline-success"
-					   value="가입 완료"/>
+					   class="form-control btn btn-success"
+					   id="btnJoin"
+					   value="가입완료">
 			</div>
 		</form>
+		<!--  
+		<div>
+			<button class="btn btn-success" id="btn-complete">가입완료</button>
+		</div>
+		-->
 	</div>
 </main>
+<!--
+<div th:replace="layout::signup-scripts">
+    <script defer src="../static/js/member/signup.js"></script>
+</div> -->
 </html>

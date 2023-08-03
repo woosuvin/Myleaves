@@ -7,7 +7,8 @@
  
 	<div class="container text-center">
 		<div class="m-5">
-			<h1>000님, 안녕하세요!</h1> <!-- '/mypage' -->
+			
+			<h1 th:text="|${#authentication.name}님 안녕하세요!|"></h1> <!-- '/mypage' -->
 			<h4>
 				<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/myinfo}">&raquo;내 정보 보기</a>
 			</h4>
@@ -28,13 +29,13 @@
 				<h5>분양/입양</h5>
 				<ul style="display:block; list-style: none; padding: 0">
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/sellbuy/wish_list}">관심 상품</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/sellbuy/buyWish(userId=${#authentication.name})}">관심 상품</a>
 					</li>
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/sellbuy/sell_list}">분양 내역</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/sellbuy/sellList(userId=${#authentication.name})}">분양 내역</a>
 					</li>
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/sellbuy/buy_list}">입양 내역</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/sellbuy/buyList(userId=${#authentication.name})}">입양 내역</a>
 					</li>
 				</ul>
 			</div>
@@ -42,10 +43,10 @@
 				<h5>스토어</h5>
 				<ul style="display:block; list-style: none; padding: 0">
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/store/wish_list}">관심 상품</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/store/storeWish(userId=${#authentication.name})}">관심 상품</a>
 					</li>
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/store/order_list}">구매 내역</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/store/orderList(userId=${#authentication.name})}">구매 내역</a>
 					</li>
 				</ul>
 			</div>

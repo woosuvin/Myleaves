@@ -13,6 +13,7 @@ public class StoreCreateDto {
 	private String content;
 	private long price;
 	private long inven;
+	private int sold;
 	
 	// dto를 entity 객체로 변환해서 리턴하는 메서드
 	public Store toEntity() {
@@ -22,7 +23,7 @@ public class StoreCreateDto {
 				.content(content)
 				.price(price)
 				.inven(inven)
-				.sold("N")
+				.sold(sold)
 				.build();
 	}
 }

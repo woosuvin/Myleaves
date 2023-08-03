@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwill.myleaves.dto.member.MemberSignUpDto;
+import com.itwill.myleaves.repository.member.EmailService;
 import com.itwill.myleaves.repository.member.Member;
 import com.itwill.myleaves.service.member.MemberService;
 
@@ -20,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	
 	private final MemberService memberService;
+	private final EmailService emailService;
 	
 	@GetMapping("/signup")
 	public void signUp() {
@@ -32,9 +35,20 @@ public class MemberController {
         
         // 회원 가입 서비스 호출
         String id = memberService.registerMember(dto);
-        log.info("회원 가입 id= {}", id);
+        log.info("회원 가입 id={}", id);
         
         // 회원가입 이후에 로그인 화면으로 이동
        return "redirect:/login"; 
     }
+	
+	@GetMapping("/confirm")
+	@ResponseBody
+	public String emailConfirm(String email) throws Exception {
+	  log.info("emailConfirm(email={})", email);
+	  
+	  String confirm = emailService.sendSimpleMessage(email);
+	  log.info("emailConfirm(confirm={})", confirm);
+	  
+	  return confirm;
+	}
 }

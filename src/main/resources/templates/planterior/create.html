@@ -16,10 +16,8 @@
 			encType="multipart/form-data">
 			<dl>
 				<div>
-					<!-- <th:block sec:authorize="isAuthenticated()"> -->
-					<input type="hidden" id="crtr_id" name="crtr_id" value="" />
-					<!-- value 속성에 사용자 id: "sec:authentication='name'" 추가-->
-					<!-- </th:block> -->
+					<input type="hidden" id="userId" name="userId"
+						th:value="${#authentication.name}" />
 				</div>
 				<dt align="left" class="dt_class">
 					플랜테리어 사진 <span class="highlight">* 1개만 선택 가능</span>
@@ -28,10 +26,10 @@
 				<dd align="left">
 					<div id="inputContainer">
 						<div class="input-group mb-3">
-							<input class="form-control file-input m-2" type="file" id="formFile"
-								name="formFile" accept="image/*" onchange="imageUpload(this);" autofocus required>
-							<img class="imagePreview" id="imagePreview1">
-							<button class="btn btn-primary m-2" type="button" id="deleteButton">삭제</button>
+							<input class="form-control file-input m-2" type="file"
+								id="formFile" name="formFile" accept="image/*" autofocus>
+							<!-- required -->
+							<img class="imagePreview" id="imagePreview">
 						</div>
 					</div>
 				</dd>
@@ -40,18 +38,17 @@
 				<dt align="left" class="dt_class">식물 이름(한글)</dt>
 				<dd align="left">
 					<div class="input-group">
-						<input type="text" id="PlantkoreanName" name="PlantkoreanName"
-							class="form-control" placeholder="식물의 이름을 입력하세요"
-							oninput="updateCharCount()"  required />
+						<input type="text" id="plantName" name="plantName"
+							class="form-control" placeholder="식물의 이름을 입력하세요" required />
 					</div>
 				</dd>
 				<br>
 				<dt align="left" class="dt_class">식물 이름(영문)</dt>
 				<dd align="left">
 					<div class="input-group">
-						<input type="text" id="PlantEnglishName" name="PlantEnglishName"
+						<input type="text" id="plantNameEnglish" name="plantNameEnglish"
 							class="form-control" placeholder="식물의 영문을 입력하세요"
-							oninput="updateCharCount()"  required />
+							oninput="updateCharCount()" required />
 					</div>
 				</dd>
 				<br>
@@ -85,6 +82,6 @@
 	</div>
 </main>
 <th:block layout:fragment="myscripts">
-	<script src="/js/planterior.js"></script>
+	<script src="/js/planterior/planteriorCreate.js"></script>
 </th:block>
 </html>
