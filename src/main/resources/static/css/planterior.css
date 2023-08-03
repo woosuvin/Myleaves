@@ -107,6 +107,17 @@ span.pick {
 	font-size: 25px;
 }
 
+.planteriorButton{
+	float: right;
+	border:none;
+	background-color:transparent;
+}
+
+.planteriorButtonEle{
+	display: inline-block;
+}
+
+
 
 /*작성하기 + 수정하기 페이지 적용*/
 

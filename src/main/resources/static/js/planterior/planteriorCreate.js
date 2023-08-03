@@ -1,17 +1,8 @@
 /**
- * 플랜테리어 js
+ * planterior create page
  */
 document.addEventListener('DOMContentLoaded', () => {
-
-	/**
-	 *  planterior create page
-	 */
 	
-	// 로그인 안 한 글쓰기 버튼 작동
-	document.querySelector('.notCreate').addEventListener('click', () => {
-		alert('로그인 후 작성가능합니다.')
-	})
-
 	// 플랜테리어 작성 취소 버튼
 	const createForm = document.querySelector('#createForm');
 	const btnCancel = document.querySelector('#btnCancel');
@@ -59,18 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			preview.src = "";
 		}
 	}
-
-	/**
-	 *  planterior main
-	 *  더보기,카테고리
-	 */
-
-
+	
+	
+	
 })
-
-
-
-
-
-
-

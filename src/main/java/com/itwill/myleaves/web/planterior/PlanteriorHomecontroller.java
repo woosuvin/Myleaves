@@ -33,7 +33,7 @@ public class PlanteriorHomecontroller {
 		
 		model.addAttribute("cardList", list);
 		
-		return "/planterior/home";
+		return "planterior/home";
 	}
 	
 	@GetMapping("/create")
