@@ -5,29 +5,31 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Data;
 
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Builder
-//@Getter
-//@ToString
-//@Entity
-//@Table(name = "CART")
-//public class Cart {
-//	@EmbeddedId
-//	private CartId cartId;
-//	
-//	@Column(nullable = true)
-//	private long cnt;
-//	
-//	@CreatedDate 
-//	private LocalDateTime addDate;
-//}
+
+// 수빈
+@Entity
+@Data
+@IdClass(CartId.class)
+@Table(name = "CART")
+public class Cart {
+
+	@Id
+	@Column(name = "USER_ID")
+	private String userId;
+	
+	@Id
+	@Column(name = "ITEM_ID")
+	private Long itemId;
+	
+	@Column(nullable = true)
+	private int cnt;
+	
+	@CreatedDate
+	private LocalDateTime addDate;
+}
