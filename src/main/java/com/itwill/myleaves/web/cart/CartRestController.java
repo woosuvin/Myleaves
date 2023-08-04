@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.myleaves.dto.cart.CartCreateDto;
+import com.itwill.myleaves.dto.cart.CartUpdateDto;
 import com.itwill.myleaves.repository.cart.Cart;
 import com.itwill.myleaves.repository.store.Store;
 import com.itwill.myleaves.service.cart.CartService;
@@ -57,6 +58,18 @@ public class CartRestController {
 	@DeleteMapping("/{userId}/{itemId}")
 	public ResponseEntity<String> delete(@PathVariable String userId, @PathVariable long itemId) {
 		cartService.delete(userId, itemId);
+		return ResponseEntity.ok("Success");
+	}
+	
+	/**
+	 * 장바구니 수량 변경 +
+	 */
+	@PutMapping("/update/{userId}/{itemId}")
+	public ResponseEntity<String> update(
+			@PathVariable String userId, @PathVariable long itemId, @RequestBody CartUpdateDto dto) {
+		log.info("update(userId={}, itemId={}, dto={})",userId, itemId, dto);
+		
+		cartService.update(userId, itemId, dto);
 		return ResponseEntity.ok("Success");
 	}
 }

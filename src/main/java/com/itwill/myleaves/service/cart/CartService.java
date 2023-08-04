@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.cart.CartCreateDto;
+import com.itwill.myleaves.dto.cart.CartUpdateDto;
 import com.itwill.myleaves.repository.cart.Cart;
 import com.itwill.myleaves.repository.cart.CartRepository;
 
@@ -62,6 +64,23 @@ public class CartService {
 		cartRepository.saveAndFlush(entity);
 		log.info("entity={}", entity);
 		return entity;
+	}
+	
+	/**
+	 * 장바구니 수정(수량)
+	 */
+	@Transactional
+	public void update(String userId, Long itemId, CartUpdateDto dto) {
+		log.info("update(userId={}, itemId={}, dto={})",userId, itemId, dto);
+		
+		// userId, itemId로 cart entity 검색
+		Cart entity = cartRepository.findByUserIdAndItemId(userId, itemId);
+		
+		log.info("entity cnt{}", entity.getCnt());
+		entity.update(dto.getCnt());
+		log.info("entity cnt{}", entity.getCnt());
+		
+		cartRepository.update(entity.getCnt(), userId, itemId);
 	}
 	
 	

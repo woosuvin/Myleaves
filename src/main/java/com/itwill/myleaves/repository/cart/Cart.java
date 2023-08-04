@@ -43,4 +43,9 @@ public class Cart {
 	
 	@CreatedDate
 	private LocalDateTime addDate;
+	
+	public Cart update(int cnt) {
+		this.cnt = cnt;
+		return this;
+	}
 }
