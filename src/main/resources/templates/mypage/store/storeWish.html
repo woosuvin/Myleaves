@@ -10,14 +10,14 @@
     <!-- 1. 품절 시 하얗게 / 문구 가운데 -->
 	<div class="bg-transparent border-dark">
 		<div class="row row-cols-1 row-cols-md-4 g-4 mb-2">
-			<div class="col" th:each="store: ${stores}">
+			<div class="col" th:each="store: ${wishStore}">
 				
 				<!-- sold값으로 switch문 -->
 				<div th:switch="${store.sold}" 
 					class="container p-0" style="position: relative; text-align: center; color: black;">
 					<a th:href="@{/store/detail?itemId={itemId} (itemId=${store.itemId})}"> 
-						<!-- Y, 품절일 경우 -->
-						<th:block th:case="Y">
+						<!-- 0, 품절일 경우 -->
+						<th:block th:case="0">
 							<img class="rounded mb-1" style="width: 100%; height: 100%; opacity: 50%;" 
 								src="/images/common/store.jpg" /> 
 							<span class="link-dark centered"
@@ -26,8 +26,8 @@
 							</span>
 						</th:block>
 						
-						<!-- N, 판매중일 경우 -->
-						<th:block th:case="N">
+						<!-- 1, 판매중일 경우 -->
+						<th:block th:case="1">
 							<img class="rounded mb-1" style="width: 100%; height: 100%;"
 								src="/images/common/store2.jpg" />
 						</th:block>
@@ -39,7 +39,7 @@
 						class="link-dark link-underline-opacity-0"> 
 						<span th:text="${store.itemName}" class="card-title text-truncate"></span>
 					</a>
-					<p class="card-text" th:text="|${store.price}원|"></p>
+					<p class="card-text" th:text="|${#numbers.formatInteger(store.price, 0, 'COMMA')}원|"></p>
 				</div> <!-- 이름 가격 div end -->
 				
 			</div>

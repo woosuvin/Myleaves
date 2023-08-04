@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.itwill.myleaves.repository.sellbuy.Sell;
 
 import lombok.Data;
-// 지
+// 지현  
 @Data
 public class SellCreateDto {
 	private Long sellId;
