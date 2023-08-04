@@ -68,7 +68,7 @@ div {
 				</tbody>
 			</table>
 			
-			<div id="summernote" name="content" th:text="${store.content}"></div>
+			<div id="summernote" name="content" th:utext="${store.content}"></div>
 			
 			<!-- 재고 개수 -->
 			<input class="d-none" type="text" id="inven" name="inven" th:value="${store.inven}" />
