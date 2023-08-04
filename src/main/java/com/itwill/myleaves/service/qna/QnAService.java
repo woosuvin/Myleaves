@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.qna.QnACreateDto;
+import com.itwill.myleaves.dto.qna.QnAMngrUpdateDto;
 import com.itwill.myleaves.dto.qna.QnAUpdateDto;
 import com.itwill.myleaves.repository.qna.QnA;
+import com.itwill.myleaves.repository.qna.QnAMngr;
+import com.itwill.myleaves.repository.qna.QnAMngrRepository;
 import com.itwill.myleaves.repository.qna.QnARepository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 public class QnAService {
 	
 	private final QnARepository qnaRepository;
+	
+	private final QnAMngrRepository qnaMngrRepository;
 	
 	/*
 	 * QnA 글 리스트 불러오기
@@ -53,6 +58,7 @@ public class QnAService {
 		
 		return entity;
 	}
+   
 	/*
 	 * QnA 글 수정하기
 	 */
@@ -73,4 +79,17 @@ public class QnAService {
 	       qnaRepository.deleteById(qid);   
 	    }
 	
+	/*
+	 * QnA 관리자 답변 
+	 */
+	public QnAMngr updateMngr(QnAMngrUpdateDto dto) {
+		log.info("QnAMngr(dto={}" , dto);
+		
+		QnAMngr entity = dto.toEntity();
+		log.info("before entity={}" , entity);
+		
+		qnaMngrRepository.saveAndFlush(entity);
+		log.info("after entity={}" , entity);
+		return entity;
+	}
 }	

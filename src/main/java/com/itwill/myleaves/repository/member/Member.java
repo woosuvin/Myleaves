@@ -19,7 +19,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import lombok.extern.slf4j.Slf4j;
 
 @NoArgsConstructor
 @Getter
@@ -56,6 +55,11 @@ public class Member implements UserDetails {
 	@CreationTimestamp
 	private LocalDateTime joinDate;
 	
+    public Member update(String newPwd) {
+        this.pwd = newPwd;
+        return this;
+    }
+    
 	@Builder
 	private Member(String userId, String name, String pwd, String gender, int birth, String phone, String email) {
 		this.userId = userId;

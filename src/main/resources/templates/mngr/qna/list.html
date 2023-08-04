@@ -2,9 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/mngr_base_layout}">
-    
 	<main layout:fragment="mngrHome">
-    <h1>QnA 관리자 페이지</h1>
+	<div class="container">
+    	<div class="text-center my-4">
+			<h1 class="my-2" style="text-align: center;">QnA 관리자 페이지</h1>
+		</div>
     	<table class="table center">
 		<thead>
 			<tr>
@@ -15,33 +17,17 @@
 			</tr>
 		</thead>
 		<tbody class="table-group-divider">
-			<tr>
-				<th scope="row">1</th>
-				<td>제목 test</td>
-				<td>작성test</td>
-				<td>
-					<a class="btn btn-primary" th:href="@{/mngr/qna/modify}">답변확인중</a>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>제목 test</td>
-				<td>작성test</td>
-				<td>
-					<a class="btn btn-primary" th:href="@{/mngr/qna/modify}">답변확인중</a>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>제목 test</td>
-				<td>작성test</td>
-				<td>
-					<a class="btn btn-primary" th:href="@{/mngr/qna/modify}">답변확인중</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="text-end">
-	</div>
+				<tr th:each="qna :${qnas}">
+					<th scope="row" th:text="${qna.qid}"></th>
+					<td th:text="${qna.title}"></td>
+					<td th:text="${#temporals.format(qna.createdDate, 'yy-mm-dd HH:mm' ) }"></td>
+					<td>
+						<a class="btn btn-primary" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">답변확인중</a>
+						<!-- th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}" -->
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
 	</main>
 </html>
