@@ -1,65 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/base_layout}">   
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
 	<main layout:fragment="main">
-		<div class="my-2 p-3 text-center">
-			<h1 class="titleBolder">FAQ 상세 페이지</h1>
-		</div>
-		<!-- <div class="card">
-			<div class="faq-item" th:each="faq :${faqs}">
-				<div class="list-group list-group-flush">
-					<div class="d-none">
-						<div class="faq-qid" th:text="${faq.fqid}"></div>
-					</div>
-					<div class="list-group-item">
-						<div class="faq-question" th:text="${faq.question}"></div>
-					</div>
-					<div  class="list-group-item">
-						<div class="faq-answer" th:text="${faq.answer}"></div>
+		<div class="container my-4">
+			<div class="my-2 p-3 text-center">
+				<h1 class="titleBolder">FAQ 상세 페이지</h1>
+			</div>
+		<div class="accordion my-2" id="accordionExample">
+			<div class="accordion-item" th:each="faq, status : ${faqs}">
+				<div class="mb-3">
+					<h2 class="accordion-header" th:id="'heading' + ${status.index}">
+						<button class="accordion-button" type="button"
+							data-bs-toggle="collapse"
+							th:data-bs-target="'#collapse' + ${status.index}"
+							aria-expanded="true"
+							th:aria-controls="'collapse' + ${status.index}"
+							th:text="${faq.question}"></button>
+					</h2>
+					<div th:id="'collapse' + ${status.index}"
+						class="accordion-collapse collapse"
+						th:aria-labelledby="'heading' + ${status.index}"
+						data-bs-parent="#accordionExample">
+						<div class="accordion-body" th:text="${faq.answer}"></div>
 					</div>
 				</div>
-			</div>	
-		</div> -->
-		<script src="/js/info/faq/faq_list.js"></script>
-		<!--  긁어오기 -->
-		
-		<!-- <div class="accordion-item " role="tabpanel"
-					aria-labelledby="headingOne">
-					<h2 class="accordion-header" id="flush-headingOne">
-						<button class="accordion-button bg-white fw-bold collapsed" type="button" data-bs-toggle="collapse" 
-							data-bs-target="#faq${ status.index }" aria-expanded="true" aria-controls="faq${ status.index }">
-							<h1><i class="bi bi-question-lg subColor"></i></h1>
-							<br/>
-							${ faq.question }
-							<br/><br/> 
-						</button>
-					</h2>
-					<div id="faq${ status.index }" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-						<div class="accordion-body">
-							<h1><i class="bi bi-exclamation-lg mainColor"></i></h1>
-							${ faq.answer }<br/>
-							<br/>
-						</div>
-					</div>
-				</div> -->
-		
-		
-		
-		
-	<div class="accordion" id="accordionExample">
-  		<div class="accordion-item" th:each="faq :${faqs}">
-    		<h2 class="accordion-header" id="headingOne">
-      			<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" 
-      			aria-controls="collapseOne" th:text="${faq.question}">
-      			</button>
-    		</h2>
-    		<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-      			<div class="accordion-body" th:text="${faq.answer}">
-        			<!-- 답변 -->
-      			</div>
-    		</div>
-  		</div>
-	</div>	    
-</main>    
+			</div>
+		</div>
+
+
+
+
+	</div>
+	</main>
 </html>

@@ -1,6 +1,9 @@
 package com.itwill.myleaves.repository.qna;
 
+import java.time.LocalDateTime;
+
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
 
 import com.itwill.myleaves.dto.qna.QnAUpdateDto;
 import com.itwill.myleaves.repository.BaseTimeEntity;
@@ -26,31 +29,18 @@ import lombok.ToString;
 @Entity
 @Table(name = "INFO_QNA")
 @SequenceGenerator(name = "INFO_QNA_SEQ_GEN" , sequenceName = "INFO_QNA_SEQ", allocationSize = 1)
-public class QnA extends BaseTimeEntity{
+public class QnAMngr extends BaseTimeEntity{
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "INFO_QNA_SEQ_GEN")
 	private long qid;
 	
-	@Column(nullable = false)
-	private String title;
-	
-	@Column(nullable = false)
-	private String content;
-	
-	@Column(nullable = false)
-	private String user_id;
-	
-	@ColumnDefault(value= "0")
-	private long secret;
-	
-	
-    public QnA update(QnAUpdateDto dto) {
-        this.title = dto.getTitle();
-        this.content = dto.getContent();
-        
-        return this;
-    }
-
-		 
+	 @Column(nullable = false) 
+	 private String an_title;
 	 
+	 @Column(nullable = false) 
+	 private String an_content;
+	 
+	 @CreatedDate 
+	 private LocalDateTime an_date;
 }

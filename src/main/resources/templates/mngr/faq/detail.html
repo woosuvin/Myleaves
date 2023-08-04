@@ -4,9 +4,10 @@
     layout:decorate="~{layout/mngr_base_layout}">
     
 	<main layout:fragment="mngrHome">
-	<br />
-	<h1 class="my-2" style="text-align: center;">FAQ 상세페이지</h1>
-	<br />
+	<div class="container">
+		<div class="text-center my-4">	
+			<h1 class="my-2" style="text-align: center;">FAQ 상세페이지</h1>
+		</div>
 		<div class="card">
 			<form id="faqDetailForm">
 				<div class="card-body">
@@ -29,9 +30,10 @@
 
 				<div class="card-footer my-2 text-center">
 	
-					<button class="btn btn-primary" id="btnFaqUpdate">수정</button>
-					<button class="btn btn-primary" id="btnFaqDelete">삭제</button>
+					<button class="btn btn-outline-success" id="btnFaqUpdate">수정</button>
+					<button class="btn btn-outline-success" id="btnFaqDelete">삭제</button>
 				</div>
 			<script src="/js/info/faq/faq_modify_mngr.js"></script>   	
+		</div>
 	</main>
 </html>
