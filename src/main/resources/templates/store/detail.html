@@ -13,9 +13,11 @@ div {
 </style> -->
 
 <main layout:fragment="main">
+	<span id="userId" name="userId" th:text="${#authentication.name}"></span>
+	<span id="itemId" name="itemId" th:text="${store.itemId}"></span>
 	<h2>상품 상세보기</h2>
 	<div class="container">
-		<form id="storeForm">
+		<!-- <form id="storeForm"> -->
 			<table class="table table-borderless">
 				<tbody>
 					<tr>
@@ -71,7 +73,7 @@ div {
 			<input class="d-none" type="text" id="inven" name="inven" th:value="${store.inven}" />
 			<!-- submit 할 때 필요한거 2: 상품 아이디 -->
 			<input class="d-none" type="text" id="itemId" name="itemId" th:value="${store.itemId}" />
-		</form>
+		<!-- </form> -->
 	</div>
 	
 

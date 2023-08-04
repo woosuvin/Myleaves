@@ -4,7 +4,9 @@
     layout:decorate="~{layout/mngr_base_layout}">
     
 	<main layout:fragment="mngrHome">
-    <h1>FAQ 관리자 페이지</h1>
+	<br />
+    <h1 class="my-2" style="text-align: center;">FAQ 관리자 리스트 페이지</h1>
+    <br />
 		<table class="table center">
 			<thead>
 			<tr>
@@ -13,16 +15,10 @@
 			</tr>
 			</thead>
 			<tbody class="table-group-divider">
-			<tr>
-				<th scope="col">1</th>
+			<tr th:each="faq :${faqs}">
+				<th scope="col" th:text="${faq.fqid}"></th>
 				<td>
-					<a th:href="@{/mngr/faq/detail}">자주하는 질문 제목1</a>
-				</td>
-			</tr>
-			<tr>
-				<th scope="col">2</th>
-				<td>
-					<a th:href="@{/mngr/faq/detail}">자주하는 질문 제목2</a>
+					<a th:href="@{/mngr/faq/detail?fqid={id} (id= ${faq.fqid})}" th:text="${faq.question}"></a>
 				</td>
 			</tr>		
 			</tbody>

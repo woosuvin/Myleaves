@@ -86,20 +86,31 @@
 					<div class="card">
 						<img th:src="@{/images/planterior/eucalyptus.png}" />
 						<!-- <img th:text="${list.img}" />  -->
-						<div class="card-body float-start">
+						<div class="card-body">
 							<!-- 일렬로 맞추기 -->
-							<p
+							<p class="planteriorButtonEle"
 								th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
-							<!--ROLE_ADMIN 권한을 갖는다면 보임-->
-							<div sec:authorize="hasRole('ADMIN')">
+							<!--ROLE_ADMIN 권한을 갖는다면 보임
+							<div sec:authorize="hasRole('ADMIN')" class="planteriorButton">
 								<input class="form-check-input float-end" type="checkbox"
 									th:value="${list.planteriorId}" id="reverseCheck1">
 							</div>
-							<!--ROLE_USER 권한을 갖는다면 보임-->
+							-->
 							<!-- 각 버튼에 아이디 값 주고 비어있으면 차고 차있으면 비게 만들기 -> db에 업뎃(조인하기) -->
-							<button type="imgButton">
+							<!-- th:if="${isBookmark} => True -->
+							<div>
+								<input type="hidden" id="userId" name="userId"
+									th:value="${#authentication.name}" />
+							</div>
+							<!--  <th:block th:if="${list.userId}" -->
+							<button th:value="${list.planteriorId}" class="imgButton">
 								<img th:src="@{/images/planterior/bookmark.svg}" />
 							</button>
+							<!-- 
+								<button class="d-none" th:value="${list.planteriorId}" class="imgButtonFill">
+								<img th:src="@{/images/planterior/bookmarkFill.svg}" />
+							</button>
+							 -->
 						</div>
 					</div>
 				</div>
@@ -114,6 +125,6 @@
 	<!-- end -->
 </main>
 <th:block layout:fragment="myscripts">
-	<script src="/js/planterior.js"></script>
+	<script src="/js/planterior/planteriorHome.js"></script>
 </th:block>
 </html>

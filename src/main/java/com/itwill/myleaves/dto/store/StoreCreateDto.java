@@ -9,7 +9,7 @@ import lombok.Data;
 public class StoreCreateDto {
 	
 	private String itemName;
-	//private byte[] thumbnail;
+	private byte[] thumbnail;
 	private String content;
 	private long price;
 	private long inven;
@@ -19,7 +19,7 @@ public class StoreCreateDto {
 	public Store toEntity() {
 		return Store.builder()
 				.itemName(itemName)
-				//.thumbnail(thumbnail)
+				.thumbnail(thumbnail)
 				.content(content)
 				.price(price)
 				.inven(inven)

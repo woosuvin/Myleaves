@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.itwill.myleaves.dto.cart.CartListDto;
 import com.itwill.myleaves.repository.cart.Cart;
 import com.itwill.myleaves.repository.store.Store;
 import com.itwill.myleaves.service.cart.CartService;

@@ -12,7 +12,7 @@
 					name="title" id="title" class="form-control" placeholder="제목을 입력하세요." required>
 			</div>
 			<input class="form-control bg-transparent border-dark d-none" id="userId"
-          	 name="userId" value="user1" required />
+          	 name="userId" value="test" required />
 			<div class="input-group mb-2">
 				<span class="input-group-text">가격</span> <input class="form-control"
 					name="price" id="price" type="number" placeholder="0원 입력 시 무료나눔" required> <span
@@ -21,7 +21,7 @@
 
 			<div class="input-group mb-2">
 				<label class="input-group-text" for="thumbnail">대표 사진</label> <input
-					name="thumbnail" id="thumbnail" type="file" class="form-control">
+					id="thumbnail" name="thumbnail" type="file" class="form-control">
 			</div>
 
 			<div class="form-floating mb-2">
@@ -46,8 +46,8 @@
 	</div>
 </main>
 <th:block layout:fragment="myscripts">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
     <script src="/js/sellbuy/sell_create.js"></script>
+    <script src="/js/info/notice/notice-summernote.js"></script>
 </th:block>
 </html>

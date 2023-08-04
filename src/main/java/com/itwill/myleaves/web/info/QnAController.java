@@ -65,7 +65,7 @@ public class QnAController {
 	 * QnA 상세 페이지 QnA 수정 페이지
 	 */
 	@GetMapping({"/detail", "/modify"})
-	public void detailQnA(Long qid, Model model) { // (QID) DB 만들면 합쳐야징 !! .. id 값도 줘야함
+	public void detailQnA(Long qid, Model model) {
 		log.info("QnA read(id={})" , qid);
 		
 		QnA qna = qnaService.read(qid);
@@ -87,6 +87,13 @@ public class QnAController {
 	/*
 	 * QnA 삭제 페이지
 	 */
-	
+	 @PostMapping("/delete")    
+	    public String delete(long qid) {
+	        log.info("delete(id={})" , qid);
+	   
+	        qnaService.delete(qid);
+	        
+	        return "redirect:/info/qna";
+	    }
 
 }
