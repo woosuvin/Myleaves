@@ -96,21 +96,35 @@
 									th:value="${list.planteriorId}" id="reverseCheck1">
 							</div>
 							-->
-							<!-- 각 버튼에 아이디 값 주고 비어있으면 차고 차있으면 비게 만들기 -> db에 업뎃(조인하기) -->
-							<!-- th:if="${isBookmark} => True -->
-							<div>
-								<input type="hidden" id="userId" name="userId"
-									th:value="${#authentication.name}" />
-							</div>
-							<!--  <th:block th:if="${list.userId}" -->
-							<button th:value="${list.planteriorId}" class="imgButton">
-								<img th:src="@{/images/planterior/bookmark.svg}" />
-							</button>
-							<!-- 
-								<button class="d-none" th:value="${list.planteriorId}" class="imgButtonFill">
+
+							<!-- 북마크 -->
+							<th:block sec:authorize="isAnonymous()">
+								<button class="none">
+									<img th:src="@{/images/planterior/bookmark.svg}" />
+								</button>
+							</th:block>
+
+							<!-- 로그인한 사용자에게만 보이게 해야함. -->
+							<th:block sec:authorize="isAuthenticated()">
+								<div>
+									<input type="hidden" id="userId" name="userId"
+										th:value="${#authentication.name}" />
+								</div>
+									<input type="hidden" id="planteriorId" 
+										th:value="${list.planteriorId}" />
+								<!-- <c:set var="loop_like" value="false" /> 타임리프 가능한지 확인-->
+								<!-- 북마크가 안되어 있을 경우에는 변수 선언이 false일 경우 +  -->
+								<div th:with="bookmarkCheck=${false}">
+									<button class="imgButton">
+										<img th:src="@{/images/planterior/bookmark.svg}" />
+									</button>
+								</div>
+								<!-- 
+								<button  class="imgButtonFill">
 								<img th:src="@{/images/planterior/bookmarkFill.svg}" />
 							</button>
 							 -->
+							</th:block>
 						</div>
 					</div>
 				</div>

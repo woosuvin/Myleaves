@@ -2,8 +2,85 @@
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/base_layout}">
-    
+<head>
+	<script defer src="/js/member/find.js"></script>
+</head>
 <main layout:fragment="main">
+	<div>
+      <button id="findIdButton">아이디 찾기</button>
+      <button id="findPwdButton">비밀번호 찾기</button>
+    </div>
+    <div id="findIdForm" style="display: none;" >
+        <form class="find-form" method="get" th:action="@{ /member/login }">
+       		<div>
+	        	<strong>이름</strong>
+	        	<input type="text"
+	        		   class="form-control"
+	        		   placeholder="이름을 입력해주세요"
+	        		   required />
+       		</div>
+       		<div>
+	        	<strong>이메일</strong>
+	         	<input type="text"
+	         		   id="idForm-inputEmail"
+	         		   class="form-control"
+	         		   placeholder="이메일을 입력해주세요"
+	         		   required />
+       		</div>
+       		<div>
+       			<button type="button"
+       				    class="btn btn-success"
+       				    id="btnIdConfirm">확인</button>
+       		</div>
+       		<div>
+       			<input type="submit"
+       				   class="form-control"
+       				   value="로그인 페이지로 돌아가기">
+       		</div>
+        </form>
+    </div>
+    <div id="findPwdForm" style="display: none;">
+        <form class="find-form" method="get" th:action="@{ /member/login }">
+        	<div>
+        		<strong>아이디</strong>
+        		<input type="text"
+        			   id="inputId"
+        			   class=form-control
+        			   placeholder="아이디를 입력해주세요"
+        			   required />
+        	</div>
+        	<div>
+	        	<strong>이메일</strong>
+	        	<input type="text"
+	        		   id="pwdForm-inputEmail"
+	        		   class="form-control"
+	        		   placeholder="이메일을 입력해주세요"
+	        		   required />
+        	</div>
+        	<div>
+        		<button type="button"
+        		        id="btnSubmit"
+        		        class="btn btn-secondary">전송</button>
+        	</div>
+        	<div>
+	        	<strong>인증번호</strong>
+	         	<input type="text"
+	         		   id="inputCode"
+	         		   class="form-control"
+	         		   placeholder="인증번호를 입력해주세요"
+	         		   required />
+        	</div>
+        	<div>
+        		<button type="button"
+        				id="btnPwdConfirm"
+        				class="btn btn-success">확인</button>
+        	</div>
+        	<div>
+        		<input type="submit"
+       				   class="form-control"
+       				   value="로그인페이지로 돌아가기">
+        	</div>
+        </form>
+    </div>
 </main>
-
 </html>

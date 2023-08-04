@@ -1,6 +1,6 @@
-package com.itwill.myleaves.dto.bookmark;
+package com.itwill.myleaves.dto.planterior;
 
-import com.itwill.myleaves.repository.bookmark.Bookmark;
+import com.itwill.myleaves.repository.Planterior.Bookmark;
 
 import lombok.Data;
 

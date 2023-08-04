@@ -4,6 +4,39 @@
     layout:decorate="~{layout/base_layout}">
     
 <main layout:fragment="main">
+	<div>
+		<div>로그인</div>
+		<div>
+			<form id="login-form" method="post" th:action="@{ /member/login }">
+				<div>
+					<strong>아이디</strong>
+					<input type="text"
+						   class="form-control"
+						   name=userId
+						   placeholder="아이디"
+						   required />
+				</div>
+				<div>
+					<strong>비밀번호</strong>
+					<input type="password"
+						   class="form-control"
+						   name=pwd
+						   placeholder="비밀번호"
+						   required />
+				</div>
+				<div th:if="${errorMsg}" style="color: red;">
+            		<p th:text="${errorMsg}"></p>
+        		</div>
+        		<div>
+				    <a th:href="@{/member/find}">아이디/비밀번호 찾기</a>
+				</div>
+				<div>
+					<input type="submit"
+						   class="btn btn-success"
+						   value="로그인" >
+				</div>
+			</form>
+		</div>
+	</div>
 </main>
-
 </html>

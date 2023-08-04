@@ -1,7 +1,6 @@
-package com.itwill.myleaves.repository.bookmark;
+package com.itwill.myleaves.repository.Planterior;
 
-import com.itwill.myleaves.repository.Planterior.Planterior;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -28,7 +27,7 @@ public class Bookmark {
 	@Id
 	private String userId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Planterior platerior;
+	@Column(nullable = false)
+	private Long planteriorId;
 
 }

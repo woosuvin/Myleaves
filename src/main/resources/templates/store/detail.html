@@ -20,17 +20,16 @@ div {
 		<!-- <form id="storeForm"> -->
 			<table class="table table-borderless">
 				<tbody>
-					<tr>
-						<td rowspan="2" width=300><img class="rounded" width=100% src="/images/common/store.jpg" /></td>
+					<tr th:switch="${ store.sold }">
+						<td rowspan="4" width=300><img class="rounded" width=100% src="/images/common/store.jpg" /></td>
 						<td style="vertical-align: middle">
 							<h3 id="itemName" name="itemName" th:text="${store.itemName}"></h3>
-							<div id="itemPrice" th:text="${store.price}"></div>
+							<h5 id="itemPrice" class="d-none" th:text="${store.price}"></h5>
+							<h5 th:text="|${#numbers.formatInteger(store.price, 0, 'COMMA')}원|"></h5>
+							<span><strong>배송비:</strong> 3,000원</span><small>(제주 및 도서 산간 2,500원 추가)</small>
 						</td>
-						<td style="vertical-align: middle">
-							<span>배송비: </span><span>3,000원</span>
-							<br/>
-							<span>제주 및 도서 산간 2,500원</span>
-						</td>
+					</tr>
+					<tr>
 						<td style="vertical-align: middle">
 							<span id="plusMinus" class="input-group mt-1" style="width: 5.3rem;"> 
 								<!-- 수량 줄이기 -->
@@ -46,6 +45,8 @@ div {
 									type="button" style="height: 1.5rem; font-size: 7pt;">+</button>
 							</span>
 						</td>
+					</tr>
+					<tr>
 						<td style="vertical-align: middle">
 							<strong>총 상품금액</strong> : 
 							<span class="total"><strong id="totalPrice"></strong></span>
@@ -67,7 +68,7 @@ div {
 				</tbody>
 			</table>
 			
-			<div id="summernote" name="content" th:text="${store.content}"></div>
+			<div id="summernote" name="content" th:utext="${store.content}"></div>
 			
 			<!-- 재고 개수 -->
 			<input class="d-none" type="text" id="inven" name="inven" th:value="${store.inven}" />

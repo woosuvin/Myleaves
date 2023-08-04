@@ -25,7 +25,7 @@
 				</div>
 				<!-- 재고 개수 -->
 				<div id="inven" th:text="${store.inven}"></div>
-				<div id="summernote" name="content" th:text="${store.content}"></div>
+				<div id="content" name="content" th:utext="${store.content}"></div>
 				<div class="my-2 text-center">
 					<a class="btn btn-secondary" id="btnCancel" th:href="@{/mngr/store/list}">취소</a> <!-- 리스트로 이동 -->
 					<a class="btn btn-outline-info" th:href="@{/mngr/store/modify?itemId={itemId} (itemId=${store.itemId})}">수정</a>
@@ -33,5 +33,4 @@
 			</div>
 		</form>
 	</main>
-	
 </html>
