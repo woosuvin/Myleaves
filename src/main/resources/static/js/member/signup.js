@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 		const email = document.querySelector('input[name=email]').value;
 		const reqUrl = '/member/confirm';
-
-		axios.get(reqUrl, { params: { email: email } })
+    
+    	axios.get(reqUrl, { params: { email: email } })
 			.then((response) => {
 				console.log(response.data);
 				authCode = response.data;
