@@ -12,12 +12,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 	}
 	
+	// 로그인 안 한 유저의 북마크 클릭시
+	const btnNones = document.querySelectorAll('.none')
+	for(const btnNone of btnNones) {
+		if (btnNone !== null) {
+			btnNone.addEventListener('click', () => {
+				alert('로그인 후 북마크 가능합니다.')
+			})
+		}
+	}
+	
 
 	/**
 	 *  planterior main
-	 *  더보기,카테고리,북마크
+	 *  북마크
 	 */
-	
+
 	// 화면 전환
 	const goToHome = function() {
 		window.location.href = `/planterior`;
@@ -30,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 			console.log('되니?')
 			
-			const planteriorId = e.target.value;
+			const planteriorId = document.querySelector('#planteriorId').value;
 			const userId = document.querySelector('#userId').value;
 			console.log(planteriorId, userId)
 			

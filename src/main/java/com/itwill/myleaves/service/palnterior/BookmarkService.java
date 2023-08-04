@@ -1,12 +1,12 @@
-package com.itwill.myleaves.service.bookmark;
+package com.itwill.myleaves.service.palnterior;
 
 import org.springframework.stereotype.Service;
 
-import com.itwill.myleaves.dto.bookmark.BookmarkDto;
+import com.itwill.myleaves.dto.planterior.BookmarkDto;
+import com.itwill.myleaves.repository.Planterior.Bookmark;
+import com.itwill.myleaves.repository.Planterior.BookmarkRepository;
 import com.itwill.myleaves.repository.Planterior.Planterior;
 import com.itwill.myleaves.repository.Planterior.PlanteriorRepository;
-import com.itwill.myleaves.repository.bookmark.Bookmark;
-import com.itwill.myleaves.repository.bookmark.BookmarkRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,33 +25,30 @@ public class BookmarkService {
 	// 이 리턴 값을 모델로 보내줘서 th:if="model 값." 이거면 되잖아.
 	// 그러면 일단 생성일때와 삭제일 때 다 restcontroller에서 넘겨주는 거니까
 	// 되겠다.
-	public Boolean create(BookmarkDto dto, String userId) {
-		log.info("create(dto ={}, userId = {})", dto, userId);
-		
-		// 일단 찾아
-		Planterior planterior = planteriorRepository.findById(dto.getPlanteriorId()).orElseThrow();
+	public Bookmark create(BookmarkDto dto) {
+		log.info("create(dto ={}, userId = {})", dto);
 		
 		// 엔터티 객체로 변환 
 		Bookmark entity = Bookmark.builder()
-				.platerior(planterior)
-				.userId(userId)
+				.planteriorId(dto.getPlanteriorId())
+				.userId(dto.getUserId())
 				.build();
 		
 		// insert
 		bookmarkRepository.save(entity);
 		
-		Boolean createResult = true;
-		
 		// 문제 발생할 경우 무조건 retrun entity바꿀것.
-		return createResult;
+		return entity;
 	
 	}
 	
 	// 삭제
-	public void delete(String userId) {
-		log.info("delete(userId = {})", userId);
+	public void delete(Long PlanteriorId, String userId) {
+		log.info("delete(planterior = {})", PlanteriorId, userId);
 		
-		bookmarkRepository.deleteById(userId);
+		bookmarkRepository.deleteByPlanteriorAndUserId(PlanteriorId, userId);
 	}
+	
+	
 	
 }

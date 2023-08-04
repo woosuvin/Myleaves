@@ -2,6 +2,8 @@ package com.itwill.myleaves.repository.Planterior;
 
 import org.hibernate.annotations.DialectOverride.GeneratedColumn;
 
+import com.itwill.myleaves.dto.planterior.BookmarkDto;
+import com.itwill.myleaves.dto.planterior.PlanteriorCreateDto;
 import com.itwill.myleaves.dto.planterior.PlanteriorUpdateDto;
 import com.itwill.myleaves.repository.BaseTimeEntity;
 import com.itwill.myleaves.repository.sellbuy.Sell;
@@ -17,6 +19,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @NoArgsConstructor
@@ -57,5 +60,6 @@ public class Planterior extends BaseTimeEntity {
 		return this;
 				
 	}
+
 
 }
