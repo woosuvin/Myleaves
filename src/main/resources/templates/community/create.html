@@ -2,13 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/base_layout}">
-<th:block layout:fragment="mycsses">
+<!-- <th:block layout:fragment="mycsses">
 	<link th:href="@{/css/community.css}" rel="stylesheet" />
-</th:block>
+	<script src="/js/summernote/summernote-lite.js"></script>
+<script src="/js/summernote/lang/summernote-ko-KR.js"></script>
+
+<link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+</th:block> -->
 <main layout:fragment="main">
 	<div>
 		<h1 class="text-center">글쓰기</h1>
 	</div>
 	
+ 	<form method="post">
+		<div>
+			<label class="form-label" for=title>제목</label>
+			<select name="hrsHd">
+				<option value="이게 뭔가요?">이게 뭔가요?</option>
+				<option value="꿀팁 대방출">꿀팁 대방출</option>
+				<option value="스토어 상품/입양 후기">스토어 상품/입양 후기</option>
+				<option value="사담">사담</option>
+			</select>
+			<input type="text" class="form-control" id="title" 
+				 name="title" placeholder="제목을 입력하세요" required autofocus/>
+			
+			<div>
+				<small id="textLengthCheck" class="text-muted">(0 / 80)</small>
+			</div>
+		</div>
+		<div>
+			<label class="form-label" for="userId">작성자:  </label>	
+	 		<input id="userId" type="text" name="userId" th:value="${#authentication.name}"></input>	
+     	</div>
+		<div class="my-2"> <!--  id="summernote" -->
+			<textarea class="form-control" id="content" name="content" placeholder="내용을 작성해주세요"></textarea>
+		</div>
+		<div class="my-2 text-center">
+			<a class="btn btn-secondary" th:href="@{/community}">취소</a>
+			<input class="btn btn-success" type="submit" 
+				id="btnCreate" value="등록"/>
+		</div>
+	</form>
 </main>
+
 </html>	

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+<th:block layout:fragment="mycsses">
+	<link th:href="@{/css/community.css}" rel="stylesheet" />
+</th:block>
+<link rel="stylesheet" href="/css/community.css">
+
+<main layout:fragment="main">
+	<div>
+		<h1 class="text-center">수정하기</h1>
+	</div>
+	<div class="card">
+		<form id=communityModifyForm>
+		 	<div class="">
+		 		<div class="d-none" id="communityId" th:text="${post.communityId}"></div> <!-- input -->
+				<span th:text="${post.hrsHd}"></span>
+				<label th:text="${post.title}"></label>
+				<br>
+				<label class="form-label" for="userId">작성자:</label>
+				<input type="text" id="userId" th:value="${post.userId}"></input>
+			</div>
+			<hr>
+			<div>
+			썸머노트에서 올린 내용 + 사진 자리 
+			</div>
+			<hr>
+			<div>
+				<label th:text= "${ #temporals.format(post.modifiedDate, 'yyyy-MM-dd HH:mm' )}" ></label>
+			</div>
+		</form>	
+	</div>
+	
+	<!-- 로그인 사용자와 포스트 작성자 동일  -->
+<div class="row justify-content-center"> <!-- <div th:if="${ #authentication.name } == ${ post.userId }" -->
+    <div class="col-auto">
+        <a class="btn btn-secondary" id="btnDelete">삭제</a>
+    </div>
+    <div class="col-auto">
+        <a class="btn btn-success" id="btnUpdate">수정</a>
+    </div>
+</div>
+
+</main>
+ <!-- layout:decorate="~{layout/base_layout}"로 지정 -> myscripts로 저장한 fragment 위치에 아래 내용이 들어감. -->
+<th:block layout:fragment="myscripts">
+        <script src="/js/community/community.js"></script>
+</th:block>
+</html>

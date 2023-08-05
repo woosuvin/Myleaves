@@ -1,1 +1,14 @@
 @charset "UTF-8";
+
+.smallText {
+	text-align: right;
+}
+
+span.highlight {
+	color: red;
+}
+
+#cm_notice small {
+	text-align: right;
+	color: red;
+}

@@ -1,19 +1,68 @@
 <!DOCTYPE html>
-<htm xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/base_layout}">
+<th:block layout:fragment="mycsses">
+	<link th:href="@{/css/community.css}" rel="stylesheet" />
+</th:block>
+<link rel="stylesheet" href="/css/community.css">
+
 <main layout:fragment="main">
-	<div class="text-center">
-		<h1 th:text="{$post.title}"></h1>
-	</div>
 	<div>
-		<label class="form-label" for="author">작성자</label>
-		<label th:value="{$post.author}"></label>
+		<h1 class="text-center">상세보기</h1>
 	</div>
-	<div>   
+	<div class="card">
+		<form id=communityModifyForm>
+			<div class="">
+				<div class="d-none" id="communityId" th:text="${post.communityId}"></div>
+				<!-- input -->
+				<span th:text="${post.hrsHd}"></span> <label th:text="${post.title}"></label>
+				<br> <label class="form-label" for="userId">작성자:</label> 
+				<input class="form-control" id="userId" th:value="${post.userId}" readonly></input>
+			</div>
+			<hr>
+			<div>썸머노트에서 올린 내용 + 사진 자리</div>
+			<hr>
+			<div>
+				<label
+					th:text="${ #temporals.format(post.modifiedDate, 'yyyy-MM-dd HH:mm' )}"></label>
+			</div>
+		</form>
 	</div>
-	<div>
-		내용 + 사
+
+	<div class="row justify-content-center">
+		<div class="col-auto">
+			<!-- th:if="${ #authentication.name } == ${ post.userId }" -->
+			<a class="btn btn-success"
+				th:href="@{/community/modify?communityId={id} (id=${post.communityId}) }">수정</a>
+		</div>
+		<div class="col-auto">
+			<a class="btn btn-warning" th:href="@{/community}">목록</a>
+		</div>
+	</div>
+	<div class="my-2 card">
+		<div class="card-header">
+			<span>댓글</span> <span id="communityCommentCount" th:text="${communityCommentCount}"></span>개
+			<button class="btn btn-outline-dark" id="btnToggleCommunityComment">보이기</button>
+		</div>
+
+		<div class="d-none" id="authName" th:text="${#authentication.name}"></div>
+		<div class="card-body collapse" id="communityCommentToggleDiv"></div>
+		<div class="my-2 row">
+			<div class="col-10">
+				<textarea class="form-control" id="content"
+					placeholder="댓글 내용을 입력하세요"></textarea>
+			</div>
+			<div class="col-2">
+				<button class="form-control btn btn-outline-success"
+					id="btnCommunityCommentCreate">등록</button>
+			</div>
+		</div>
+		<div class="my-2 row" id="comments"></div>
 	</div>
 </main>
+<!-- layout:decorate="~{layout/base_layout}"로 지정 -> myscripts로 저장한 fragment 위치에 아래 내용이 들어감. -->
+<th:block layout:fragment="myscripts">
+	<script src="/js/community/communitycomment.js"></script>
+</th:block>
 </html>

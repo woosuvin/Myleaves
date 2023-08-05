@@ -13,7 +13,7 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col"><input type="checkbox"/></th>
+			<!--<th scope="col"><input type="checkbox"/></th>-->
 				<th scope="col">말머리</th>
 				<th scope="col">제목</th>
 				<th scope="col">작성자</th>
@@ -22,15 +22,14 @@
 		</thead>
 		<tbody class="table-group-divider">
 			<tr th:each="post : ${posts}">
-				<td><input type="checkbox" id="checkAll"></td>
-				<td th:text="${post.hrsHd}"></td>
-				<td> <a th:href="@{/post/detail?id={id} (id = ${post.communityId})}"
+			<!--<td><input type="checkbox" id="checkAll"></td>-->
+				<td th:text="'[' + ${post.hrsHd} + ']'"></td>
+				<td> <a th:href="@{/community/detail?id={id} (id = ${post.communityId})}"
 						th:text="${post.title}"></a></td>
 				<td th:text="${post.userId}"></td>
-				<td th:text="${ #temporals.format(post.createdTime, 'yy-MM-dd HH:mm:ss')}"></td>
+				<td th:text="${ #temporals.format(post.createdDate, 'yy-MM-dd HH:mm:ss')}"></td>
 			</tr>
 		</tbody>
 	</table>
-	
 </main>
 </html>

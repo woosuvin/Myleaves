@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.itwill.myleaves.dto.community.CommunityCreateDto;
+import com.itwill.myleaves.dto.community.CommunityUpdateDto;
 import com.itwill.myleaves.repository.community.Community;
 import com.itwill.myleaves.repository.community.CommunityRepository;
 
@@ -25,6 +27,49 @@ public class CommunityService {
 
 		return communityRepository.findByOrderByCommunityIdDesc();
 	}
+	
+
+	// DB COMMUNITY 테이블에 엔터티 insert 
+	public Community create(CommunityCreateDto dto) {
+		log.info("create(dto={})", dto);
+
+		
+		// DTO를 Entity로 변환:
+		Community entity = dto.toEntity();
+		log.info("entity={}", entity);
+		
+		// DB 테이블에 저장 
+		communityRepository.save(entity);
+		log.info("entity={}", entity);
+		
+		return entity;
+	}
+
+    @Transactional(readOnly = true)
+	public Community read(Long communityId) {
+		log.info("read(communityId={})", communityId);
+		
+		
+		return communityRepository.findById(communityId).orElseThrow();
+	}
+
+
+	public void delete(Long communityId) {
+		log.info("delete(communityId={})", communityId);
+		
+		communityRepository.deleteById(communityId);
+		
+	}
+
+
+	@Transactional
+	public void update(CommunityUpdateDto dto) {
+		log.info("update(dto={})", dto);
+		Community entity = communityRepository.findById(dto.getCommunityId()).orElseThrow();
+		
+		entity.update(dto);
+	}
+	
 	
 	
 }

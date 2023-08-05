@@ -1,19 +1,22 @@
 package com.itwill.myleaves.repository.community;
 
 
+import com.itwill.myleaves.dto.community.CommunityUpdateDto;
 import com.itwill.myleaves.repository.BaseTimeEntity;
 
-import groovy.transform.ToString;
-import groovy.transform.builder.Builder;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import groovy.transform.ToString;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -46,5 +49,13 @@ public class Community extends BaseTimeEntity{
 	@Column(nullable = true)
 	private String hrsHd;
 	
+	// Community 엔터티의 title과 content를 수정해서 리턴하는 메서드(setter 메서드 두개의 역할)
+	public Community update(CommunityUpdateDto dto) {
+		this.title = dto.getTitle();
+		this.content = dto.getContent();
+		
+		return this;
+	}
+
 	
 }
