@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.myleaves.dto.planterior.PlanteriorCreateDto;
+import com.itwill.myleaves.repository.Planterior.Bookmark;
 import com.itwill.myleaves.repository.Planterior.Planterior;
 import com.itwill.myleaves.repository.Planterior.PlanteriorRepository;
+import com.itwill.myleaves.service.palnterior.BookmarkService;
 import com.itwill.myleaves.service.palnterior.PlanteriorService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,14 +26,17 @@ public class PlanteriorHomecontroller {
 	
 	// 의존성 주입!!!!
 	private final PlanteriorService planteriorService;
+	private final BookmarkService bookmarkService;
 	
 	@GetMapping
 	public String planterior(Model model) {
 		log.info("planterior");
 		
 		List<Planterior> list = planteriorService.read();
+		List<Bookmark> bookList = bookmarkService.read();
 		
 		model.addAttribute("cardList", list);
+		model.addAttribute("bookmark", bookList);
 		
 		return "planterior/home";
 	}

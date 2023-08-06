@@ -14,5 +14,6 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, String> {
 	@Query(value = "delete from BOOKMARK where PLANTERIOR_ID = ?1 and USER_ID = ?2", nativeQuery = true)
 	void deleteByPlanteriorAndUserId(Long PlanteriorId, String userId);
 
-	// List<Bookmark> findByPlanteriorAndUserId(Long PlanteriorId, String userId);
+	@Query(value = "SELECT * FROM BOOKMARK", nativeQuery = true)
+	List<Bookmark> findAll();
 }

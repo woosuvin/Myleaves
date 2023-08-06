@@ -110,20 +110,35 @@
 									<input type="hidden" id="userId" name="userId"
 										th:value="${#authentication.name}" />
 								</div>
-									<input type="hidden" id="planteriorId" 
-										th:value="${list.planteriorId}" />
-								<!-- <c:set var="loop_like" value="false" /> 타임리프 가능한지 확인-->
-								<!-- 북마크가 안되어 있을 경우에는 변수 선언이 false일 경우 +  -->
-								<div th:with="bookmarkCheck=${false}">
-									<button class="imgButton">
-										<img th:src="@{/images/planterior/bookmark.svg}" />
-									</button>
-								</div>
-								<!-- 
-								<button  class="imgButtonFill">
-								<img th:src="@{/images/planterior/bookmarkFill.svg}" />
-							</button>
-							 -->
+								<input type="hidden" id="planteriorId"
+									th:value="${list.planteriorId}" />
+
+								<!-- 북마크 사진 변경 -->
+								<!-- 누름 -->
+								<th:block th:with="loop='False'" />
+								<th:block th:each="bookmark: ${bookmark}">
+								<!-- 이 부분에서 계속 오류 발생함. + 이미지 변경
+									<div th:value="${bookmark.planteriorId"></div>
+								-->
+									<th:block
+										th:if="${loop == False}">
+										<div>
+											<button class="imgButtonFill">
+												<img th:src="@{/images/planterior/bookmarkFill.svg}" />
+											</button>
+										</div>
+
+										<th:block th:with="loop='True'" />
+									</th:block>
+								</th:block>
+
+								<!-- 안 눌름 -->
+									<div>
+										<button class="imgButton" th:value="${list.planteriorId}">
+											<img th:src="@{/images/planterior/bookmark.svg}" />
+										</button>
+									</div>
+								</th:block>
 							</th:block>
 						</div>
 					</div>
