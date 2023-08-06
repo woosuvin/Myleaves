@@ -1,5 +1,6 @@
 package com.itwill.myleaves.repository.qna;
 
+
 import org.hibernate.annotations.ColumnDefault;
 
 import com.itwill.myleaves.dto.qna.QnAUpdateDto;
@@ -43,7 +44,21 @@ public class QnA extends BaseTimeEntity{
 	@ColumnDefault(value= "0")
 	private long secret;
 	
+	/*
+	 * 관리자 페이지
+	 */
 	
+	 private String an_title;
+	 
+	 private String an_content;
+	 
+	 //@CreatedDate 
+	 //private LocalDateTime an_date;
+	
+	
+	 /*
+	  * 사용자 QnA 답변 수정 UPDATE
+	  */
     public QnA update(QnAUpdateDto dto) {
         this.title = dto.getTitle();
         this.content = dto.getContent();

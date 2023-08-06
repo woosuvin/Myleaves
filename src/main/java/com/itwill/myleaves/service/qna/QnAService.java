@@ -9,8 +9,6 @@ import com.itwill.myleaves.dto.qna.QnACreateDto;
 import com.itwill.myleaves.dto.qna.QnAMngrUpdateDto;
 import com.itwill.myleaves.dto.qna.QnAUpdateDto;
 import com.itwill.myleaves.repository.qna.QnA;
-import com.itwill.myleaves.repository.qna.QnAMngr;
-import com.itwill.myleaves.repository.qna.QnAMngrRepository;
 import com.itwill.myleaves.repository.qna.QnARepository;
 
 import lombok.RequiredArgsConstructor;
@@ -23,7 +21,6 @@ public class QnAService {
 	
 	private final QnARepository qnaRepository;
 	
-	private final QnAMngrRepository qnaMngrRepository;
 	
 	/*
 	 * QnA 글 리스트 불러오기
@@ -82,13 +79,13 @@ public class QnAService {
 	/*
 	 * QnA 관리자 답변 
 	 */
-	public QnAMngr updateMngr(QnAMngrUpdateDto dto) {
-		log.info("QnAMngr(dto={}" , dto);
+	public QnA updateMngr(QnAMngrUpdateDto dto) {
+		log.info("QnAMngr(dto={} , qid={}" , dto);
 		
-		QnAMngr entity = dto.toEntity();
+		QnA entity = dto.toEntity();
 		log.info("before entity={}" , entity);
 		
-		qnaMngrRepository.saveAndFlush(entity);
+		qnaRepository.saveAndFlush(entity);
 		log.info("after entity={}" , entity);
 		return entity;
 	}
