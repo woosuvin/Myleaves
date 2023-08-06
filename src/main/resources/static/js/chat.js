@@ -1,6 +1,7 @@
-/**
- * chat.js
+/** 
  * 정지언 채팅
+ * chat.js
+ * 
  */
 
 function openCenteredWindow(url, width, height) {

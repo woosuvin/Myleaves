@@ -18,7 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.myleaves.dto.sellbuy.SellCreateDto;
 import com.itwill.myleaves.dto.sellbuy.SellUpdateDto;
+import com.itwill.myleaves.repository.sellbuy.BuyWish;
+import com.itwill.myleaves.repository.sellbuy.BuyWishRepository;
 import com.itwill.myleaves.repository.sellbuy.Sell;
+import com.itwill.myleaves.service.mypage.MypageSellBuyService;
 import com.itwill.myleaves.service.sellbuy.SellService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,17 +33,18 @@ import lombok.extern.slf4j.Slf4j;
 public class SellBuyController {
 
 	private final SellService sellService;
-
+	private final MypageSellBuyService mypageService;
+	
 	@GetMapping("/buy/list")
 	public void read(Model model) {
 		log.info("read()");
 		List<Sell> list = sellService.read();
 		
-		Map<Long, String> productBase64Images = new HashMap<>();
-        for(Sell sell: list){               
-            productBase64Images.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
-        }
-        model.addAttribute("images", productBase64Images);
+//		Map<Long, String> productBase64Images = new HashMap<>();
+//        for(Sell sell: list){               
+//            productBase64Images.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
+//        }
+//        model.addAttribute("images", productBase64Images);
 		model.addAttribute("sells", list);
 	}
 
@@ -78,13 +82,30 @@ public class SellBuyController {
 		sellService.create(dto);
 		return "redirect:/buy/list";
 	}
-
-	@GetMapping({ "/buy/detail", "sell/modify" })
+	
+	/**
+	 * 
+	 * @param sellId
+	 * @param model
+	 */
+	@GetMapping("/buy/detail")
+	public void readDetail(Long sellId, Model model) {
+		log.info("read(sellId={}", sellId);
+		
+		List<BuyWish> buyWishlist = mypageService.readBuyWish(sellId);
+		log.info("", buyWishlist);
+		Sell sell = sellService.read(sellId);
+		
+		model.addAttribute("buyWishes", buyWishlist);
+		model.addAttribute("sell", sell);
+	}
+	
+	@GetMapping("sell/modify")
 	public void read(Long sellId, Model model) {
 		log.info("read(sellId={})", sellId);
 
 		Sell sell = sellService.read(sellId);
-
+		
 		model.addAttribute("sell", sell);
 	}
 
