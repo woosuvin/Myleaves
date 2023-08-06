@@ -34,35 +34,49 @@
 				<tr>
 					<td style="vertical-align: bottom">
 						<div class="d-grid gap-2 d-md-flex">
-							<th:block th:if="${#authentication.name == sell.userId}">
-								<a class="btn btn-outline-dark"
-									th:href="@{ /sell/modify?sellId={sellId} (sellId = ${sell.sellId})}">수정하기</a>
-								<a class="btn btn-outline-dark" th:href="@{ /chat }">대화내역</a>
-							</th:block>
-							<th:block th:if="${#authentication.name != sell.userId}">
-								<th:block th:each="buyWish:${ buyWishes }">
-									<th:block th:switch="${buyWish.userId == #authentication.name}">
-										<button th:case="true" class="btn btn-outline-dark" id="deleteWishBtn"
-													name="deleteWishBtn" th:data-id="${sell.sellId}" >관심 상품 삭제</button>
-										<button th:case="*" class="btn btn-outline-dark" id="addWishBtn"
-													name="addWishBtn">관심 상품에 추가</button>
-											</th:block>
-										</th:block>
-										<button id="" class="btn btn-outline-dark" type="button">판매자와
-													대화하기</button>
-									</th:block>
+							<th:block th:switch="${#authentication.name == sell.userId}">
+								<th:block th:case="true">
+									<a class="btn btn-outline-dark"
+										th:href="@{ /sell/modify?sellId={sellId} (sellId = ${sell.sellId})}">수정하기</a>
+									<a class="btn btn-outline-dark" th:href="@{ /chat }">대화내역</a>
 								</th:block>
+								<th:block th:case="false">
+									<th:block th:each="wish: ${ wishes }">
+										<th:block th:if="${wish.sellId} == ${sell.sellId}">
+											<!-- buywish에 내 아이디가 없음 >> 관심 상품 추가 -->
+											<button class="btn btn-outline-dark" id="addWishBtn"
+													name="addWishBtn">관심 상품에 추가</button>
+										</th:block>
+											<!-- buywish에 내 아이디가 있음 >> 관심 상품 삭제 -->
+											<!-- <input th:value="${buyWish.userId}"/>
+											<th:block th:if="${buyWish.userId == #authentication.name}">
+												<button class="btn btn-outline-dark" id="deleteWishBtn"
+													name="deleteWishBtn" th:data-id="${sell.sellId}">관심
+													상품 삭제</button>
+											</th:block>
+											<th:block th:if="${buyWish.userId != #authentication.name}">
+												<button class="btn btn-outline-dark" id="addWishBtn"
+													name="addWishBtn">관심 상품에 추가</button>
+											</th:block> -->
+									</th:block> 
+									<!-- 항상 보일 것 -->
+									<button id="" class="btn btn-outline-dark" type="button">판매자와
+										대화하기</button>
+								</th:block>
+							</th:block>
 							</th:block>
 						</div>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<div class="m-2" th:text="${ sell.content }"></div>
+		<div class="m-2" th:utext="${ sell.content }"></div>
 	</div>
 </main>
 <th:block layout:fragment="myscripts">
-	<script src="/js/sellbuy/buy_detail.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+	<script src="/js/sellbuy/buyDetail.js"></script>
 	<script src="/js/sellbuy/wishDelete.js"></script>
 </th:block>
 </html>

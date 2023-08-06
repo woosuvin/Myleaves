@@ -48,14 +48,14 @@ public class SellBuyController {
 		model.addAttribute("sells", list);
 	}
 
-	@GetMapping("/display/image/{sellId}")
-    public ResponseEntity<byte[]> displayItemImage(@PathVariable int sellId) {
-    	Sell sell = sellService.read(sellId);
-        byte[] image = sell.getThumbnail();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        return new ResponseEntity<>(image, headers, HttpStatus.OK);
-    }
+//	@GetMapping("/display/image/{sellId}")
+//    public ResponseEntity<byte[]> displayItemImage(@PathVariable int sellId) {
+//    	Sell sell = sellService.read(sellId);
+//        byte[] image = sell.getThumbnail();
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.IMAGE_JPEG);
+//        return new ResponseEntity<>(image, headers, HttpStatus.OK);
+//    }
 	
 	@GetMapping("/sell/create")
 	public void create() {
@@ -89,14 +89,20 @@ public class SellBuyController {
 	 * @param model
 	 */
 	@GetMapping("/buy/detail")
-	public void readDetail(Long sellId, Model model) {
+	public void readDetail(String userId, Long sellId, Model model) {
 		log.info("read(sellId={}", sellId);
 		
 		List<BuyWish> buyWishlist = mypageService.readBuyWish(sellId);
-		log.info("", buyWishlist);
+		log.info("{}", buyWishlist);
+		
+		List<BuyWish> wishlist = mypageService.readWish(userId);
+		
 		Sell sell = sellService.read(sellId);
 		
+		model.addAttribute("wishes", wishlist);
+		
 		model.addAttribute("buyWishes", buyWishlist);
+		
 		model.addAttribute("sell", sell);
 	}
 	

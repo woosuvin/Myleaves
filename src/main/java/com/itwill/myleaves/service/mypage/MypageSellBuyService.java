@@ -37,4 +37,8 @@ public class MypageSellBuyService {
 		return buyWishRepository.findBySellId(sellId);
 	}
 	
+	public List<BuyWish> readWish(String UserId) {
+		return buyWishRepository.findByUserId(UserId);
+	}
+	
 }

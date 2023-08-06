@@ -22,4 +22,6 @@ public interface BuyWishRepository extends JpaRepository<BuyWish, BuyWishId> {
 	
 	List<BuyWish> findBySellId(long sellId);
 	
+	BuyWish findByUserIdAndSellId(String userId, long sellId);
+	
 }
