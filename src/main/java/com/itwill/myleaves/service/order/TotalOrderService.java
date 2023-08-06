@@ -11,6 +11,7 @@ import com.itwill.myleaves.repository.order.OrderDetailRepository;
 import com.itwill.myleaves.repository.order.TotalOrder;
 import com.itwill.myleaves.repository.order.TotalOrderRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 //지현
@@ -69,10 +70,17 @@ public class TotalOrderService {
 	 * @param dto
 	 * @return
 	 */
-	public TotalOrder update(TotalOrderUpdateDto dto) {
-		log.info("update({})", dto);
-		TotalOrder entity = totalOrderRepository.findById(dto.getOrderId()).orElseThrow();
-		entity.update(dto);
-		return totalOrderRepository.saveAndFlush(entity);
+//	public TotalOrder update(TotalOrderUpdateDto dto) {
+//		log.info("update(dto={})", dto);
+//		TotalOrder entity = totalOrderRepository.findById(dto.getOrderId()).orElseThrow();
+//		entity.update(dto);
+//		return totalOrderRepository.saveAndFlush(entity);
+//	}
+	@Transactional
+	public void update(long orderId, TotalOrderUpdateDto dto) {
+		log.info("update(orderId={} ,dto={})", orderId, dto);
+		TotalOrder entity = totalOrderRepository.findByOrderId(orderId);
+		entity.update(dto.getReason(), dto.getStatus());
 	}
+	
 }

@@ -87,9 +87,15 @@ public class TotalOrder {
 	@Column(nullable = true)
 	private byte[] itemImg;
 	
-	public TotalOrder update(TotalOrderUpdateDto dto) {
-		this.status = dto.getStatus();
-		this.reason = dto.getReason();
+//	public TotalOrder update(TotalOrderUpdateDto dto) {
+//		this.status = dto.getStatus();
+//		this.reason = dto.getReason();
+//		return this;
+//	}
+	public TotalOrder update(String reason, String status) {
+		this.reason = reason;
+		this.status = status;
 		return this;
 	}
+	
 }

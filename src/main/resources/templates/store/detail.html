@@ -49,13 +49,15 @@ div {
 					<tr>
 						<td style="vertical-align: middle">
 							<strong>총 상품금액</strong> : 
-							<span class="total"><strong id="totalPrice"></strong></span>
+							<span class="total">
+							<strong id="totalPrice" 
+								th:text="|${#numbers.formatInteger(store.price, 0, 'COMMA')}원|"></strong></span>
 						</td>
 					</tr>
 					
 					<tr style="vertical-align: bottom">
 						<td>
-							<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+							<div class="d-grid gap-2 d-md-flex">
 								<button class="btn btn-outline-dark" id="addWishBtn" name="addWishBtn">
 									관심 상품에 추가
 								</button>
