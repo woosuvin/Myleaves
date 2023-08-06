@@ -6,6 +6,9 @@
 <main layout:fragment="main">
 	<div>
 		<h2>내풀잎🍀수정</h2>
+		<span class="d-none" id="selectedSido" th:text="${sell.sido}"></span>
+		<span class="d-none" id="selectedGungu" th:text="${sell.gungu}"></span>
+		
 		<form id="sellModifyForm" class="container">
 			<input class="d-none" name="sellId" id="sellId" th:value="${sell.sellId}"></input>
 			<div class="input-group mb-2">
@@ -27,17 +30,14 @@
 			</div>
 
 			<div class="form-floating mb-2">
-				<textarea class="form-control bg-transparent border-tertiary"
-					th:text="${sell.content}" style="height: 300px;" id="content" name="content"
-					placeholder="Leave a comment here" required></textarea>
-				<label for="content">상세 설명</label>
+				<textarea th:text="${sell.content}" id="summernote" name="content" class="form-control" required></textarea>
 			</div>
 
 			<div class="input-group mb-1">
-				<span class="input-group-text">거래 장소</span> <select name="sido"
-					th:value="${sell.sido}" id="sido" class="form-select"></select> <select name="gungu"
-					th:value="${sell.gungu}" id="gungu" class="form-select"></select> <input
-					class="form-control bg-transparent border-tertiary" id="loc"
+				<span class="input-group-text">거래 장소</span> 
+					<select onclick="selectbox();" th:value="${sell.sido}" name="sido" id="sido" class="form-select"></select>
+					<select th:value="${sell.gungu}" name="gungu" id="gungu" class="form-select"></select> 
+					<input class="form-control bg-transparent border-tertiary" id="loc"
 					th:value="${sell.loc}" name="loc" placeholder="상세 주소 및 장소명을 입력해 주세요." required></input>
 			</div>
 			<nav class="text-end">
@@ -53,8 +53,9 @@
 </main>
 <th:block layout:fragment="myscripts">
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/js/sellbuy/modify.js"></script>
     <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
-    <script src="/js/sellbuy/sell_modify.js"></script>
+    <script src="/js/sellbuy/sellModify.js"></script>
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="/js/info/notice/notice-summernote.js"></script>
 </th:block>
 </html>

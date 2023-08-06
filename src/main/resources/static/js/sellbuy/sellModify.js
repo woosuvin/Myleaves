@@ -1,8 +1,21 @@
 /**
- * 지현 분양 거래 장소 
+ * 지현 분양 거래 장소 수정
  */
-// 시군구 셀렉트
+
 $('document').ready(function() {
+	let sido = document.querySelector('#selectedSido').innerText;
+	let gungu = document.querySelector('#selectedGungu').innerText;
+	
+	$("select[name^=sido]").append(`"<option id="sido" name="sido">${sido}</option>"`);
+	$("select[name^=gungu]").append(`"<option id="gungu" name="gungu">${gungu}</option>"`);
+});
+
+
+// 시군구 셀렉트
+function selectbox() {
+	$("select[name^=sido]").empty();
+	$("select[name^=gungu]").empty();
+	
 	const area0 = ["시/도 선택", "서울특별시", "인천광역시", "대전광역시", "광주광역시", "대구광역시", "울산광역시", "부산광역시", "경기도", "강원도", "충청북도", "충청남도", "전라북도", "전라남도", "경상북도", "경상남도", "제주도"];
 	const area1 = ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"];
 	const area2 = ["계양구", "남구", "남동구", "동구", "부평구", "서구", "연수구", "중구", "강화군", "옹진군"];
@@ -20,6 +33,7 @@ $('document').ready(function() {
 	const area14 = ["경산시", "경주시", "구미시", "김천시", "문경시", "상주시", "안동시", "영주시", "영천시", "포항시", "고령군", "군위군", "봉화군", "성주군", "영덕군", "영양군", "예천군", "울릉군", "울진군", "의성군", "청도군", "청송군", "칠곡군"];
 	const area15 = ["거제시", "김해시", "마산시", "밀양시", "사천시", "양산시", "진주시", "진해시", "창원시", "통영시", "거창군", "고성군", "남해군", "산청군", "의령군", "창녕군", "하동군", "함안군", "함양군", "합천군"];
 	const area16 = ["서귀포시", "제주시", "남제주군", "북제주군"];
+	
 	// 시/도 선택 박스 초기화
 	$("select[name^=sido]").each(function() {
 		$selsido = $(this);
@@ -41,4 +55,45 @@ $('document').ready(function() {
 			});
 		}
 	});
+};
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // <form> 요소를 찾음.
+    const sellModifyForm = document.querySelector('#sellModifyForm');
+    
+    const btnUpdate = document.querySelector('#btnUpdate');
+    btnUpdate.addEventListener('click', (e) => {
+        const title = document.querySelector('#title').value;
+        // const thumbnail 
+        const content = document.querySelector('#summernote').value;
+        const price = document.querySelector('#price').value;
+        const sido = document.querySelector('#sido').value;
+        const gungu = document.querySelector('#gungu').value;
+        const loc = document.querySelector('#loc').value;
+        
+        if (title === '' || content === '' || price === '' 
+        	|| sido === '' || gungu === '' || loc === '') {
+            alert('공백 입력 불가합니다.');
+            return;
+        }
+        
+        const result = confirm('변경 사항을 저장하시겠습니까?');
+        if (result) {
+            sellModifyForm.action = 'update';
+			sellModifyForm.method = 'post';
+			sellModifyForm.submit();
+        }
+    });
+    
+    const btnDelete = document.querySelector('#btnDelete');
+    btnDelete.addEventListener('click', (e) => {
+        const result = confirm('글을 삭제하시겠습니까?');
+        if (result) {
+           	sellModifyForm.action = 'delete'; 
+        	sellModifyForm.method = 'post'; 
+        	sellModifyForm.submit(); 
+        }
+    });
 });

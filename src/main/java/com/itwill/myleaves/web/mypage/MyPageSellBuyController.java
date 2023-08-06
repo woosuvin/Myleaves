@@ -1,5 +1,6 @@
 package com.itwill.myleaves.web.mypage;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.myleaves.repository.sellbuy.Sell;
+import com.itwill.myleaves.repository.sellbuy.Buy;
 import com.itwill.myleaves.repository.sellbuy.BuyWish;
 import com.itwill.myleaves.service.mypage.MypageSellBuyService;
 import com.itwill.myleaves.service.sellbuy.SellService;
@@ -27,45 +29,46 @@ public class MyPageSellBuyController {
 	private final SellService sellService;
 	private final MypageSellBuyService mypageService;
 
+	// 입양 위시리스트
 	@GetMapping("/buyWish")
 	public void read(BuyWish wishList, Model model) {
 		log.info("read()");
+		List<BuyWish> buyWishlist = mypageService.read(wishList);
+		List<Sell> sellList = new ArrayList<>();
 		
-		List<BuyWish> list = mypageService.read(wishList);
+		for(BuyWish b : buyWishlist) {
+			Sell sell = sellService.read(b.getSellId());
+			sellList.add(sell);
+		}
 		
-//		Map<Long, String> productBase64Images = new HashMap<>();
-//        for(Sell sell: list){               
-//            productBase64Images.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
-//        }
-//        model.addAttribute("images", productBase64Images);
-		model.addAttribute("wishSell", list);
+//		model.addAttribute("buyWish", buyWishlist);
+		model.addAttribute("sell", sellList);
 	}
 	
+	// 분양 리스트
 	@GetMapping("/sellList")
-	public void sellList(Model model) {
-		log.info("read()");
-		List<Sell> list = sellService.read();
+	public void sellList(String userId, Model model) {
+		log.info("read(userId={})", userId);
 		
-		Map<Long, String> productBase64Images = new HashMap<>();
-        for(Sell sell: list){               
-            productBase64Images.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
-        }
-        model.addAttribute("images", productBase64Images);
-		model.addAttribute("sells", list);
+		List<Sell> sellList = sellService.readSellList(userId);
+
+//		Map<Long, String> productBase64Images = new HashMap<>();
+//      for(Sell sell: list){               
+//          productBase64Images.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
+//      }
+//      model.addAttribute("images", productBase64Images);
+		
+		model.addAttribute("sell", sellList);
 	}
 	
+	// 입양 리스트
 	@GetMapping("/buyList")
-	public void read(Model model) {
-		log.info("read()");
-		List<Sell> list = sellService.read();
-		
-		Map<Long, String> productBase64Images = new HashMap<>();
-        for(Sell sell: list){               
-            productBase64Images.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
-        }
-        model.addAttribute("images", productBase64Images);
-		model.addAttribute("sells", list);
-	
+	public void buyList(String buyerId, Model model) {
+	    log.info("read(buyerId={})", buyerId);
+
+	    List<Buy> buyList = sellService.readBuyList(buyerId);
+
+	    model.addAttribute("buy", buyList);
 	}
 	
 }

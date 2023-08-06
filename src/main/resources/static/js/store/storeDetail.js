@@ -12,9 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	const inven = document.querySelector('input#inven').value;
 	const addWishBtn = document.querySelector('button#addWishBtn');
 	const addCartBtn = document.querySelector('button#addCartBtn');
-	totalPrice.innerHTML = itemPrice; // 맨 처음 총 상품금액(price * 1)
 	const userId = document.querySelector('span#userId').innerText; // 현재 로그인 아이디
 	const itemId = document.querySelector('span#itemId').innerText; // 상품 아이디
+
+//	let itemPriceFormat = itemPrice.toLocaleString();
+//	console.log(itemPrice.toLocaleString());
+//	totalPrice.innerHTML = `${itemPriceFormat}원`; // 맨 처음 총 상품금액(price * 1)
 	
 	const cntPlus = () => {
 		const cnt = document.querySelector('input#cnt');
@@ -25,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 		cnt.innerText = ''; // 상품 개수 input 비우고
 		cnt.value++; // 더한 상품 개수 값 채워주기
-		totalPrice.innerHTML = itemPrice * cnt.value; // 총 상품 금액에 금액*수량 채워주기
+		let multiply = (itemPrice * cnt.value).toLocaleString();
+		totalPrice.innerHTML = `${multiply}원`;
 	};
 	btnPlus.addEventListener('click', cntPlus);
 	
@@ -38,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 		cnt.innerText = ''; // 상품개수 input 비우고
 		cnt.value--; // 더한 상품 개수 값 채워주기
-		totalPrice.innerHTML = itemPrice * cnt.value; // 총 상품 금액에 금액*수량 채워주기
+		let multiply = (itemPrice * cnt.value).toLocaleString();
+		totalPrice.innerHTML = `${multiply}원`;
 	};
 	btnMinus.addEventListener('click', cntMinus);
 	

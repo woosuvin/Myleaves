@@ -41,7 +41,7 @@
 				</div>
 				<div class="text-truncate">
 					<a
-						th:href="@{/buy/detail?sellId={sellId} (sellId=${sell.sellId}) }"
+						th:href="@{/buy/detail(userId=${#authentication.name},sellId=${sell.sellId}) }"
 						class="link-dark link-underline-opacity-0"> <span
 						th:text="${ sell.title }" class="card-title text-truncate"></span>
 					</a>

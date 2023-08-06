@@ -9,4 +9,7 @@ public interface SellRepository extends JpaRepository<Sell, Long>{
 	//id 내림차순
 	List<Sell> findByOrderBySellIdDesc();
 	
+	// 마이페이지 분양 리스트 
+	List<Sell> findByUserId(String userId);
+
 }
