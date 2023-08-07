@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.planterior.BookmarkDto;
-import com.itwill.myleaves.repository.Planterior.Bookmark;
-import com.itwill.myleaves.repository.Planterior.BookmarkRepository;
-import com.itwill.myleaves.repository.Planterior.Planterior;
-import com.itwill.myleaves.repository.Planterior.PlanteriorRepository;
+import com.itwill.myleaves.repository.planterior.Bookmark;
+import com.itwill.myleaves.repository.planterior.BookmarkRepository;
+import com.itwill.myleaves.repository.planterior.Planterior;
+import com.itwill.myleaves.repository.planterior.PlanteriorRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

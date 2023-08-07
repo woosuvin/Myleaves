@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.myleaves.dto.planterior.BookmarkDto;
-import com.itwill.myleaves.repository.Planterior.Bookmark;
-import com.itwill.myleaves.repository.Planterior.Planterior;
+import com.itwill.myleaves.repository.planterior.Bookmark;
+import com.itwill.myleaves.repository.planterior.Planterior;
 import com.itwill.myleaves.service.palnterior.BookmarkService;
 
 import lombok.RequiredArgsConstructor;

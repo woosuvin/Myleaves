@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+	
+<main layout:fragment="main">
+
+	<div class="container text-center">
+		<div class="m-5">
+			<h1> 플랜테리어 북마크 </h1>
+		</div>
+		<div class="m-2">
+			<div class="row row-cols-1 row-cols-md-4 g-4">
+				<div class="col" th:each="list: ${cardList}">
+					<div class="card">
+						<img th:src="@{/images/planterior/eucalyptus.png}" />
+						<!-- <img th:text="${list.img}" />  -->
+						<div class="card-body">
+							<!-- 일렬로 맞추기 -->
+							<p class="planteriorButtonEle"
+								th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div>
+		<!-- 페이징 -->
+	</div>
+
+</main>
+<th:block layout:fragment="myscripts">
+	<script src="/js/planterior/planteriorBookmark.js"></script>
+</th:block>
+</html>

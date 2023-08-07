@@ -81,76 +81,95 @@
 		</div>
 		<br>
 		<div class="m-2">
-			<div class="row row-cols-1 row-cols-md-4 g-4">
-				<div class="col" th:each="list: ${cardList}">
-					<div class="card">
-						<img th:src="@{/images/planterior/eucalyptus.png}" />
-						<!-- <img th:text="${list.img}" />  -->
-						<div class="card-body">
-							<!-- 일렬로 맞추기 -->
-							<p class="planteriorButtonEle"
-								th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
-							<!--ROLE_ADMIN 권한을 갖는다면 보임
-							<div sec:authorize="hasRole('ADMIN')" class="planteriorButton">
-								<input class="form-check-input float-end" type="checkbox"
-									th:value="${list.planteriorId}" id="reverseCheck1">
-							</div>
-							-->
-
-							<!-- 북마크 -->
-							<th:block sec:authorize="isAnonymous()">
-								<button class="none">
-									<img th:src="@{/images/planterior/bookmark.svg}" />
-								</button>
-							</th:block>
-
-							<!-- 로그인한 사용자에게만 보이게 해야함. -->
-							<th:block sec:authorize="isAuthenticated()">
+			<th:block sec:authorize="isAnonymous()">
+				<div class="row row-cols-1 row-cols-md-4 g-4">
+					<div class="col" th:each="list: ${cardList}">
+						<div class="card">
+							<img th:src="@{/images/planterior/eucalyptus.png}" />
+							<!-- <img th:text="${list.img}" />  -->
+							<div class="card-body">
+								<!-- 일렬로 맞추기 -->
+								<p class="planteriorButtonEle"
+									th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
 								<div>
-									<input type="hidden" id="userId" name="userId"
-										th:value="${#authentication.name}" />
+									<button class="none">
+										<img th:src="@{/images/planterior/bookmark.svg}" />
+									</button>
 								</div>
-								<input type="hidden" id="planteriorId"
-									th:value="${list.planteriorId}" />
-
-								<!-- 북마크 사진 변경 -->
-								<!-- 누름 -->
-								<th:block th:with="loop='False'" />
-								<th:block th:each="bookmark: ${bookmark}">
-								<!-- 이 부분에서 계속 오류 발생함. + 이미지 변경
-									<div th:value="${bookmark.planteriorId"></div>
-								-->
-									<th:block
-										th:if="${loop == False}">
-										<div>
-											<button class="imgButtonFill">
-												<img th:src="@{/images/planterior/bookmarkFill.svg}" />
-											</button>
-										</div>
-
-										<th:block th:with="loop='True'" />
-									</th:block>
-								</th:block>
-
-								<!-- 안 눌름 -->
-									<div>
-										<button class="imgButton" th:value="${list.planteriorId}">
-											<img th:src="@{/images/planterior/bookmark.svg}" />
-										</button>
-									</div>
-								</th:block>
-							</th:block>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<!-- 더보기 버튼 -->
-		<div class="d-flex justify-content-center">
-			<button class="m-4 btn btn-success rounded ">더보기</button>
-		</div>
-
+			</th:block>
+			<th:block sec:authorize="isAuthenticated()">
+				<div class="row row-cols-1 row-cols-md-4 g-4">
+					<!--  <div th:each="bookmark: ${bookmark}"> -->
+					<div class="col" th:each="list: ${cardList}">
+						<div>
+							<input type="hidden" id="userId" name="userId"
+								th:value="${#authentication.name}" /> <input type="hidden"
+								id="plantName" th:value="${list.plantName}" /> <input
+								type="hidden" id="planteriorId" th:value="${list.planteriorId}" />
+						</div>
+						<th:block th:if="${list.userId == #authentication.name}">
+							<div class="card">
+								<img th:src="@{/images/planterior/eucalyptus.png}" />
+								<!-- <img th:text="${list.img}" />  -->
+								<div class="card-body">
+									<!-- 일렬로 맞추기 -->
+									<p class="planteriorButtonEle"
+										th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+									<div>
+									<button class="notBookmark">
+										<img th:src="@{/images/planterior/bookmark.svg}" />
+									</button>
+								</div>
+								</div>
+							</div>
+						</th:block>
+						<th:block th:unless="${list.userId == #authentication.name}">
+							<!-- <th:block th:with="loop='false'" />  -->
+								<!-- <th:block th:if="${bookmark.userId == #authentication.name} and ${loop == false}">  -->
+									<div class="card">
+										<img th:src="@{/images/planterior/eucalyptus.png}" />
+										<div class="card-body">
+											<p class="planteriorButtonEle"
+												th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+											<div>
+												<button class="imgButton" th:value="${list.planteriorId}">
+													<img th:src="@{/images/planterior/bookmark.svg}" />
+												</button>
+											</div>
+										</div>
+									</div>
+								<!-- </th:block>  -->
+								<!-- <th:block th:with="loop='true'" />  
+								<!-- <th:block th:unless="${bookmark.userId == #authentication.name} and ${loop == false}"> 
+									<div class="card">
+										<img th:src="@{/images/planterior/eucalyptus.png}" />
+										<div class="card-body">
+											<p class="planteriorButtonEle"
+												th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+											<div>
+												<button class="imgButtonFill" th:value="${list.planteriorId}">
+													<img th:src="@{/images/planterior/bookmarkFill.svg}" />
+												</button>
+											</div>
+										</div>
+									</div>
+								<!-- </th:block>  -->
+						</th:block>
+					</div> <!-- cardlist -->
+					<!-- </div>  book -->
+					</div>
+				</div>
+			</th:block>
 	</div>
+	<!-- 더보기 버튼 -->
+	<div class="d-flex justify-content-center">
+		<button class="m-4 btn btn-success rounded ">더보기</button>
+	</div>
+
 	<!-- end -->
 </main>
 <th:block layout:fragment="myscripts">

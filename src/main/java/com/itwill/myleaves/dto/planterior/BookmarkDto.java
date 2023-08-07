@@ -1,6 +1,6 @@
 package com.itwill.myleaves.dto.planterior;
 
-import com.itwill.myleaves.repository.Planterior.Bookmark;
+import com.itwill.myleaves.repository.planterior.Bookmark;
 
 import lombok.Data;
 

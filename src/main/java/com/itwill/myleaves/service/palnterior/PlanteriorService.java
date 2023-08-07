@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.itwill.myleaves.dto.planterior.PlanteriorCreateDto;
-import com.itwill.myleaves.repository.Planterior.Planterior;
-import com.itwill.myleaves.repository.Planterior.PlanteriorRepository;
+import com.itwill.myleaves.repository.planterior.Planterior;
+import com.itwill.myleaves.repository.planterior.PlanteriorRepository;
 
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;

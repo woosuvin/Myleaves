@@ -1,4 +1,4 @@
-package com.itwill.myleaves.repository.Planterior;
+package com.itwill.myleaves.repository.planterior;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
