@@ -128,16 +128,5 @@ document.addEventListener('DOMContentLoaded', () => {
 		btn.addEventListener('click', cntPlus);
 	}
 	
-	const form = document.querySelector('form#orderForm');
-	const orderButton = document.querySelector('button#orderButton');
-	orderButton.addEventListener('click', () => {
-		form.action = 'insert'; // 폼 제출(요청) 주소 '/post/delete' & 'delete' 차이? post/modify/?id=.. 인 주소에서 /post/delete로 바뀌는게 목적이므로 delete or ./delete 로 작성해야함.
-		form.method = 'post'; // 폼 요청 방식
-		form.submit();
-	});
-	
-	
-	
-	
 	
 });

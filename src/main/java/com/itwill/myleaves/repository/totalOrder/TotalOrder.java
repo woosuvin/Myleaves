@@ -1,4 +1,4 @@
-package com.itwill.myleaves.repository.order;
+package com.itwill.myleaves.repository.totalOrder;
 
 import java.time.LocalDateTime;
 

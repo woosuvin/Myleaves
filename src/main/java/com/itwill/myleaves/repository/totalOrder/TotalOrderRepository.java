@@ -1,4 +1,4 @@
-package com.itwill.myleaves.repository.order;
+package com.itwill.myleaves.repository.totalOrder;
 
 import java.util.List;
 
@@ -33,11 +33,11 @@ public interface TotalOrderRepository extends JpaRepository<TotalOrder, Long> {
 //			+ "'', '', '', '', -1, '', '')", nativeQuery = true)
 //	void insertTotalOrder(String user_id);
 	
-	@Transactional
-	@Modifying
-	@Query(value ="insert into TOTAL_ORDER "
-			+ "(USER_ID, PRICE, NAME, CNT) "
-			+ "VALUES "
-			+ "(:userId, -1, (select NAME from USER_INFO where USER_ID = :userId), -1)", nativeQuery = true)
-	void insertTotalOrder(@Param("userId") String userId);
+//	@Transactional
+//	@Modifying
+//	@Query(value ="insert into TOTAL_ORDER "
+//			+ "(USER_ID) "
+//			+ "VALUES "
+//			+ "(?1)", nativeQuery = true)
+//	void insertTotalOrder(String userId);
 }

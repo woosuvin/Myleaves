@@ -9,11 +9,47 @@
 				<h2>장바구니 > 결제 페이지</h2>
 			</div>	
 			
+		<form>
+			
+			<input class="d-none" id="userId" name="userId" th:text="${#authentication.name}"/>
+			
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th colspan="2">상품 정보</th>
+						<th class="text-center">수량</th>
+						<th class="text-center">가격</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="cart: ${ carts }">
+						<td class="col-1 text-center">
+							<img class="rounded" style="width: 6rem; height: 6rem;" src="/images/common/store.jpg" />
+						</td>
+						<td style="vertical-align: middle;" class="col-5 text-center textvcenter">
+							<span th:text="${ stores.get(cart.itemId).itemName }"></span>
+						</td>
+						<td style="vertical-align: middle;" class="col-3 text-center" 
+							th:text="${ cart.cnt }">
+						</td>
+						<td style="vertical-align: middle;" class="col-3 text-center"
+							th:text="|${#numbers.formatInteger(stores.get(cart.itemId).price * cart.cnt, 0, 'COMMA')}원|">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<th:block th:each="cart: ${carts}">
+				<input id="itemId" name="itemId" th:value="${cart.itemId}" /> <!-- orderDetail itemId -->
+				<!-- <input name="price" th:value="${cart.price * cart.cnt}" /> orderDetail price -->
+				<input name="cnt" th:value="${cart.cnt}" /> <!-- orderDetail cnt -->
+			</th:block>
+			
 			<div>
 				<h3>배송지</h3>
 			</div>
 				
-			<form>
+			
 				
 				<div>
 					<input type="radio" id="defaultaddr" name="address" /> 
@@ -24,22 +60,22 @@
 				
 				<div>
 					<label>이름</label>
-					<input type="text" />
+					<input type="text" name="name" /> <!-- address.name , totalOrder.name -->
 				</div>
 				
 				<div>
 					<label>우편번호</label>
-					<input type="text" id="sample6_postcode" placeholder="우편번호">
+					<input type="text" id="sample6_postcode" name="zipcode" placeholder="우편번호">
 					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 					<label>주소</label>
-					<input type="text" id="sample6_address" placeholder="주소"><br>
-					<input type="text" id="sample6_detailAddress" placeholder="상세주소">
+					<input type="text" id="sample6_address" name="addr" placeholder="주소"><br>
+					<input type="text" id="sample6_detailAddress" name="addrdetail" placeholder="상세주소">
 					<input type="text" id="sample6_extraAddress" placeholder="참고항목">
 				</div>
 				
 				<div>
 					<label>연락처</label>
-					<input type="text" />
+					<input type="text" id="tel" name="tel" />
 				</div>
 				
 				<div>
@@ -49,7 +85,7 @@
 				
 				<div>
 					<label>배송 시 요청 사항</label>
-					<input type="text" />
+					<input type="text" id="req" name="req" />
 					<br/>
 					<span>제주 및 도서 산간 지역의 배송은 추가 배송비가 발생할 수 있습니다.</span>
 				</div>
@@ -63,17 +99,18 @@
 				<div>
 					<div>
 						<span>상품 합계</span>
+						<span th:text="|${#numbers.formatInteger(price, 0, 'COMMA')}원|"></span>
 						<!-- span 상품 합계 값 자리 -->
 					</div>
 					
 					<div>
 						<span>배송비</span>
-						<!-- span 배송비 값 자리 -->
+						<span th:text="|${#numbers.formatInteger(3000, 0, 'COMMA')}원|"></span>
 					</div>
 					
 					<div>
 						<span>결제 금액</span>
-						<!-- span 상품 합 + 배송비 자리 -->
+						<span th:text="|${#numbers.formatInteger(price+3000, 0, 'COMMA')}원|"></span>
 					</div>
 				</div>
 				
@@ -84,9 +121,9 @@
 				</div>
 				
 				<div>
-					<input type="radio" id="card" name="payment" /> 
+					<input type="radio" id="card" name="payment" value="1" /> 
 					<label for="card" >신용 / 체크카드</label> 
-					<input type="radio" id="withoutBank" name="payment" value="withoutBank" /> 
+					<input type="radio" id="withoutBank" name="payment" value="2" /> 
 					<label for="withoutBank">무통장 입금</label>
 				</div>
 				
@@ -103,13 +140,15 @@
 					
 					<div>
 						<span>환불 계좌</span>
-						<input type="text" placeholder="은행" />
 						<input type="text" placeholder="예금주" />
-						<input type="text" placeholder="계좌 번호" />
+						<input type="text" name="reAcc" placeholder="은행 + 계좌 번호" />
 					</div>
+					<button id="btnWithoutBank">결제하기</button>
 				</div>
 				
-				<button>결제하기</button>
+				<div id="cardDiv" style="display:none;">
+					<button id="btnWithCard">결제하기</button>
+				</div>
 			</form>
 		</div>
 	</main>

@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.myleaves.dto.order.TotalOrderUpdateDto;
-import com.itwill.myleaves.repository.order.OrderDetail;
-import com.itwill.myleaves.repository.order.TotalOrder;
+import com.itwill.myleaves.repository.orderDetail.OrderDetail;
 import com.itwill.myleaves.repository.store.Store;
 import com.itwill.myleaves.repository.store.StoreWish;
-import com.itwill.myleaves.service.order.TotalOrderService;
+import com.itwill.myleaves.repository.totalOrder.TotalOrder;
 import com.itwill.myleaves.service.store.MypageStoreService;
 import com.itwill.myleaves.service.store.StoreService;
+import com.itwill.myleaves.service.totalOrder.TotalOrderService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -41,16 +41,7 @@ public class CartController {
 		model.addAttribute("stores", storeList);
 	}
 	
-	/**
-	 * 수빈
-	 * 장바구니에서 결제 페이지로 이동
-	 * @param userId
-	 * @return
-	 */
-	@PostMapping("/orderDetail")
-	public String insert(String userId) {
-		return "redirect:/cart/orderDetail?userId=" + userId;
-	}
+	
 	
 	
 }

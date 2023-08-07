@@ -1,4 +1,4 @@
-package com.itwill.myleaves.service.order;
+package com.itwill.myleaves.service.totalOrder;
 
 import java.util.List;
 
@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.itwill.myleaves.dto.order.TotalOrderCreateDto;
 import com.itwill.myleaves.dto.order.TotalOrderUpdateDto;
-import com.itwill.myleaves.repository.order.OrderDetail;
-import com.itwill.myleaves.repository.order.OrderDetailRepository;
-import com.itwill.myleaves.repository.order.TotalOrder;
-import com.itwill.myleaves.repository.order.TotalOrderRepository;
+import com.itwill.myleaves.repository.orderDetail.OrderDetail;
+import com.itwill.myleaves.repository.orderDetail.OrderDetailRepository;
+import com.itwill.myleaves.repository.totalOrder.TotalOrder;
+import com.itwill.myleaves.repository.totalOrder.TotalOrderRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class TotalOrderService {
 	// create는 결제가 완료되면 되는건데 form 제출을 어디서 하는지?
 	public TotalOrder create(TotalOrderCreateDto dto) {
 		TotalOrder entity = dto.toEntity();
-		totalOrderRepository.save(entity);
+		totalOrderRepository.saveAndFlush(entity);
 		return entity;
 	}
 	
@@ -82,5 +82,6 @@ public class TotalOrderService {
 		TotalOrder entity = totalOrderRepository.findByOrderId(orderId);
 		entity.update(dto.getReason(), dto.getStatus());
 	}
+	
 	
 }

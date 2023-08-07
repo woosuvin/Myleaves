@@ -13,7 +13,6 @@
     <span class="d-none" id="userId" name="userId" th:text="${#authentication.name}"></span>
     
     <div class="container">
-    	<!-- <form id="cartForm"> -->
     		<th:block th:each="store: ${stores}">
 	    		<table class="table table-borderless">
 	    			<tbody>
@@ -83,19 +82,11 @@
     		<br/>
     		
     		<div class="d-grid gap-2 col-6 mx-auto">
-    			<button class="btn btn-outline-dark btn-lg">구매하기</button>
+    			<!-- <button th:href="@{/order/orderDetail(userId=${#authentication.name})}" class="btn btn-outline-dark btn-lg">구매하기</button> -->
+    			<a class="btn btn-outline-dark btn-lg" th:href="@{/order/orderDetail(userId=${#authentication.name})}">
+    			구매하기
+    			</a>
     		</div>
-    	<!-- </form> -->
-    	
-    	<form action="post" id="orderFrom">
-    		<span id="userId" name="userId" th:text="${#authentication.name}"></span>
-    		<th:block th:each="cart: ${carts}">
-    			<input th:value="${cart.itemId}" />
-    		</th:block>
-    		<div class="d-grid gap-2 col-6 mx-auto">
-    			<button class="btn btn-outline-dark btn-lg" id="orderButton">구매하기</button>
-    		</div>
-    	</form>
     	
     </div>
     

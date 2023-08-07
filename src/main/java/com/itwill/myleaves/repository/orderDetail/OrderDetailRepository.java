@@ -1,4 +1,4 @@
-package com.itwill.myleaves.repository.order;
+package com.itwill.myleaves.repository.orderDetail;
 
 import java.util.List;
 

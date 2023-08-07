@@ -1,6 +1,6 @@
 package com.itwill.myleaves.dto.order;
 
-import com.itwill.myleaves.repository.order.OrderDetail;
+import com.itwill.myleaves.repository.orderDetail.OrderDetail;
 
 import lombok.Data;
 //지현
