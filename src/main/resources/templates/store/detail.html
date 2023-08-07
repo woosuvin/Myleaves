@@ -58,9 +58,16 @@ div {
 					<tr style="vertical-align: bottom">
 						<td>
 							<div class="d-grid gap-2 d-md-flex">
-								<button class="btn btn-outline-dark" id="addWishBtn" name="addWishBtn">
-									관심 상품에 추가
-								</button>
+								<th:block th:unless="${wish}">
+									<button class="btn btn-outline-dark" id="addWishBtn" name="addWishBtn">
+										관심 상품에 추가
+									</button>
+								</th:block>
+								<th:block th:if="${wish}">
+									<button class="btn btn-outline-dark" id="deleteWishBtn"
+										name="deleteWishBtn" th:data-id="${store.itemId}">관심
+										상품 삭제</button>
+								</th:block>
 								<button class="btn btn-outline-dark" id="addCartBtn" name="addCartBtn">
 									장바구니에 담기
 								</button>
@@ -85,5 +92,7 @@ div {
 <th:block layout:fragment="myscripts">
 	<script src="/js/chat.js"></script>
 	<script src="/js/store/storeDetail.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 </th:block>
 </html>

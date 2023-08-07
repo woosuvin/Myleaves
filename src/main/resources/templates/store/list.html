@@ -15,7 +15,7 @@
 				<!-- sold값으로 switch문 -->
 				<div th:switch="${store.sold}" 
 					class="container p-0" style="position: relative; text-align: center; color: black;">
-					<a th:href="@{/store/detail?itemId={itemId} (itemId=${store.itemId})}"> 
+					<a th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}"> 
 						<!-- 1, 품절일 경우 -->
 						<th:block th:case="1">
 							<img class="rounded mb-1" style="width: 100%; height: 100%; opacity: 50%;" 
@@ -35,7 +35,7 @@
 				</div> <!-- 사진 div end -->
 				
 				<div class="text-truncate">
-					<a th:href="@{/store/detail?itemId={itemId} (itemId=${store.itemId})}"
+					<a th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}"
 						class="link-dark link-underline-opacity-0"> 
 						<span th:text="${store.itemName}" class="card-title text-truncate"></span>
 					</a>
