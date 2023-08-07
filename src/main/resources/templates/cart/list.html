@@ -10,7 +10,7 @@
     	<h1>🍀장🍀바🍀구🍀니🍀</h1>
     </div>
     
-    <span id="userId" name="userId" th:text="${#authentication.name}"></span>
+    <span class="d-none" id="userId" name="userId" th:text="${#authentication.name}"></span>
     
     <div class="container">
     	<!-- <form id="cartForm"> -->
@@ -19,32 +19,41 @@
 	    			<tbody>
 	    				<tr class="row">
 	    					<td class="col" style="width: 6rem;"> <!-- th:value="${store.thumbnail}" -->
-	    						<img class="rounded" src="/images/common/store.jpg" style="width: 6rem; height: 6rem;" />
+	    						<a th:href="@{/store/detail?itemId={itemId} (itemId=${store.itemId})}">
+	    							<img class="rounded" src="/images/common/store.jpg" style="width: 6rem; height: 6rem;" />
+	    						</a>
 	    					</td>
 	    					<td class="col-6" style="vertical-align: middle">
-								<span id="itemName" name="itemName" th:text="${store.itemName}"></span>
+	    						<a th:href="@{/store/detail?itemId={itemId} (itemId=${store.itemId})}">
+									<span id="itemName" name="itemName" th:text="${store.itemName}"></span>
+								</a>
 							</td>
 							<td class="col-1">
 								<span id="plusMinus" class="input-group mt-1" style="width: 5.3rem;">
 									<!-- 수량 줄이기 -->
 									<button id="btnMinus" class="btn btn-sm btn-outline-secondary" 
-										type="button" style="height: 1.5rem; font-size: 7pt;" th:data-id="${store.itemId}">-</button>
+										type="button" style="height: 1.5rem; font-size: 7pt;" th:attr="data-btnMinus=${store.itemId}">-</button>
 								
 									<th:block th:each="cart: ${carts}">
 										<input th:if="${store.itemId} == ${cart.itemId}" 
-											id="cnt_${cart.itemId}" name="cnt" type="text" class="form-control" th:value="${cart.cnt}"
-											style="height: 1.5rem; font-size: 7pt; text-align: center;"  />
+											th:id="|cnt_${cart.itemId}|" name="cnt" type="text" class="form-control" th:value="${cart.cnt}" 
+											style="height: 1.5rem; font-size: 7pt; text-align: center;" />
 									</th:block>
 								
 									<!-- 수량 더하기 -->
 									<button id="btnPlus" class="btn btn-sm btn-outline-secondary" 
-										type="button" style="height: 1.5rem; font-size: 7pt;" th:data-id="${store.itemId}">+</button>
+										type="button" style="height: 1.5rem; font-size: 7pt;" th:attr="data-btnPlus=${store.itemId}">+</button>
 								</span>
 							</td>
 							<td class="col-3" style="vertical-align: middle">
-								<!-- <span th:text="|총 상품 금액: ${store.price}|"></span> --> 
-								<span>총 상품 금액 :</span>
-								<span id="totalPrice"></span> <!-- TODO: price * cnt -->
+								<span>총 상품 금액 :
+									<span class="d-none" th:id="|price_${store.itemId}|" th:text="${store.price}"></span>
+									<span class="d-none" th:id="|inven_${store.itemId}|" th:text="${store.inven}"></span>
+									<th:block th:each="cart: ${carts}">
+										<span th:if="${store.itemId} == ${cart.itemId}" 
+										th:id="|cntPrice_${store.itemId}|" name="cntPrice" th:text="${store.price} * ${cart.cnt}"></span>
+									</th:block>
+								</span>
 							</td>
 							<td class="col-1">
 								<button class="btn btn-sm btn-outline-dark" id="cartDeleteBtn" name="cartDeleteBtn" th:data-id="${store.itemId}">삭제</button>
@@ -58,20 +67,36 @@
     		</th:block>
     		
     		<div class="row">
-				<span class="col">상품 합계</span>
-				<span class="col text-end" id="price" name="price"></span> <!-- totalPrice 다 더한거 -->
+				<span class="col">상품 합계</span> <!-- totalPrice 다 더한거 -->
+				<span class="col text-end" id="totalItemPrice" name="totalItemPrice"></span>
 			</div>
 			<div class="row">
-				<span class="col">배송비</span>
-				<span class="col text-end" id="deliveryCharge" name="deliveryCharge"></span>
+				<span class="col">배송비</span> <!-- TODO: 추가 배송비 -->
+				<span class="col text-end" id="deliveryCharge" name="deliveryCharge">3000</span>
 			</div>
 			<div class="row">
-				<strong class="col">합계</strong>
-				<strong class="col text-end" id="sum" name="sum"></strong>
+				<strong class="col">합계</strong> <!-- totalPrice + 배송비 -->
+				<span class="col text-end fw-bold" id="totalPriceDeliveryCharge" name="totalPriceDeliveryCharge"></span>
 			</div>
     		
-    		<button class="btn btn-outline-dark">구매하기</button>
+    		<br/>
+    		<br/>
+    		
+    		<div class="d-grid gap-2 col-6 mx-auto">
+    			<button class="btn btn-outline-dark btn-lg">구매하기</button>
+    		</div>
     	<!-- </form> -->
+    	
+    	<form action="post" id="orderFrom">
+    		<span id="userId" name="userId" th:text="${#authentication.name}"></span>
+    		<th:block th:each="cart: ${carts}">
+    			<input th:value="${cart.itemId}" />
+    		</th:block>
+    		<div class="d-grid gap-2 col-6 mx-auto">
+    			<button class="btn btn-outline-dark btn-lg" id="orderButton">구매하기</button>
+    		</div>
+    	</form>
+    	
     </div>
     
 	</main>

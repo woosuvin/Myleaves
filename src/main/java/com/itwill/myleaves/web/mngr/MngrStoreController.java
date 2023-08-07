@@ -2,6 +2,7 @@ package com.itwill.myleaves.web.mngr;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class MngrStoreController {
 	
 	private final StoreService storeService;
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/list")
 	public void mngrHome(Model model) {
 		log.info("mngrStoreList");

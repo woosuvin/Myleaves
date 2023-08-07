@@ -12,7 +12,7 @@
 				<div class="container p-0"
 					style="position: relative; text-align: center; color: black;">
 					<a th:switch="${sell.sold}"
-						th:href="@{/buy/detail?sellId={sellId} (sellId=${sell.sellId}) }">
+						th:href="@{/buy/detail(userId=${#authentication.name}, sellId=${sell.sellId}) }">
 						<!-- 판매종료(buy>sold.equals("판매 종료"), 품절(store>inven==0) 흰색/문구 가운데 -->
 						<th:block th:case="1">
 							<img class="rounded mb-1" style="width: 100%; height: 100%;"
@@ -41,7 +41,7 @@
 				</div>
 				<div class="text-truncate">
 					<a
-						th:href="@{/buy/detail(userId=${#authentication.name},sellId=${sell.sellId}) }"
+						th:href="@{/buy/detail(userId=${#authentication.name}, sellId=${sell.sellId})}"
 						class="link-dark link-underline-opacity-0"> <span
 						th:text="${ sell.title }" class="card-title text-truncate"></span>
 					</a>

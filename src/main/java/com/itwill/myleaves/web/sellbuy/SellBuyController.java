@@ -66,18 +66,18 @@ public class SellBuyController {
 	public String create(SellCreateDto dto) {
 		log.info("create(dto={}) POST", dto);
 
-		MultipartFile file = dto.getFile();
-
-		if (file != null && !file.isEmpty()) {
-			byte[] bytes;
-			try {
-				bytes = file.getBytes();
-				dto.setThumbnail(bytes);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
+//		MultipartFile file = dto.getFile();
+//
+//		if (file != null && !file.isEmpty()) {
+//			byte[] bytes;
+//			try {
+//				bytes = file.getBytes();
+//				dto.setThumbnail(bytes);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//
+//		}
 
 		sellService.create(dto);
 		return "redirect:/buy/list";
@@ -95,14 +95,20 @@ public class SellBuyController {
 		List<BuyWish> buyWishlist = mypageService.readBuyWish(sellId);
 		log.info("{}", buyWishlist);
 		
-		List<BuyWish> wishlist = mypageService.readWish(userId);
+		Boolean result = null;
+		for (BuyWish x : buyWishlist) {
+		    if (x.getUserId().equals(userId)) {
+		        result = true;
+		        break;
+		    } else {
+		        result = false;
+		    }
+		}
+
 		
 		Sell sell = sellService.read(sellId);
 		
-		model.addAttribute("wishes", wishlist);
-		
-		model.addAttribute("buyWishes", buyWishlist);
-		
+		model.addAttribute("wish", result);
 		model.addAttribute("sell", sell);
 	}
 	
