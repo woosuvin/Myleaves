@@ -21,10 +21,15 @@
 					<th scope="row" th:text="${qna.qid}"></th>
 					<td th:text="${qna.title}"></td>
 					<td th:text="${#temporals.format(qna.createdDate, 'yy-mm-dd HH:mm' ) }"></td>
-					<td>
-						<a class="btn btn-primary" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">답변확인중</a>
-						<!-- th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}" -->
+					
+					<td th:if="${not #strings.isEmpty(qna.an_title)}">
+						<a class="btn btn-secondary" th:href="@{/mngr/qna/detail?qid={id} (id= ${qna.qid})}">답변확인완료</a>
 					</td>
+					<td th:if="${#strings.isEmpty(qna.an_title)}">
+						<a class="btn btn-primary" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">답변확인중</a>
+					</td>
+					
+					
 				</tr>
 			</tbody>
 		</table>

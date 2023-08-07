@@ -79,14 +79,12 @@ public class QnAService {
 	/*
 	 * QnA 관리자 답변 
 	 */
-	public QnA updateMngr(QnAMngrUpdateDto dto) {
-		log.info("QnAMngr(dto={} , qid={}" , dto);
+	@Transactional
+	public void updateMngr(QnAMngrUpdateDto dto) {
+		log.info("QnAMngr(dto={}" , dto);
 		
-		QnA entity = dto.toEntity();
-		log.info("before entity={}" , entity);
-		
-		qnaRepository.saveAndFlush(entity);
-		log.info("after entity={}" , entity);
-		return entity;
+		QnA entity = qnaRepository.findById(dto.getQid()).orElseThrow();
+	
+		entity.updateMngr(dto);
 	}
 }	

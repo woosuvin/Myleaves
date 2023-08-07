@@ -16,21 +16,52 @@
 							<th scope="col">제목</th>
 							<th scope="col">작성자</th>
 							<th scope="col">작성일</th>
+							<th scope= "col">비밀글</th>
 							<th scope="col">진행상태</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="qna :${qnas}">
+					<!-- 비밀글 본인만 볼 수 있어야 함. -->
+						<!-- <tr th:each="qna :${qnas}" >
 							<td th:text="${qna.qid}"></td>
-							<td><a
-								th:href="@{/info/qna/detail?qid={id} (id = ${qna.qid}) }"
-								th:text="${qna.title}"></a></td>
+							<td th:if="${qna.secret == 1} && ${qna.user_id == th:value="${#authentication.name}"}">
+							<a th:href="@{/info/qna/detail?qid={id} (id = ${qna.qid}) }"
+							   th:text="${qna.title}"></a></td>
 
 							<td th:text="${qna.user_id}"></td>
 							<td
-								th:text="${#temporals.format(qna.createdDate, 'yy-mm-dd HH:mm' ) }"></td>
+								th:text="${#temporals.format(qna.createdDate, 'yy-mm-dd HH:mm' ) }">
+							</td>
+							<td th:if="${qna.secret == 1}">🔒</td>
+							<td th:if="${qna.secret == 0}">공개</td>
+							관리자 페이지에 확인 할 거임
+							<td th:if="${#strings.isEmpty(qna.an_title)}">확인중</td>
+							<td th:if="${not #strings.isEmpty(qna.an_title)}">확인완료</td>
+						</tr> -->
+						<tr th:each="qna :${qnas}">
+							<td th:text="${qna.qid}"></td>
+							<td
+								th:if="${qna.secret == 1 && qna.user_id == #authentication.name}">
+								<a th:href="@{/info/qna/detail?qid={id}(id=${qna.qid})}"
+								th:text="${qna.title}"></a>
+							</td>
+							<td
+								th:if="${qna.secret == 1 && qna.user_id != #authentication.name}">
+								<a th:text="${qna.title}"></a>
+							</td>
+							<td
+								th:if="${qna.secret == 0}">
+								<a th:href="@{/info/qna/detail?qid={id}(id=${qna.qid})}"
+								th:text="${qna.title}"></a>
+							</td>
+
+							<td th:text="${qna.user_id}"></td>
+							<td th:text="${#temporals.format(qna.createdDate, 'yy-MM-dd HH:mm')}"></td>
+							<td th:if="${qna.secret == 1}">🔒</td>
+							<td th:if="${qna.secret == 0}">공개</td>
 							<!-- 관리자 페이지에 확인 할 거임 -->
-							<td>진행상태 TEST 확인중</td>
+							<td th:if="${#strings.isEmpty(qna.an_title)}">확인중</td>
+							<td th:if="${not #strings.isEmpty(qna.an_title)}">확인완료</td>
 						</tr>
 					</tbody>
 				</table>

@@ -11,7 +11,9 @@ public class QnACreateDto {
 	private String content;
 	private String user_id;
 	private long secret; // check 0,1
-	
+	/*
+	 * private String an_title; private String an_content;
+	 */
 				
 	public QnA toEntity() {
 		return QnA.builder()

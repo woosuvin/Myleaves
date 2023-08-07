@@ -1,8 +1,12 @@
 package com.itwill.myleaves.repository.qna;
 
 
+
+
 import org.hibernate.annotations.ColumnDefault;
 
+
+import com.itwill.myleaves.dto.qna.QnAMngrUpdateDto;
 import com.itwill.myleaves.dto.qna.QnAUpdateDto;
 import com.itwill.myleaves.repository.BaseTimeEntity;
 
@@ -48,12 +52,12 @@ public class QnA extends BaseTimeEntity{
 	 * 관리자 페이지
 	 */
 	
+	//@Column(nullable = false)
 	 private String an_title;
 	 
+	//@Column(nullable = false)
 	 private String an_content;
 	 
-	 //@CreatedDate 
-	 //private LocalDateTime an_date;
 	
 	
 	 /*
@@ -65,7 +69,17 @@ public class QnA extends BaseTimeEntity{
         
         return this;
     }
-
+    
+    /*
+     * 관리자 QnA 답변 수정 UPDATE
+     */
+    public QnA updateMngr(QnAMngrUpdateDto dto) {
+    	this.an_title = dto.getAn_title();
+    	this.an_content = dto.getAn_content();
+    	
+    	return this;
+    }
+    
 		 
 	 
 }

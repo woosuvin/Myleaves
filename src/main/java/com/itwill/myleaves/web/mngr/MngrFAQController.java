@@ -28,7 +28,6 @@ public class MngrFAQController {
 	/*
 	 * FAQ 리스트 보기
 	 */
-	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/list")
 	public void mngrListFaq(Model model) {
 		
@@ -61,6 +60,7 @@ public class MngrFAQController {
 	/*
 	 * FAQ 상세보기 페이지
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/detail")
 	public void detailFaq(Long fqid , Model model) {
         log.info("detailFaq(id={})" , fqid);

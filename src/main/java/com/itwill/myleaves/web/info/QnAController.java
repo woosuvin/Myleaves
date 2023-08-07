@@ -28,7 +28,7 @@ public class QnAController {
 	/*
 	 * QnA 리스트 메인 페이지
 	 */
-	//@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping
 	public String readQnA(Model model) {
 		log.info("QNA read()");
@@ -47,13 +47,13 @@ public class QnAController {
 	/*
 	 * QnA 새 글 작성하기
 	 */
-	//@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/create")
     public void create() {
         log.info("QNA create() GET");
         
 	}
-	//@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/create")
 	public String create(QnACreateDto dto) {
 		log.info("QnA create(dto={}) POST" , dto);
@@ -67,7 +67,7 @@ public class QnAController {
 	/*
 	 * QnA 상세 페이지 QnA 수정 페이지
 	 */
-	//@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping({"/detail", "/modify"})
 	public void detailQnA(Long qid, Model model) {
 		log.info("QnA read(id={})" , qid);
@@ -79,7 +79,7 @@ public class QnAController {
 	/*
 	 * QnA 수정 보내기
 	 */
-	//@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/update")
 	public String update(QnAUpdateDto dto) {
         log.info("update dto={}" , dto);
@@ -92,7 +92,7 @@ public class QnAController {
 	/*
 	 * QnA 삭제 페이지
 	 */
-	//@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	 @PostMapping("/delete")    
 	    public String delete(long qid) {
 	        log.info("delete(id={})" , qid);

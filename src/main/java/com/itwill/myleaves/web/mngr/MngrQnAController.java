@@ -2,13 +2,14 @@ package com.itwill.myleaves.web.mngr;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.itwill.myleaves.dto.qna.QnAMngrUpdateDto;
 import com.itwill.myleaves.repository.qna.QnA;
@@ -25,6 +26,9 @@ public class MngrQnAController {
 	
 	private final QnAService qnaService;
 	
+	/*
+	 * QnA 리스트 불러오기
+	 */
 	@GetMapping("/list")
 	public void mngrqna(Model model) {
 		log.info("mngrqna list");
@@ -33,10 +37,12 @@ public class MngrQnAController {
 		
 		model.addAttribute("qnas" , list);
 		
-	}
-	
-	
-	  @GetMapping("/modify") 
+	}	
+	  /*
+	   * QnA 수정 , 상세페이지 
+	   */
+	  @PreAuthorize("hasRole('ADMIN')")
+	  @GetMapping({"/modify", "/detail"}) 
 	  public void modifyMngrQna(Long qid, Model model) {
 		  log.info("QnA Mngr modify(id={})" , qid);
 		  
@@ -46,6 +52,10 @@ public class MngrQnAController {
 	  
 	  } 
 	  
+	  /*
+	   * QnA 답변 주기
+	   */
+	  @PreAuthorize("hasRole('ADMIN')")
 	  @PostMapping("/update")
 	  public String updateMngrQna(QnAMngrUpdateDto dto) {
 		  log.info("QnA Update mngr(dto={})" , dto );

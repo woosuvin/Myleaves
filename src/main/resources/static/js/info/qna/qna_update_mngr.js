@@ -8,13 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
      btnUpdate.addEventListener('click', () =>{
          // 제목과 내용이 입력되어 있는 지 체크
          const qid = document.querySelector('input#qid').value;
-         const title = document.querySelector('input#an_title').value; //input에 입력된 값
-         const content = document.querySelector('textarea#an_comment').value; //textarea에 입력된 값
-         if(title === ''||content ===''){
+         const an_title = document.querySelector('input#an_title').value; //input에 입력된 값
+         const an_content = document.querySelector('textarea#an_content').value; //textarea에 입력된 값
+         if(an_title === ''||an_content ===''){
              alert('제목과 내용은 반드시 입력하세요.')
              return;
          }
          const check = confirm('변경 내용을 저장할까요?')
+        
          if(check){
              modifyForm.action = '/mngr/qna/update'
              modifyForm.method = 'post';
