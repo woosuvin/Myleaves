@@ -19,8 +19,6 @@ public interface BuyWishRepository extends JpaRepository<BuyWish, BuyWishId> {
 			nativeQuery = true)
 	void deleteByUserIdAndSellId(String userId, long sellId);
 	
-	
 	List<BuyWish> findBySellId(long sellId);
-	
 	
 }

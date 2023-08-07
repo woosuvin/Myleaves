@@ -39,10 +39,21 @@ public class StoreController {
 	public void read(String userId, long itemId, Model model) {
 		log.info("read(itemId={})", itemId);
 		
+		List<StoreWish> storeWishList = storeService.readStoreWish(itemId);
+		log.info("{}", storeWishList);
+		
 		Boolean result = null;
-		List<StoreWish> wishlist = mypageStoreService.readWish(itemId);
-		for(StoreWish wish : wishlist) {
-			result = (wish.getUserId().equals(userId))? true:false;
+//		List<StoreWish> wishlist = mypageStoreService.readWish(itemId);
+//		for(StoreWish wish : wishlist) {
+//			result = (wish.getUserId().equals(userId))? true:false;
+//		}
+		for (StoreWish x : storeWishList) {
+			if (x.getUserId().equals(userId)) {
+				result = true;
+				break;
+			} else {
+				result = false;
+			}
 		}
 		model.addAttribute("wish", result);
 		

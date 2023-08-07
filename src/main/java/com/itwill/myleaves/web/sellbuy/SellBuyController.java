@@ -89,7 +89,7 @@ public class SellBuyController {
 	 * @param model
 	 */
 	@GetMapping("/buy/detail")
-	public void readDetail(String userId, Long sellId, Model model) {
+	public void readDetail(String userId, long sellId, Model model) {
 		log.info("read(sellId={}", sellId);
 		
 		List<BuyWish> buyWishlist = mypageService.readBuyWish(sellId);
@@ -105,7 +105,6 @@ public class SellBuyController {
 		    }
 		}
 
-		
 		Sell sell = sellService.read(sellId);
 		
 		model.addAttribute("wish", result);

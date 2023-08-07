@@ -7,8 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.store.StoreCreateDto;
 import com.itwill.myleaves.dto.store.StoreUpdateDto;
+import com.itwill.myleaves.dto.wish.WishStoreCreateDto;
+import com.itwill.myleaves.repository.sellbuy.BuyWish;
 import com.itwill.myleaves.repository.store.Store;
 import com.itwill.myleaves.repository.store.StoreRepository;
+import com.itwill.myleaves.repository.store.StoreWish;
+import com.itwill.myleaves.repository.store.StoreWishRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class StoreService {
 
 	private final StoreRepository storeRepository;
+	private final StoreWishRepository storeWishRepository;
 	
 	/**
 	 * 관리자 페이지에서 스토어 상품 create
@@ -71,4 +76,42 @@ public class StoreService {
 		Store entity = storeRepository.findByItemId(itemId);
 		storeRepository.delete(entity);
 	}
+	
+	
+	/**
+	 * 스토어 관심상품 삭제
+	 * @param userId
+	 * @param itemId
+	 */
+	public void deleteStoreWish(String userId, long itemId) {
+		log.info("delete(userId={}, sellId={})", userId, itemId);
+		storeWishRepository.deleteByUserIdAndItemId(userId, itemId);
+	}
+	
+	/**
+	 * 스토어 관심삼품 추가
+	 * @param dto
+	 * @return
+	 */
+	public StoreWish createStoreWish(WishStoreCreateDto dto) {
+		log.info("create(dto={})", dto);
+		StoreWish entity = StoreWish.builder()
+					.userId(dto.getUserId())
+					.itemId(dto.getItemId())
+					.build();
+		
+		storeWishRepository.saveAndFlush(entity);
+		log.info("entity={}", entity);
+		return entity;
+	}
+	
+	/**
+	 * 관심상품 등록 여부 확인
+	 * @param itemId
+	 * @return
+	 */
+	public List<StoreWish> readStoreWish(long itemId) {
+		return storeWishRepository.findByItemId(itemId);
+	}
+	
 }

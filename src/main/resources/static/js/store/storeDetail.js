@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	const itemPrice = document.querySelector('#itemPrice').innerText;
 	const totalPrice = document.querySelector('#totalPrice');
 	const inven = document.querySelector('input#inven').value;
-	const addWishBtn = document.querySelector('button#addWishBtn');
+	const addWishBtn = document.querySelector('#addWishBtn');
+	const deleteWishBtn = document.querySelector('#deleteWishBtn');
 	const addCartBtn = document.querySelector('button#addCartBtn');
 	const userId = document.querySelector('span#userId').innerText; // 현재 로그인 아이디
 	const itemId = document.querySelector('span#itemId').innerText; // 상품 아이디
@@ -47,18 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 	btnMinus.addEventListener('click', cntMinus);
 	
-	const addWish = () => {
-		console.log('위시 리스트 추가')
-		/*const confirm = confirm('관심 상품에 저장하시겠습니까?');
-		if(confirm) {
-			form.action = 'update'; // action 이름 정해지면 바꾸기
-			form.method = 'post';
-			form.submit();
-		}*/
-		// TODO: 리스트 테이블에 있는지 검사해야됨
-	}
-	addWishBtn.addEventListener('click', addWish);
-	
 	const addCart = () => {
 		
 		const cnt = document.querySelector('input#cnt').value;
@@ -80,8 +69,42 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 	addCartBtn.addEventListener('click', addCart);
 	
+	// 관심상품 추가
+	const addWish = () => {
+		console.log(userId, itemId);
+			const data = {userId, itemId};
+			const reqUrl = '/api/storeWish';
+			axios.post(reqUrl, data)
+			.then((response) => {
+				console.log(response);
+				alert('관심상품에 추가되었습니다.');
+				location.reload(); // 화면 새로고침
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+	if(addWishBtn != null) {
+		addWishBtn.addEventListener('click', addWish);
+	}
 	
+	// 관심상품 삭제
+	const deleteWish = (e) => {
+		const data = {itemId, userId};
+		const reqUrl = `/api/storeWish/${userId}/${itemId}`;
+		axios
+		.delete(reqUrl, data)
+		.then((response) => {
+			console.log(response);
+			location.reload();
+		})
+		.catch((error) => {
+			console.log(error);
+		});
 	
-	
+	};
+	if(deleteWishBtn != null) {
+		deleteWishBtn.addEventListener('click', deleteWish);
+	}
 	
 });

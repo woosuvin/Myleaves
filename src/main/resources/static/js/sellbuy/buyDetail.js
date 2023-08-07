@@ -11,13 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	const deleteWishBtn = document.querySelector('#deleteWishBtn');
 	const userId = document.querySelector('input#userId').value; //로그인한 사용자 아이디
 	const sellId = document.querySelector('input#sellId').value;
-	
+
 	const addWish = () => {
 		console.log(userId, sellId);
-/*		const check = confirm('관심상품에 추가하시겠습니까?');
-		if(check) {*/
 			const data = {userId, sellId};
-			const reqUrl = '/api/wish';
+			const reqUrl = '/api/buyWish';
 			axios.post(reqUrl, data)
 			.then((response) => {
 				console.log(response);
@@ -27,14 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
 			.catch((error) => {
 				console.log(error);
 			});
-	/*	}*/
 	};
-	addWishBtn.addEventListener('click', addWish);
+	if(addWishBtn != null) {
+		addWishBtn.addEventListener('click', addWish);
+	}
 	
 	// 관심상품 삭제
 	const deleteWish = (e) => {
 		const data = {sellId, userId};
-		const reqUrl = `/api/wish/${userId}/${sellId}`;
+		const reqUrl = `/api/buyWish/${userId}/${sellId}`;
 		axios
 		.delete(reqUrl, data)
 		.then((response) => {
@@ -46,8 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	
 	};
-	deleteWishBtn.addEventListener('click', deleteWish);
+	if(deleteWishBtn != null) {
+		deleteWishBtn.addEventListener('click', deleteWish);
+	}
+	
 });
+
 
 
 

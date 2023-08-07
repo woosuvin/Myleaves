@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itwill.myleaves.dto.wish.WishSellCreateDto;
+import com.itwill.myleaves.dto.wish.WishStoreCreateDto;
 import com.itwill.myleaves.repository.sellbuy.BuyWish;
+import com.itwill.myleaves.repository.store.StoreWish;
 import com.itwill.myleaves.service.sellbuy.SellService;
+import com.itwill.myleaves.service.store.StoreService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,18 +22,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/wish")
-public class wishRestContoller {
+@RequestMapping("/api/buyWish")
+public class BuywishRestContoller {
 	
 	private final SellService sellService;
 	
 	/**
-	 * 관심상품 추가
+	 * 입양 관심상품 추가
 	 * @param dto
 	 * @return
 	 */
 	@PostMapping
-	public ResponseEntity<BuyWish> create(@RequestBody WishSellCreateDto dto) {
+	public ResponseEntity<BuyWish> createBuyWish(@RequestBody WishSellCreateDto dto) {
 		log.info("create(dto={})", dto);
 		BuyWish wish = sellService.create(dto);
 		log.info(wish.toString());
@@ -38,13 +41,13 @@ public class wishRestContoller {
 	}
 	
 	/**
-	 * 관심상품 삭제
+	 * 입양 관심상품 삭제
 	 * @param userId
 	 * @param sellId
 	 * @return
 	 */
 	@DeleteMapping("/{userId}/{sellId}")
-	public ResponseEntity<String> delete(@PathVariable String userId, @PathVariable long sellId) {
+	public ResponseEntity<String> deleteBuyWish(@PathVariable String userId, @PathVariable long sellId) {
 		sellService.delete(userId, sellId);
 		return ResponseEntity.ok("Success");
 	}
