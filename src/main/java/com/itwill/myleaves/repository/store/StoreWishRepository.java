@@ -9,5 +9,5 @@ public interface StoreWishRepository extends JpaRepository<StoreWish, StoreWishI
 
 	List<StoreWish> findByUserId(String userId);
 	
-	List<Store> findByItemId(Long itemId);
+	List<StoreWish> findByItemId(Long itemId);
 }

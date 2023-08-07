@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class MypageStoreService {
-	private final StoreWishRepository storeWishListRepository;
+	private final StoreWishRepository storeWishRepository;
 	private final StoreRepository storeRepository;
 	
 	
@@ -27,13 +27,17 @@ public class MypageStoreService {
 	 * @param storeWishList
 	 * @return Store 상품 정보 list
 	 */
-	public List<Store> read(StoreWish storeWishList){
-		List<StoreWish> wishList = storeWishListRepository.findByUserId(storeWishList.getUserId());
+	public List<Store> read(StoreWish storeWish){
+		List<StoreWish> wishList = storeWishRepository.findByUserId(storeWish.getUserId());
 		List<Store> list = new ArrayList<>();
 		for(StoreWish sWishList: wishList) {
 			list.add(storeRepository.findByItemId(sWishList.getItemId()));
 		}
 		return list;
+	}
+	
+	public List<StoreWish> readWish(Long itemId){
+		return storeWishRepository.findByItemId(itemId);
 	}
 	
 }

@@ -7,8 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.itwill.myleaves.repository.sellbuy.BuyWish;
 import com.itwill.myleaves.repository.store.Store;
+import com.itwill.myleaves.repository.store.StoreWish;
+import com.itwill.myleaves.service.store.MypageStoreService;
 import com.itwill.myleaves.service.store.StoreService;
+import com.itwill.myleaves.web.mypage.MyPageStoreController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 public class StoreController {
 	
 	private final StoreService storeService;
+	private final MypageStoreService mypageStoreService;
 	
 	@GetMapping("/list")
 	public void read(Model model) {
@@ -31,8 +36,15 @@ public class StoreController {
 	}
 	
 	@GetMapping("/detail")
-	public void read(long itemId, Model model) {
+	public void read(String userId, long itemId, Model model) {
 		log.info("read(itemId={})", itemId);
+		
+		Boolean result = null;
+		List<StoreWish> wishlist = mypageStoreService.readWish(itemId);
+		for(StoreWish wish : wishlist) {
+			result = (wish.getUserId().equals(userId))? true:false;
+		}
+		model.addAttribute("wish", result);
 		
 		Store store = storeService.read(itemId); // itemId로 store 테이블에서 검색
 		

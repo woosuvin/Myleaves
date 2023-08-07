@@ -12,7 +12,7 @@
 					name="title" id="title" class="form-control" placeholder="제목을 입력하세요." required>
 			</div>
 			<input class="form-control bg-transparent border-dark d-none" id="userId"
-          	 name="userId" value="test" required />
+          	 name="userId" th:value="${#authentication.name}" required />
 			<div class="input-group mb-2">
 				<span class="input-group-text">가격</span> <input class="form-control"
 					name="price" id="price" type="number" placeholder="0원 입력 시 무료나눔" required> <span
@@ -21,7 +21,7 @@
 
 			<div class="input-group mb-2">
 				<label class="input-group-text" for="thumbnail">대표 사진</label> <input
-					id="thumbnail" name="thumbnail" type="file" class="form-control">
+					id="" name="" type="file" class="form-control">
 			</div>
 
 			<div class="form-floating mb-2">
