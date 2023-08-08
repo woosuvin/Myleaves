@@ -13,29 +13,27 @@
     <span class="d-none" id="userId" name="userId" th:text="${#authentication.name}"></span>
     	
 	<th:block th:if="${#lists.isEmpty(carts)}">
-		 <div class="container">
+		 <div class="text-center my-5">
 		 	<h1>장바구니가 비어있음! ㅎㅎ</h1>
 		 </div>
 	</th:block>
 
 	<th:block th:if="${!#lists.isEmpty(carts)}">
-	
 	    <div class="container">
 	   		<th:block th:each="store: ${stores}">
 	    		<table class="table table-borderless">
 	    			<tbody>
-	    				<tr class="row">
-	    					<td class="col" style="width: 6rem;"> <!-- th:value="${store.thumbnail}" -->
-	    						<a th:href="@{/store/detail?itemId={itemId} (itemId=${store.itemId})}">
+	    				<tr class="">
+	    					<td class="col-1" style="width: 6rem;"> <!-- th:value="${store.thumbnail}" -->
+	    						<a th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}">
 	    							<img class="rounded" src="/images/common/store.jpg" style="width: 6rem; height: 6rem;" />
 	    						</a>
 	    					</td>
 	    					<td class="col-6" style="vertical-align: middle">
-	    						<a th:href="@{/store/detail?itemId={itemId} (itemId=${store.itemId})}">
+	    						<a th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}"
+	    							class="link-dark link-underline-opacity-0">
 									<span id="itemName" name="itemName" th:text="${store.itemName}"></span>
 								</a>
-							</td>
-							<td class="col-1">
 								<span id="plusMinus" class="input-group mt-1" style="width: 5.3rem;">
 									<!-- 수량 줄이기 -->
 									<button id="btnMinus" class="btn btn-sm btn-outline-secondary" 
@@ -52,7 +50,7 @@
 										type="button" style="height: 1.5rem; font-size: 7pt;" th:attr="data-btnPlus=${store.itemId}">+</button>
 								</span>
 							</td>
-							<td class="col-3" style="vertical-align: middle">
+							<td class="col-4" style="vertical-align: middle">
 								<span>총 상품 금액 :
 									<span class="d-none" th:id="|price_${store.itemId}|" th:text="${store.price}"></span>
 									<span class="d-none" th:id="|inven_${store.itemId}|" th:text="${store.inven}"></span>
@@ -62,7 +60,7 @@
 									</th:block>
 								</span>
 							</td>
-							<td class="col-1">
+							<td class="col-1" style="vertical-align: middle">
 								<button class="btn btn-sm btn-outline-dark" id="cartDeleteBtn" name="cartDeleteBtn" th:data-id="${store.itemId}">삭제</button>
 							</td>
 	    				</tr>

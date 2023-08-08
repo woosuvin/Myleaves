@@ -38,123 +38,182 @@
 					</tr>
 				</tbody>
 			</table>
+			
 			<th:block th:each="cart, i : ${ carts }">
 				<!-- name="itemImg" id="itemImg"  -->
 				<th:block th:if = "${i.index == 0}">
-					<input name="itemName" id="itemName" th:value="${ stores.get(cart.itemId).itemName }" />
+					<input class="d-none" name="itemName" id="itemName" th:value="${ stores.get(cart.itemId).itemName }" />
 				</th:block>
 			</th:block>
-			<div>
-				<h3>배송지</h3>
-			</div>
-				
 			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>배송지</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<table class="table table-borderless">
+								<tbody>
+									<tr>
+										<td>
+											<div>
+												<input type="radio" id="defaultaddr" name="address" /> 
+												<label for="defaultaddr" >기본 배송지</label> 
+												<input type="radio" id="newaddr" name="address" /> 
+												<label for="newaddr">신규 입력</label>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+										 	<label class="form-label">이름</label> <!-- address.name , totalOrder.name -->
+											<input class="form-control" type="text" name="name" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="form-label">우편번호</label>
+											<div class="input-group">
+												<input class="form-control" type="text" id="sample6_postcode" name="zipcode">
+												<input class="btn btn-outline-dark" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="form-label">주소</label>
+											<input class="form-control" type="text" id="sample6_address" name="addr" placeholder="주소">
+											<div class="input-group mt-2" >
+												<input class="form-control" type="text" id="sample6_detailAddress" name="addrdetail" placeholder="상세주소">
+												<input class="form-control" type="text" id="sample6_extraAddress" placeholder="참고항목">	
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="form-lable">연락처</label>
+											<input class="form-control" type="text" id="tel" name="tel" />
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="checkbox" value="N"/>
+												<label class="form-check-label" for="checkbox">기본 배송지로 설정하기</label>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label class="form-lable">배송 시 요청 사항</label>
+											<input class="form-control"type="text" id="req" name="req" />
+											<div class="form-text">
+											  제주 및 도서 산간 지역의 배송은 추가 배송비가 발생할 수 있습니다.
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th colspan="2">결제 정보</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<table class="table table-borderless">
+								<tbody>
+									<tr>
+										<th class="col-4">상품 합계</th>
+										<td class="col-8"><span th:text="|${#numbers.formatInteger(price, 0, 'COMMA')}원|"></span></td>
+									</tr>
+									<tr>
+										<th>배송비</th>
+										<td><span th:text="|${#numbers.formatInteger(3000, 0, 'COMMA')}원|"></span></td>
+									</tr>
+									<tr>
+										<th>결제 금액</th>
+										<td><span th:text="|${#numbers.formatInteger(price+3000, 0, 'COMMA')}원|"></span></td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<input class="d-none" name="price" id="price" th:value="${price+3000}" />
+			<input class="d-none" type="text" name="cnt" id="cnt" th:value= "${totalCnt}"/>
 				
-				<div>
-					<input type="radio" id="defaultaddr" name="address" /> 
-					<label for="defaultaddr" >기본 배송지</label> 
-					<input type="radio" id="newaddr" name="address" /> 
-					<label for="newaddr">신규 입력</label>
-				</div>
-				
-				<div>
-					<label>이름</label>
-					<input type="text" name="name" /> <!-- address.name , totalOrder.name -->
-				</div>
-				
-				<div>
-					<label>우편번호</label>
-					<input type="text" id="sample6_postcode" name="zipcode" placeholder="우편번호">
-					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-					<br>
-					<label>주소</label>
-					<input type="text" id="sample6_address" name="addr" placeholder="주소">
-					<br>
-					<input type="text" id="sample6_detailAddress" name="addrdetail" placeholder="상세주소">
-					<input type="text" id="sample6_extraAddress" placeholder="참고항목">
-				</div>
-				
-				<div>
-					<label>연락처</label>
-					<input type="text" id="tel" name="tel" />
-				</div>
-				
-				<div>
-					<input type="checkbox" id="checkbox" value="N"/>
-					<label for="checkbox">기본 배송지로 설정하기</label>
-				</div>
-				
-				<div>
-					<label>배송 시 요청 사항</label>
-					<input type="text" id="req" name="req" />
-					<br/>
-					<span>제주 및 도서 산간 지역의 배송은 추가 배송비가 발생할 수 있습니다.</span>
-				</div>
-				
-				<hr/>
-				
-				<div>
-					<h3>결제 정보</h3>
-				</div>
-				
-				<div>
-					<div>
-						<span>상품 합계</span>
-						<span th:text="|${#numbers.formatInteger(price, 0, 'COMMA')}원|"></span>
-						<!-- span 상품 합계 값 자리 -->
-					</div>
-					
-					<div>
-						<span>배송비</span>
-						<span th:text="|${#numbers.formatInteger(3000, 0, 'COMMA')}원|"></span>
-					</div>
-					
-					<div>
-						<span>결제 금액</span>
-						<span th:text="|${#numbers.formatInteger(price+3000, 0, 'COMMA')}원|"></span>
-						<input name="price" id="price" th:value="${price+3000}" />
-						<input type="text" name="cnt" id="cnt" th:value= "${totalCnt}"/>
-					</div>
-				</div>
-				
-				<hr />
-				
-				<div>
-					<h3>결제 방식</h3>
-				</div>
-				
-				<div>
-					<input type="radio" id="card" name="payment" value="1" /> 
-					<label for="card" >신용 / 체크카드</label> 
-					<input type="radio" id="withoutBank" name="payment" value="2" /> 
-					<label for="withoutBank">무통장 입금</label>
-				</div>
-				
-				<div id="withoutBankDiv" style="display:none;">
-					<div>
-						<span>입금자</span>
-						<input type="text" />
-					</div>
-					
-					<div>
-						<span>입금 계좌</span>
-						<span>카카오뱅크 3333-10-2222222 내풀잎스</span>
-					</div>
-					
-					<div>
-						<span>환불 계좌</span>
-						<input type="text" placeholder="예금주" />
-						<input type="text" name="reAcc" placeholder="은행 + 계좌 번호" />
-					</div>
-					<button type="submit" id="btnWithoutBank">결제하기</button>
-				</div>
-				
-				<div id="cardDiv" style="display:none;">
-					<button id="btnWithCard">결제하기</button>
-				</div>
-			</form>
-		</div>
-	</main>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>결제 방식</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<table class="table table-borderless">
+								<tbody>
+									<tr>
+										<td>
+											<div>
+												<input type="radio" id="card" name="payment" value="1" /> 
+												<label for="card" >신용 / 체크카드</label> 
+												<input type="radio" id="withoutBank" name="payment" value="2" /> 
+												<label for="withoutBank">무통장 입금</label>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div id="withoutBankDiv" style="display:none;">
+												<div>
+													<span class="form-lable">입금자</span>
+													<input class="form-control" type="text" />
+													<span class="form-text">입금 계좌: 카카오뱅크 3333-10-2222222 내풀잎스</span>
+												</div>
+												<div class="mt-2">
+													<span class="form-lable">환불 계좌</span>
+													<div class="input-group">
+														<input class="form-control" type="text" name="reAcc" placeholder="은행" />
+														<input class="form-control" type="text" name="reAcc" placeholder="계좌 번호" />
+													</div>
+													<span class="form-text">계좌 명의가 입금자와 동일해야 환불 가능합니다.</span>
+												</div>
+												<div class="text-center">
+													<button class="btn btn-outline-dark" type="submit" id="btnWithoutBank">결제하기</button>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="text-center" id="cardDiv" style="display:none;">
+												<button class="btn btn-outline-dark" id="btnWithCard">결제하기</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</div>
+</main>
 
 <th:block layout:fragment="myscripts">	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

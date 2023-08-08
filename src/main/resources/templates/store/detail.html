@@ -30,6 +30,10 @@ div {
 							th:text="|${#numbers.formatInteger(store.price, 0, 'COMMA')}원|"></h5>
 						<span><strong>배송비:</strong> 3,000원</span><small>(제주 및 도서
 							산간 2,500원 추가)</small>
+						<br />
+						<th:block th:if="${store.sold} == 1">
+							<i>품절</i>
+						</th:block>
 					</td>
 				</tr>
 				<tr>
@@ -68,8 +72,6 @@ div {
 									상품 삭제</button>
 							</th:block>
 							<!-- 항상 보일 것 -->
-							<button id="" class="btn btn-outline-dark" type="button">판매자와
-								대화하기</button>
 							<button class="btn btn-outline-dark" id="addCartBtn"
 								name="addCartBtn">장바구니에 담기</button>
 						</div>

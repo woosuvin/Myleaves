@@ -24,11 +24,11 @@
 						<div
 							th:text="|${#numbers.formatInteger(sell.price, 0, 'COMMA')}원|"
 							class=""></div> <th:block th:case="1">
-							<p>분양중</p>
+							<i>분양중</i>
 						</th:block> <th:block th:case="2">
-							<p>거래중</p>
+							<i>거래중</i>
 						</th:block> <th:block th:case="3">
-							<p>분양 완료</p>
+							<i>분양 종료</i>
 						</th:block></td>
 				</tr>
 				<tr>

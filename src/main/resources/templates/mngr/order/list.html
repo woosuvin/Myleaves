@@ -18,11 +18,13 @@
 				<span class="input-group-text">주문 상태</span> <select
 					class="form-select" name="searchOrderStatus">
 					<option selected disabled>선택</option>
-					<option value="1">입금 대기</option>
-					<option value="2">입금 확인</option>
-					<option value="3">상품 준비중</option>
-					<option value="4">배송중</option>
-					<option value="5">배송 완료</option>
+					<option value="주문 완료">주문 완료</option>
+					<option value="입금 대기">입금 대기</option>
+					<option value="상품 준비중">상품 준비중</option>
+					<option value="배송중">배송중</option>
+					<option value="배송 완료">배송 완료</option>
+					<option value="취소 처리중">취소 처리중</option>
+					<option value="취소 완료">취소 완료</option>
 				</select>
 			</div>
 
@@ -51,21 +53,23 @@
 				</tr>
 			</thead>
 			<tbody class="table-group-divider">
-				<tr th:each="post: ${ posts }" class="border-dark">
+				<tr th:each="order: ${ totalOrders }" class="border-dark">
 					<th scope="row" class="text-center bg-transparent"
-						th:text="${ post.id }"></th>
-					<td class="text-center bg-transparent" th:text="${ post.author }"></td>
+						th:text="${ order.orderId }"></th>
+					<td class="text-center bg-transparent" th:text="${ order.userId }"></td>
 					<td class="text-center bg-transparent"
-						th:text="${ #temporals.format(post.createdTime, 'yy/MM/dd HH:mm:ss')}"></td>
-					<td class="text-center bg-transparent">24,000원</td>
+						th:text="${ #temporals.format(order.orderDate, 'yy/MM/dd HH:mm:ss')}"></td>
+					<td class="text-center bg-transparent" th:text="${order.price}">24,000원</td>
 					<td class="col-2 text-center bg-transparent"><select
 						class="text-center form-select form-select-sm">
 							<option selected disabled>선택</option>
-							<option value="1">입금 대기</option>
-							<option value="2">입금 확인</option>
-							<option value="3">상품 준비중</option>
-							<option value="4">배송중</option>
-							<option value="5">배송 완료</option>
+							<option value="주문 완료">주문 완료</option>
+							<option value="입금 대기">입금 대기</option>
+							<option value="상품 준비중">상품 준비중</option>
+							<option value="배송중">배송중</option>
+							<option value="배송 완료">배송 완료</option>
+							<option value="취소 처리중">취소 처리중</option>
+							<option value="취소 완료">취소 완료</option>
 					</select></td>
 					<td class="text-center bg-transparent">
 						<button type="button" class="btn btn-sm btn-outline-dark">저장</button>
