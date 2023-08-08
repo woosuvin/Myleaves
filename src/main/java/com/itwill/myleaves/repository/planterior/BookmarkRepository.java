@@ -16,4 +16,6 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, String> {
 
 	@Query(value = "SELECT * FROM BOOKMARK", nativeQuery = true)
 	List<Bookmark> findAll();
+	
+	List<Bookmark> findAllByUserId(String userId);
 }

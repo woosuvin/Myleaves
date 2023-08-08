@@ -1,8 +1,11 @@
 package com.itwill.myleaves.web.planterior;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.myleaves.dto.planterior.PlanteriorCreateDto;
+import com.itwill.myleaves.repository.member.Member;
 import com.itwill.myleaves.repository.planterior.Bookmark;
 import com.itwill.myleaves.repository.planterior.Planterior;
 import com.itwill.myleaves.repository.planterior.PlanteriorRepository;
@@ -30,27 +34,30 @@ public class PlanteriorHomecontroller {
 	private final BookmarkService bookmarkService;
 	
 	@GetMapping
-	public String planterior(Model model) {
+	public String planterior(Model model, Authentication auth ) {
 		log.info("planterior");
 		
 		List<Planterior> list = planteriorService.read();
 		List<Bookmark> bookList = bookmarkService.read();
 		
-		// 해당 플랜테리어아이디를 북마크한 유저들의 집합
-		List<Bookmark> bookmarkList = new ArrayList<>();
+		// 최종
+		Map<Long, Long> bookmarkMap = new HashMap<>();
 		
-		for(int i =0; i < list.size(); i++) {
-			for(int j = 0; j< bookList.size(); j++) {
-				if(list.get(i).getPlanteriorId() == bookList.get(j).getPlanteriorId()) {
-					bookmarkList.add(bookList.get(j));
+		if (auth != null && auth.isAuthenticated()) {
+			
+			// 아이디 비교
+			// 현재 로그인한 사용자 정보 가져오기
+			Member loggedInUser = (Member) auth.getPrincipal();
+			for(Bookmark p : bookList) {
+				if(p.getUserId().equals(loggedInUser.getUserId())) {
+					bookmarkMap.put(p.getPlanteriorId(), p.getPlanteriorId());
 				}
 			}
-		}
+		  }
 		
-		log.info(bookmarkList.toString());
 		
 		model.addAttribute("cardList", list);
-		model.addAttribute("bookmark", bookmarkList);
+		model.addAttribute("bookmark", bookmarkMap);
 		
 		return "planterior/home";
 	}

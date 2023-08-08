@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/mngr_base_layout}">
+
+<main layout:fragment="mngrHome">
+
+	<div class="container">
+		<h1>플랜테리어 관리자 북마크</h1>
+		<!-- 이동했을 떄 로그인도 풀리는지 확인하기 + 경로....-->
+		<a th:href="@{./planterior}"><button>북마크하러 가기</button></a>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<!-- <th scope="col"><input type="checkbox" class="imgButtonFill" th:value="${list.planteriorId}"/></th> -->
+					<th scope="col">
+						<button class="imgButtonFill" th:value="${list.planteriorId}">
+							<img th:src="@{/images/planterior/bookmarkFill.svg}" />
+						</button>
+					</th>
+					<th scope="col">아이디</th>
+					<th scope="col">식물이름(한글)</th>
+					<th scope="col">식물이름(영문)</th>
+					<th scope="col">작성자</th>
+				</tr>
+			</thead>
+			<tbody class="table-group-divider">
+				<tr th:each="list: ${cardList}">
+					<td><input type="checkbox"></td>
+					<td th:text="${list.planteriorId}"></td>
+					<td th:text="${list.plantName}"></td>
+					<td th:text="${list.plantNameEnglish}"></td>
+					<td th:text="${list.userId}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<button class="delete"></button>
+		<!-- 	카드 형태
+		<div class="m-2">
+			<div class="row row-cols-1 row-cols-md-4 g-4">
+				<div class="col" th:each="list: ${cardList}">
+					<div class="card">
+						<img th:src="@{/images/planterior/eucalyptus.png}" />
+						<div class="card-body">
+							<p class="planteriorButtonEle"
+								th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')' + '-' + ${list.userId}" />
+							<div>
+								<button class="imgButtonFill" th:value="${list.planteriorId}">
+									<img th:src="@{/images/planterior/bookmarkFill.svg}" />
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ -->
+</main>
+<th:block layout:fragment="myscripts">
+	<script src="/js/planterior/planteriorBookmark.js"></script>
+</th:block>
+</html>
