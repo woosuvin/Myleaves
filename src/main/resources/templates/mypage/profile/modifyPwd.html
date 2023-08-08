@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+<head>
+	<script defer src="/js/myprofile/modifyPwd.js"></script>
+	<script>
+		var userId;
+	</script>
+</head>
+<main layout:fragment="main">
+	<div>
+		<h1>비밀번호 수정</h1>
+	</div>
+	<div>
+		<table>
+			<tr>
+				<th>현재 비밀번호</th>
+				<td><input type="password" id="currentPwd"
+					data-username="${#authentication.name}" placeholder="현재 비밀번호"
+					required /></td>
+			</tr>
+			<tr>
+				<th>변경할 비밀번호</th>
+				<td><input type="password" id="newPwd" placeholder="변경할 비밀번호"
+					required /></td>
+			</tr>
+			<tr>
+				<th>변경할 비밀번호 재입력</th>
+				<td><input type="password" id="re-newPwd"
+					placeholder="변경할 비밀번호 재입력" required /></td>
+			</tr>
+		</table>
+		<div>
+			<button class="btn btn-success" id="btnSubmit">변경 완료</button>
+		</div>
+	</div>
+</main>
+</html>

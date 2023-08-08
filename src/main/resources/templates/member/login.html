@@ -33,7 +33,11 @@
 				<div>
 					<input type="submit"
 						   class="btn btn-success"
+						   id="btn-login"
 						   value="로그인" >
+				    <a th:href="@{ https://kauth.kakao.com/oauth/authorize?client_id=314c0325ca91badd1284203c73a36949&redirect_uri=http://localhost:8090/member/kakao/callback&response_type=code }">
+				    <img height="38px" th:src="@{/images/login/kakao_login_button.png}" alt="Kakao Login">
+				    </a>
 				</div>
 			</form>
 		</div>

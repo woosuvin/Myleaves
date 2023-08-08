@@ -1,6 +1,7 @@
 package com.itwill.myleaves.service.member;
 
 import java.util.Random;
+import java.util.UUID;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.member.MemberSignUpDto;
+import com.itwill.myleaves.dto.member.MemberUpdateDto;
+import com.itwill.myleaves.repository.kakao.KakaoProfile;
 import com.itwill.myleaves.repository.member.Member;
 import com.itwill.myleaves.repository.member.MemberRepository;
 
@@ -29,15 +32,42 @@ public class MemberService implements UserDetailsService {
 
 		log.info("registerMember(dto={})", dto);
 
-		Member entity = Member.builder().userId(dto.getUserId()).name(dto.getName())
-				.pwd(passwordEncoder.encode(dto.getPwd())).gender(dto.getGender()).birth(dto.getBirth())
-				.phone(dto.getPhone()).email(dto.getEmail()).build();
+		Member entity = Member.builder()
+				.userId(dto.getUserId())
+				.name(dto.getName())
+				.pwd(passwordEncoder.encode(dto.getPwd()))
+				.gender(dto.getGender())
+				.birth(dto.getBirth())
+				.phone(dto.getPhone())
+				.email(dto.getEmail())
+				.build();
 
 		log.info("save 전: entity={}", entity);
 
 		memberRepository.save(entity);
 		log.info("save 후: entity={}", entity);
 
+		return entity.getUserId();
+	}
+	
+	public String registerMember(KakaoProfile kakaoProfile) {
+		log.info("registerMember(dto={})", kakaoProfile);
+
+		UUID garbagePwd = UUID.randomUUID();
+		log.info("registerMember(uuid={})", garbagePwd);
+		
+		Member entity = Member.builder()
+				.userId(kakaoProfile.getId())
+				.name(kakaoProfile.getKakao_account().getProfile().getNickname())
+				.pwd(passwordEncoder.encode(garbagePwd.toString()))
+				.email(kakaoProfile.getKakao_account().getEmail())
+				.build();
+		
+		log.info("registerMember(save 전: entity={})", entity);
+		
+		memberRepository.save(entity);
+		log.info("registerMember(save 후: entity={})", entity);
+		
 		return entity.getUserId();
 	}
 
@@ -95,5 +125,22 @@ public class MemberService implements UserDetailsService {
         Member entity = memberRepository.findByUserId(userId);
         entity.update(passwordEncoder.encode(newPwd.toString()));
         return newPwd.toString();
+	}
+
+	@Transactional
+	public void update(MemberUpdateDto dto) {
+		log.info("update(dto={})", dto);
+		
+		Member member = memberRepository.findByUserId(dto.getUserId());
+		log.info("update(member={} SAVE 전", member);
+		
+		member.update(dto);
+		log.info("update(memeber={} SAVE 후", member);
+	}
+
+	public void checkPwd(String pwd) {
+		log.info("checkPwd(pwd={})", pwd);
+	
+		
 	}
 }

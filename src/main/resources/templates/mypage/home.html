@@ -10,7 +10,7 @@
 			
 			<h1 th:text="|${#authentication.name}님 안녕하세요!|"></h1> <!-- '/mypage' -->
 			<h4>
-				<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/myinfo}">&raquo;내 정보 보기</a>
+				<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/profile/info(userId=${#authentication.name})}">&raquo;내 정보 보기</a>
 			</h4>
 		</div>
 		<div class="row mt-5">

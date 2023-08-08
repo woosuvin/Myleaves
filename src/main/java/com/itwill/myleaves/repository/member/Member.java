@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.itwill.myleaves.dto.member.MemberUpdateDto;
 import com.itwill.myleaves.repository.BaseTimeEntity;
 
 import jakarta.persistence.Column;
@@ -36,7 +37,7 @@ public class Member implements UserDetails {
 	@Column(nullable = false)
 	private String pwd;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String gender;
 	
 	@Column(nullable = true)
@@ -55,6 +56,14 @@ public class Member implements UserDetails {
 	@CreationTimestamp
 	private LocalDateTime joinDate;
 	
+    public Member update(MemberUpdateDto dto) {
+    	this.gender = dto.getGender();
+    	this.phone = dto.getPhone();
+    	this.birth = dto.getBirth();
+    	
+    	return this;
+    }
+    
     public Member update(String newPwd) {
         this.pwd = newPwd;
         return this;
