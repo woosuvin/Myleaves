@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	const withoutBankBtn = document.querySelector('input#withoutBank');
 	const withoutBankDiv = document.querySelector('div#withoutBankDiv');
 	const cardDiv = document.querySelector('div#cardDiv');
+	const form = document.querySelector('form#orderForm');
+	const btnWithoutBank =document.querySelector('button#btnWithoutBank');
 	
 	payments.forEach((radio) => {
 		radio.addEventListener('change', (e) => {
@@ -22,5 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 	
+	/*btnWithoutBank.addEventListener('click', (e) => {
+		
+		form.action = 'create';
+		form.method = 'post';
+		form.submit();
+	});*/
 	
 });

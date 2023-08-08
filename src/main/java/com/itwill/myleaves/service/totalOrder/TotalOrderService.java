@@ -65,22 +65,19 @@ public class TotalOrderService {
 	}
 	
 	/**
-	 * 관리자 주문관리에서 주문상태 수정
-	 * 사용자 마이페이지 주문 상세에서 반품 신청 시 수정
+	 * 결제 완료 시 total_order update
 	 * @param dto
 	 * @return
 	 */
-//	public TotalOrder update(TotalOrderUpdateDto dto) {
-//		log.info("update(dto={})", dto);
-//		TotalOrder entity = totalOrderRepository.findById(dto.getOrderId()).orElseThrow();
-//		entity.update(dto);
-//		return totalOrderRepository.saveAndFlush(entity);
-//	}
 	@Transactional
-	public void update(long orderId, TotalOrderUpdateDto dto) {
+	public TotalOrder update(long orderId, TotalOrderUpdateDto dto) {
 		log.info("update(orderId={} ,dto={})", orderId, dto);
 		TotalOrder entity = totalOrderRepository.findByOrderId(orderId);
-		entity.update(dto.getReason(), dto.getStatus());
+		log.info("before entity={}",entity);
+		entity.update(dto);
+		
+		log.info("after entity={}", entity);
+		return totalOrderRepository.saveAndFlush(entity);
 	}
 	
 	

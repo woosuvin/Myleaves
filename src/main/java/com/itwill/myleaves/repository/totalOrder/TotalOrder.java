@@ -3,11 +3,13 @@ package com.itwill.myleaves.repository.totalOrder;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.itwill.myleaves.dto.order.TotalOrderUpdateDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,6 +29,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "TOTAL_ORDER")
 @SequenceGenerator(name = "TOTAL_ORDER_SEQ_GEN", sequenceName = "TOTAL_ORDER_SEQ", allocationSize = 1)
 public class TotalOrder {
@@ -92,9 +95,21 @@ public class TotalOrder {
 //		this.reason = dto.getReason();
 //		return this;
 //	}
-	public TotalOrder update(String reason, String status) {
-		this.reason = reason;
-		this.status = status;
+	public TotalOrder update(TotalOrderUpdateDto dto) {
+		this.price = dto.getPrice();
+		this.payment = dto.getPayment();
+		this.card = dto.getCard();
+		this.status = "주문 완료";
+		this.reAcc = dto.getReAcc();
+		this.name = dto.getName();
+		this.zipcode = dto.getZipcode();
+		this.addr = dto.getAddr();
+		this.addrdetail = dto.getAddrdetail();
+		this.tel = dto.getTel();
+		this.req = dto.getReq();
+		this.cnt = dto.getCnt();
+		this.itemName = dto.getItemName();
+		this.itemImg = dto.getItemImg();
 		return this;
 	}
 	

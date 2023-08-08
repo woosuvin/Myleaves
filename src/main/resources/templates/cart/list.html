@@ -11,9 +11,17 @@
     </div>
     
     <span class="d-none" id="userId" name="userId" th:text="${#authentication.name}"></span>
-    
-    <div class="container">
-    		<th:block th:each="store: ${stores}">
+    	
+	<th:block th:if="${#lists.isEmpty(carts)}">
+		 <div class="container">
+		 	<h1>장바구니가 비어있음! ㅎㅎ</h1>
+		 </div>
+	</th:block>
+
+	<th:block th:if="${!#lists.isEmpty(carts)}">
+	
+	    <div class="container">
+	   		<th:block th:each="store: ${stores}">
 	    		<table class="table table-borderless">
 	    			<tbody>
 	    				<tr class="row">
@@ -63,9 +71,9 @@
 	    		
 	    		<hr />
 	    		
-    		</th:block>
-    		
-    		<div class="row">
+	   		</th:block>
+	   		
+	   		<div class="row">
 				<span class="col">상품 합계</span> <!-- totalPrice 다 더한거 -->
 				<span class="col text-end" id="totalItemPrice" name="totalItemPrice"></span>
 			</div>
@@ -77,18 +85,20 @@
 				<strong class="col">합계</strong> <!-- totalPrice + 배송비 -->
 				<span class="col text-end fw-bold" id="totalPriceDeliveryCharge" name="totalPriceDeliveryCharge"></span>
 			</div>
-    		
-    		<br/>
-    		<br/>
-    		
-    		<div class="d-grid gap-2 col-6 mx-auto">
-    			<!-- <button th:href="@{/order/orderDetail(userId=${#authentication.name})}" class="btn btn-outline-dark btn-lg">구매하기</button> -->
-    			<a class="btn btn-outline-dark btn-lg" th:href="@{/order/orderDetail(userId=${#authentication.name})}">
-    			구매하기
-    			</a>
-    		</div>
-    	
-    </div>
+	   		
+	   		<br/>
+	   		<br/>
+	   		
+	   		<div class="d-grid gap-2 col-6 mx-auto">
+	   			<!-- <button th:href="@{/order/orderDetail(userId=${#authentication.name})}" class="btn btn-outline-dark btn-lg">구매하기</button> -->
+	   			<a class="btn btn-outline-dark btn-lg" th:href="@{/order/orderDetail(userId=${#authentication.name})}">
+	   			구매하기
+	   			</a>
+	   		</div>
+	    </div>
+	    
+	</th:block>
+
     
 	</main>
 

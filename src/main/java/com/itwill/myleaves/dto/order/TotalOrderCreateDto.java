@@ -1,6 +1,5 @@
 package com.itwill.myleaves.dto.order;
 
-import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.myleaves.repository.totalOrder.TotalOrder;
 
@@ -12,7 +11,6 @@ public class TotalOrderCreateDto {
 	
 	private String userId;
 	
-	private MultipartFile file;
 	
 	public TotalOrder toEntity() {
 		return TotalOrder.builder()

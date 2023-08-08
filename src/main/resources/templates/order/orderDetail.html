@@ -9,10 +9,10 @@
 				<h2>장바구니 > 결제 페이지</h2>
 			</div>	
 			
-		<form>
+		<form method="post" id="orderForm">
 			
-			<input class="d-none" id="userId" name="userId" th:text="${#authentication.name}"/>
-			
+			<!-- <span class="" id="userId" name="userId" th:text="${#authentication.name}"></span>
+			 -->
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -38,13 +38,12 @@
 					</tr>
 				</tbody>
 			</table>
-			
-			<th:block th:each="cart: ${carts}">
-				<input id="itemId" name="itemId" th:value="${cart.itemId}" /> <!-- orderDetail itemId -->
-				<!-- <input name="price" th:value="${cart.price * cart.cnt}" /> orderDetail price -->
-				<input name="cnt" th:value="${cart.cnt}" /> <!-- orderDetail cnt -->
+			<th:block th:each="cart, i : ${ carts }">
+				<!-- name="itemImg" id="itemImg"  -->
+				<th:block th:if = "${i.index == 0}">
+					<input name="itemName" id="itemName" th:value="${ stores.get(cart.itemId).itemName }" />
+				</th:block>
 			</th:block>
-			
 			<div>
 				<h3>배송지</h3>
 			</div>
@@ -66,9 +65,11 @@
 				<div>
 					<label>우편번호</label>
 					<input type="text" id="sample6_postcode" name="zipcode" placeholder="우편번호">
-					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+					<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+					<br>
 					<label>주소</label>
-					<input type="text" id="sample6_address" name="addr" placeholder="주소"><br>
+					<input type="text" id="sample6_address" name="addr" placeholder="주소">
+					<br>
 					<input type="text" id="sample6_detailAddress" name="addrdetail" placeholder="상세주소">
 					<input type="text" id="sample6_extraAddress" placeholder="참고항목">
 				</div>
@@ -111,6 +112,8 @@
 					<div>
 						<span>결제 금액</span>
 						<span th:text="|${#numbers.formatInteger(price+3000, 0, 'COMMA')}원|"></span>
+						<input name="price" id="price" th:value="${price+3000}" />
+						<input type="text" name="cnt" id="cnt" th:value= "${totalCnt}"/>
 					</div>
 				</div>
 				
@@ -143,7 +146,7 @@
 						<input type="text" placeholder="예금주" />
 						<input type="text" name="reAcc" placeholder="은행 + 계좌 번호" />
 					</div>
-					<button id="btnWithoutBank">결제하기</button>
+					<button type="submit" id="btnWithoutBank">결제하기</button>
 				</div>
 				
 				<div id="cardDiv" style="display:none;">
@@ -156,7 +159,7 @@
 <th:block layout:fragment="myscripts">	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/js/order/zipcode.js"></script>
-	<script src="/js/order/storeOrder.js"></script>
+	<script src="/js/order/order.js"></script>
 </th:block>
 	
 </html>

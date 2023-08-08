@@ -31,7 +31,7 @@ public class StoreController {
 	public void read(Model model) {
 		log.info("storeList:GET");
 		
-		List<Store> list = storeService.read();
+		List<Store> list = storeService.readUserPage();
 		model.addAttribute("stores", list);
 	}
 	

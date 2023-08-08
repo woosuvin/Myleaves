@@ -29,6 +29,12 @@ public interface CartRepository extends JpaRepository<Cart, CartId> {
             nativeQuery = true)
     void deleteByUserIdAndItemId(String userId, long itemId);
 	
+	@Transactional
+	@Modifying
+	@Query(value = "delete from CART where USER_ID = ?1", 
+		nativeQuery = true)
+	void deleteByUserId(String userId);
+	
 	/**
 	 * 장바구니 리스트
 	 * @param userId

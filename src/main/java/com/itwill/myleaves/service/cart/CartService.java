@@ -84,4 +84,11 @@ public class CartService {
 	}
 	
 	
+	/**
+	 * 결제 완료 후 장바구니 삭제
+	 */
+	@Transactional
+	public void delete(String userId) {
+		cartRepository.deleteByUserId(userId);
+	}
 }

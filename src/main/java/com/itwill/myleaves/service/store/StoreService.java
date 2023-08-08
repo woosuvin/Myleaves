@@ -50,6 +50,14 @@ public class StoreService {
 	}
 	
 	/**
+	 * 회원 페이지 스토어 상품 리스트
+	 * @return
+	 */
+	public List<Store> readUserPage() {
+		return storeRepository.findByOrderBySoldAscCreatedDateDesc();
+	}
+	
+	/**
 	 * detail
 	 */
 	@Transactional(readOnly = true)

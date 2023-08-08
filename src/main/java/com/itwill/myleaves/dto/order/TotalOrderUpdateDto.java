@@ -1,6 +1,5 @@
 package com.itwill.myleaves.dto.order;
 
-import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.myleaves.repository.totalOrder.TotalOrder;
 
@@ -14,7 +13,6 @@ public class TotalOrderUpdateDto {
 	private Long price;
 	private Long payment;
 	private String card;
-	private String status;
 	private String reason;
 	private String reAcc;
 	private String name;
@@ -27,7 +25,6 @@ public class TotalOrderUpdateDto {
 	private String itemName;
 	private byte[] itemImg;
 	
-	private MultipartFile file;
 	
 	public TotalOrder toEntity() {
 		return TotalOrder.builder()
@@ -35,7 +32,6 @@ public class TotalOrderUpdateDto {
 				.price(price)
 				.payment(payment)
 				.card(card)
-				.status("주문 완료")
 				.reAcc(reAcc)
 				.name(name)
 				.zipcode(zipcode)
