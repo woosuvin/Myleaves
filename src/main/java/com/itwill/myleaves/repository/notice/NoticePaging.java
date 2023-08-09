@@ -10,11 +10,14 @@ public class NoticePaging {
 	private int startPage;
 	private int endPage;
 	private int total;
+	private int previous;
+	private int next;
+	private int totalPages;
 	
 	// 만약 검색을 넣는다면 여기에 넣으셈.
 	
 	public NoticePaging() {
-		this.offset = 0;
+		this.offset = 1;
 		this.rows = 10;
 	}
 	
@@ -26,11 +29,15 @@ public class NoticePaging {
 	
 	public void pagingTotal(int total) {
 		this.total = total;
+		System.out.println(this.toString());
 		
-		this.endPage = (int)(Math.ceil((this.offset + 1) / 10.0)) * 10;		
-		this.startPage = endPage - 9;
+		this.totalPages = ((total - 1) / this.rows) + 1;
+		this.endPage = this.offset > this.offset / 10 * 10 ? (this.offset / 10 + 1) * 10 : this.offset / 10 * 10;
+		this.startPage = this.offset > 10 ? this.endPage - 9 : 1;
 		
-		int realEnd = (int) (Math.ceil((total * 1.0) / rows));
-		this.endPage = realEnd <= endPage ? realEnd : endPage;
+		this.endPage = this.endPage > this.totalPages ? this.totalPages : endPage;
+		
+		this.previous = this.startPage >= 10 ? this.startPage - 10 : 0;
+		this.next = ((total - 1) / this.rows) + 1 >= 10 ? this.startPage + 10 : this.endPage;
 	}
 }

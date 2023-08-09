@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/base_layout}">
+    
+<main layout:fragment="main">
+	<div class="my-3 mx-auto w-75 text-center">
+		<h1>공지사항</h1>
+	</div>	
+	<div class="mx-auto w-75">
+		<table class="table">
+			<thead class="text-center">
+				<tr>
+					<th>No</th>
+					<th>제목</th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+			<tbody class="table-group-divider text-center">
+				<tr th:if="${#lists.size(fixList)} <= 0 and ${#lists.size(notFixList)} <= 0">
+					<td colspan="3">등록된 공지사항이 없습니다.</td>
+				</tr>
+				<tr th:each="fix : ${fixList}">
+					<td>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-megaphone-fill" viewBox="0 0 16 16">
+							<path d="M13 2.5a1.5 1.5 0 0 1 3 0v11a1.5 1.5 0 0 1-3 0v-11zm-1 .724c-2.067.95-4.539 1.481-7 1.656v6.237a25.222 25.222 0 0 1 1.088.085c2.053.204 4.038.668 5.912 1.56V3.224zm-8 7.841V4.934c-.68.027-1.399.043-2.008.053A2.02 2.02 0 0 0 0 7v2c0 1.106.896 1.996 1.994 2.009a68.14 68.14 0 0 1 .496.008 64 64 0 0 1 1.51.048zm1.39 1.081c.285.021.569.047.85.078l.253 1.69a1 1 0 0 1-.983 1.187h-.548a1 1 0 0 1-.916-.599l-1.314-2.48a65.81 65.81 0 0 1 1.692.064c.327.017.65.037.966.06z"/>
+						</svg>
+					</td>
+					<td class="text-start">
+						<a th:href="@{ /info/notice/detail?nid={nid} (nid = ${fix.nid}) }"
+							th:text="${fix.title}"></a>
+					</td>
+					<td th:text="${ #temporals.format(fix.created_Date, 'yyyy-MM-dd') }"></td>
+				</tr>
+				<tr th:each="nfix : ${notFixList}">
+					<td th:text="${nfix.rn}"></td>
+					<td class="text-start">
+						<a th:href="@{ /info/notice/detail?nid={nid} (nid = ${nfix.nid}) }"
+							th:text="${nfix.title}"></a>
+					</td>
+					<td th:text="${ #temporals.format(nfix.created_Date, 'yyyy-MM-dd') }"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="d-grid gap-2">
+			<div class="d-md-flex col-12">
+				<div class="col-3"></div>
+				<div class="col-6">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-md-center"
+							th:with="start = ${paging.startPage}, end = ${paging.endPage}, pageNum = ${paging.offset}
+									, next = ${paging.next}, previous = ${paging.previous}">
+							<li class="page-item" th:if="${start > 1}">
+								<a class="page-link" href="#" th:value="${previous}">
+									&laquo;
+								</a>
+							</li>
+							<li th:each="page : ${#numbers.sequence(start, end)}" class="page-item"
+								th:classappend="${pageNum == page} ? 'active' : ''">
+								<a class="page-link" href="#" th:text="${page}" th:value="${page}"></a>
+							</li>
+							<li class="page-item" th:if="${end < paging.totalPages}">
+								<a class="page-link" href="#" th:value="${next}">
+									&raquo;
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<form id="actionForm" method="get">
+						<input type="hidden" name="offset" th:value="${paging.offset}" />
+						<input type="hidden" name="rows" th:value="${paging.rows}" />
+					</form>
+				</div>
+				<div class="col-3 text-end"></div>
+			</div>
+		</div>
+	</div>
+</main>
+<th:block layout:fragment="myscripts">
+	<script src="/js/info/notice/notice-paging.js"></script>
+</th:block>
+
+</html>

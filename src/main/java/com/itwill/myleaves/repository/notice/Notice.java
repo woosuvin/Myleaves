@@ -43,15 +43,13 @@ public class Notice {
 	@Column(nullable = false)
 	private String content;
 	
-	@ColumnDefault(value= "0")
-	private Long views;
+	@ColumnDefault("0")
+	private int views;	
 	
 	private int fix;
 	
 	@CreatedDate
 	private LocalDateTime createdDate;
-	
-	private int rn;
 	
 	// Notice 엔터티의 title과 content를 수정해서 리턴하는 메서드
 	public Notice update(NoticeUpdateDto dto) {

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.notice.NoticeCreateDto;
+import com.itwill.myleaves.dto.notice.NoticeReadInterface;
 import com.itwill.myleaves.dto.notice.NoticeUpdateDto;
 import com.itwill.myleaves.repository.notice.Notice;
 import com.itwill.myleaves.repository.notice.NoticePaging;
@@ -28,23 +29,29 @@ public class MngrNoticeService {
 	public Map<String, Object> read(NoticePaging paging) {
 		log.info("read()");
 		
+		int pageNum = paging.getOffset();
+		
 		Map<String, Object> map = new HashMap<>();
-		List<Notice> fixList = noticeRepository.searchByFixNotice();
+		List<NoticeReadInterface> fixList = noticeRepository.searchByFixNotice();
 		map.put("yFixList", fixList);
 		
-		if(paging.getOffset() >= 1) {
-			paging.setRows(paging.getRows() - fixList.size());
+		if(paging.getOffset() > 1) {
+			paging.setRows(10 - fixList.size());
 			paging.setOffset((paging.getOffset() - 1) * paging.getRows());
 		} else {
-			paging.setRows(paging.getRows() - fixList.size());
+			paging.setOffset(0);
+			paging.setRows(10 - fixList.size());
 		}
 		
-		List<Notice> nFixList = noticeRepository.searchByNotFixNoticePaging(paging.getOffset(), paging.getRows());
+		List<NoticeReadInterface> nFixList = noticeRepository.searchByNotFixNoticePaging(paging.getOffset(), paging.getRows());
 		map.put("nFixList", nFixList);
 		
+		paging.setOffset(pageNum);
 		paging.pagingTotal(noticeRepository.searchByFixNoticeAll().size());
+		
 		log.info(paging.toString());
 		map.put("paging", paging);
+		
 		
 		return map;
 	}
@@ -89,8 +96,14 @@ public class MngrNoticeService {
 		// (3)검색한 엔터티를 수정하면,
 		// 트랜잭션이 끝나는 시점에 DB update가 자동으로 수행됨!
 		
-		Notice entity = noticeRepository.findById(dto.getId()).orElseThrow(); // (2)
+		Notice entity = noticeRepository.findById(dto.getNid()).orElseThrow(); // (2)
 		entity.update(dto);	// (3)
+	}
+	
+	// 사용자 공지사항 read
+	@Transactional
+	public int updateView(Long nid) {
+		return noticeRepository.updateView(nid);
 	}
 	
 }

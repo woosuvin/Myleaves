@@ -3,8 +3,11 @@ package com.itwill.myleaves.repository.notice;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import com.itwill.myleaves.dto.notice.NoticeReadInterface;
 
 public interface NoticeRepository extends JpaRepository<Notice, Long> {
 	
@@ -23,7 +26,7 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
 		"ORDER BY n.CREATED_DATE DESC",
 		nativeQuery = true
 	)
-	List<Notice> searchByFixNotice();
+	List<NoticeReadInterface> searchByFixNotice();
 	
 	
 	@Query(
@@ -39,7 +42,7 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
 		"OFFSET :offset ROWS FETCH NEXT :rows ROWS ONLY",
 		nativeQuery = true
 	)
-	List<Notice> searchByNotFixNoticePaging(@Param("offset") int offset, @Param("rows") int rows);
+	List<NoticeReadInterface> searchByNotFixNoticePaging(@Param("offset") int offset, @Param("rows") int rows);
 	
 	
 	@Query(
@@ -52,7 +55,14 @@ public interface NoticeRepository extends JpaRepository<Notice, Long> {
 		"ORDER BY n.CREATED_DATE DESC",
 		nativeQuery = true
 	)
-	List<Notice> searchByFixNoticeAll();
+	List<NoticeReadInterface> searchByFixNoticeAll();
 	
-	
+	// 사용자 공지사항 view update
+	@Modifying
+	@Query(
+		"UPDATE Notice n " +
+		"SET n.views = n.views + 1 " +
+		"WHERE n.nid = :nid"
+	)
+	int updateView(@Param("nid") Long nid);
 }

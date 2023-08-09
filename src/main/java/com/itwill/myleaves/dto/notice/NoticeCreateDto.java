@@ -17,6 +17,7 @@ public class NoticeCreateDto {
                 .title(title)
                 .content(content)
                 .fix(fix)
+                .views(0)
                 .build();
     }
 

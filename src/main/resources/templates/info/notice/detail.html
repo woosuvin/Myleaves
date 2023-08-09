@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/mngr_base_layout}">
+    layout:decorate="~{layout/base_layout}">
     
-<main layout:fragment="mngrHome">
-	<h1>공지사항 상세보기</h1>	
-   	<div class="my-2 p-3 card">
+<main layout:fragment="main">
+	<div class="my-3 mx-auto w-75 text-center">
+		<h1>공지사항 상세보기</h1>
+	</div>	
+	<div class="mx-auto w-75">
 		<table class="table">
 			<colgroup>
-				<col width="15%">
-				<col width="35%">
-				<col width="15%">
-				<col width="35%">
+				<col width="10%">
+				<col width="33%">
 			</colgroup>
 			<tbody>
 				<tr>
 					<th>제목</th>
 					<td th:text="${notice.title}"></td>
-					<th>고정여부</th>
-					<td th:text="${notice.fix < 0 ? '고정' : '일반'}"></td>
+					<th>날짜</th>
+					<td th:text="${#temporals.format(notice.createdDate, 'yyyy-MM-dd')}"></td>
+					<th>조회수</th>
+					<td th:text="${notice.views}" th:value="${notice.views}"></td>
 				</tr>
 				<tr>
 					<th>내용</th>
-					<td colspan="3">
+					<td colspan="5">
 						<div th:utext="${notice.content}"></div>
 					</td>
 				</tr>
 				<tr>
 					<th>첨부파일</th>
-					<td colspan="3">
+					<td colspan="5">
 						<table class="table table-bordered my-1">
 							<thead>
 								<tr>
@@ -53,8 +55,7 @@
 			</tbody>
 		</table>
 		<div class="d-grid gap-2 d-md-flex justify-content-md-center">
-			<a class="btn btn-primary" th:href="@{ /mngr/notice/modify?nid={nid} (nid = ${notice.nid}) }">수정</a>
-			<a class="btn btn-primary" th:href="@{/mngr/notice/list}">목록</a>
+			<a class="btn btn-primary" th:href="@{/info/notice/}">목록</a>
 		</div>
 	</div>
 </main>
@@ -63,5 +64,5 @@
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="/js/info/notice/file-download.js"></script>
 </th:block>
-	
+
 </html>
