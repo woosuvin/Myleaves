@@ -4,6 +4,7 @@
     layout:decorate="~{layout/base_layout}">
     
 	<main layout:fragment="main">
+	
 		<div>
 			<div>
 				<h2>장바구니 > 결제 페이지</h2>
@@ -11,8 +12,8 @@
 			
 		<form method="post" id="orderForm">
 			
-			<!-- <span class="" id="userId" name="userId" th:text="${#authentication.name}"></span>
-			 -->
+			<span class="" id="userId" name="userId" th:text="${#authentication.name}"></span>
+			
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -70,7 +71,7 @@
 									<tr>
 										<td>
 										 	<label class="form-label">이름</label> <!-- address.name , totalOrder.name -->
-											<input class="form-control" type="text" name="name" />
+											<input class="name form-control" type="text" name="name" id="memberName" />
 										</td>
 									</tr>
 									<tr>
@@ -143,7 +144,9 @@
 									</tr>
 									<tr>
 										<th>결제 금액</th>
-										<td><span th:text="|${#numbers.formatInteger(price+3000, 0, 'COMMA')}원|"></span></td>
+										<td>
+											<span th:text="|${#numbers.formatInteger(price+3000, 0, 'COMMA')}원|"></span>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -154,64 +157,35 @@
 
 			<input class="d-none" name="price" id="price" th:value="${price+3000}" />
 			<input class="d-none" type="text" name="cnt" id="cnt" th:value= "${totalCnt}"/>
-				
-			<table class="table">
-				<thead>
-					<tr>
-						<th>결제 방식</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<table class="table table-borderless">
-								<tbody>
-									<tr>
-										<td>
-											<div>
-												<input type="radio" id="card" name="payment" value="1" /> 
-												<label for="card" >신용 / 체크카드</label> 
-												<input type="radio" id="withoutBank" name="payment" value="2" /> 
-												<label for="withoutBank">무통장 입금</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div id="withoutBankDiv" style="display:none;">
-												<div>
-													<span class="form-lable">입금자</span>
-													<input class="form-control" type="text" />
-													<span class="form-text">입금 계좌: 카카오뱅크 3333-10-2222222 내풀잎스</span>
-												</div>
-												<div class="mt-2">
-													<span class="form-lable">환불 계좌</span>
-													<div class="input-group">
-														<input class="form-control" type="text" name="reAcc" placeholder="은행" />
-														<input class="form-control" type="text" name="reAcc" placeholder="계좌 번호" />
-													</div>
-													<span class="form-text">계좌 명의가 입금자와 동일해야 환불 가능합니다.</span>
-												</div>
-												<div class="text-center">
-													<button class="btn btn-outline-dark" type="submit" id="btnWithoutBank">결제하기</button>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="text-center" id="cardDiv" style="display:none;">
-												<button class="btn btn-outline-dark" id="btnWithCard">결제하기</button>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<h5>결제 방식</h5>
+			<div>
+				<input type="radio" id="card" name="payment" value="1" /> 
+				<label for="card" >신용 / 체크카드</label> 
+				<input type="radio" id="withoutBank" name="payment" value="2" /> 
+				<label for="withoutBank">무통장 입금</label>
+			</div>
+			<div id="withoutBankDiv" style="display:none;">
+				<div>
+					<span class="form-lable">입금자</span>
+					<input class="form-control" type="text" />
+					<span class="form-text">입금 계좌: 카카오뱅크 3333-10-2222222 내풀잎스</span>
+				</div>
+				<div class="mt-2">
+					<span class="form-lable">환불 계좌</span>
+					<div class="input-group">
+						<input class="form-control" type="text" name="reAcc" placeholder="은행" />
+						<input class="form-control" type="text" name="reAcc" placeholder="계좌 번호" />
+					</div>
+					<span class="form-text">계좌 명의가 입금자와 동일해야 환불 가능합니다.</span>
+				</div>
+				<div class="text-center">
+					<button class="btn btn-outline-dark" type="submit" id="btnWithoutBank">결제하기</button>
+				</div>
+			</div>
 		</form>
+		<div class="text-center" id="cardDiv" style="display:none;">
+			<button class="btn btn-outline-dark" id="btnWithCard" onclick="requestPay()">결제하기</button>
+		</div>
 	</div>
 </main>
 
@@ -219,6 +193,10 @@
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/js/order/zipcode.js"></script>
 	<script src="/js/order/order.js"></script>
+	<script src="/js/order/payment.js"></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<!-- <script src="https://cdn.iamport.kr/v1/iamport.js"></script> -->
+	<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 </th:block>
 	
 </html>
