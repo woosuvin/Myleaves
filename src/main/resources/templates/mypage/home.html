@@ -67,7 +67,7 @@
 				<h5>QnA</h5>
 				<ul style="display:block; list-style: none; padding: 0">
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/qna/qna_list}">문의 내역</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/qna/qna_list(userId=${#authentication.name})}">문의 내역</a>
 					</li>
 				</ul>
 			</div>

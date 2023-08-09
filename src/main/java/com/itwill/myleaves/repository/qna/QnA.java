@@ -45,7 +45,7 @@ public class QnA extends BaseTimeEntity{
 	private String content;
 	
 	@Column(nullable = false)
-	private String user_id;
+	private String userId;
 	
 	@ColumnDefault(value= "0")
 	private long secret;

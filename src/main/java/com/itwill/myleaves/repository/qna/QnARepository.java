@@ -12,7 +12,7 @@ public interface QnARepository extends JpaRepository<QnA, Long> {
     
     // 마이페이지 본인이 작성한 글 리스트
     
-    //List<QnA> findByUserI(String userId);
+    List<QnA> findAllByUserIdOrderByQidDesc(String userId);
    
     		
  

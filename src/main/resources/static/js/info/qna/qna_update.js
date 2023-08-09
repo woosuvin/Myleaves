@@ -1,5 +1,5 @@
 /**
- * QnA modify 수정 삭제
+ * QnA modify 수정 
  */
 
  document.addEventListener('DOMContentLoaded', () => {
@@ -25,21 +25,6 @@
             modifyForm.method = 'post';   
             modifyForm.submit(); 
         }
-    });
-    
-    // 삭제
-    const btnDelete = document.querySelector('#btnDelete');
-    btnDelete.addEventListener('click', (e) => {
-        const result = confirm('삭제?');
-        if (!result) {
-            return;           
-        } 
-          
-            modifyForm.action = '/info/qna/delete' 
-            modifyForm.method = 'post';  
-			modifyForm.submit(); 
-    });
-    
-    
+    }); 
     
 });

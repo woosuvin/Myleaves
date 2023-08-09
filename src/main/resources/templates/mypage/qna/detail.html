@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/base_layout}">
+	<main layout:fragment="main">
+		<div class="container my-4">
+			<div class="card">
+				<div class="card-header text-center">
+					<h1>QnA 마이페이지 상세페이지</h1>
+				</div>
+				<div class="card-body my-2">
+				<form id="qnaModifyForm">
+					<!-- 사용자 문의 출력 -->
+					<div class="my-2">
+						<label class="form-label d-none" for="qid">번호</label> 
+						<input class="form-control d-none" id="qid" th:value="${myqnas.qid}" readonly />
+					</div>
+					<!-- 제목 -->
+					<div class="card">
+						<div class="card-body">
+							<div class="card-text d-none">
+								<label class="form-label" for="title">제목</label>
+		                        <input class="form-control" id="title" th:value="${myqnas.title}" readonly />
+							</div>
+							<h4 class="card-text" th:text="${myqnas.title}" ></h4>
+							<hr />
+							<!-- 내용 -->
+							<br/>
+							<div class="my-2">
+								<div class="card-text">
+									<label class="form-label d-none" for="content">내용</label>
+		                        	<textarea class="form-control d-none" id="content" th:text="${myqnas.content}" readonly></textarea>
+									<div class="card-text" id="content" style="height: 10rem" th:text="${myqnas.content}"></div>
+									
+								</div>
+							</div>
+							<br />
+							<!-- 작성자 -->
+							<div class="card-text d-none">
+								<label class="form-label" for="userId">작성자</label>
+		                        <input class="form-control" id="userId" th:value="${myqnas.userId}" readonly />
+							</div> 
+							<br />
+							<!-- 작성날짜 -->
+							<hr />
+							<div  class="my-2">
+								<div class="card-text">
+									<p class="card-text text-end small mb-3 me-3" id="answer_date" th:text="${#temporals.format(myqnas.createdDate, 'yyyy-mm-dd HH:mm' ) }"></p>
+	                        		<label class="form-label d-none" for="createdTime">작성시간</label>
+	                        		<input class="form-control d-none" id="createdTime"
+	                       				th:value="${#temporals.format(myqnas.createdDate, 'yy-mm-dd HH:mm' ) }"readonly />
+	                    		</div>
+							</div>
+						</div>
+					</div>
+				</form>
+					<div class="my-3" style="text-align: right;" >
+						<!-- 수정버튼은 관리자가 확인중일시 수정 버튼 가능 c:if 써야함 -->
+						<a class="btn btn-outline-success" th:href="@{/mypage/qna/modify?(userId=${#authentication.name},qid=${myqnas.qid})}">설정</a>
+					</div>
+				</div>
+			</div>
+			<!-- 관리자 페이지 답변 -->
+			<div class="card my-4" th:if="${not #strings.isEmpty(myqnas.an_title)}">
+				<div class="card-body">
+					<h4 class="card-text" th:text="${myqnas.an_title}" ></h4>
+						<div class="card-text" id="content" style="height: 10rem"th:text="${myqnas.an_content}"></div>
+							<!-- 관리자가 답변한 답변 날짜 -->
+							<hr />
+							<p class="card-text text-end small mb-3 me-3" id="answer_date" th:text="${#temporals.format(myqnas.modifiedDate, 'yyyy-mm-dd HH:mm' ) }"></p>	
+				</div>
+			</div> 
+		</div>
+	
+	</main>
+</html>

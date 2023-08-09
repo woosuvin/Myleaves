@@ -3,7 +3,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/base_layout}">
 <main layout:fragment="main">
-	<div class="container my-4" th:if="${qna.secret == 1 && qna.user_id == #authentication.name}">
+	<div class="container my-4">
 		<div class="card">
 			<div class="card-header text-center">
 		    	<h1>QNA 상세페이지</h1>
@@ -37,9 +37,9 @@
 							<br />
 							<!-- 작성자 -->
 							<div class="card-text d-none">
-								<label class="form-label" for="user_id">작성자</label>
-		                        <input class="form-control" id="user_id" th:value="${qna.user_id}" readonly />
-							</div>
+								<label class="form-label" for="userId">작성자</label>
+		                        <input class="form-control" id="userId" th:value="${qna.userId}" readonly />
+							</div> 
 							<br />
 							<!-- 작성날짜 -->
 							<hr />

@@ -5,8 +5,10 @@ import lombok.Data;
 @Data
 public class QnAUpdateDto {
 	 
-	private Long qid;
-	    
+	 private Long qid;
+	 
+	 private String userId;
+	 
 	 private String title;
 	    
 	 private String content;

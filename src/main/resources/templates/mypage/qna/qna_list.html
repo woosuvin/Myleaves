@@ -3,35 +3,41 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/base_layout}">
 	<main layout:fragment="main">
-		<h1>내가 작성한 (나)문희</h1>
-   	<table class="table center">
-		<thead>
-			<tr>
-				<th scope="col">No</th>
-				<th scope="col">제목</th>
-				<th scope="col">작성일</th>
-			</tr>
-		</thead>
-		<tbody class="table-group-divider">
-			<tr>
-				<th scope="row">1</th>
-				<td>제목 test</td>
-				<td>작성test</td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>제목 test</td>
-				<td>작성test</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>제목 test</td>
-				<td>작성test</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="text-end">
-	</div>
-	<!-- 페이징, 체크박스 삭제 넣기 -->
+		<div class="container">
+			<div class="text-center my-5">
+				<h1>내가 작성한 QnA 리스트</h1>
+			</div>
+		<form id="qnamyalldeleteForm" method="post" class="my-2">	
+		   	<table class="table center">
+				<thead>
+					<tr>
+						<th scope="col"><input type="checkbox" id="selectAll" /></th>
+						<th scope="col">No.</th>
+						<th scope="col">제목</th>
+						<th scope="col">작성일</th>
+					</tr>
+				</thead>
+				<tbody class="table-group-divider">
+					<tr th:each="qnalist: ${myQnAlist}">
+						<td scope="col">
+							<input type="checkbox" id="selectedQnaIds" name="selectedQnaIds" th:value="${qnalist.qid}" />
+							<input type="hidden" id="hiddenSelectedQnaIds" name="hiddenSelectedQnaIds" th:value="${qnalist.qid}" />
+							<input type="hidden" id="hiddenuserId" name="hiddenSelectedQnaIds" th:value="${qnalist.userId}" />
+						</td>
+						<th th:text=${qnalist.qid}></th>
+						<td scope="col">
+							<a th:href="@{/mypage/qna/detail?(userId=${#authentication.name},qid=${qnalist.qid})}" th:text=${qnalist.title}></a>
+						</td>
+						<td scope="col" th:text="${#temporals.format(qnalist.createdDate, 'yy-MM-dd HH:mm')}"></td> 
+					</tr>	
+				</tbody>
+			</table>
+		</form>	
+		<div style="text-align: center;" class="my-2">
+			<a class="btn btn-outline-success" th:href="@{/info/qna/create}">문의하기</a>
+			<button class="btn btn-outline-success" type="submit" id="btnAllDelete">삭제</button>
+		</div>
+</div>	
+	<script src="/js/info/qna/my_qna_alldelete.js"></script>
 	</main>
 </html>

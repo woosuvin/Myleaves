@@ -9,7 +9,7 @@ public class QnACreateDto {
 	
 	private String title;
 	private String content;
-	private String user_id;
+	private String userId;
 	private long secret; // check 0,1
 	/*
 	 * private String an_title; private String an_content;
@@ -19,7 +19,7 @@ public class QnACreateDto {
 		return QnA.builder()
 				.title(title)
 				.content(content)
-				.user_id(user_id)
+				.userId(userId)
 				.secret(secret)
 				.build();
 	}
