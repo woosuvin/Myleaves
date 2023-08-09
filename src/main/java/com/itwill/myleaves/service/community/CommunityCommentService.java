@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.community.CommunityCommentCreateDto;
 import com.itwill.myleaves.dto.community.CommunityCommentUpdateDto;
+import com.itwill.myleaves.dto.community.CommunitySearchDto;
 import com.itwill.myleaves.repository.community.Community;
 import com.itwill.myleaves.repository.community.CommunityRepository;
 import com.itwill.myleaves.repository.community_comment.CommunityComment;
@@ -31,7 +32,7 @@ public class CommunityCommentService {
 		Community communityId = communityRepository.findById(id).orElseThrow();
 		
 		// 2. 찾은 게시글에 달려있는 댓글 목록을 검색 
-		List<CommunityComment> list = communityCommentRepository.findByCommunityId(communityId);
+		List<CommunityComment> list = communityCommentRepository.findByCommunityIdOrderByCommunityCommentIdDesc(communityId);
 		
 		return list;
 	}
@@ -41,14 +42,16 @@ public class CommunityCommentService {
 		log.info("create(dto={})", dto);
 		
 		// 1. dto의 커뮤니티 ID로 Community 엔터티 검색
-		Community post = communityRepository.findById(dto.getCommunityId()).orElseThrow();
+		Community communityId = communityRepository.findById(dto.getCommunityId()).orElseThrow();
 		
 		// 2. CommunityCommentCreateDto 객체를 CommunityComment 객체로 변환
 		CommunityComment entity = CommunityComment.builder()
-									.communityId(post.getCommunityId())
+									.communityId(communityId)
 									.content(dto.getContent())
 									.userId(dto.getUserId())
 									.build();
+		// 	//.communityId(communityId.getCommunityId())
+
 		
 		// 3. DB COMMUNITY_COMMENT 테이블에 insert
 		communityCommentRepository.save(entity);
@@ -57,6 +60,10 @@ public class CommunityCommentService {
 		return entity;
 	}
 
+	
+	public void deleteComment(long communityId) {
+		communityCommentRepository.deleteByCommunityId(communityId);
+	}
 	
 	public void delete(long communityCommentId) {
 		log.info("delete(communityCommentId={})", communityCommentId);
@@ -78,10 +85,10 @@ public class CommunityCommentService {
 	}
 
 	// 해당 게시글의 댓글 개수 
-	public long countByCommunityId(Community post) {
-		log.info("countByCommunity(post={})", post);
+	public long countByCommunityId(Community communityId) {
+		log.info("countByCommunity(communityId={})", communityId);
 		
-		return communityCommentRepository.countByCommunityId(post.getCommunityId());
+		// return communityCommentRepository.countByCommunityId(communityId.getCommunityId());
+		 return communityCommentRepository.countByCommunityId(communityId);
 	}
-
 }

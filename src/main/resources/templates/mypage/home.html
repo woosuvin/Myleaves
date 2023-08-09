@@ -10,7 +10,7 @@
 			
 			<h1 th:text="|${#authentication.name}님 안녕하세요!|"></h1> <!-- '/mypage' -->
 			<h4>
-				<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/profile/info(userId=${#authentication.name})}">&raquo;내 정보 보기</a>
+				<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/myinfo}">&raquo;내 정보 보기</a>
 			</h4>
 		</div>
 		<div class="row mt-5">
@@ -18,10 +18,10 @@
 				<h5>플랜테리어</h5>
 				<ul style="display:block; list-style: none; padding: 0">
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/planterior/my_posts(userId=${#authentication.name})}">내가 쓴 글</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/planterior/my_posts?}">내가 쓴 글</a>
 					</li>
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/planterior/bookmark(userId=${#authentication.name})}">북마크</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/planterior/bookmark}">북마크</a>
 					</li>
 				</ul>
 			</div>
@@ -35,7 +35,7 @@
 						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/sellbuy/sellList(userId=${#authentication.name})}">분양 내역</a>
 					</li>
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/sellbuy/buyList(buyerId=${#authentication.name})}">입양 내역</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/sellbuy/buyList(userId=${#authentication.name})}">입양 내역</a>
 					</li>
 				</ul>
 			</div>
@@ -52,22 +52,22 @@
 			</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col"> <!-- 커뮤니티 -->
+			<div class="col"> <!— 커뮤니티 —>
 				<h5>커뮤니티</h5>
 				<ul style="display:block; list-style: none; padding: 0">
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/community/my_posts}">내가 쓴 글</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/community/my_posts?userId={id} (id = ${#authentication.name})}">내가 쓴 글</a>
 					</li>
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/community/my_comments}">내가 쓴 댓글</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/community/my_comments?userId={id} (id = ${#authentication.name})}">내가 쓴 댓글</a>
 					</li>
 				</ul>
 			</div>
-			<div class="col"> <!-- QnA -->
+			<div class="col"> <!— QnA —>
 				<h5>QnA</h5>
 				<ul style="display:block; list-style: none; padding: 0">
 					<li>
-						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/qna/qna_list(userId=${#authentication.name})}">문의 내역</a>
+						<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/qna/qna_list}">문의 내역</a>
 					</li>
 				</ul>
 			</div>

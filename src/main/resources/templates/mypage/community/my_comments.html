@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+<th:block layout:fragment="mycsses">
+	<link th:href="@{/css/community.css}" rel="stylesheet" />
+</th:block> 
+
+<main layout:fragment="main">
+	<div>
+		<h1 class="text-center">내가 쓴 댓글</h1>
+	</div>
+    <div class="mb-2 text-end">
+      <button class="btn delete-button btn-secondary">댓글삭제</button>
+    </div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+			    <th scope="col"><input type="checkbox" class="all-checkbox" /></th>
+				<th scope="col">[ 말머리 ]</th>
+				<th scope="col">글 제목</th>
+				<th scope="col">댓글 내용</th>
+				<th scope="col">댓글 작성시간</th>
+			</tr>
+		</thead>
+		<!-- 게시글. -->
+		<tbody class="table-group-divider">
+			<tr th:each="comment : ${commentList}">
+				<td><input type="checkbox" id="row-checkbox"></td>
+			<!-- 	<th:block th:if= "${communityList.get(comment.communityCommentId) == null}" >
+					<td><span>삭제된 게시글</span></td>
+					<td><span>삭제된 게시글</span></td>
+				</th:block> -->
+<!-- 				<th:block th:if= "${communityList.get(comment.communityCommentId) != null}">
+ -->				<td><span th:text="'['+${communityList.get(comment.communityCommentId).hrsHd }+']'"></span></td>
+					<td><a th:href="@{/community/detail?id={id} (id = ${ communityList.get(comment.communityCommentId).communityId})}">
+					<span th:text="${communityList.get(comment.communityCommentId).title}"></span></a></td>
+				</th:block>
+				<td><span th:text="${comment.content}"></span></td>
+				<td><span th:text="${#temporals.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}"></span></td>
+				<td><span id="communityCommentId" class="d-none" th:text="${comment.communityCommentId}"></span></td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- 	<form th:action="@{/mypage/community/searchcomment}">
+		<input  name="userId" th:value="${ #authentication.name }"/>
+		<div class="row">
+			<select class="form-control" name="type">
+				<option value="t">제목</option>
+				<option value="c">내용</option>
+				<option value="tc">제목+내용</option>
+			</select>
+		</div>	
+		<div class="col-8">
+			<input class="form-control" name="keyword" type="text" placeholder="검색어 입력" required/>
+		</div>
+		<div class="col-1">
+			<input class="form-control btn btn-outline-dark" type="submit" value="검색" />
+		</div>
+	</form> -->
+</main>
+<th:block layout:fragment="myscripts">>
+     <script src="/js/community/communitycomment-mypage.js"></script>
+</th:block> 
+</html>

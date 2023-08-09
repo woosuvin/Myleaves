@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.community.CommunityCreateDto;
+import com.itwill.myleaves.dto.community.CommunitySearchDto;
 import com.itwill.myleaves.dto.community.CommunityUpdateDto;
 import com.itwill.myleaves.repository.community.Community;
 import com.itwill.myleaves.repository.community.CommunityRepository;
@@ -64,10 +65,33 @@ public class CommunityService {
 
 	@Transactional
 	public void update(CommunityUpdateDto dto) {
-		log.info("update(dto={})", dto);
+		log.info("update(dto={})", dto.getCommunityId());
 		Community entity = communityRepository.findById(dto.getCommunityId()).orElseThrow();
 		
 		entity.update(dto);
+	}
+
+
+	@Transactional(readOnly = true)
+	public List<Community> search(CommunitySearchDto dto) {
+		log.info("search(dto)={}", dto);
+		
+		List<Community> list = null;
+		switch (dto.getType()) {
+		case "t":
+			list = communityRepository.findByTitleContainsIgnoreCaseOrderByCommunityIdDesc(dto.getKeyword());
+			break;
+		case "c":
+			list = communityRepository.findByContentContainsIgnoreCaseOrderByCommunityIdDesc(dto.getKeyword());
+			break;
+		case "tc":
+			list = communityRepository.searchByKeyword(dto.getKeyword());
+			break;
+		case "u":
+			list = communityRepository.findByUserIdContainsIgnoreCaseOrderByCommunityIdDesc(dto.getKeyword());
+			break;
+		}
+		return list;
 	}
 	
 	

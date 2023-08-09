@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// 삭제할 댓글 아이디
 		const communityCommentId = e.target.getAttribute('data-communityCommentId');
 
-		const reqUrl = `api/communitycomment/${communityCommentId}`;
+		const reqUrl = `/api/communitycomment/${communityCommentId}`;
 
 		axios
 			.delete(reqUrl)
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('수정할 댓글 내용을 입력하세요.')
             return;
         }
-        const reqUrl = `/api/reply/${communityCommentId}`; 
+		const reqUrl = `/api/communitycomment/${communityCommentId}`;
         const data = {content};  // 수정한 댓글 내용
 
 	  
@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 
 	const getCommentsWithCommunityId = async () => {
-		const communityId = document.querySelector('div#communityId').value;
-		const reqUrl = `/api/communitycomment/all/${communityId}`;
+		const id = document.querySelector('input#communityId').value;
+		const reqUrl = `/api/communitycomment/all/${id}`;
 
 		try {
 			const response = await axios.get(reqUrl);
@@ -136,7 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	const btnCommunityCommentCreate = document.querySelector('button#btnCommunityCommentCreate');
 	btnCommunityCommentCreate.addEventListener('click', () => {
 		// 몇번 게시물의 댓글?
-		const communityId = document.querySelector('div#communityId').value;
+		const communityId = document.querySelector('input#communityId').value;
+		console.log(communityId);
 		const content = document.querySelector('textarea#content').value;
 		const userId = authName;
 
@@ -146,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 
 		const data = { communityId, content, userId };
-		const reqUrl = 'api/communitycomment';
+		const reqUrl = '/api/communitycomment';
 
 		axios
 			.post(reqUrl, data)

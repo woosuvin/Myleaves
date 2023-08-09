@@ -5,28 +5,34 @@
 <th:block layout:fragment="mycsses">
 	<link th:href="@{/css/community.css}" rel="stylesheet" />
 </th:block>
-<link rel="stylesheet" href="/css/community.css">
-
+<!-- <link rel="stylesheet" href="/css/community.css">
+ -->
 <main layout:fragment="main">
 	<div>
 		<h1 class="text-center">수정하기</h1>
 	</div>
 	<div class="card">
-		<form id=communityModifyForm>
+		<form id="communityModifyForm">
 		 	<div class="">
-		 		<div class="d-none" id="communityId" th:text="${post.communityId}"></div> <!-- input -->
-				<span th:text="${post.hrsHd}"></span>
-				<label th:text="${post.title}"></label>
+		 		<input type="hidden" name="communityId" th:value="${post.communityId}"/>
+				<select name="hrsHd">
+				    <option value="이게 뭔가요?" th:selected="${post.hrsHd == '이게 뭔가요?'}">이게 뭔가요?</option>
+				    <option value="꿀팁 대방출" th:selected="${post.hrsHd == '꿀팁 대방출'}">꿀팁 대방출</option>
+				    <option value="스토어 상품/입양 후기" th:selected="${post.hrsHd == '스토어 상품/입양 후기'}">스토어 상품/입양 후기</option>
+				    <option value="사담" th:selected="${post.hrsHd == '사담'}">사담</option>
+				</select>
+				<input type="text" id="title" name="title" th:value="${post.title}"></input>
 				<br>
-				<label class="form-label" for="userId">작성자:</label>
-				<input type="text" id="userId" th:value="${post.userId}"></input>
+				<span>작성자:</span>
+				<span th:text="${post.userId}"></span>
+				<input type="hidden" name="userId" th:value="${post.userId}"/>
 			</div>
 			<hr>
 			<div>
-			썸머노트에서 올린 내용 + 사진 자리 
+				<textarea name="content" id="content" th:utext="${post.content}"></textarea>
 			</div>
 			<hr>
-			<div>
+			<div class="text-end">
 				<label th:text= "${ #temporals.format(post.modifiedDate, 'yyyy-MM-dd HH:mm' )}" ></label>
 			</div>
 		</form>	
@@ -44,7 +50,9 @@
 
 </main>
  <!-- layout:decorate="~{layout/base_layout}"로 지정 -> myscripts로 저장한 fragment 위치에 아래 내용이 들어감. -->
-<th:block layout:fragment="myscripts">
-        <script src="/js/community/community.js"></script>
+<th:block layout:fragment="myscripts">>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/community/community.js"></script>
+    <script src="/js/community/community-summernote.js"></script>
 </th:block>
 </html>

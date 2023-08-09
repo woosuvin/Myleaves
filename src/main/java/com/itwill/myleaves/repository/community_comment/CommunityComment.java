@@ -33,10 +33,11 @@ public class CommunityComment extends BaseTimeEntity {
 	@Column(nullable = false)
 	private Long communityCommentId;  // 댓글 ID 
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "community_id")
 //	private Community community; // 커뮤니티 ID
-	private Long communityId;
+//	private Long communityId;
+	@JoinColumn(name = "community_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Community communityId;
 	
 	private String content;
 	

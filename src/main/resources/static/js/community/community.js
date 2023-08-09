@@ -8,6 +8,7 @@
 	
 	btnUpdate = document.querySelector('#btnUpdate');
 	btnUpdate.addEventListener('click', (e) => {
+	//	const communityId = document.querySelector('').value;
 		const title = document.querySelector('#title').value;
 		const content = document.querySelector('#content').value;
 		
@@ -34,7 +35,7 @@
 		if (!result){
 			return;
 		}
-		communityModifyForm.action = '/commuity/delete'
+		communityModifyForm.action = '/community/delete'
 		communityModifyForm.method = 'post'
 		communityModifyForm.submit();
 	}); 

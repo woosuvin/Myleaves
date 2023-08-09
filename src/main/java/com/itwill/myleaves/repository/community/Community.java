@@ -53,6 +53,7 @@ public class Community extends BaseTimeEntity{
 	public Community update(CommunityUpdateDto dto) {
 		this.title = dto.getTitle();
 		this.content = dto.getContent();
+		this.hrsHd = dto.getHrsHd();
 		
 		return this;
 	}
