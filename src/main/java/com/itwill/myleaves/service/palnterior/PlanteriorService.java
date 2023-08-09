@@ -2,6 +2,10 @@ package com.itwill.myleaves.service.palnterior;
 
 import java.util.List;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.itwill.myleaves.dto.planterior.PlanteriorCreateDto;
@@ -35,6 +39,17 @@ public class PlanteriorService {
 		
 	}
 	
+	// 페이징 처리 포함된 전체 읽기
+	@Transactional(readOnly = true)
+	public Slice<Planterior> read(int pageNumber, int pageSize) {
+		log.info("read(pageNumber = {}, pageSize ={})", pageNumber, pageSize);
+		
+		Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "planteriorId"));
+		
+		return planeteriorRepository.findAllByOrderByPlanteriorIdDesc(pageable);
+	}
+	
+	// 페이징 처리 미포함된 전체 읽기
 	@Transactional(readOnly = true)
 	public List<Planterior> read() {
 		log.info("read()");

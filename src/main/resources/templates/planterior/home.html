@@ -15,36 +15,33 @@
 		</section>
 
 		<!-- 카테고리 -->
-		<section class="plants_filter_section" id="first_filter">
-			<div class="plants_filter_section" id="first_filter">
-				<ul class="filterLists">
-					<button id="filter_reset_btn" type="button">
-						<img th:src="@{/images/common/reset.svg}" />
-					</button>
-					<button id="filterBtn" type="button">거실</button>
-					<button id="filterBtn" type="button">주방</button>
-					<button id="filterBtn" type="button">욕실</button>
-					<button id="filterBtn" type="button">방</button>
-					<button id="filterBtn" type="button">베란다</button>
-				</ul>
-			</div>
-			<!-- first 필터 입력시 second 나오게 js처리: 댓글 처럼 js로 넣기 -->
-			<div class="secondFilterSection" id="secondFilter">
+		<form class="filterForm" action="" >
+			<section class="plants_filter_section" id="first_filter">
+				<div class="plants_filter_section" id="first_filter">
+						<!-- state_content -->
+						<ul class="filterLists list-unstyled">
+							<li>
+								<!-- 해당 css에 id="filterBtn" 이걸로 정해진 코드 존재함 -->
+								<input type="image" th:src="@{/images/common/reset.svg}" name="reset" id="filter_reset_btn" />
+								<input type="button" class="filterBtn"  name="stateContent" value="거실"  />
+								<input type="button" class="filterBtn"  name="stateContent" value="주방"  />
+								<input type="button" class="filterBtn"  name="stateContent" value="욕실"  />
+								<input type="button" class="filterBtn"  name="stateContent" value="방"  />
+								<input type="button" class="filterBtn"  name="stateContent" value="베란다"  />
+							</li>
+						</ul>
+				</div>
+				<!-- condition_content -->
+				<ul class="list-unstyled secondFilterSection" id="secondFilter" name="secondfilter"></ul>
 				<div class="filterDivision"></div>
-				<!-- for문 돌리기 가지고 온 수 만큼. -->
-				<!-- <div th:each="category: ${category}"> -->
-				<ul class="filterLists">
-					<!-- th:text="${category.name}" -->
-					<button class="filterBtn" type="button"></button>
-				</ul>
-				<!-- </div> -->
-			</div>
-
-		</section>
+				
+	
+			</section>
+		</form>
+		
 		<!-- 식물 데이터 수 div -->
 		<div class="plantDataCount">
 			<span>식물 데이터</span> <span id="plantData"></span>종
-			<!-- th:text="${count()}" -->
 		</div>
 		<div>
 			<span class="pick">이 달의 MD 픽</span>
@@ -81,6 +78,7 @@
 		</div>
 		<br>
 		<div class="m-2">
+			<!-- 로그인 안 했을 경우 -->
 			<th:block sec:authorize="isAnonymous()">
 				<div class="row row-cols-1 row-cols-md-4 g-4">
 					<div class="col" th:each="list: ${cardList}">
@@ -160,8 +158,16 @@
 	</div>
 	<!-- 더보기 버튼 -->
 	<div class="d-flex justify-content-center">
-		<button class="m-4 btn btn-success rounded ">더보기</button>
+		<input type="hidden" class="userId" th:value="${#authentication.name}" />
+		<button id="loadMoreButton" class="m-4 btn btn-success rounded ">더보기</button>
 	</div>
+	<th:block sec:authorize="isAuthenticated()">
+		<th:block th:if="${#authentication.name.equals('admin')}">
+			<div class="d-flex justify-content-end">
+				<a th:href="@{/mngr/planterior}"><button class="m-4 btn btn-success rounded ">관리자 플랜테리어 페이지로 돌아가기</button></a>
+			</div>
+		</th:block>
+	</th:block>
 
 	<!-- end -->
 </main>
