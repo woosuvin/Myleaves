@@ -50,4 +50,5 @@ public class MemberRestController {
 		
 		return ResponseEntity.ok(newPwd);
 	}
+	
 }

@@ -1,4 +1,4 @@
-package com.example.demo.repository.notice;
+package com.itwill.myleaves.notice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

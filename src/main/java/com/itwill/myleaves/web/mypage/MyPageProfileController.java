@@ -1,12 +1,16 @@
 package com.itwill.myleaves.web.mypage;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.myleaves.dto.member.MemberModifyPwdDto;
 import com.itwill.myleaves.service.mypage.MyPageProfileService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,5 +34,24 @@ public class MyPageProfileController {
 	@GetMapping("/modifyPwd")
 	public void modifyPwd() {
 		log.info("modifyPwd()");
+	}
+	
+	@GetMapping("/matches/pwd")
+	public ResponseEntity<Boolean> matchesPwd(String userId, String currentPwd) {
+		log.info("matchesPwd(userId={}, currentPwd={})", userId, currentPwd);
+		
+		Boolean bool = myPageProfileService.matchesPwd(userId, currentPwd);
+		log.info("matchesPwd(bool={})", bool);
+		
+		return ResponseEntity.ok(bool);
+	}
+	
+	@PutMapping("/modify/pwd")
+	public ResponseEntity<String> modifyPwd(@RequestBody MemberModifyPwdDto dto) {
+		log.info("modifyPwd(dto={})", dto);
+		
+		myPageProfileService.modifyPwd(dto);
+		
+		return ResponseEntity.ok("Success");
 	}
 }

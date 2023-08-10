@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/base_layout}">
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/base_layout}">
 <head>
 	<script defer src="/js/myprofile/modifyPwd.js"></script>
-	<script>
-		var userId;
+	<script th:inline="javascript">
+    	var userId = /*[[${#authentication.name}]]*/ null;
 	</script>
 </head>
 <main layout:fragment="main">
@@ -17,8 +17,8 @@
 			<tr>
 				<th>현재 비밀번호</th>
 				<td><input type="password" id="currentPwd"
-					data-username="${#authentication.name}" placeholder="현재 비밀번호"
-					required /></td>
+						   placeholder="현재 비밀번호"
+						   required /></td>
 			</tr>
 			<tr>
 				<th>변경할 비밀번호</th>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/mngr_base_layout}">
+<head>
+	<script defer src="/js/mngr/manage.js"></script>
+</head>
+<main layout:fragment="mngrHome">
+	<div>
+		<h3>통계</h3>
+		<div></div>
+	</div>
+	<div>
+		<div>
+			<h3>회원 검색</h3>
+		</div>
+		<div>
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th>이름</th>
+							<th>아이디</th>
+							<th>전화번호</th>
+							<th>E-MAIL</th>
+							<th>생년월일</th>
+							<th>가입일자</th>
+							<th>성별</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="member : ${ members }" th:object="${ member }">
+						    <td th:text="*{ name }"></td>
+						    <td th:text="*{ userId }"></td>
+						    <td th:text="*{ phone }"></td>
+						    <td th:text="*{ email }"></td>
+						    <td th:text="*{ birth }"></td>
+						    <td th:text="*{ joinDate }"></td>
+						    <td th:text="*{ gender }"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div>
+				<ul class="pagination"
+					th:each="pageMaker : ${ pageMaker }">
+					
+					<li class="page-item"
+						th:if="${ pageMaker.prev }">
+				      <a class="page-link" th:href="@{ |${pageMaker.startPage - 1}| }" tabindex="-1">Previous</a>
+				    </li>
+				    
+				    <li class="page-item"
+				    	th:each="i : ${ #numbers.sequence(pageMaker.startPage, pageMaker.endPage) }">
+				    	<a class="page-link"
+				    	   th:classappend="${pageMaker.cri.pageNum == i} ? 'active' : ''"
+           				   th:text="${i}"
+           				   th:href="${i}"></a>
+				    </li>
+				    	
+				    <li class="page-item"
+				    	th:if="${ pageMaker.next }">
+				      <a class="page-link" th:href="@{ |${pageMaker.endPage + 1}| }">Next</a>
+				    </li>
+				    
+				</ul>
+			</div>
+			<div>
+				<form id="actionForm" action="/mngr/member/manage" method="get">
+					<input type="hidden" name="pageNum" th:value="${ pageMaker.cri.pageNum }"/>
+					<input type="hidden" name="amount" th:value="${ pageMaker.cri.amount}" />				
+				</form>
+			</div>
+			 <div>
+                <form method="get" th:action="@{ /mngr/member/search }">
+                    <div class="row">
+                        <div class="col-3">
+                            <select class="form-control" name="type">
+                                <option value="name">이름</option>
+                                <option value="userId">아이디</option>
+                                <option value="phone">전화번호</option>
+                                <option value="email">E-MAIL</option>
+                                <option value="birth">생년월일</option>
+                                <option value="joinDate">가입일자</option>
+                                <option value="gender">성별</option>
+                            </select>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" name="keyword"
+                                   type="text" placeholder="검색어 입력" required />
+                        </div>
+                        <div class="col-1">
+                            <input class="form-control btn btn-outline-dark"
+                                   type="submit" value="검색" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+		</div>
+	</div>
+</main>
+</html>

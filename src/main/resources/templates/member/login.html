@@ -28,7 +28,7 @@
             		<p th:text="${errorMsg}"></p>
         		</div>
         		<div>
-				    <a th:href="@{/member/find}">아이디/비밀번호 찾기</a>
+				    <a th:href="@{ /member/find }">아이디/비밀번호 찾기</a>
 				</div>
 				<div>
 					<input type="submit"
@@ -36,7 +36,7 @@
 						   id="btn-login"
 						   value="로그인" >
 				    <a th:href="@{ https://kauth.kakao.com/oauth/authorize?client_id=314c0325ca91badd1284203c73a36949&redirect_uri=http://localhost:8090/member/kakao/callback&response_type=code }">
-				    <img height="38px" th:src="@{/images/login/kakao_login_button.png}" alt="Kakao Login">
+				    <img height="38px" th:src="@{ /images/login/kakao_login_button.png }" alt="Kakao Login">
 				    </a>
 				</div>
 			</form>

@@ -1,26 +1,13 @@
 package com.itwill.myleaves.web.member;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itwill.myleaves.dto.member.MemberSignUpDto;
-import com.itwill.myleaves.repository.kakao.KakaoProfile;
-import com.itwill.myleaves.repository.oauth_token.OAuthToken;
 import com.itwill.myleaves.service.kakao.KakaoProfileService;
 import com.itwill.myleaves.service.member.MemberService;
 
