@@ -7,7 +7,7 @@
 		<form>
 			<div>
 				<div style="float: left;">
-					<img src="/images/common/store.jpg" width="300" height="300" />
+					<img th:src="@{'data:image/png;base64,'+${image}}"  style="object-fit:cover; height:300px; width:300px;"/>
 				</div>
 				<div>
 					<table>

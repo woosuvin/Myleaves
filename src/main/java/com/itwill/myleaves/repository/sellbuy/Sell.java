@@ -1,5 +1,8 @@
 package com.itwill.myleaves.repository.sellbuy;
 
+import java.io.IOException;
+import java.util.Base64;
+
 import com.itwill.myleaves.dto.sellbuy.SellUpdateDto;
 import com.itwill.myleaves.repository.BaseTimeEntity;
 
@@ -42,6 +45,7 @@ public class Sell extends BaseTimeEntity {
 	private String title;
 	
 	@Column(nullable = true)
+	@Lob
 	private byte[] thumbnail;
 	
 	@Column(nullable = true)
@@ -53,7 +57,6 @@ public class Sell extends BaseTimeEntity {
 	@Column(nullable = true)
 	private String sido;
 	
-	
 	@Column(nullable = true)
 	private String gungu;
 	
@@ -63,9 +66,11 @@ public class Sell extends BaseTimeEntity {
 	@Column(nullable = true)
 	private Long sold;
 	
-	public Sell update(SellUpdateDto dto) {
+	public Sell update(SellUpdateDto dto) throws IOException {
 		this.title = dto.getTitle();
-		this.thumbnail = dto.getThumbnail();
+		if (dto.getFile() != null && dto.getFile().getBytes().length > 0) {
+			this.thumbnail = dto.getFile().getBytes();
+		}
 		this.content = dto.getContent();
 		this.price = dto.getPrice();
 		this.sido = dto.getSido();

@@ -1,5 +1,7 @@
 package com.itwill.myleaves.dto.store;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.itwill.myleaves.repository.store.Store;
 
 import lombok.Data;
@@ -14,6 +16,8 @@ public class StoreCreateDto {
 	private long price;
 	private long inven;
 	private int sold;
+	
+	private MultipartFile file;
 	
 	// dto를 entity 객체로 변환해서 리턴하는 메서드
 	public Store toEntity() {

@@ -1,5 +1,6 @@
 package com.itwill.myleaves.service.sellbuy;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import com.itwill.myleaves.repository.sellbuy.BuyWishRepository;
 import com.itwill.myleaves.repository.sellbuy.Sell;
 import com.itwill.myleaves.repository.sellbuy.SellRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -92,12 +94,12 @@ public class SellService {
 		return entity;
 	}
 
-	public Sell update(SellUpdateDto dto) {
+	@Transactional
+	public void update(SellUpdateDto dto) throws IOException {
 		log.info("update({})", dto);
 
 		Sell entity = sellRepository.findById(dto.getSellId()).orElseThrow();
 		entity.update(dto);
-		return sellRepository.saveAndFlush(entity);
 	}
 
 	public void delete(long sellId) {

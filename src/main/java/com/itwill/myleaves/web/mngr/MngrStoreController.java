@@ -1,5 +1,7 @@
 package com.itwill.myleaves.web.mngr;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -41,8 +43,10 @@ public class MngrStoreController {
 	}
 	
 	@PostMapping("/create")
-	public String create(StoreCreateDto dto) {
+	public String create(StoreCreateDto dto) throws IOException {
 		log.info("create(dto={}):POST", dto);
+		
+		dto.setThumbnail(dto.getFile().getBytes());
 		
 		storeService.create(dto); // form에서 submit된 내용을 db에 insert
 		
@@ -54,12 +58,14 @@ public class MngrStoreController {
 		log.info("read(itemId={})", itemId);
 		
 		Store store = storeService.read(itemId); // itemId로 store 테이블에서 검색
+		String image = Base64.getEncoder().encodeToString(store.getThumbnail());
 		
+		model.addAttribute("image", image);
 		model.addAttribute("store", store); // model에 저장
 	}
 	
 	@PostMapping("/update")
-	public String update(StoreUpdateDto dto) {
+	public String update(StoreUpdateDto dto) throws IOException {
 		storeService.update(dto);
 		return "redirect:/mngr/store/list";
 	}

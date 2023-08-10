@@ -40,7 +40,12 @@ public class MyPageSellBuyController {
 			Sell sell = sellService.read(b.getSellId());
 			sellList.add(sell);
 		}
+		Map<Long, String> thumbnails = new HashMap<>();
 		
+        for(Sell sell: sellList){
+        	thumbnails.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
+        }
+        model.addAttribute("images", thumbnails);
 //		model.addAttribute("buyWish", buyWishlist);
 		model.addAttribute("sell", sellList);
 	}
@@ -52,11 +57,12 @@ public class MyPageSellBuyController {
 		
 		List<Sell> sellList = sellService.readSellList(userId);
 
-//		Map<Long, String> productBase64Images = new HashMap<>();
-//      for(Sell sell: list){               
-//          productBase64Images.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
-//      }
-//      model.addAttribute("images", productBase64Images);
+		Map<Long, String> thumbnails = new HashMap<>();
+		
+        for(Sell sell: sellList){
+        	thumbnails.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
+        }
+        model.addAttribute("images", thumbnails);
 		
 		model.addAttribute("sell", sellList);
 	}
@@ -67,7 +73,13 @@ public class MyPageSellBuyController {
 	    log.info("read(buyerId={})", buyerId);
 
 	    List<Buy> buyList = sellService.readBuyList(buyerId);
-
+	    Map<Long, String> thumbnails = new HashMap<>();
+		
+        for(Buy buy: buyList){
+        	thumbnails.put(buy.getSellId(), Base64.getEncoder().encodeToString(buy.getThumbnail()));
+        }
+        model.addAttribute("images", thumbnails);
+	    
 	    model.addAttribute("buy", buyList);
 	}
 	

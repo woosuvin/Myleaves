@@ -21,8 +21,8 @@ div {
 		<table class="table table-borderless">
 			<tbody>
 				<tr th:switch="${ store.sold }">
-					<td rowspan="4" width=300><img class="rounded" width=100%
-						src="/images/common/store.jpg" /></td>
+					<td rowspan="4" width=300><img class="rounded" style="object-fit:cover; height:300px; width:300px;" 
+						th:src="@{'data:image/png;base64,'+${image}}" /></td>
 					<td style="vertical-align: middle">
 						<h3 id="itemName" name="itemName" th:text="${store.itemName}"></h3>
 						<h5 id="itemPrice" class="d-none" th:text="${store.price}"></h5>

@@ -28,7 +28,7 @@ public class SellCreateDto {
 		return Sell.builder()
 				.title(title)
 				.userId(userId)
-				//.thumbnail(thumbnail)
+				.thumbnail(thumbnail)
 				.content(content)
 				.price(price)
 				.sido(sido)

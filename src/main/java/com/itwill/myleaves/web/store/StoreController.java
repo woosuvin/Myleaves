@@ -1,6 +1,9 @@
 package com.itwill.myleaves.web.store;
 
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.myleaves.repository.sellbuy.BuyWish;
+import com.itwill.myleaves.repository.sellbuy.Sell;
 import com.itwill.myleaves.repository.store.Store;
 import com.itwill.myleaves.repository.store.StoreWish;
 import com.itwill.myleaves.service.store.MypageStoreService;
@@ -32,6 +36,11 @@ public class StoreController {
 		log.info("storeList:GET");
 		
 		List<Store> list = storeService.readUserPage();
+		Map<Long, String> thumbnails = new HashMap<>();
+		for(Store store: list){
+			thumbnails.put(store.getItemId(), Base64.getEncoder().encodeToString(store.getThumbnail()));
+        }
+        model.addAttribute("images", thumbnails);
 		model.addAttribute("stores", list);
 	}
 	
@@ -58,7 +67,9 @@ public class StoreController {
 		model.addAttribute("wish", result);
 		
 		Store store = storeService.read(itemId); // itemId로 store 테이블에서 검색
+		String image = Base64.getEncoder().encodeToString(store.getThumbnail());
 		
+		model.addAttribute("image", image);
 		model.addAttribute("store", store); // model에 저장
 	}
 }

@@ -1,21 +1,18 @@
 package com.itwill.myleaves.web.mypage;
 
-import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.aspectj.weaver.ast.Or;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.myleaves.dto.order.TotalOrderUpdateDto;
 import com.itwill.myleaves.repository.orderDetail.OrderDetail;
@@ -44,7 +41,11 @@ public class MyPageStoreController {
 		log.info("read()");
 		
 		List<Store> list = myPageStoreService.read(storeWishList);
-		
+		Map<Long, String> thumbnails = new HashMap<>();
+		for(Store store: list){
+			thumbnails.put(store.getItemId(), Base64.getEncoder().encodeToString(store.getThumbnail()));
+        }
+        model.addAttribute("images", thumbnails);
 		model.addAttribute("wishStore", list);
 	
 	}
@@ -85,5 +86,14 @@ public class MyPageStoreController {
 		model.addAttribute("items", storeList);
 	}
 	
+	@PutMapping("/orderDetail/update/{orderId}")
+	public ResponseEntity<String> update(@PathVariable long orderId, @RequestBody TotalOrderUpdateDto dto){
+		// log.info("update(dto={})", dto);
+		log.info("update(orderId={}, dto={})", orderId, dto);
+		// orderService.update(dto);
+		orderService.update(orderId, dto);
+		// return "redirect:/mypage/store/orderDetail";
+		return ResponseEntity.ok("Success");
+	}
 	
 }

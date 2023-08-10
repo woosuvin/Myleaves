@@ -1,25 +1,19 @@
 package com.itwill.myleaves.web.sellbuy;
 
+import java.io.IOException;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.itwill.myleaves.dto.sellbuy.SellCreateDto;
 import com.itwill.myleaves.dto.sellbuy.SellUpdateDto;
 import com.itwill.myleaves.repository.sellbuy.BuyWish;
-import com.itwill.myleaves.repository.sellbuy.BuyWishRepository;
 import com.itwill.myleaves.repository.sellbuy.Sell;
 import com.itwill.myleaves.service.mypage.MypageSellBuyService;
 import com.itwill.myleaves.service.sellbuy.SellService;
@@ -37,51 +31,34 @@ public class SellBuyController {
 	
 	@GetMapping("/buy/list")
 	public void read(Model model) {
-		log.info("read()");
+//		log.info("read()");
 		List<Sell> list = sellService.read();
 		
-//		Map<Long, String> productBase64Images = new HashMap<>();
-//        for(Sell sell: list){               
-//            productBase64Images.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
-//        }
-//        model.addAttribute("images", productBase64Images);
+		Map<Long, String> thumbnails = new HashMap<>();
+        for(Sell sell: list){
+        	thumbnails.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
+        }
+        model.addAttribute("images", thumbnails);
 		model.addAttribute("sells", list);
 	}
 
-//	@GetMapping("/display/image/{sellId}")
-//    public ResponseEntity<byte[]> displayItemImage(@PathVariable int sellId) {
-//    	Sell sell = sellService.read(sellId);
-//        byte[] image = sell.getThumbnail();
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.IMAGE_JPEG);
-//        return new ResponseEntity<>(image, headers, HttpStatus.OK);
-//    }
 	
 	@GetMapping("/sell/create")
 	public void create() {
-		log.info("create() GET");
+//		log.info("create() GET");
 	}
 
 	@PostMapping("/sell/create")
-	public String create(SellCreateDto dto) {
-		log.info("create(dto={}) POST", dto);
+	public String create(SellCreateDto dto) throws IOException {
+//		log.info("create(dto={}) POST", dto);
 
-//		MultipartFile file = dto.getFile();
-//
-//		if (file != null && !file.isEmpty()) {
-//			byte[] bytes;
-//			try {
-//				bytes = file.getBytes();
-//				dto.setThumbnail(bytes);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//
-//		}
-
+		dto.setThumbnail(dto.getFile().getBytes());
+		
 		sellService.create(dto);
 		return "redirect:/buy/list";
 	}
+	
+	
 	
 	/**
 	 * 
@@ -90,10 +67,10 @@ public class SellBuyController {
 	 */
 	@GetMapping("/buy/detail")
 	public void readDetail(String userId, long sellId, Model model) {
-		log.info("read(sellId={}", sellId);
+//		log.info("read(sellId={}", sellId);
 		
 		List<BuyWish> buyWishlist = mypageService.readBuyWish(sellId);
-		log.info("{}", buyWishlist);
+//		log.info("{}", buyWishlist);
 		
 		Boolean result = null;
 		for (BuyWish x : buyWishlist) {
@@ -104,49 +81,43 @@ public class SellBuyController {
 		        result = false;
 		    }
 		}
-
-		Sell sell = sellService.read(sellId);
 		
+		Sell sell = sellService.read(sellId);
+		String image = Base64.getEncoder().encodeToString(sell.getThumbnail());
+		
+		model.addAttribute("image", image);
 		model.addAttribute("wish", result);
 		model.addAttribute("sell", sell);
 	}
 	
 	@GetMapping("sell/modify")
-	public void read(Long sellId, Model model) {
-		log.info("read(sellId={})", sellId);
+	public void read(Long sellId, Model model) throws IOException {
+//		log.info("read(sellId={})", sellId);
 
 		Sell sell = sellService.read(sellId);
+		String image = Base64.getEncoder().encodeToString(sell.getThumbnail());
+		byte[] thumbnail = sell.getThumbnail();
 		
+		model.addAttribute("thumbnail", thumbnail);
+		model.addAttribute("image", image);
 		model.addAttribute("sell", sell);
 	}
 
 	@PostMapping("/sell/update")
-	public String update(SellUpdateDto dto) {
-		log.info("update(dto={})", dto);
-
-		MultipartFile file = dto.getFile();
-
-		if (file != null && !file.isEmpty()) {
-			byte[] bytes;
-			try {
-				bytes = file.getBytes();
-				dto.setThumbnail(bytes);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
-
+	public String update(SellUpdateDto dto) throws IOException {
+//		log.info("update(dto={})", dto);
+//		log.info(dto.getFile().getBytes()[0] + ", " + dto.getFile().getBytes()[1]);
+		
 		sellService.update(dto);
 		return "redirect:/buy/detail?sellId=" + dto.getSellId();
 	}
 
 	@PostMapping("/sell/delete")
 	public String delete(long sellId) {
-		log.info("delete(sellId={})", sellId);
+//		log.info("delete(sellId={})", sellId);
 		sellService.delete(sellId);
-		log.info("삭제 결과={}", sellId);
+//		log.info("삭제 결과={}", sellId);
 		return "redirect:/buy/list";
 	}
-
+	
 }

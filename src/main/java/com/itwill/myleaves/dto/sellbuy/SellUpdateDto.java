@@ -11,7 +11,6 @@ public class SellUpdateDto {
 
 	private Long sellId;
 	private String title;
-	// clob string, blob byte[]
 	private byte[] thumbnail;
 	private String content;
 	private Long price;

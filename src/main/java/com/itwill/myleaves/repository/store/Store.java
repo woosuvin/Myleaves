@@ -1,5 +1,6 @@
 package com.itwill.myleaves.repository.store;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -60,9 +61,11 @@ public class Store {
 	@CreatedDate
 	private LocalDateTime createdDate;
 	
-	public Store update(StoreUpdateDto dto) {
+	public Store update(StoreUpdateDto dto) throws IOException {
 		this.itemName = dto.getItemName();
-		//this.thumbnail = dto.getThumbnail();
+		if (dto.getFile() != null && dto.getFile().getBytes().length > 0) {
+			this.thumbnail = dto.getFile().getBytes();
+		}
 		this.content = dto.getContent();
 		this.price = dto.getPrice();
 		this.sold = dto.getSold();

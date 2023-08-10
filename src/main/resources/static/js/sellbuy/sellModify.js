@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnUpdate = document.querySelector('#btnUpdate');
     btnUpdate.addEventListener('click', (e) => {
         const title = document.querySelector('#title').value;
-        // const thumbnail 
         const content = document.querySelector('#summernote').value;
         const price = document.querySelector('#price').value;
         const sido = document.querySelector('#sido').value;

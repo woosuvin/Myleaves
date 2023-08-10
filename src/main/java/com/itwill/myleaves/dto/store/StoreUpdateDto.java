@@ -1,5 +1,7 @@
 package com.itwill.myleaves.dto.store;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.itwill.myleaves.repository.store.Store;
 
 import com.itwill.myleaves.repository.store.Store;
@@ -12,16 +14,18 @@ public class StoreUpdateDto {
 	
 	private long itemId;
 	private String itemName;
-	//private byte[] thumbnail;
+	private byte[] thumbnail;
 	private String content;
 	private long price;
 	private long inven;
 	private int sold;
 	
+	private MultipartFile file;
+	
 	public Store toEntity() {
 		return Store.builder()
 				.itemName(itemName)
-				//.thumbnail(thumbnail)
+				.thumbnail(thumbnail)
 				.content(content)
 				.price(price)
 				.inven(inven)

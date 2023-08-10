@@ -14,22 +14,21 @@
 						th:href="@{/buy/detail(userId=${#authentication.name}, sellId=${sell.sellId}) }">
 						<!-- 판매종료(buy>sold.equals("판매 종료"), 품절(store>inven==0) 흰색/문구 가운데 -->
 						<th:block th:case="1">
-							<img class="rounded mb-1" style="width: 100%; height: 100%;"
-								src="/images/sellbuy/onsale.jpeg" />
-							<!-- th:src="@{'/display/image/' + ${sell.sellId}}" /> -->
+							<img class="rounded mb-1" style="object-fit:cover; height:150px; width:150px;"
+								th:src="@{'data:image/png;base64,'+${images.get(sell.sellId)}}" />
 							<span class="link-dark centered rounded"
 								style="background: deeppink; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
 								분양중</span>
 						</th:block> <th:block th:case="2">
-							<img class="rounded mb-1" style="width: 100%; height: 100%;"
-								src="/images/sellbuy/onnego.JPG" />
+							<img class="rounded mb-1" style="object-fit:cover; height:150px; width:150px;"
+								th:src="@{'data:image/png;base64,'+${images.get(sell.sellId)}}" />
 							<span class="link-dark centered rounded"
 								style="background: mediumaquamarine; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
 								거래중</span>
 						</th:block> <th:block th:case="3">
 							<img class="rounded mb-1"
-								style="width: 100%; height: 100%; opacity: 50%;"
-								src="/images/sellbuy/soldout.JPG" />
+								style="object-fit:cover; height:150px; width:150px; opacity: 50%;"
+								th:src="@{'data:image/png;base64,'+${images.get(sell.sellId)}}" />
 							<span class="link-dark centered rounded"
 								style="background: darkgray; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
 								분양 종료</span>

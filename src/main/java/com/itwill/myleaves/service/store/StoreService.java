@@ -1,5 +1,6 @@
 package com.itwill.myleaves.service.store;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -69,9 +70,10 @@ public class StoreService {
 	
 	/**
 	 * update
+	 * @throws IOException 
 	 */
 	@Transactional
-	public void update(StoreUpdateDto dto) {
+	public void update(StoreUpdateDto dto) throws IOException {
 		log.info("update(dto={})", dto);
 		Store entity = storeRepository.findByItemId(dto.getItemId());
 		entity.update(dto);

@@ -9,7 +9,7 @@
 		<span class="d-none" id="selectedSido" th:text="${sell.sido}"></span>
 		<span class="d-none" id="selectedGungu" th:text="${sell.gungu}"></span>
 		
-		<form id="sellModifyForm" class="container">
+		<form id="sellModifyForm" class="container" enctype="multipart/form-data">
 			<input class="d-none" name="sellId" id="sellId" th:value="${sell.sellId}"></input>
 			<div class="input-group mb-2">
 				<span class="input-group-text">제목</span> <input type="text"
@@ -25,10 +25,14 @@
 			</div>
 
 			<div class="input-group mb-2">
-				<label class="input-group-text" for="thumbnail">대표 사진</label> <input
-					th:value="${sell.thumbnail}" name="thumbnail" id="thumbnail" type="file" class="form-control">
+				<label class="input-group-text">대표 사진</label> 
+				<img name="" id="" style="height:10rem;" class="rounded" th:src="@{'data:image/png;base64,'+${image}}" />
 			</div>
-
+			<div class="input-group mb-2">
+				<label class="input-group-text">사진 변경</label> 
+				<input name="file" id="file" type="file" class="form-control">
+			</div>
+			
 			<div class="form-floating mb-2">
 				<textarea th:text="${sell.content}" id="summernote" name="content" class="form-control" required></textarea>
 			</div>
