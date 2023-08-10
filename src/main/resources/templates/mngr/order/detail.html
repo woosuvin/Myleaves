@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/base_layout}">
-<style>
-</style>
-<main layout:fragment="main">
+	layout:decorate="~{layout/mngr_base_layout}">
+
+<main layout:fragment="mngrHome">
 	<div>
-		<div>
-			<h2>마이 페이지 > 구매 내역 > 구매 내역 상세</h2>
+		<div >
+			<h2>관리자 페이지 > 구매 내역 > 구매 내역 상세</h2>
 		</div>
 
 		<div>
 
-			<input class="d-none" id="orderId" th:value="${order.orderId}" />
+			<span class="d-none" id="orderId" th:text="${ order.orderId }"></span>
 
 			<table class="table table-hover">
 				<thead>
@@ -24,14 +23,12 @@
 				</thead>
 				<tbody>
 					<tr th:each="detail: ${ details }">
-						<td class="col-1 text-center"><img class="rounded"
-							style="width: 6rem; height: 6rem;" src="/images/common/store.jpg" /></td>
-						<td style="vertical-align: middle;"
-							class="col-5 text-center textvcenter"><a
-							th:href="@{/store/detail(userId=${#authentication.name},itemId=${items.get(detail.itemId).itemId})}"
-							class="link-dark link-underline-opacity-0"> <span
-								th:text="${ items.get(detail.itemId).itemName }"></span>
-						</a></td>
+						<td class="col-1 text-center">
+							<img class="rounded" style="width: 6rem; height: 6rem;" src="/images/common/store.jpg" />
+						</td>
+						<td style="vertical-align: middle;" class="col-5 text-center textvcenter">
+							<span th:text="${ items.get(detail.itemId).itemName }"></span>
+						</td>
 						<td style="vertical-align: middle;" class="col-3 text-center"
 							th:text="${ detail.cnt }"></td>
 						<td style="vertical-align: middle;" class="col-3 text-center"
@@ -40,7 +37,7 @@
 				</tbody>
 			</table>
 		</div>
-		<!-- <form id="updateReasonForm"> -->
+		<form id="updateReasonForm">
 			<div>
 				<table class="table">
 					<thead>
@@ -56,7 +53,8 @@
 									<tbody>
 										<tr>
 											<th class="col-4">주문 일자</th>
-											<td class="col-8" th:text="${ #temporals.format(order.orderDate, 'yy/MM/dd HH:mm:ss')}"></td>
+											<td class="col-8" 
+												th:text="${ #temporals.format(order.orderDate, 'yy/MM/dd HH:mm:ss')}"></td>
 										</tr>
 										<tr>
 											<th class="col-4">주문 상태</th>
@@ -70,27 +68,6 @@
 										</th:block>
 									</tbody>
 								</table>
-								<div id="cancel" th:switch="${ order.status }"
-									class="m-3 text-center">
-									<th:block th:case="'상품 준비중'">
-										<small>상품 준비중, 배송중, 배송 완료 시 취소 불가</small>
-									</th:block>
-									<th:block th:case="'배송'">
-										<small>상품 준비중, 배송중, 배송 완료 시 취소 불가</small>
-									</th:block>
-									<th:block th:case="'배송 완료'">
-										<small>상품 준비중, 배송중, 배송 완료 시 취소 불가</small>
-									</th:block>
-									<th:block th:case="'주문 완료'">
-										<button id="btnCancel" class="btn btn-outline-dark">주문 취소하기</button>
-									</th:block>
-									<th:block th:case="'입금 대기'">
-										<button id="btnCancel" class="btn btn-outline-dark">주문 취소하기</button>
-									</th:block>
-									<th:block th:case="'입금 확인'">
-										<button id="btnCancel" class="btn btn-outline-dark">주문 취소하기</button>
-									</th:block>
-								</div>
 							</td>
 							<td class="col-6">
 								<table class="table table-borderless">
@@ -130,7 +107,7 @@
 					</tbody>
 				</table>
 			</div>
-		<!-- </form> -->
+		</form>
 		<div>
 			<table class="table">
 				<thead>
@@ -153,8 +130,9 @@
 								<tr>
 									<th>주소</th>
 									<td><span th:text="${ order.zipcode }"></span>
-										<span th:text="${ order.addr }"></span> <span
-										th:text="${ order.addrdetail }"></span></td>
+										<span th:text="${ order.addr }"></span> 
+										<span th:text="${ order.addrdetail }"></span>
+									</td>
 								</tr>
 								<tr>
 									<th>연락처</th>
@@ -171,8 +149,9 @@
 			</table>
 		</div>
 	</div>
+
 </main>
+
 <th:block layout:fragment="myscripts">
-	<script src="/js/store/mypageStoreDetail.js"></script>
 </th:block>
 </html>

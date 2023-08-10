@@ -13,31 +13,17 @@ public interface TotalOrderRepository extends JpaRepository<TotalOrder, Long> {
 	// 마이페이지 사용자 아이디로 가지고 오기
 	List<TotalOrder> findByUserIdOrderByOrderIdDesc(String UserId);
 	
-	// 관리자 걍 다 가져옴
-	List<TotalOrder> findByOrderByOrderIdDesc();
+	// 관리자 걍 다 가져옴 수빈: 주문 날짜 정렬로 바꿈
+	List<TotalOrder> findByOrderByOrderDateDesc();
 	
 	// 마이페이지 상세 사용자 아이디, 주문 번호로 가져오기
 	TotalOrder findByOrderId(long orderId);
 	
 	/**
 	 * 수빈
-	 * 빈 total_order 생성하여 주문상세 받을 준비
+	 * 관리자 주문 상태로 검색
 	 */
-//	@Transactional
-//	@Modifying
-//	@Query(value = "insert into TOTAL_ORDER "
-//			+ "(USER_ID, PRICE, NAME, ZIPCODE, ADDR, ADDRDETAIL, TEL, CNT, ITEM_NAME, ITEM_IMG) "
-//			+ "values "
-//			+ "(?1, -1, "
-//			+ "(select NAME from USER_INFO where USER_ID = ?1), "
-//			+ "'', '', '', '', -1, '', '')", nativeQuery = true)
-//	void insertTotalOrder(String user_id);
+	@Query(value = "select * from TOTAL_ORDER where STATUS=?1 order by ORDER_DATE desc", nativeQuery = true)
+	List<TotalOrder> findByStatus(String status);
 	
-//	@Transactional
-//	@Modifying
-//	@Query(value ="insert into TOTAL_ORDER "
-//			+ "(USER_ID) "
-//			+ "VALUES "
-//			+ "(?1)", nativeQuery = true)
-//	void insertTotalOrder(String userId);
 }

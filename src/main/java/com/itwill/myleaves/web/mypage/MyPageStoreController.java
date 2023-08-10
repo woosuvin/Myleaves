@@ -85,14 +85,5 @@ public class MyPageStoreController {
 		model.addAttribute("items", storeList);
 	}
 	
-	@PutMapping("/orderDetail/update/{orderId}")
-	public ResponseEntity<String> update(@PathVariable long orderId, @RequestBody TotalOrderUpdateDto dto){
-		// log.info("update(dto={})", dto);
-		log.info("update(orderId={}, dto={})", orderId, dto);
-		// orderService.update(dto);
-		orderService.update(orderId, dto);
-		// return "redirect:/mypage/store/orderDetail";
-		return ResponseEntity.ok("Success");
-	}
 	
 }

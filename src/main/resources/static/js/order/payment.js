@@ -3,10 +3,12 @@
  */
 
 function requestPay() {
-	console.log("님 됨?");
 
 	const form = document.querySelector('#orderForm');
-
+	
+	// 라디오버튼 체크 value, 1: 카드  3: 카카오페이
+	const radio = document.querySelector('input[name="payment"]:checked').value;
+	
 	const userId = document.querySelector('#userId').innerText;
 	const price = document.querySelector('#price').value;
 	const name = document.querySelector('.name').value;
@@ -22,11 +24,11 @@ function requestPay() {
 
 	var IMP = window.IMP;
 	IMP.init("imp03583343");
-
+	
+	
 	IMP.request_pay({
-
-		pg: "html5_inicis",
-		pay_method: "card",
+		pg: getPgMethod(),
+		pay_method: getPayMethod(),
 		merchant_uid: "merchant_" + new Date().getTime(),
 		name: itemName,
 		amount: price,
@@ -35,7 +37,7 @@ function requestPay() {
 		buyer_tel: tel,
 		buyer_addr: addr,
 		buyer_postcode: zipcode
-	},
+		},
 		function(rsp) { // callback
 			/** 결제 검증 **/
 			console.log(rsp);
@@ -47,7 +49,31 @@ function requestPay() {
 			} else {
 				alert("결제에 실패했습니다." + "에러코드 : " + rsp.error_code + " 에러 메시지 : " + rsp.error_message);
 			}
+	});
+	
+	function getPgMethod() {
+		switch(radio) {
+			case '1': // 카드
+				return "html5_inicis";
+				break;
+			
+			case '3': // 카페
+				return "kakao";
+				break;
+		}
+	}
 
-		});
+	function getPayMethod() {
+		switch(radio) {
+			case '1': // 카드
+				return "card";
+				break;
+			
+			case '3': // 카페
+				return "kakao";
+				break;
+		}
+	}
+	
 }
 

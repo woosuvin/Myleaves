@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.itwill.myleaves.dto.order.TotalOrderCreateDto;
+import com.itwill.myleaves.dto.order.TotalOrderReasonUpdateDto;
+import com.itwill.myleaves.dto.order.TotalOrderStatusUpdateDto;
 import com.itwill.myleaves.dto.order.TotalOrderUpdateDto;
 import com.itwill.myleaves.repository.orderDetail.OrderDetail;
 import com.itwill.myleaves.repository.orderDetail.OrderDetailRepository;
@@ -38,7 +40,38 @@ public class TotalOrderService {
 	 */
 	public List<TotalOrder> read(){
 		log.info("mngr read()");
-		return totalOrderRepository.findByOrderByOrderIdDesc();
+		return totalOrderRepository.findByOrderByOrderDateDesc();
+	}
+	
+	/**
+	 * 수빈
+	 * 관리자 주문 상태 수정
+	 */
+	public TotalOrder update(long orderId, TotalOrderStatusUpdateDto dto) {
+		log.info("update(orderId={} ,dto={})", orderId, dto);
+		TotalOrder entity = totalOrderRepository.findByOrderId(orderId);
+		entity.updateStatus(dto);
+		return totalOrderRepository.saveAndFlush(entity);
+	}
+	
+	/**
+	 * 수빈
+	 * 관리자 주문 상태로 검색
+	 */
+	public List<TotalOrder> searchStatus(String status) {
+		log.info("searchStatus");
+		return totalOrderRepository.findByStatus(status);
+	}
+	
+	/**
+	 * 수빈
+	 * 마이페이지 주문 취소, 취소 사유 업데이트
+	 */
+	public TotalOrder updateReason(long orderId, TotalOrderReasonUpdateDto dto) {
+		log.info("update(orderId={} ,dto={})", orderId, dto);
+		TotalOrder entity = totalOrderRepository.findByOrderId(orderId);
+		entity.updateReason(dto);
+		return totalOrderRepository.saveAndFlush(entity);
 	}
 	
 	/**

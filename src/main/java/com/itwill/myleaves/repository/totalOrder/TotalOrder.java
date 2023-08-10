@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.itwill.myleaves.dto.order.TotalOrderReasonUpdateDto;
+import com.itwill.myleaves.dto.order.TotalOrderStatusUpdateDto;
 import com.itwill.myleaves.dto.order.TotalOrderUpdateDto;
 
 import jakarta.persistence.Column;
@@ -110,6 +112,17 @@ public class TotalOrder {
 		this.cnt = dto.getCnt();
 		this.itemName = dto.getItemName();
 		this.itemImg = dto.getItemImg();
+		return this;
+	}
+	
+	public TotalOrder updateStatus(TotalOrderStatusUpdateDto dto) {
+		this.status = dto.getStatus();
+		return this;
+	}
+	
+	public TotalOrder updateReason(TotalOrderReasonUpdateDto dto) {
+		this.reason = dto.getReason();
+		this.status = dto.getStatus();
 		return this;
 	}
 	

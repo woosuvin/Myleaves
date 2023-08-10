@@ -15,8 +15,8 @@
 			</div>
 
 			<div class="input-group mb-2">
-				<span class="input-group-text">주문 상태</span> <select
-					class="form-select" name="searchOrderStatus">
+				<span class="input-group-text">주문 상태</span> 
+				<select class="form-select" name="searchOrderStatus">
 					<option selected disabled>선택</option>
 					<option value="주문 완료">주문 완료</option>
 					<option value="입금 대기">입금 대기</option>
@@ -40,7 +40,9 @@
 			</div>
 		</form>
 	</div>
+	
 	<div class="mt-5">
+		<small>* 주문 번호 클릭 시 주문 상세 내역 페이지로 이동합니다.</small>
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -48,31 +50,45 @@
 					<th class="text-center bg-transparent" scope="col">주문 회원 ID</th>
 					<th class="text-center bg-transparent" scope="col">주문 날짜</th>
 					<th class="text-center bg-transparent" scope="col">결제 금액</th>
+					<th class="text-center bg-transparent" scope="col">결제 방법</th>
 					<th class="text-center bg-transparent" scope="col">주문 상태</th>
 					<th class="text-center bg-transparent" scope="col">변경</th>
 				</tr>
 			</thead>
 			<tbody class="table-group-divider">
 				<tr th:each="order: ${ totalOrders }" class="border-dark">
-					<th scope="row" class="text-center bg-transparent"
-						th:text="${ order.orderId }"></th>
+					<th scope="row" class="text-center bg-transparent">
+						<a th:href="@{/mngr/order/detail(orderId=${ order.orderId })}"
+							th:text="${ order.orderId }"
+							class="link-dark link-underline-opacity-0">
+						</a>	
+					</th>
 					<td class="text-center bg-transparent" th:text="${ order.userId }"></td>
 					<td class="text-center bg-transparent"
 						th:text="${ #temporals.format(order.orderDate, 'yy/MM/dd HH:mm:ss')}"></td>
-					<td class="text-center bg-transparent" th:text="${order.price}">24,000원</td>
-					<td class="col-2 text-center bg-transparent"><select
-						class="text-center form-select form-select-sm">
-							<option selected disabled>선택</option>
-							<option value="주문 완료">주문 완료</option>
-							<option value="입금 대기">입금 대기</option>
-							<option value="상품 준비중">상품 준비중</option>
-							<option value="배송중">배송중</option>
-							<option value="배송 완료">배송 완료</option>
-							<option value="취소 처리중">취소 처리중</option>
-							<option value="취소 완료">취소 완료</option>
-					</select></td>
+					<td class="text-center bg-transparent"
+						th:text="|${#numbers.formatInteger(order.price, 0, 'COMMA')}원|"></td>
+					<th:block th:switch="${order.payment}">
+						<td th:case="1" 
+						class="text-center bg-transparent" th:text="|신용/체크카드|"></td>
+						<td th:case="2" 
+						class="text-center bg-transparent" th:text="무통장"></td>
+					</th:block>
+					<td class="col-2 text-center bg-transparent">
+						<select class="text-center form-select form-select-sm"
+							th:id="|status_${order.orderId}|" th:value="${order.status}">
+							<option value="주문 완료" th:selected="${order.status == '주문 완료'}">주문 완료</option>
+						    <option value="입금 대기" th:selected="${order.status == '입금 대기'}">입금 대기</option>
+						    <option value="상품 준비중" th:selected="${order.status == '상품 준비중'}">상품 준비중</option>
+						    <option value="배송중" th:selected="${order.status == '배송중'}">배송중</option>
+						    <option value="배송 완료" th:selected="${order.status == '배송 완료'}">배송 완료</option>
+						    <option value="취소 처리중" th:selected="${order.status == '취소 처리중'}">취소 처리중</option>
+						    <option value="취소 완료" th:selected="${order.status == '취소 완료'}">취소 완료</option>
+						</select>
+					</td>
 					<td class="text-center bg-transparent">
-						<button type="button" class="btn btn-sm btn-outline-dark">저장</button>
+						<button type="button" class="btn btn-sm btn-outline-dark" 
+							id="statudBtn" name="statusBtn" th:data-id="${order.orderId}">저장</button>
 					</td>
 				</tr>
 			</tbody>
@@ -80,5 +96,10 @@
 	</div>
 
 </main>
+
+<th:block layout:fragment="myscripts">
+	<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="/js/order/mngrOrder.js"></script>
+</th:block>
 
 </html>
