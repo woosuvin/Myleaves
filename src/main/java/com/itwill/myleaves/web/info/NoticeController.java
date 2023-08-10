@@ -74,16 +74,6 @@ public class NoticeController {
 	 * @param dto
 	 * @return
 	 */
-//	@PostMapping("/download")
-//	@ResponseBody
-//	public UploadFile downloadFile(@RequestBody DownloadFileReqDto dto) {
-//		UploadFile result = null;
-//		
-//		result = uploadFileService.readFile(dto.getUfid());
-//		
-//		return result;
-//	}
-	
 	@PostMapping("/download")
 	@ResponseBody
 	public byte[] downloadFile(@RequestBody DownloadFileReqDto dto) {

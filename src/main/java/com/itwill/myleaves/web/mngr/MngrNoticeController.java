@@ -195,12 +195,11 @@ public class MngrNoticeController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/download")
 	@ResponseBody
-	public UploadFile downloadFile(@RequestBody DownloadFileReqDto dto) {
+	public byte[] downloadFile(@RequestBody DownloadFileReqDto dto) {
 		UploadFile result = null;
-		
 		result = uploadFileService.readFile(dto.getUfid());
 		
-		return result;
+		return result.getAtchdFile();
 	}
 	
 	/**
