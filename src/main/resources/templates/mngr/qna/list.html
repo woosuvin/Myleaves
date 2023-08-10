@@ -28,11 +28,17 @@
 					<td th:if="${#strings.isEmpty(qna.an_title)}">
 						<a class="btn btn-primary" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">답변확인중</a>
 					</td>
-					
-					
 				</tr>
 			</tbody>
 		</table>
+		<!-- 페이징처리 시작 -->
+		<div class="text-center">
+			<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+	            <a th:if="${page != nowPage}" th:href="@{/mngr/qna/list(page=${page - 1})}" th:text="${page}"></a>
+	            <strong th:if="${page==nowPage}" th:text ="${page}" style="color:red"></strong>
+	        </th:block>
+        </div>
+		<!-- 페이징처리 끝 -->	
 		</div>
 	</main>
 </html>

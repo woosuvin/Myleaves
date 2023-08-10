@@ -2,6 +2,10 @@ package com.itwill.myleaves.web.mypage;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.itwill.myleaves.dto.qna.QnAUpdateDto;
 import com.itwill.myleaves.repository.qna.QnA;
 import com.itwill.myleaves.service.mypage.MypageQnAService;
-import com.itwill.myleaves.service.qna.QnAService;
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,12 +34,19 @@ public class MypageQnAController {
 	 * 내가 쓴 QnA 리스트 페이지
 	 */
 	@GetMapping("/qna_list")
-	public void qnaList(Model model, String userId) {
+	public void qnaList(Model model, String userId , @PageableDefault(page=0, size=10, sort="qid", direction=Sort.Direction.DESC) Pageable pageable) {
 		log.info("QnA My list()");
 		
-		List<QnA> list = mypageqnaService.allread(userId);
+		Page<QnA> list = mypageqnaService.allread(userId , pageable);
+		
+		int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
+        int startPage =  Math.max(nowPage - 4, 1); // 시작 페이지
+        int endPage = Math.min(nowPage +5, list.getTotalPages()); // 끝 페이지
 		
 		model.addAttribute("myQnAlist" , list);
+		model.addAttribute("nowPage",nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
 		
 	}
 	

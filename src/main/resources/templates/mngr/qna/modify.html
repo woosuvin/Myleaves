@@ -16,8 +16,8 @@
 					<input class="form-control d-none" id="title" name="title" th:value="${qna.title}" readonly />
 					<label class="form-label d-none" for="content">작성한 내용</label> 
 					<input class="form-control d-none" id="content" name="content" th:value="${qna.content}" readonly />
-					<label class="form-label d-none" for="user_id">작성한 아이디</label> 
-					<input class="form-control d-none" id="user_id" name="user_id" th:value="${qna.user_id}" readonly />
+					<label class="form-label d-none" for="userId">작성한 아이디</label> 
+					<input class="form-control d-none" id="userId" name="userId" th:value="${qna.userId}" readonly />
 					
 					
 				</div>
@@ -29,7 +29,7 @@
 						<h2 class="card-text" th:text="${qna.title}" id="title"></h2>
 						
 						<!-- 작성자 -->
-						<p id="author" class="card-text" th:text="${qna.user_id}"></p>
+						<p id="author" class="card-text" th:text="${qna.userId}"></p>
 										
 						<!-- 내용 -->
 						<hr />

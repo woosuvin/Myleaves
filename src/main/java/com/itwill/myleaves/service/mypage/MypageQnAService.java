@@ -2,6 +2,8 @@ package com.itwill.myleaves.service.mypage;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,10 +24,10 @@ public class MypageQnAService {
 	
 	// 내가 쓴 QnA 리스트 가져오기
 	@Transactional(readOnly = true)
-	public List<QnA> allread(String userId) {
+	public Page<QnA> allread(String userId, Pageable pageable) {
 		log.info("read()");
 		
-		return qnaRepository.findAllByUserIdOrderByQidDesc(userId);
+		return qnaRepository.findAllByUserIdOrderByQidDesc(userId ,pageable);
 	}
 	
 	// 내가 쓴 QnA 상세보기 

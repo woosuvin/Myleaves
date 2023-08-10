@@ -2,11 +2,15 @@ package com.itwill.myleaves.service.qna;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.qna.QnACreateDto;
 import com.itwill.myleaves.dto.qna.QnAMngrUpdateDto;
+import com.itwill.myleaves.dto.qna.QnASearchAndPageDto;
 import com.itwill.myleaves.dto.qna.QnAUpdateDto;
 import com.itwill.myleaves.repository.qna.QnA;
 import com.itwill.myleaves.repository.qna.QnARepository;
@@ -18,73 +22,100 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 public class QnAService {
-	
+
 	private final QnARepository qnaRepository;
-	
-	
+
 	/*
 	 * QnA 글 리스트 불러오기
 	 */
-    @Transactional(readOnly = true)
-    public List<QnA> read(){
-        log.info("read()");
-        
-        return qnaRepository.findByOrderByQidDesc();
-    }
-    /*
-     * QnA 글 상세보기
-     */
-    @Transactional(readOnly = true)
-    public QnA read(Long qid) {
-        log.info("read(qid={})" , qid);
-        return qnaRepository.findById(qid).orElseThrow();
-    }
+	@Transactional(readOnly = true)
+	public Page<QnA> read(Pageable pageable) {
+		log.info("read()");
+
+		return qnaRepository.findAll(pageable);
+	}
 	
+	/*
+	 * QnA 글 상세보기
+	 */
+	@Transactional(readOnly = true)
+	public QnA read(Long qid) {
+		log.info("read(qid={})", qid);
+		return qnaRepository.findById(qid).orElseThrow();
+	}
+
 	/*
 	 * QnA 글 새로 작성하기
 	 */
-    @Transactional(readOnly = true)
+	@Transactional(readOnly = true)
 	public QnA create(QnACreateDto dto) {
-		log.info("QnA(dto={})" , dto);
-		
+		log.info("QnA(dto={})", dto);
+
 		QnA entity = dto.toEntity();
-		log.info("before entity={}" , entity);
-		
+		log.info("before entity={}", entity);
+
 		qnaRepository.saveAndFlush(entity);
-		log.info("after entity={}" , entity);
-		
+		log.info("after entity={}", entity);
+
 		return entity;
 	}
-   
+
 	/*
 	 * QnA 글 수정하기
 	 */
-    @Transactional
-    public void update(QnAUpdateDto dto) {
-        log.info("update(dto={})" , dto);
-        
-        QnA entity = qnaRepository.findById(dto.getQid()).orElseThrow();
-        
-        entity.update(dto); 
-        
-    }
+	@Transactional
+	public void update(QnAUpdateDto dto) {
+		log.info("update(dto={})", dto);
+
+		QnA entity = qnaRepository.findById(dto.getQid()).orElseThrow();
+
+		entity.update(dto);
+
+	}
+
 	/*
 	 * QnA 글 삭제하기
 	 */
 	public void delete(Long qid) {
-	       log.info("delete{}" , qid);
-	       qnaRepository.deleteById(qid);   
-	    }
-	
+		log.info("delete{}", qid);
+		qnaRepository.deleteById(qid);
+	}
+
 	/*
-	 * QnA 관리자 답변 
+	 * QnA 관리자 답변
 	 */
 	@Transactional
 	public void updateMngr(QnAMngrUpdateDto dto) {
-		log.info("QnAMngr(dto={}" , dto);
-		
+		log.info("QnAMngr(dto={}", dto);
+
 		QnA entity = qnaRepository.findById(dto.getQid()).orElseThrow();
-	
+
 		entity.updateMngr(dto);
 	}
-}	
+
+	/*
+	 * QnA 사용자 검색 기능
+	 */
+	@Transactional(readOnly = true)
+	public Page<QnA> searchQnA(QnASearchAndPageDto dto , Pageable pageable) {
+		log.info("searchQnA(dto={}", dto);
+		Page<QnA> list = null;
+		switch (dto.getType()) {
+		case "t":
+			list = qnaRepository.findByTitleContainsIgnoreCaseOrderByQidDesc(dto.getKeyword(), pageable);
+			break;
+		case "c":
+			list = qnaRepository.findByContentContainsIgnoreCaseOrderByQidDesc(dto.getKeyword(), pageable);
+			break;
+		case "tc":
+			list = qnaRepository.searchBykeyword(dto.getKeyword(), pageable);
+			break;
+		case "a":
+			list = qnaRepository.findByUserIdContainsIgnoreCaseOrderByQidDesc(dto.getKeyword() ,pageable);
+			break;
+		}
+
+		return list;
+	}
+
+}
