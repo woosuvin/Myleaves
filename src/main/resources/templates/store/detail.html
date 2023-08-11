@@ -13,9 +13,9 @@ div {
 </style> -->
 
 <main layout:fragment="main">
-	<span id="userId" name="userId" th:text="${#authentication.name}"></span>
-	<span id="itemId" name="itemId" th:text="${store.itemId}"></span>
-	<h2>상품 상세보기</h2>
+	<span class="d-none" id="userId" name="userId" th:text="${#authentication.name}"></span>
+	<span class="d-none" id="itemId" name="itemId" th:text="${store.itemId}"></span>
+	<h3 class="text-center mb-5">상품 상세보기</h3>
 	<div class="container">
 		<!-- <form id="storeForm"> -->
 		<table class="table table-borderless">

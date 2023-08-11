@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,9 +37,10 @@ public class MyPageStoreController {
 	private final TotalOrderService orderService;
 	private final StoreService storeService;
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/storeWish")
 	public void wishList(StoreWish storeWishList, Model model) {
-		log.info("read()");
+//		log.info("read()");
 		
 		List<Store> list = myPageStoreService.read(storeWishList);
 		Map<Long, String> thumbnails = new HashMap<>();
@@ -50,14 +52,16 @@ public class MyPageStoreController {
 	
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/orderList")
 	public void orderList(String userId, Model model) {
-		log.info("read()");
+//		log.info("read()");
 		List<TotalOrder> list = orderService.read(userId);
 		
 		model.addAttribute("totalOrders", list);
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/orderDetail")
 	public void orderDetail(Long orderId, Model model) {
 		TotalOrder order = orderService.read(orderId);
@@ -80,16 +84,22 @@ public class MyPageStoreController {
 		Long deliveryPrice = order.getPrice() - totalDetail;
 		prices.put("deliveryPrice", deliveryPrice);
 		
+		Map<Long, String> thumbnails = new HashMap<>();
+		for(OrderDetail detail: detailList){
+			thumbnails.put(detail.getItemId(), Base64.getEncoder().encodeToString(storeService.read(detail.getItemId()).getThumbnail()));
+        }
+        model.addAttribute("images", thumbnails);
 		model.addAttribute("prices", prices);
 		model.addAttribute("order", order);
 		model.addAttribute("details", detailList);
 		model.addAttribute("items", storeList);
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@PutMapping("/orderDetail/update/{orderId}")
 	public ResponseEntity<String> update(@PathVariable long orderId, @RequestBody TotalOrderUpdateDto dto){
 		// log.info("update(dto={})", dto);
-		log.info("update(orderId={}, dto={})", orderId, dto);
+//		log.info("update(orderId={}, dto={})", orderId, dto);
 		// orderService.update(dto);
 		orderService.update(orderId, dto);
 		// return "redirect:/mypage/store/orderDetail";

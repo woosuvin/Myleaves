@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +31,10 @@ public class MyPageSellBuyController {
 	private final MypageSellBuyService mypageService;
 
 	// 입양 위시리스트
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/buyWish")
 	public void read(BuyWish wishList, Model model) {
-		log.info("read()");
+//		log.info("read()");
 		List<BuyWish> buyWishlist = mypageService.read(wishList);
 		List<Sell> sellList = new ArrayList<>();
 		
@@ -51,9 +53,10 @@ public class MyPageSellBuyController {
 	}
 	
 	// 분양 리스트
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/sellList")
 	public void sellList(String userId, Model model) {
-		log.info("read(userId={})", userId);
+//		log.info("read(userId={})", userId);
 		
 		List<Sell> sellList = sellService.readSellList(userId);
 
@@ -68,9 +71,10 @@ public class MyPageSellBuyController {
 	}
 	
 	// 입양 리스트
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/buyList")
 	public void buyList(String buyerId, Model model) {
-	    log.info("read(buyerId={})", buyerId);
+//	    log.info("read(buyerId={})", buyerId);
 
 	    List<Buy> buyList = sellService.readBuyList(buyerId);
 	    Map<Long, String> thumbnails = new HashMap<>();

@@ -36,7 +36,3 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 });
 
-
-/**
- * 지현 검색 영역
- */

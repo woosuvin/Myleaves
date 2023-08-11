@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,11 +44,13 @@ public class SellBuyController {
 	}
 
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/sell/create")
 	public void create() {
 //		log.info("create() GET");
 	}
 
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/sell/create")
 	public String create(SellCreateDto dto) throws IOException {
 //		log.info("create(dto={}) POST", dto);
@@ -65,6 +68,7 @@ public class SellBuyController {
 	 * @param sellId
 	 * @param model
 	 */
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/buy/detail")
 	public void readDetail(String userId, long sellId, Model model) {
 //		log.info("read(sellId={}", sellId);
@@ -90,19 +94,19 @@ public class SellBuyController {
 		model.addAttribute("sell", sell);
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("sell/modify")
 	public void read(Long sellId, Model model) throws IOException {
 //		log.info("read(sellId={})", sellId);
 
 		Sell sell = sellService.read(sellId);
 		String image = Base64.getEncoder().encodeToString(sell.getThumbnail());
-		byte[] thumbnail = sell.getThumbnail();
 		
-		model.addAttribute("thumbnail", thumbnail);
 		model.addAttribute("image", image);
 		model.addAttribute("sell", sell);
 	}
 
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/sell/update")
 	public String update(SellUpdateDto dto) throws IOException {
 //		log.info("update(dto={})", dto);
@@ -112,6 +116,7 @@ public class SellBuyController {
 		return "redirect:/buy/detail?sellId=" + dto.getSellId();
 	}
 
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/sell/delete")
 	public String delete(long sellId) {
 //		log.info("delete(sellId={})", sellId);

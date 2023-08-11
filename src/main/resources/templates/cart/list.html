@@ -7,14 +7,14 @@
 
 	<main layout:fragment="main">
     <div class="py-4 text-center">
-    	<h1>🍀장🍀바🍀구🍀니🍀</h1>
+    	<h3 class="text-center mb-5">장바구니</h3>
     </div>
     
     <span class="d-none" id="userId" name="userId" th:text="${#authentication.name}"></span>
     	
 	<th:block th:if="${#lists.isEmpty(carts)}">
 		 <div class="text-center my-5">
-		 	<h1>장바구니가 비어있음! ㅎㅎ</h1>
+		 	<h4>장바구니가 비어있습니다 🛒</h4>
 		 </div>
 	</th:block>
 
@@ -102,6 +102,7 @@
 	</main>
 
 <th:block layout:fragment="myscripts">
+	<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="/js/cart/cartList.js"></script>
 </th:block>
 

@@ -75,7 +75,7 @@ public class SellService {
 
 	public List<Sell> read() {
 		log.info("read()");
-		return sellRepository.findByOrderBySellIdDesc();
+		return sellRepository.findByOrderBySoldAscSellIdDesc();
 	}
 
 	public Sell read(long sellId) {

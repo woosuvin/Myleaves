@@ -31,9 +31,9 @@ public class StoreWishRestController {
 	 */
 	@PostMapping
 	public ResponseEntity<StoreWish> createStoreWish(@RequestBody WishStoreCreateDto dto) {
-		log.info("create(dto={})", dto);
+//		log.info("create(dto={})", dto);
 		StoreWish wish = storeService.createStoreWish(dto);
-		log.info(wish.toString());
+//		log.info(wish.toString());
 		return ResponseEntity.ok(wish);
 	}
 	

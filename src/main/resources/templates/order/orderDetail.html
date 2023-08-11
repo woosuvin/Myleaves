@@ -6,13 +6,11 @@
 	<main layout:fragment="main">
 	
 		<div>
-			<div>
-				<h2>장바구니 > 결제 페이지</h2>
-			</div>	
+			<h3 class="text-center mb-5">결제</h3>
 			
 		<form method="post" id="orderForm">
 			
-			<span class="" id="userId" name="userId" th:text="${#authentication.name}"></span>
+			<span class="d-none" id="userId" name="userId" th:text="${#authentication.name}"></span>
 			
 			<table class="table table-hover">
 				<thead>
@@ -59,17 +57,6 @@
 						<td>
 							<table class="table table-borderless">
 								<tbody>
-									<tr>
-										<td>
-											<div>
-												<input type="radio" id="defaultaddr" name="address" /> 
-												<label for="defaultaddr" >기본 배송지</label> 
-												<input type="radio" id="newaddr" name="address" /> 
-												<label for="newaddr">신규 입력</label>
-											</div>
-										</td>
-									</tr>
-									
 									<th:block th:if="${address != null}"> <!-- 기본배송지가 있으면 -->
 										<tr>
 											<td>
@@ -215,9 +202,9 @@
 			<h5>결제 방식</h5>
 			<div>
 				<input type="radio" id="card" name="payment" value="1" /> 
-				<label for="card" >신용/체크카드</label> 
+				<label class="me-3" for="card" >신용/체크카드</label> 
 				<input type="radio" id="kakaopay" name="payment" value="3" /> 
-				<label for="kakaopay">카카오페이</label>
+				<label class="me-3" for="kakaopay">카카오페이</label>
 				<input type="radio" id="withoutBank" name="payment" value="2" /> 
 				<label for="withoutBank">무통장 입금</label>
 			</div>
@@ -236,12 +223,12 @@
 					<span class="form-text">계좌 명의가 입금자와 동일해야 환불 가능합니다.</span>
 				</div>
 				<div class="text-center">
-					<button class="btn btn-outline-dark" type="submit" id="btnWithoutBank">결제하기</button>
+					<button class="btn btn-outline-dark mt-4" type="submit" id="btnWithoutBank">결제하기</button>
 				</div>
 			</div>
 		</form>
 		<div class="text-center" id="cardDiv" style="display:none;">
-			<button class="btn btn-outline-dark" id="btnWithCard" onclick="requestPay()">결제하기</button>
+			<button class="btn btn-outline-dark mt-4" id="btnWithCard" onclick="requestPay()">결제하기</button>
 		</div>
 	</div>
 </main>

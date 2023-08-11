@@ -4,30 +4,30 @@
     layout:decorate="~{layout/base_layout}">
     
 <main layout:fragment="main">
-<h1>분양 내역</h1>
+<h3 class="text-center mb-5">🌱 분양 내역</h3>
 <div class="container bg-transparent border-dark">
 	<div class="row row-cols-1 row-cols-md-4 g-4 mb-2">
 		<div class="col" th:each="sell: ${ sell }"> <!-- buy테이블 이름으로 바꿔야 함. -->
 			<div class="container p-0"
-				style="position: relative; text-align: center; color: black;">
+				style="position: sticky; text-align: center; color: black;">
 				<a th:switch="${sell.sold}"
 					th:href="@{/buy/detail?sellId={sellId} (sellId=${sell.sellId}) }">
 					<!-- 판매종료(buy>sold.equals("판매 종료"), 품절(store>inven==0) 흰색/문구 가운데 -->
 					<th:block th:case="1">
-							<img class="rounded mb-1" style="object-fit:cover; height:150px; width:150px;"
+							<img class="rounded mb-1" style="object-fit:cover; height: 250px; width:-webkit-fill-available;"
 								th:src="@{'data:image/png;base64,'+${images.get(sell.sellId)}}" />
 							<span class="link-dark centered rounded"
-								style="background: deeppink; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
+								style="background: hotpink; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
 								분양중</span>
 						</th:block> <th:block th:case="2">
-							<img class="rounded mb-1" style="object-fit:cover; height:150px; width:150px;"
+							<img class="rounded mb-1" style="object-fit:cover; height: 250px; width:-webkit-fill-available;"
 								th:src="@{'data:image/png;base64,'+${images.get(sell.sellId)}}" />
 							<span class="link-dark centered rounded"
 								style="background: mediumaquamarine; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
 								거래중</span>
 						</th:block> <th:block th:case="3">
 							<img class="rounded mb-1"
-								style="object-fit:cover; height:150px; width:150px; opacity: 50%;"
+								style="object-fit:cover; height: 250px; width:-webkit-fill-available; opacity: 50%;"
 								th:src="@{'data:image/png;base64,'+${images.get(sell.sellId)}}" />
 							<span class="link-dark centered rounded"
 								style="background: darkgray; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">

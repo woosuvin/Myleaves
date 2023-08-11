@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,7 @@ public class OrderController {
 	private final CartService cartService;
 	private final StoreService storeService;
 	
-	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/orderDetail")
 	public void read(Cart cart, Model model) {
 		List<Cart> cartList = cartService.read(cart);
@@ -80,6 +81,7 @@ public class OrderController {
 	 * 5. total_order를 주문 내용으로 UPDATE하기(결제 정보는 지금 update)
 	 * 6. 다 됐으면 orderSuccess로 redirect
 	 */
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/orderDetail")
 	public String create(TotalOrderCreateDto tcdto, AddressCreateDto adto, AddressUpdateDto audto, TotalOrderUpdateDto tudto) {
 		TotalOrder blankTotalOrder =  totalOrderService.create(tcdto); // 1. 빈 total_order insert
@@ -121,6 +123,7 @@ public class OrderController {
 		
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/orderSuccess")
 	public void read() {
 		
