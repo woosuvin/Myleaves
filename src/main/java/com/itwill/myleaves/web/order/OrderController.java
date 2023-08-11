@@ -1,5 +1,6 @@
 package com.itwill.myleaves.web.order;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,11 @@ public class OrderController {
 			Address address = addressService.read(cart.getUserId(), 1);
 			model.addAttribute("address", address);
 		}
-		
+		Map<Long, String> thumbnails = new HashMap<>();
+		for(Cart c: cartList){
+			thumbnails.put(c.getItemId(), Base64.getEncoder().encodeToString(storeService.read(c.getItemId()).getThumbnail()));
+        }
+        model.addAttribute("images", thumbnails);
 		model.addAttribute("carts", cartList);
 		model.addAttribute("price", totalItemPrice);
 		model.addAttribute("totalCnt", totalCnt);

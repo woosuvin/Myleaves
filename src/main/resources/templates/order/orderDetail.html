@@ -25,7 +25,8 @@
 				<tbody>
 					<tr th:each="cart: ${ carts }">
 						<td class="col-1 text-center">
-							<img class="rounded" style="width: 6rem; height: 6rem;" src="/images/common/store.jpg" />
+							<img class="rounded" style="object-fit:cover; height:100px; width:100px;"
+									th:src="@{'data:image/png;base64,'+${images.get(cart.itemId)}}" />
 						</td>
 						<td style="vertical-align: middle;" class="col-5 text-center textvcenter">
 							<span th:text="${ stores.get(cart.itemId).itemName }"></span>

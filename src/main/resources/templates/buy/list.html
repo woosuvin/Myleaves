@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/base_layout}">
-
+<th:block layout:fragment="mycsses">
+	<link th:href="@{/css/thumbnailList.css}" rel="stylesheet" />
+</th:block>
 <main layout:fragment="main">
 	<h1>내 풀잎 입양 리스트</h1>
 	<!-- 1. 품절 시 하얗게 / 문구 가운데 -->

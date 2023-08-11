@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		btn.addEventListener('click', modifyStatus);
 	}
 	
-	
-	
 });
+
+
+/**
+ * 지현 검색 영역
+ */
