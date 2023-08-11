@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.itwill.myleaves.dto.address.AddressUpdateDto;
 import com.itwill.myleaves.repository.cart.Cart;
 import com.itwill.myleaves.repository.cart.CartId;
 
@@ -54,5 +55,17 @@ public class Address {
 	private String tel;
 	
 	private String req;
+	
+	private int defAddr;
+	
+	public Address update(AddressUpdateDto dto) {
+		this.name = dto.getName();
+		this.zipcode = dto.getZipcode();
+		this.addr = dto.getAddr();
+		this.addrdetail = dto.getAddrdetail();
+		this.tel = dto.getTel();
+		this.req = dto.getReq();
+		return this;
+	}
 	
 }

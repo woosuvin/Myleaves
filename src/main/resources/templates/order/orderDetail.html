@@ -68,54 +68,108 @@
 											</div>
 										</td>
 									</tr>
-									<tr>
-										<td>
-										 	<label class="form-label">이름</label> <!-- address.name , totalOrder.name -->
-											<input class="name form-control" type="text" name="name" id="memberName" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<label class="form-label">우편번호</label>
-											<div class="input-group">
-												<input class="form-control" type="text" id="sample6_postcode" name="zipcode">
-												<input class="btn btn-outline-dark" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<label class="form-label">주소</label>
-											<input class="form-control" type="text" id="sample6_address" name="addr" placeholder="주소">
-											<div class="input-group mt-2" >
-												<input class="form-control" type="text" id="sample6_detailAddress" name="addrdetail" placeholder="상세주소">
-												<input class="form-control" type="text" id="sample6_extraAddress" placeholder="참고항목">	
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<label class="form-lable">연락처</label>
-											<input class="form-control" type="text" id="tel" name="tel" />
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" id="checkbox" value="N"/>
-												<label class="form-check-label" for="checkbox">기본 배송지로 설정하기</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<label class="form-lable">배송 시 요청 사항</label>
-											<input class="form-control"type="text" id="req" name="req" />
-											<div class="form-text">
-											  제주 및 도서 산간 지역의 배송은 추가 배송비가 발생할 수 있습니다.
-											</div>
-										</td>
-									</tr>
+									
+									<th:block th:if="${address != null}"> <!-- 기본배송지가 있으면 -->
+										<tr>
+											<td>
+											 	<label class="form-label">이름</label> <!-- address.name , totalOrder.name -->
+												<input class="name form-control" type="text" name="name" id="memberName" th:value="${address.name}" />
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="form-label">우편번호</label>
+												<div class="input-group">
+													<input class="form-control" type="text" id="sample6_postcode" name="zipcode" th:value="${address.zipcode}" />
+													<input class="btn btn-outline-dark" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="form-label">주소</label>
+												<input class="form-control" type="text" id="sample6_address" name="addr" placeholder="주소" th:value="${address.addr}">
+												<div class="input-group mt-2" >
+													<input class="form-control" type="text" id="sample6_detailAddress" name="addrdetail" placeholder="상세주소" th:value="${address.addrdetail}">
+													<input class="form-control" type="text" id="sample6_extraAddress" placeholder="참고항목">	
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="form-lable">연락처</label>
+												<input class="form-control" type="text" id="tel" name="tel" th:value="${address.tel}" />
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="defAddr" name="defAddr" value="1"/>
+													<label class="form-check-label" for="checkbox">기본 배송지로 설정하기</label>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="form-lable">배송 시 요청 사항</label>
+												<input class="form-control"type="text" id="req" name="req" th:value="${address.req}" />
+												<div class="form-text">
+												  제주 및 도서 산간 지역의 배송은 추가 배송비가 발생할 수 있습니다.
+												</div>
+											</td>
+										</tr>
+									</th:block>
+									<th:block th:unless="${address != null}" > <!-- 배송지가 없으면 -->
+										<tr>
+											<td>
+											 	<label class="form-label">이름</label> <!-- address.name , totalOrder.name -->
+												<input class="name form-control" type="text" name="name" id="memberName" />
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="form-label">우편번호</label>
+												<div class="input-group">
+													<input class="form-control" type="text" id="sample6_postcode" name="zipcode" />
+													<input class="btn btn-outline-dark" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="form-label">주소</label>
+												<input class="form-control" type="text" id="sample6_address" name="addr" placeholder="주소">
+												<div class="input-group mt-2" >
+													<input class="form-control" type="text" id="sample6_detailAddress" name="addrdetail" placeholder="상세주소">
+													<input class="form-control" type="text" id="sample6_extraAddress" placeholder="참고항목">	
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="form-lable">연락처</label>
+												<input class="form-control" type="text" id="tel" name="tel" />
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="defAddr" name="defAddr" value="1"/>
+													<label class="form-check-label" for="checkbox">기본 배송지로 설정하기</label>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<label class="form-lable">배송 시 요청 사항</label>
+												<input class="form-control"type="text" id="req" name="req"/>
+												<div class="form-text">
+												  제주 및 도서 산간 지역의 배송은 추가 배송비가 발생할 수 있습니다.
+												</div>
+											</td>
+										</tr>
+									</th:block>
+									
 								</tbody>
 							</table>
 						</td>

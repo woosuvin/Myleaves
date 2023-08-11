@@ -2,16 +2,14 @@ package com.itwill.myleaves.dto.address;
 
 import com.itwill.myleaves.repository.address.Address;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
+// 수빈
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class AddressCreateDto {
+public class AddressUpdateDto {
 	
-	private String userId;
+	// if defAddr 1(기본배송지)일 때 주소 수정할거니까 defAddr는 필요 없 나
+	private long addrId;
 	private String name;
 	private String zipcode;
 	private String addr;
@@ -22,14 +20,12 @@ public class AddressCreateDto {
 	
 	public Address toEntity() {
 		return Address.builder()
-				.userId(userId)
 				.name(name)
 				.zipcode(zipcode)
 				.addr(addr)
 				.addrdetail(addrdetail)
 				.tel(tel)
 				.req(req)
-				.defAddr(defAddr)
 				.build();
 	}
 }
