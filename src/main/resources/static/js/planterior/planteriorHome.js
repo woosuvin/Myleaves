@@ -28,8 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			e.preventDefault();
 
-			const stateContent = filterBtn.value
+			const stateContent = filterBtn.innerText
 			console.log(stateContent)
+			filterForm.action = 'planterior/search'
 			filterForm.method = 'post'
 			filterForm.submit();
 

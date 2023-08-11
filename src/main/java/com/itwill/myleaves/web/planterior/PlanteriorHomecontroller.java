@@ -160,11 +160,12 @@ public class PlanteriorHomecontroller {
 	}
 	
 	@PostMapping("/create")
-	public String create(PlanteriorCreateDto dto) {
-		log.info("create(dto ={}) post", dto);
+	public String create(PlanteriorCreateDto dto, PlanteriorCategoryCreateDto cdto) {
+		log.info("create(dto ={}, cdto = {}) post", dto, cdto);
 		
 		// form에서 가져온 data DB insert
 		planteriorService.create(dto);
+		categoryService.create(cdto);
 		
 		return "redirect:/planterior";
 		

@@ -12,7 +12,7 @@
 		<div class=" createTitle">
 			<h1 class="text-center">작성하기</h1>
 		</div>
-		<form action="" method="post" class="form-box" id="createForm"
+		<form  class="form-box" id="createForm"
 			encType="multipart/form-data">
 			<dl>
 				<div>
@@ -48,7 +48,7 @@
 					<div class="input-group">
 						<input type="text" id="plantNameEnglish" name="plantNameEnglish"
 							class="form-control" placeholder="식물의 영문을 입력하세요"
-							oninput="updateCharCount()" required />
+							 required />
 					</div>
 				</dd>
 				<br>
@@ -59,15 +59,19 @@
 					<span class="highlight-left">* 1개만 선택 가능</span> <br>
 					<div class="input-group">
 						<ul class="filterLists">
-							<button id="filterBtn" type="button">거실</button>
-							<button id="filterBtn" type="button">주방</button>
-							<button id="filterBtn" type="button">욕실</button>
-							<button id="filterBtn" type="button">방</button>
-							<button id="filterBtn" type="button">베란다</button>
+							<li>
+								<input th:src="@{/images/common/reset.svg}" name="reset" id="filter_reset_btn" />
+								<input class="filterBtn"  name="stateContent" value="거실"  />
+								<input class="filterBtn"  name="stateContent" value="주방"  />
+								<input class="filterBtn"  name="stateContent" value="욕실"  />
+								<input class="filterBtn"  name="stateContent" value="방"  />
+								<input class="filterBtn"  name="stateContent" value="베란다"  />
+							</li>
 						</ul>
+						<ul class="list-unstyled secondFilterSection" id="secondFilter" ></ul>
 					</div>
 					<!-- js 처리하기 -->
-					<div class="secondFilter"></div>
+					
 				</dd>
 			</dl>
 			<div>

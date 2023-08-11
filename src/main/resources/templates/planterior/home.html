@@ -15,19 +15,29 @@
 		</section>
 
 		<!-- 카테고리 -->
-		<form class="filterForm" action="" >
+		<form class="filterForm"  >
 			<section class="plants_filter_section" id="first_filter">
 				<div class="plants_filter_section" id="first_filter">
 						<!-- state_content -->
 						<ul class="filterLists list-unstyled">
 							<li>
-								<!-- 해당 css에 id="filterBtn" 이걸로 정해진 코드 존재함 -->
+								<!-- 해당 css에 id="filterBtn" 이걸로 정해진 코드 존재함 
 								<input type="image" th:src="@{/images/common/reset.svg}" name="reset" id="filter_reset_btn" />
 								<input type="button" class="filterBtn"  name="stateContent" value="거실"  />
 								<input type="button" class="filterBtn"  name="stateContent" value="주방"  />
 								<input type="button" class="filterBtn"  name="stateContent" value="욕실"  />
 								<input type="button" class="filterBtn"  name="stateContent" value="방"  />
 								<input type="button" class="filterBtn"  name="stateContent" value="베란다"  />
+								-->
+								<button id="filter_reset_btn"  name="reset">
+									<img th:src="@{/images/common/reset.svg}" />
+								</button>
+								<button class="filterBtn"  name="stateContent">거실</button>
+								<button class="filterBtn"  name="stateContent">주방</button>
+								<button class="filterBtn"  name="stateContent">욕실</button>
+								<button class="filterBtn"  name="stateContent">방</button>
+								<button class="filterBtn"  name="stateContent">베란다</button>
+							
 							</li>
 						</ul>
 				</div>
