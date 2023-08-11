@@ -1,19 +1,23 @@
 package com.itwill.myleaves.service.totalOrder;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.order.TotalOrderCreateDto;
 import com.itwill.myleaves.dto.order.TotalOrderReasonUpdateDto;
 import com.itwill.myleaves.dto.order.TotalOrderStatusUpdateDto;
 import com.itwill.myleaves.dto.order.TotalOrderUpdateDto;
+import com.itwill.myleaves.dto.order.TotalOrderdSearchDto;
 import com.itwill.myleaves.repository.orderDetail.OrderDetail;
 import com.itwill.myleaves.repository.orderDetail.OrderDetailRepository;
 import com.itwill.myleaves.repository.totalOrder.TotalOrder;
 import com.itwill.myleaves.repository.totalOrder.TotalOrderRepository;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 //지현
@@ -113,5 +117,12 @@ public class TotalOrderService {
 		return totalOrderRepository.saveAndFlush(entity);
 	}
 	
+	@Transactional(readOnly = true)
+	public List<TotalOrder> search(TotalOrderdSearchDto dto) throws ParseException{
+		return totalOrderRepository
+				.search(dto.getSearchUserId(), dto.getSearchStatus()
+						,dto.getSearchOrderDateStart(), dto.getSearchOrderDateEnd());
+		
+	}
 	
 }

@@ -4,19 +4,19 @@
 	layout:decorate="~{layout/mngr_base_layout}">
 
 <main layout:fragment="mngrHome">
-	<h1>주문 관리</h1>
+	<h3 class="text-center m-5">주문 관리</h3>
 	<div>
-		<form action="/shape/mngr/user/list" method="get" id="searchForm">
+		<form method="get" th:action="@{/mngr/order/search}">
 			<div class="input-group mb-2">
 				<span class="input-group-text">주문 날짜</span> 
-				<input type="date" id="mt_date" name="mt_date" class="form-control" placeholder="날짜">
-				<p>~</p>
-				<input type="date" id="mt_date" name="mt_date" class="form-control" placeholder="날짜">
+				<input type="date" id="mt_date" name="searchOrderDateStart" class="form-control" placeholder="날짜">
+				<span class="input-group-text">-</span> 
+				<input type="date" id="mt_date" name="searchOrderDateEnd" class="form-control" placeholder="날짜">
 			</div>
 
 			<div class="input-group mb-2">
 				<span class="input-group-text">주문 상태</span> 
-				<select class="form-select" name="searchOrderStatus">
+				<select class="form-select" name="searchStatus">
 					<option selected disabled>선택</option>
 					<option value="주문 완료">주문 완료</option>
 					<option value="입금 대기">입금 대기</option>
@@ -34,9 +34,9 @@
 			</div>
 
 			<div class="d-grid gap-2 d-md-flex justify-content-md-center">
-				<button id="btnSearch" class="btn btn-outline-dark" type="button">검색</button>
+				<button id="btnSearch" class="btn btn-outline-dark" type="submit">검색</button>
 				<button id="btnResetSearch" class="btn btn-outline-dark"
-					type="button">초기화</button>
+					th:href="@{/mngr/order/list}">초기화</button>
 			</div>
 		</form>
 	</div>

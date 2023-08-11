@@ -2,6 +2,8 @@ package com.itwill.myleaves.service.community;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,10 +25,10 @@ public class CommunityService {
 
 	// 커뮤니티 게시글 전체 리스트
 	@Transactional(readOnly = true)
-	public List<Community> read() {
+	public Page<Community> read(Pageable pageable) {
 		log.info("read()");
 
-		return communityRepository.findByOrderByCommunityIdDesc();
+		return communityRepository.findAll(pageable);
 	}
 	
 
@@ -73,22 +75,22 @@ public class CommunityService {
 
 
 	@Transactional(readOnly = true)
-	public List<Community> search(CommunitySearchDto dto) {
+	public Page<Community> search(CommunitySearchDto dto, Pageable pageable) {
 		log.info("search(dto)={}", dto);
 		
-		List<Community> list = null;
+		Page<Community> list = null;
 		switch (dto.getType()) {
 		case "t":
-			list = communityRepository.findByTitleContainsIgnoreCaseOrderByCommunityIdDesc(dto.getKeyword());
+			list = communityRepository.findByTitleContainsIgnoreCaseOrderByCommunityIdDesc(dto.getKeyword(), pageable);
 			break;
 		case "c":
-			list = communityRepository.findByContentContainsIgnoreCaseOrderByCommunityIdDesc(dto.getKeyword());
+			list = communityRepository.findByContentContainsIgnoreCaseOrderByCommunityIdDesc(dto.getKeyword(), pageable);
 			break;
 		case "tc":
-			list = communityRepository.searchByKeyword(dto.getKeyword());
+			list = communityRepository.searchByKeyword(dto.getKeyword(), pageable);
 			break;
 		case "u":
-			list = communityRepository.findByUserIdContainsIgnoreCaseOrderByCommunityIdDesc(dto.getKeyword());
+			list = communityRepository.findByUserIdContainsIgnoreCaseOrderByCommunityIdDesc(dto.getKeyword(), pageable);
 			break;
 		}
 		return list;

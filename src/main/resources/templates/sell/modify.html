@@ -5,7 +5,7 @@
 
 <main layout:fragment="main">
 	<div>
-		<h2>내풀잎🍀수정</h2>
+		<h3 class="text-center mb-5">🌱 분양 수정</h3>
 		<span class="d-none" id="selectedSido" th:text="${sell.sido}"></span>
 		<span class="d-none" id="selectedGungu" th:text="${sell.gungu}"></span>
 		
@@ -49,8 +49,8 @@
 			</nav>
 			<!-- <div class="text-center mt-2" th:if="${sell.userId} == ${#authentication.name}"> -->
             <div class="text-center mt-2">
+           		<a class="btn btn-secondary" id="btnDelete">삭제</a>
                 <a class="btn btn-outline-dark" id="btnUpdate">수정 등록</a>
-                <a class="btn btn-outline-dark" id="btnDelete">삭제</a>
             </div>
 		</form>
 	</div>

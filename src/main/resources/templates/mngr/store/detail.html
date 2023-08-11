@@ -1,36 +1,26 @@
-<!DOCTYPE html> <!-- 수빈 -->
+<!DOCTYPE html>
+<!-- 수빈 -->
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{layout/mngr_base_layout}">
-    
-	<main layout:fragment="mngrHome">
-		<form>
-			<div>
-				<div style="float: left;">
-					<img th:src="@{'data:image/png;base64,'+${image}}"  style="object-fit:cover; height:300px; width:300px;"/>
-				</div>
-				<div>
-					<table>
-						<tbody>
-							<tr>
-								<td th:text="${store.itemName}"
-									style="padding: 8px; font-size: 16px; font-weight: bold;"></td>
-							</tr>
-							<tr>
-								<td id="price" th:text="${store.price}"
-									style="padding: 8px; font-size: 16px;"></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- 재고 개수 -->
-				<div id="inven" th:text="${store.inven}"></div>
-				<div id="content" name="content" th:utext="${store.content}"></div>
-				<div class="my-2 text-center">
-					<a class="btn btn-secondary" id="btnCancel" th:href="@{/mngr/store/list}">취소</a> <!-- 리스트로 이동 -->
-					<a class="btn btn-outline-info" th:href="@{/mngr/store/modify?itemId={itemId} (itemId=${store.itemId})}">수정</a>
-				</div>
-			</div>
-		</form>
-	</main>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/mngr_base_layout}">
+
+<main layout:fragment="mngrHome">
+	<h3 class="text-center m-5">상품 관리 상세</h3>
+	<form>
+		<img class="rounded"
+			style="object-fit: cover; height: 300px; width: 300px;"
+			th:src="@{'data:image/png;base64,'+${image}}" />
+		<h3 class="mt-2" th:text="${store.itemName}"></h3>
+		<h5 th:text="|${#numbers.formatInteger(store.price, 0, 'COMMA')}원|"></h5>
+		<span>재고: </span><span id="inven" th:text="${store.inven}"></span>
+		<div id="content" name="content" th:utext="${store.content}"></div>
+		<div class="my-2 text-center">
+			<a class="btn btn-secondary" id="btnCancel"
+				th:href="@{/mngr/store/list}">취소</a>
+			<!-- 리스트로 이동 -->
+			<a class="btn btn-outline-info"
+				th:href="@{/mngr/store/modify?itemId={itemId} (itemId=${store.itemId})}">수정</a>
+		</div>
+	</form>
+</main>
 </html>

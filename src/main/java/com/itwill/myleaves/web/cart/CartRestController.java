@@ -43,9 +43,9 @@ public class CartRestController {
 	 */
 	@PostMapping
 	public ResponseEntity<Cart> create(@RequestBody CartCreateDto dto) {
-		log.info("create(dto={})", dto);
+//		log.info("create(dto={})", dto);
 		Cart cart = cartService.create(dto);
-		log.info(cart.toString());
+//		log.info(cart.toString());
 		return ResponseEntity.ok(cart);
 	}
 	
@@ -67,7 +67,7 @@ public class CartRestController {
 	@PutMapping("/update/{userId}/{itemId}")
 	public ResponseEntity<String> update(
 			@PathVariable String userId, @PathVariable long itemId, @RequestBody CartUpdateDto dto) {
-		log.info("update(userId={}, itemId={}, dto={})",userId, itemId, dto);
+//		log.info("update(userId={}, itemId={}, dto={})",userId, itemId, dto);
 		
 		cartService.update(userId, itemId, dto);
 		return ResponseEntity.ok("Success");

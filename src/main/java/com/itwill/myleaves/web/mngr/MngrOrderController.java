@@ -1,15 +1,19 @@
 package com.itwill.myleaves.web.mngr;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.myleaves.dto.order.TotalOrderUpdateDto;
+import com.itwill.myleaves.dto.order.TotalOrderdSearchDto;
 import com.itwill.myleaves.repository.orderDetail.OrderDetail;
 import com.itwill.myleaves.repository.store.Store;
 import com.itwill.myleaves.repository.totalOrder.TotalOrder;
@@ -32,9 +36,10 @@ public class MngrOrderController {
 	 * 주문 관리 페이지 리스트
 	 * @param model
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/list")
 	public void mngrHome(Model model) {
-		log.info("mngr order");
+//		log.info("mngr order");
 		List<TotalOrder> list = totalOrderService.read();
 		model.addAttribute("totalOrders", list);
 	}
@@ -45,6 +50,7 @@ public class MngrOrderController {
 	 * @param orderId
 	 * @param model
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/detail")
 	public void orderDetail(Long orderId, Model model) {
 		TotalOrder order = totalOrderService.read(orderId);
@@ -73,5 +79,14 @@ public class MngrOrderController {
 		model.addAttribute("items", storeList);
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/search")
+	public String search(TotalOrderdSearchDto dto, Model model) throws ParseException {
+//		log.info("search(dto={})",dto);
+		
+		List<TotalOrder> list = totalOrderService.search(dto);
+		model.addAttribute("totalOrders", list);		
+		return "/mngr/order/list";
+	}
 	
 }

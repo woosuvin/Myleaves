@@ -34,6 +34,5 @@ document.addEventListener('DOMContentLoaded', () => {
 		btn.addEventListener('click', modifyStatus);
 	}
 	
-	
-	
 });
+

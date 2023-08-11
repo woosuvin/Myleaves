@@ -1,29 +1,28 @@
 package com.itwill.myleaves.repository.community;
 
-import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.itwill.myleaves.repository.community_comment.CommunityComment;
 
 public interface CommunityRepository extends JpaRepository<Community, Long>{
 
-	List<Community> findByOrderByCommunityIdDesc();
-
-	List<Community> findByUserId(String userId);
+//	Page<Community> findByOrderByCommunityIdDesc(Pageable pageable);
+	Page<Community> findAll(Pageable pageable);
+	
+	Page<Community> findByUserId(String userId, Pageable pageable);
 	
 	Community findByCommunityId(Long communityId);
 
-	List<Community> findByTitleContainsIgnoreCaseOrderByCommunityIdDesc(String title);
+	Page<Community> findByTitleContainsIgnoreCaseOrderByCommunityIdDesc(String title, Pageable pageable);
 
-	List<Community> findByContentContainsIgnoreCaseOrderByCommunityIdDesc(String content);
+	Page<Community> findByContentContainsIgnoreCaseOrderByCommunityIdDesc(String content, Pageable pageable);
 
 
-	List<Community> findByUserIdContainsIgnoreCaseOrderByCommunityIdDesc(String userId);
+	Page<Community> findByUserIdContainsIgnoreCaseOrderByCommunityIdDesc(String userId, Pageable pageable);
 
 	
 	@Query(
@@ -32,14 +31,14 @@ public interface CommunityRepository extends JpaRepository<Community, Long>{
                " or lower(c.content) like lower('%' || :keyword || '%') "  +
                " order by c.communityId desc"
 			)
-	List<Community> searchByKeyword(@Param("keyword") String keyword);
+	Page<Community> searchByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
 	
 	
 	
-    List<Community> findByUserIdAndTitle(String userId, String title);
+	Page<Community> findByUserIdAndTitle(String userId, String title, Pageable pageable);
 
-	List<Community> findByContentAndUserId(String userId, String content);
+	Page<Community> findByContentAndUserId(String userId, String content, Pageable pageable);
 
 	 
 }

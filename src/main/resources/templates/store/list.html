@@ -4,9 +4,7 @@
     layout:decorate="~{layout/base_layout}">
     
 	<main layout:fragment="main">
-	<div class="py-4 text-center">
-    	<h1>내풀잎🍀스토어</h1>
-    </div>
+    <h3 class="text-center mb-5">스토어</h3>
     <!-- 1. 품절 시 하얗게 / 문구 가운데 -->
 	<div class="border-dark container">
 		<div class="row row-cols-1 row-cols-md-4 g-4 mb-2">
@@ -18,7 +16,7 @@
 					<a th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}"> 
 						<!-- 1, 품절일 경우 -->
 						<th:block th:case="1">
-							<img class="rounded mb-1" style="object-fit:cover; height:150px; width:150px; opacity: 50%;"
+							<img class="rounded mb-1" style="object-fit:cover; height: 250px; width:-webkit-fill-available; opacity: 50%;"
 								th:src="@{'data:image/png;base64,'+${images.get(store.itemId)}}" />
 							<span class="link-dark centered"
 								style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 10pt">
@@ -28,7 +26,7 @@
 						
 						<!-- 0, 판매중일 경우 -->
 						<th:block th:case="0">
-							<img class="rounded mb-1" style="object-fit:cover; height:150px; width:150px;"
+							<img class="rounded mb-1" style="object-fit:cover; height: 250px; width:-webkit-fill-available;"
 								th:src="@{'data:image/png;base64,'+${images.get(store.itemId)}}" />
 						</th:block>
 					</a>

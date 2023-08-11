@@ -6,10 +6,7 @@
 </style>
 <main layout:fragment="main">
 	<div>
-		<div>
-			<h2>마이 페이지 > 구매 내역 > 구매 내역 상세</h2>
-		</div>
-
+		<h3 class="text-center mb-5">구매 내역 상세</h3>
 		<div>
 
 			<input class="d-none" id="orderId" th:value="${order.orderId}" />
@@ -24,8 +21,9 @@
 				</thead>
 				<tbody>
 					<tr th:each="detail: ${ details }">
-						<td class="col-1 text-center"><img class="rounded"
-							style="width: 6rem; height: 6rem;" src="/images/common/store.jpg" /></td>
+						<td class="col-1 text-center">
+							<img class="rounded" style="object-fit:cover; height:100px; width:100px;"
+									th:src="@{'data:image/png;base64,'+${images.get(detail.itemId)}}" /></td>
 						<td style="vertical-align: middle;"
 							class="col-5 text-center textvcenter"><a
 							th:href="@{/store/detail(userId=${#authentication.name},itemId=${items.get(detail.itemId).itemId})}"
@@ -152,8 +150,7 @@
 								</tr>
 								<tr>
 									<th>주소</th>
-									<td><span th:text="${ order.zipcode }"></span>
-										<span th:text="${ order.addr }"></span> <span
+									<td><span th:text="${ order.addr }"></span> <span
 										th:text="${ order.addrdetail }"></span></td>
 								</tr>
 								<tr>

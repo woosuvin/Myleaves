@@ -10,7 +10,7 @@
 			
 			<h1 th:text="|${#authentication.name}님 안녕하세요!|"></h1> <!-- '/mypage' -->
 			<h4>
-				<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/myinfo}">&raquo;내 정보 보기</a>
+				<a class="text-uppercase nav-link link-dark" th:href="@{/mypage/profile/info(userId=${#authentication.name})}">&raquo;내 정보 보기</a>
 			</h4>
 		</div>
 		<div class="row mt-5">
@@ -52,7 +52,7 @@
 			</div>
 		</div>
 		<div class="row mt-2">
-			<div class="col"> <!— 커뮤니티 —>
+			<div class="col"> <!—- 커뮤니티 -—>
 				<h5>커뮤니티</h5>
 				<ul style="display:block; list-style: none; padding: 0">
 					<li>
@@ -63,7 +63,7 @@
 					</li>
 				</ul>
 			</div>
-			<div class="col"> <!— QnA —>
+			<div class="col"> <!—- QnA -—>
 				<h5>QnA</h5>
 				<ul style="display:block; list-style: none; padding: 0">
 					<li>

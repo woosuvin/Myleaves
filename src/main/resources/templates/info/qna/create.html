@@ -4,38 +4,41 @@
     layout:decorate="~{layout/base_layout}">
 	<main layout:fragment="main">
 		<div class="container">
-		    <div class="my-2 card">
-		        <div class="card-header text-center">
-		            <h1>QNA 문의글 작성하기</h1>
+		    <div class="my-2">
+		        <div class="mb-5 text-center">
+		            <h3>QNA 문의글 작성하기</h3>
 		        </div>
-		        <form method="post"> 
+		        <form method="post">
+		        <div class="card my-4">
 		            <div class="card-body">
-		                <!--  비밀글 -->
-		                <div class="form-check my-2">
-		                    <input class="form-check-input" type="checkbox" id="checkbox" checked> 
-		                    <label class="form-check-label" for="checkbox"> 비밀글 </label>
-		                </div>
-		                <textarea class="form-control d-none" id="secret" name="secret"></textarea>
-		
+		                 <!--  비밀글 -->
+				        <div class="form-check my-2  d-flex justify-content-end">
+				        	<input class="form-check-input me-2" type="checkbox" id="checkbox" checked> 
+				        	<label class="form-check-label me-2" for="checkbox"> 비밀글 </label>
+						</div>
+						<textarea class="form-control d-none" id="secret" name="secret"></textarea>
 		                <!-- 제목 -->
 		                <div class="my-2">    
 		                    <label class="form-label" for="title">제목</label> 
 		                    <input class="form-control" type="text" id="title" name="title" required autofocus />
 		                </div>
+		                <br />
 		                <!--  내용 -->
 		                <div class="my-2">
 		                    <label class="form-label" for="content">내용</label>
 		                    <textarea class="form-control" style="height: 200px;" id="content" name="content" required></textarea>
 		                </div>
+		                <br />
 		                <!-- 아이디 -->
 		                <div class="my-2 d-none">
 		                    <label class="form-label" for="userId">작성자 아이디</label>
 		                    <input class="form-control" type="text" id="userId" name="userId"  th:value="${#authentication.name}" readonly />
 		                </div>
 		            </div>
-		            <div class="mb-3 me-3 d-grid gap-2 d-md-flex justify-content-md-end">
-		                <input class="btn btn-outline-success justify-content-md-end" id="btnSubmit" type="submit" value="등록" />
-		                <a class=" btn btn-outline-success justify-content-md-end" type="submit" th:href="@{/info/qna}">취소</a>    
+		           </div>  
+		            <div style="text-align: right;" class="my-2">
+		                <input class="btn btn-outline-dark" id="btnSubmit" type="submit" value="등록" />
+		                <a class=" btn btn-secondary" type="submit" th:href="@{/info/qna}">취소</a>    
 		            </div>  
 		        </form>
 		    </div>

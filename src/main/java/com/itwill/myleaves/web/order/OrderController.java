@@ -1,9 +1,11 @@
 package com.itwill.myleaves.web.order;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.myleaves.dto.address.AddressCreateDto;
+import com.itwill.myleaves.dto.address.AddressUpdateDto;
 import com.itwill.myleaves.dto.order.TotalOrderCreateDto;
 import com.itwill.myleaves.dto.order.TotalOrderUpdateDto;
+import com.itwill.myleaves.repository.address.Address;
 import com.itwill.myleaves.repository.cart.Cart;
 import com.itwill.myleaves.repository.store.Store;
 import com.itwill.myleaves.repository.totalOrder.TotalOrder;
@@ -37,7 +41,7 @@ public class OrderController {
 	private final CartService cartService;
 	private final StoreService storeService;
 	
-	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/orderDetail")
 	public void read(Cart cart, Model model) {
 		List<Cart> cartList = cartService.read(cart);
@@ -52,6 +56,15 @@ public class OrderController {
 			storeList.put(c.getItemId(), storeService.read(c.getItemId()));
 		}
 		
+		if(addressService.read(cart.getUserId(), 1) != null) { // 기본 배송지가 있으면
+			Address address = addressService.read(cart.getUserId(), 1);
+			model.addAttribute("address", address);
+		}
+		Map<Long, String> thumbnails = new HashMap<>();
+		for(Cart c: cartList){
+			thumbnails.put(c.getItemId(), Base64.getEncoder().encodeToString(storeService.read(c.getItemId()).getThumbnail()));
+        }
+        model.addAttribute("images", thumbnails);
 		model.addAttribute("carts", cartList);
 		model.addAttribute("price", totalItemPrice);
 		model.addAttribute("totalCnt", totalCnt);
@@ -68,8 +81,9 @@ public class OrderController {
 	 * 5. total_order를 주문 내용으로 UPDATE하기(결제 정보는 지금 update)
 	 * 6. 다 됐으면 orderSuccess로 redirect
 	 */
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/orderDetail")
-	public String create(TotalOrderCreateDto tcdto, AddressCreateDto adto, TotalOrderUpdateDto tudto) {
+	public String create(TotalOrderCreateDto tcdto, AddressCreateDto adto, AddressUpdateDto audto, TotalOrderUpdateDto tudto) {
 		TotalOrder blankTotalOrder =  totalOrderService.create(tcdto); // 1. 빈 total_order insert
 		
 		Long orderId = blankTotalOrder.getOrderId(); // 2. 1번의 order_id의 정보 갖고오기
@@ -92,7 +106,13 @@ public class OrderController {
 		}
 		
 		
-		addressService.create(adto); // 4. address insert
+		if (addressService.read(blankTotalOrder.getUserId(), 1) == null) { // 4. address insert 신규 배송지거나 기본배송지가 테이블에 없거나
+		    addressService.create(adto); 
+		} else if (adto.getDefAddr() == 0) { // 기본 배송지 있는데 신규 배송지 입력할 때
+		    addressService.create(adto);
+		} else if (adto.getDefAddr() != 0) { // 기본 배송지 있는데 기본 배송지 업데이트할 때
+		    addressService.update(blankTotalOrder.getUserId(), audto);
+		}
 		
 		totalOrderService.update(orderId, tudto); //  5. total_order를 주문 내용으로 UPDATE하기(결제 정보는 지금 update)
 		
@@ -103,6 +123,7 @@ public class OrderController {
 		
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/orderSuccess")
 	public void read() {
 		

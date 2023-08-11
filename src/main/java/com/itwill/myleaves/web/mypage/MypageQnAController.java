@@ -39,6 +39,8 @@ public class MypageQnAController {
 		
 		Page<QnA> list = mypageqnaService.allread(userId , pageable);
 		
+		
+		
 		int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
         int startPage =  Math.max(nowPage - 4, 1); // 시작 페이지
         int endPage = Math.min(nowPage +5, list.getTotalPages()); // 끝 페이지

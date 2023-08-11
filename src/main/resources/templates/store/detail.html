@@ -13,9 +13,9 @@ div {
 </style> -->
 
 <main layout:fragment="main">
-	<span id="userId" name="userId" th:text="${#authentication.name}"></span>
-	<span id="itemId" name="itemId" th:text="${store.itemId}"></span>
-	<h2>상품 상세보기</h2>
+	<span class="d-none" id="userId" name="userId" th:text="${#authentication.name}"></span>
+	<span class="d-none" id="itemId" name="itemId" th:text="${store.itemId}"></span>
+	<h3 class="text-center mb-5">상품 상세보기</h3>
 	<div class="container">
 		<!-- <form id="storeForm"> -->
 		<table class="table table-borderless">
@@ -43,7 +43,7 @@ div {
 								type="button" style="height: 1.5rem; font-size: 7pt;">-</button>
 
 							<!-- submit 할 때 필요한거 1: 상품의 수량 --> <input id="cnt" name="cnt"
-							type="text" class="form-control" value="1"
+							type="text" class="form-control" value="1" readonly
 							style="height: 1.5rem; font-size: 7pt; text-align: center;" /> <!-- 수량 더하기 -->
 							<button id="btnPlus" class="btn btn-sm btn-outline-secondary"
 								type="button" style="height: 1.5rem; font-size: 7pt;">+</button>

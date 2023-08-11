@@ -34,9 +34,9 @@ public class BuywishRestContoller {
 	 */
 	@PostMapping
 	public ResponseEntity<BuyWish> createBuyWish(@RequestBody WishSellCreateDto dto) {
-		log.info("create(dto={})", dto);
+//		log.info("create(dto={})", dto);
 		BuyWish wish = sellService.create(dto);
-		log.info(wish.toString());
+//		log.info(wish.toString());
 		return ResponseEntity.ok(wish);
 	}
 	

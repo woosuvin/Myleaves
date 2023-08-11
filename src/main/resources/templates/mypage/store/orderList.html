@@ -4,9 +4,9 @@
     layout:decorate="~{layout/base_layout}">
     
 <main layout:fragment="main">
-<h1>구매 내역</h1>
+<h3 class="text-center mb-5">구매 내역</h3>
 <div>
-	<table class="table table-hover ">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th class="text-center">주문일자</th>
@@ -16,7 +16,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="order: ${ totalOrders }" class="border-dark">
+			<tr th:each="order: ${ totalOrders }">
 				<td class="col-3 text-center"
 					th:text="${ #temporals.format(order.orderDate, 'yy/MM/dd HH:mm:ss')}"></td>
 				<td class="col-3 text-center"><a

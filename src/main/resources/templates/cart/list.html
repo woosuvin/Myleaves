@@ -7,14 +7,14 @@
 
 	<main layout:fragment="main">
     <div class="py-4 text-center">
-    	<h1>🍀장🍀바🍀구🍀니🍀</h1>
+    	<h3 class="text-center mb-5">장바구니</h3>
     </div>
     
     <span class="d-none" id="userId" name="userId" th:text="${#authentication.name}"></span>
     	
 	<th:block th:if="${#lists.isEmpty(carts)}">
 		 <div class="text-center my-5">
-		 	<h1>장바구니가 비어있음! ㅎㅎ</h1>
+		 	<h4>장바구니가 비어있습니다 🛒</h4>
 		 </div>
 	</th:block>
 
@@ -26,7 +26,8 @@
 	    				<tr class="">
 	    					<td class="col-1" style="width: 6rem;"> <!-- th:value="${store.thumbnail}" -->
 	    						<a th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}">
-	    							<img class="rounded" src="/images/common/store.jpg" style="width: 6rem; height: 6rem;" />
+	    							<img class="rounded" style="object-fit:cover; height:100px; width:100px;"
+									th:src="@{'data:image/png;base64,'+${images.get(store.itemId)}}" />
 	    						</a>
 	    					</td>
 	    					<td class="col-6" style="vertical-align: middle">
@@ -40,7 +41,7 @@
 										type="button" style="height: 1.5rem; font-size: 7pt;" th:attr="data-btnMinus=${store.itemId}">-</button>
 								
 									<th:block th:each="cart: ${carts}">
-										<input th:if="${store.itemId} == ${cart.itemId}" 
+										<input th:if="${store.itemId} == ${cart.itemId}" readonly
 											th:id="|cnt_${cart.itemId}|" name="cnt" type="text" class="form-control" th:value="${cart.cnt}" 
 											style="height: 1.5rem; font-size: 7pt; text-align: center;" />
 									</th:block>
@@ -87,9 +88,9 @@
 	   		<br/>
 	   		<br/>
 	   		
-	   		<div class="d-grid gap-2 col-6 mx-auto">
+	   		<div class="text-center">
 	   			<!-- <button th:href="@{/order/orderDetail(userId=${#authentication.name})}" class="btn btn-outline-dark btn-lg">구매하기</button> -->
-	   			<a class="btn btn-outline-dark btn-lg" th:href="@{/order/orderDetail(userId=${#authentication.name})}">
+	   			<a class="btn btn-outline-dark" th:href="@{/order/orderDetail(userId=${#authentication.name})}">
 	   			구매하기
 	   			</a>
 	   		</div>
@@ -101,6 +102,7 @@
 	</main>
 
 <th:block layout:fragment="myscripts">
+	<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="/js/cart/cartList.js"></script>
 </th:block>
 

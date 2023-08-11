@@ -13,6 +13,8 @@ html, body {
 }
 
 #body-content {
+	width: 75%;
+	margin: 50px auto 0;
 	padding-bottom: 200px; /* footer의 높이 */
 }
 
