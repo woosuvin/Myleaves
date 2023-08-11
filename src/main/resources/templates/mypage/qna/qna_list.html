@@ -3,13 +3,16 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/base_layout}">
 	<main layout:fragment="main">
-		<div class="container">
-			<div class="text-center my-5">
-				<h1>내가 작성한 QnA 리스트</h1>
-			</div>
+		<div class="mb-5 text-center">
+				<h3>내가 작성한 QnA 리스트</h3>
+		</div>
+		<div style="text-align: right;" class="my-2">
+			<a class="btn btn-outline-dark" th:href="@{/info/qna/create}">문의</a>
+			<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
+		</div>
 		<form id="qnamyalldeleteForm" method="post" class="my-2">	
-		   	<table class="table center">
-				<thead>
+		   	<table class="table table-hover">
+				<thead class="text-center">
 					<tr>
 						<th scope="col"><input type="checkbox" id="selectAll" /></th>
 						<th scope="col">No.</th>
@@ -17,7 +20,7 @@
 						<th scope="col">작성일</th>
 					</tr>
 				</thead>
-				<tbody class="table-group-divider">
+				<tbody class="text-center">
 					<tr th:each="qnalist: ${myQnAlist}">
 						<td scope="col">
 							<input type="checkbox" id="selectedQnaIds" name="selectedQnaIds" th:value="${qnalist.qid}" />
@@ -26,7 +29,8 @@
 						</td>
 						<th th:text=${qnalist.qid}></th>
 						<td scope="col">
-							<a th:href="@{/mypage/qna/detail?(userId=${#authentication.name},qid=${qnalist.qid})}" th:text=${qnalist.title}></a>
+							<a th:href="@{/mypage/qna/detail?(userId=${#authentication.name},qid=${qnalist.qid})}" th:text=${qnalist.title}
+							class="text-decoration-none text-reset"></a>
 						</td>
 						<td scope="col" th:text="${#temporals.format(qnalist.createdDate, 'yy-MM-dd HH:mm')}"></td> 
 					</tr>	
@@ -34,18 +38,25 @@
 			</table>
 		</form>
 		<!-- 페이징처리 시작 -->
-		<div class="text-center">
-			<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
-	            <a th:if="${page != nowPage}" th:href="@{/mypage/qna/qna_list(userId=${#authentication.name},page=${page - 1})}" th:text="${page}"></a>
-	            <strong th:if="${page==nowPage}" th:text ="${page}" style="color:red"></strong>
-	        </th:block>
-        </div>
+        <nav aria-label="...">
+	    <ul class="pagination pagination-sm justify-content-center">
+	        <!--  이전 페이지 세트로 가는 화살표-->
+	        <li th:if="${startPage > 1}" class="page-item">
+	            <a th:href="@{/mypage/qna/qna_list(userId=${#authentication.name},page=${page - 1})}" class="page-link">&laquo;</a>
+	        </li>
+	       <!--  페이지 번호들 (최대 5개까지 표시)-->
+	        <li th:each="page : ${#numbers.sequence(startPage, endPage)}"
+	            class="page-item">
+	            <a th:if="${page == nowPage}" class="page-link active" th:text="${page}" style="color: white; background-color: black; border-color: black;"></a>
+	            <a th:if="${page != nowPage}" th:href="@{/mypage/qna/qna_list(userId=${#authentication.name},page=${page - 1})}" class="page-link" th:text="${page}" style="color: black;"></a>
+	        </li>
+	        <!-- 다음 페이지 세트로 가는 화살표-->
+	        <li th:if="${endPage < myQnAlist.totalPages}" class="page-item">
+	            <a th:href="@{/info/qna(page=${endPage})}" class="page-link">&raquo;</a>
+	        </li>
+	    </ul>
+	</nav>
 		<!-- 페이징처리 끝 -->	
-		<div style="text-align: center;" class="my-2">
-			<a class="btn btn-outline-success" th:href="@{/info/qna/create}">문의하기</a>
-			<button class="btn btn-outline-success" type="submit" id="btnAllDelete">삭제</button>
-		</div>
-</div>	
 	<script src="/js/info/qna/my_qna_alldelete.js"></script>
 	</main>
 </html>
