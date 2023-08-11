@@ -16,11 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	 * 검색 + home controller에 보내야 함. 그래야 찾지  => create.js에도 추가 필. => postmapping 참고하기
 	 * 
 	 */
-	
+
 	// 검색 초기화 구현
-	
-	
+
+
 	// 검색 요소들
+	const inputStateContent = document.querySelector('input#stateContent');
+	const inputConditionContent = document.querySelector('input#conditionContent');
 	const filterForm = document.querySelector('.filterForm')
 	const filterBtns = document.querySelectorAll('.filterBtn')
 	for (const filterBtn of filterBtns) {
@@ -28,52 +30,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			e.preventDefault();
 
-			const stateContent = filterBtn.innerText
-			console.log(stateContent)
-			filterForm.action = 'planterior/search'
-			filterForm.method = 'post'
-			filterForm.submit();
+			console.log('ghkrdls');
+			e.preventDefault();
 
 			// li 삽입할 ul 요소를 찾음
-			const secondFilter = document.querySelector('#secondFilter')
+			const secondFilter = document.querySelector('#secondFilter');
+			secondFilter.classList.remove('d-none');
 
-			// 추가
-			let htmlStr = ''
-			htmlStr += `
-				<li>
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="초보자용"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="선물하기 좋은"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="공기정화"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="빛이 적어도 되는"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="향기나는"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="반려동물 안전한"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="목대있는"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="흙이 필요없는"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="덩굴로 자라는"  />
-					
-				</li>
-				`
-			secondFilter.innerHTML = htmlStr;
+			console.log(e.target.value);
 
-			const filterSecondBtns = document.querySelectorAll('input.filterSecondBtn')
-			for (let btn of filterSecondBtns) {
-				btn.addEventListener('click', (e) => {
-					e.preventDefault();
+			inputStateContent.value = e.target.value;
+			inputConditionContent.value = '';
 
-					const stateContent = filterBtn.value
-					const conditionContent = btn.value
-					filterForm.method = 'post'
-					filterForm.submit();
+			const stateContent = document.querySelector('input#stateContent').value;
+			const conditionContent = document.querySelector('input#conditionContent').value;
 
-				})
-			}
+			//console.log(stateContent)
+			//filterForm.action = '/planterior/search'
+			//filterForm.method = 'get'
+			//filterForm.submit();
 
 		})
 	}
 
+	const filterSecondBtns = document.querySelectorAll('input.filterSecondBtn');
+	for (let btn of filterSecondBtns) {
+		btn.addEventListener('click', (e) => {
+			console.log(e.target.value);
+			inputConditionContent.value += e.target.value + ',';
+		})
+	}
 
 
-
+	const click = document.querySelector('#click');
+	click.addEventListener('click', () => {
+		
+		const stateContent = document.querySelector('input#stateContent').value;
+		const conditionContent = document.querySelector('input#conditionContent').value;
+	
+		filterForm.action = '/planterior/search'
+		filterForm.method = 'get'
+		filterForm.submit();
+		
+	});
 
 
 

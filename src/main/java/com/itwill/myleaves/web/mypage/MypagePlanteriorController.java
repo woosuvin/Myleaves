@@ -17,6 +17,7 @@ import com.itwill.myleaves.repository.planterior.BookmarkRepository;
 import com.itwill.myleaves.repository.planterior.Planterior;
 import com.itwill.myleaves.repository.planterior.PlanteriorRepository;
 import com.itwill.myleaves.service.palnterior.BookmarkService;
+import com.itwill.myleaves.service.palnterior.CategoryService;
 import com.itwill.myleaves.service.palnterior.MypageService;
 import com.itwill.myleaves.service.palnterior.PlanteriorService;
 
@@ -31,6 +32,7 @@ public class MypagePlanteriorController {
 	
 	private final MypageService mypageService;
 	private final BookmarkService bookmarkService;
+	private final CategoryService categoryService;
 	
 	// 내가 쓴 글 읽기
 	@GetMapping("/my_posts")

@@ -12,8 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itwill.myleaves.dto.planterior.TotalCreateDto;
 import com.itwill.myleaves.dto.planterior.PlanteriorCategoryCreateDto;
 import com.itwill.myleaves.dto.planterior.PlanteriorCreateDto;
 import com.itwill.myleaves.repository.member.Member;
@@ -46,6 +49,7 @@ public class PlanteriorHomecontroller {
 		
 		Slice<Planterior> list = planteriorService.read(0,20);
 		List<Bookmark> bookList = bookmarkService.read();
+		// count가져오기
 		
 		// 최종
 		Map<Long, Long> bookmarkMap = new HashMap<>();
@@ -70,14 +74,11 @@ public class PlanteriorHomecontroller {
 	}
 	
 	// 검색
-	// 플랜테리어 아이디와 카테고리 아이디를 비교해서 같으면 해당 플랜테리어 카드를 가지고 옴. -- a
-	// -> 해당 list에서 북마크와의 사용자를 비교해서 가져오기 -- b
-	// model로 a, b를 넘겨야 함. 단, 저 ""는동일하게
-	@PostMapping
+	@GetMapping("search")
 	public String filterRead(Model model, PlanteriorCategoryCreateDto dto, Authentication auth) {
 		log.info("filterRead(dto={})",dto);
 		
-		if(dto.getConditionContent() == null) {
+		if(dto.getConditionContent().isEmpty()) {
 			List<PlanteriorCategory> stateList = categoryService.findState(dto.getStateContent());
 			List<Planterior> list = planteriorService.read();
 			List<Bookmark> bookList = bookmarkService.read();
@@ -92,8 +93,7 @@ public class PlanteriorHomecontroller {
 					}
 				}
 			}
-			log.info("검색 플랜테리어 사이즈=", preResult.size());
-			model.addAttribute("cardList", preResult);
+			log.info("검색 플랜테리어 사이즈= {}", preResult.size());
 			
 			// (2) 북마크 가져오기
 			Map<Long, Long> bookmarkMap = new HashMap<>();
@@ -109,8 +109,11 @@ public class PlanteriorHomecontroller {
 					}
 				}
 			  }
+			
+			model.addAttribute("cardList", preResult);
 			model.addAttribute("bookmark", bookmarkMap);
-			return "redirect:/planterior";
+			model.addAttribute("count", preResult.size());
+			return "planterior/home";
 			
 		} else {
 			List<PlanteriorCategory> stateList = categoryService.findStateAndCondition(dto.getStateContent(), dto.getConditionContent());
@@ -127,7 +130,7 @@ public class PlanteriorHomecontroller {
 					}
 				}
 			}
-			log.info("검색 플랜테리어 사이즈=", preResult.size());
+			log.info("검색 플랜테리어 사이즈= {}", preResult.size());
 			model.addAttribute("cardList", preResult);
 			
 			// (2) 북마크 가져오기
@@ -145,7 +148,8 @@ public class PlanteriorHomecontroller {
 				}
 			  }
 			model.addAttribute("bookmark", bookmarkMap);
-			return "redirect:/planterior";
+			model.addAttribute("count", preResult.size());
+			return "planterior/home";
 		}
 		
 	}
@@ -160,12 +164,14 @@ public class PlanteriorHomecontroller {
 	}
 	
 	@PostMapping("/create")
-	public String create(PlanteriorCreateDto dto, PlanteriorCategoryCreateDto cdto) {
-		log.info("create(dto ={}, cdto = {}) post", dto, cdto);
+	public String create(TotalCreateDto dto) {
+		log.info("create(dto ={}) post", dto);
 		
 		// form에서 가져온 data DB insert
-		planteriorService.create(dto);
-		categoryService.create(cdto);
+		Planterior entity = planteriorService.create(dto.planteriorCreateDto());
+		log.info("확인 = {}", entity.getPlanteriorId());
+		
+		categoryService.create(dto.planteriorCategoryCreateDto(entity.getPlanteriorId()));
 		
 		return "redirect:/planterior";
 		

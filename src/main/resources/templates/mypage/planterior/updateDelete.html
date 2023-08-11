@@ -57,18 +57,34 @@
 
 				<dt align="left" class="dt_class">카테고리</dt>
 				<dd align="left">
-					<span class="highlight-left">* 1개만 선택 가능</span> <br>
+					<span class="highlight-left">* 2조건 다 선택하세요</span> <br>
 					<div class="input-group">
-						<ul class="filterLists">
-							<button id="filterBtn" type="button">거실</button>
-							<button id="filterBtn" type="button">주방</button>
-							<button id="filterBtn" type="button">욕실</button>
-							<button id="filterBtn" type="button">방</button>
-							<button id="filterBtn" type="button">베란다</button>
+						<ul class="filterLists list-unstyled">
+							<li>
+								<input type="image" th:src="@{/images/common/reset.svg}" name="reset" id="filter_reset_btn" />
+								<input type="button" class="filterBtn"  value="거실"  />
+								<input type="button" class="filterBtn"  value="주방"  />
+								<input type="button" class="filterBtn"  value="욕실"  />
+								<input type="button" class="filterBtn"  value="방"  />
+								<input type="button" class="filterBtn"  value="베란다"  />
+							</li>
+						</ul>
+						<input class="d-none" name="stateContent" id="stateContent" />
+						<input class="d-none" name="conditionContent" id="conditionContent" />
+						<ul class="d-none secondFilterSection" id="secondFilter" >
+							<li>
+								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="초보자용"  />
+								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="선물하기 좋은"  />
+								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="공기정화"  />
+								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="빛이 적어도 되는"  />
+								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="향기나는"  />
+								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="반려동물 안전한"  />
+								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="목대있는"  />
+								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="흙이 필요없는"  />
+								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="덩굴로 자라는"  />
+							</li>
 						</ul>
 					</div>
-					<!-- js 처리하기 -->
-					<div class="secondFilter"></div>
 				</dd>
 			</dl>
 			<div>

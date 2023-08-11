@@ -2,24 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/base_layout}">
-	
+
 <main layout:fragment="main">
 
 	<div class="container text-center">
 		<div class="m-5">
-			<h1> 플랜테리어 북마크 </h1>
-			<h1> 삭제도 가능하게 할까요? </h1>
+			<h1>플랜테리어 북마크</h1>
 		</div>
 		<div class="m-2">
 			<div class="row row-cols-1 row-cols-md-4 g-4">
 				<div class="col" th:each="list: ${cardList}">
+					<input type="hidden" id="userId" name="userId" th:value="${#authentication.name}" /> 
+					<input type="hidden" id="plantName" th:value="${list.plantName}" /> 
+					<input type="hidden" id="planteriorId" th:value="${list.planteriorId}" />
 					<div class="card">
 						<img th:src="@{/images/planterior/eucalyptus.png}" />
 						<!-- <img th:text="${list.img}" />  -->
-						<div class="card-body">
-							<!-- 일렬로 맞추기 -->
-							<p class="planteriorButtonEle"
-								th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+						<div class="card-body row">
+							<div class="col-9">
+								<p class="planteriorButtonEle text-start"
+									th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+							</div>
+							<div class="col-3 text-end">
+								<button class="imgButtonFill" th:value="${list.planteriorId}">
+									<img th:src="@{/images/planterior/bookmarkFill.svg}" />
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -32,6 +40,6 @@
 
 </main>
 <th:block layout:fragment="myscripts">
-	<script src="/js/planterior/planteriorBookmark.js"></script>
+	<script src="/js/planterior/mypage.js"></script>
 </th:block>
 </html>

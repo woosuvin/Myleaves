@@ -2,8 +2,12 @@ package com.itwill.myleaves.dto.planterior;
 
 import com.itwill.myleaves.repository.planterior.Planterior;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class PlanteriorCreateDto {
 

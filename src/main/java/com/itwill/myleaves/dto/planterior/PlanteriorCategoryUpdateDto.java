@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class PlanteriorCategoryUpdateDto {
 	
+	private Long pcid;
 	private String stateContent;
 	private String conditionContent;
 	private Long planteriorId;
@@ -16,6 +17,7 @@ public class PlanteriorCategoryUpdateDto {
 				.planteriorId(planteriorId)
 				.conditionContent(conditionContent)
 				.stateContent(stateContent)
+				.pcid(pcid)
 				.build();
 	}
 }

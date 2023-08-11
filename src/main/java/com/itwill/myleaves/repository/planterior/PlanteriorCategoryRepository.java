@@ -11,5 +11,8 @@ public interface PlanteriorCategoryRepository extends JpaRepository<PlanteriorCa
 
 	
 	// 상태 + 조건 카테고리 선택시 플랜테리어 아이디 검색됨.
-	List<PlanteriorCategory> findAllByStateContentAndConditionContent(String stateContent, String conditionContent);
+	List<PlanteriorCategory> findAllByStateContentAndConditionContentContainsIgnoreCase(String stateContent, String conditionContent);
+
+	// 검색 결과 수
+	//Long countcountByPlanteriorId(Long planteriorId);
 }

@@ -28,7 +28,7 @@ public class CategoryService {
 	public List<PlanteriorCategory> findStateAndCondition(String stateContent, String conditionContent) {
 		log.info("findStateAndCondition(stateContent = {}, conditionContent = {})", stateContent, conditionContent);
 
-		return planteriorCategoryRepository.findAllByStateContentAndConditionContent(stateContent, conditionContent);
+		return planteriorCategoryRepository.findAllByStateContentAndConditionContentContainsIgnoreCase(stateContent, conditionContent);
 	}
 
 	public PlanteriorCategory create(PlanteriorCategoryCreateDto dto) {
@@ -44,5 +44,12 @@ public class CategoryService {
 		return entity;
 
 	}
+	
+//	// 검색 수
+//	public Long countByPId(Long planteriorId) {
+//		log.info("countByPId = {}", planteriorId);
+//		
+//		return planteriorCategoryRepository.countcountByPlanteriorId(planteriorId);
+//	}
 
 }
