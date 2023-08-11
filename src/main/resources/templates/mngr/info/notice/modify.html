@@ -31,7 +31,7 @@
 				</form>
 				<input type="button" value="추가" id="af-add" class="btn btn-primary btn-sm">
 				<table class="table table-bordered my-1">
-					<thead>
+					<thead class="text-center">
 						<tr>
 							<th>파일 이름</th>
 							<th>삭제</th>
@@ -58,9 +58,9 @@
 			</div>
 			
 			<div class="d-grid gap-2 d-md-flex col-6 mx-auto justify-content-md-center">
-				<a class="btn btn-primary" type="button" th:href="@{/mngr/notice/list}">목록</a>
-				<a class="btn btn-primary" type="button" id="updateBtn">저장</a>
-				<a class="btn btn-primary" type="button" id="deleteBtn">삭제</a>
+				<a class="btn btn-outline-dark" type="button" th:href="@{/mngr/notice/list}">목록</a>
+				<a class="btn btn-outline-dark" type="button" id="updateBtn">수정 완료</a>
+				<a class="btn btn-secondary" type="button" id="deleteBtn">삭제</a>
 			</div>
 		</div>
 	</div>

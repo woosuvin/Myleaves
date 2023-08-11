@@ -4,11 +4,11 @@
     layout:decorate="~{layout/base_layout}">
     
 <main layout:fragment="main">
-	<div class="my-3 mx-auto w-75 text-center">
+	<div class="mb-5 text-center">
 		<h1>공지사항</h1>
 	</div>	
-	<div class="mx-auto w-75">
-		<table class="table">
+	<div>
+		<table class="table table-hover">
 			<thead class="text-center">
 				<tr>
 					<th>No</th>
@@ -28,7 +28,8 @@
 					</td>
 					<td class="text-start">
 						<a th:href="@{ /info/notice/detail?nid={nid} (nid = ${fix.nid}) }"
-							th:text="${fix.title}"></a>
+							th:text="${fix.title}"
+							class="text-decoration-none text-reset"></a>
 					</td>
 					<td th:text="${ #temporals.format(fix.created_Date, 'yyyy-MM-dd') }"></td>
 				</tr>
@@ -36,7 +37,8 @@
 					<td th:text="${nfix.rn}"></td>
 					<td class="text-start">
 						<a th:href="@{ /info/notice/detail?nid={nid} (nid = ${nfix.nid}) }"
-							th:text="${nfix.title}"></a>
+							th:text="${nfix.title}"
+							class="text-decoration-none text-reset"></a>
 					</td>
 					<td th:text="${ #temporals.format(nfix.created_Date, 'yyyy-MM-dd') }"></td>
 				</tr>

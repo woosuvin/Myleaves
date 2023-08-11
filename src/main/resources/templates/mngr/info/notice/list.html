@@ -5,7 +5,7 @@
 
 <main layout:fragment="mngrHome">
    	<h1>공지사항</h1>
-   	<table class="table">
+   	<table class="table table-hover">
 		<thead class="text-center">
 			<tr>
 				<th>No</th>
@@ -25,7 +25,8 @@
 				</td>
 				<td class="text-start">
 					<a th:href="@{ /mngr/notice/detail?nid={nid} (nid = ${fix.nid}) }"
-						th:text="${fix.title}"></a>
+						th:text="${fix.title}"
+						class="text-decoration-none text-reset"></a>
 				</td>
 				<td th:text="${ #temporals.format(fix.created_Date, 'yyyy-MM-dd') }"></td>
 			</tr>
@@ -33,7 +34,8 @@
 				<td th:text="${nfix.rn}"></td>
 				<td class="text-start">
 					<a th:href="@{ /mngr/notice/detail?nid={nid} (nid = ${nfix.nid}) }"
-						th:text="${nfix.title}"></a>
+						th:text="${nfix.title}"
+						class="text-decoration-none text-reset"></a>
 				</td>
 				<td th:text="${ #temporals.format(nfix.created_Date, 'yyyy-MM-dd') }"></td>
 			</tr>
@@ -69,7 +71,7 @@
 				</form>
 			</div>
 			<div class="col-3 text-end">
-				<a class="btn btn-primary" th:href="@{/mngr/notice/write}">공지사항 작성</a>
+				<a class="btn btn-outline-dark" th:href="@{/mngr/notice/write}">공지사항 작성</a>
 			</div>
 		</div>
 	</div>
