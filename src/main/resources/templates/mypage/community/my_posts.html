@@ -51,6 +51,17 @@
 		<input class="form-control btn btn-outline-dark" type="submit" value="검색" />
 	</div>
 </form>
+<!-- 페이징처리 시작 -->
+<nav aria-label="...">
+	<ul class="pagination pagination-sm justify-content-center">
+		<li th:each="page : ${#numbers.sequence(startPage, endPage)}"
+			class="page-item"><a th:if="${page == nowPage}"
+			class="page-link active" th:text="${page}"></a> <a
+			th:if="${page != nowPage}" th:href="@{/mypage/community/my_posts(userId=${ #authentication.name },page=${page - 1})}"
+			class="page-link" th:text="${page}"></a></li>
+	</ul>
+</nav>
+<!-- 페이징처리 끝 -->
 </main>
 <th:block layout:fragment="myscripts">>
      <script src="/js/community/community-mypage.js"></script>

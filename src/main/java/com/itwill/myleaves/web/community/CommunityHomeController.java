@@ -2,6 +2,10 @@ package com.itwill.myleaves.web.community;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,14 +35,23 @@ public class CommunityHomeController {
 	private final CommunityCommentService communityCommentService;
 	
 	@GetMapping
-	public String post(Model model) { 
+	public String post(Model model, @PageableDefault(page=0, size=10, sort="communityId", direction=Sort.Direction.DESC) Pageable pageable) { 
 		log.info("community home");
 		
 		// 포스트 목록 검색
-	    List<Community> list = communityService.read();
+	    Page<Community> list = communityService.read(pageable);
 	    
+	    int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
+        int startPage =  Math.max(nowPage - 4, 1); // 시작 페이지
+        int endPage = Math.min(nowPage +5, list.getTotalPages()); // 끝 페이지
+       
+        
 	    // Model 검색 결과를 세팅.
 	    model.addAttribute("posts", list );
+	    model.addAttribute("nowPage",nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+       
 		
 		return "community/home";
 	}
@@ -152,12 +165,18 @@ public class CommunityHomeController {
 	}
 	
 	@GetMapping("/search")
-	public String search(CommunitySearchDto dto, Model model) {
+	public String search(CommunitySearchDto dto, Model model,  @PageableDefault(page=0, size=10, sort="communityId", direction=Sort.Direction.DESC) Pageable pageable) {
 		log.info("search(dto={})", dto);
 		
-		List<Community> list = communityService.search(dto);
-		
+		Page<Community> list = communityService.search(dto, pageable);
+	    int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
+        int startPage =  Math.max(nowPage - 4, 1); // 시작 페이지
+        int endPage = Math.min(nowPage +5, list.getTotalPages()); // 끝 페이지
+        
 		model.addAttribute("posts", list);
+	    model.addAttribute("nowPage",nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
 		
 		return "community/home";
 		

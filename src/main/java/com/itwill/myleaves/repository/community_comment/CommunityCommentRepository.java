@@ -2,6 +2,8 @@ package com.itwill.myleaves.repository.community_comment;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +20,7 @@ public interface CommunityCommentRepository extends JpaRepository<CommunityComme
 	Long countByCommunityId(Community communityId);
 //	Long countByCommunityId(Long communityId);
 	
-	List<CommunityComment> findByUserId(String userId);
+	Page<CommunityComment> findByUserId(String userId, Pageable pageable);
 	
 	@Transactional
 	@Modifying

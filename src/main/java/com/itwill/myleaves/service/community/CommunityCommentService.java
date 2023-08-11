@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.itwill.myleaves.dto.community.CommunityCommentCreateDto;
 import com.itwill.myleaves.dto.community.CommunityCommentUpdateDto;
-import com.itwill.myleaves.dto.community.CommunitySearchDto;
 import com.itwill.myleaves.repository.community.Community;
 import com.itwill.myleaves.repository.community.CommunityRepository;
 import com.itwill.myleaves.repository.community_comment.CommunityComment;

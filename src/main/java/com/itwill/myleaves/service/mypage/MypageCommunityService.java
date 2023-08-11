@@ -2,6 +2,8 @@ package com.itwill.myleaves.service.mypage;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.itwill.myleaves.dto.community.CommunitySearchDto;
@@ -21,18 +23,18 @@ public class MypageCommunityService {
 	private final CommunityCommentRepository communityCommentRepository;
 
 	// 마이페이지 내가 쓴 게시글 목록  
-	public List<Community> read(String userId) {
+	public Page<Community> read(String userId, Pageable pageable) {
 		log.info("my_posts Service read()");
-		List<Community> list = communityRepository.findByUserId(userId);
+		Page<Community> list = communityRepository.findByUserId(userId, pageable);
 
 		return list;
 	}
 	
 	
 	// 마이페이지 내가 쓴 댓글 검색 (댓글 페이지 / 1)
-	public List<CommunityComment> readComments(String userId) {
+	public Page<CommunityComment> readComments(String userId, Pageable pageable) {
 		log.info("my_comments Service read()");
-		List<CommunityComment> list = communityCommentRepository.findByUserId(userId);
+		Page<CommunityComment> list = communityCommentRepository.findByUserId(userId, pageable);
 		return list;
 	}
 	
@@ -44,19 +46,19 @@ public class MypageCommunityService {
 
 	
 	// 마이페이지 게시글 검색 기능 	
-	public List<Community> search(CommunitySearchDto dto) {
+	public Page<Community> search(CommunitySearchDto dto, Pageable pageable) {
 		log.info("search(dto)={}", dto);
-		List<Community> list = null;
+		Page<Community> list = null;
 		switch (dto.getType()) {
 		case "t":
-			list = communityRepository.findByUserIdAndTitle(dto.getUserId(), dto.getKeyword());
+			list = communityRepository.findByUserIdAndTitle(dto.getUserId(), dto.getKeyword(), pageable);
 			break;
 		case "c":
-			list = communityRepository.findByContentAndUserId(dto.getKeyword(), dto.getUserId());
+			list = communityRepository.findByContentAndUserId(dto.getKeyword(), dto.getUserId(), pageable);
 			break;
 		}
 		
-		log.info("lise size = {}", list.size());
+//		log.info("lise size = {}", list.size());
 		return list;
 	}
 	
