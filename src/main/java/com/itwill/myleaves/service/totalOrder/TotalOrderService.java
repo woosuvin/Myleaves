@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,9 +44,9 @@ public class TotalOrderService {
 	 * 관리자 주문 관리용
 	 * @return
 	 */
-	public List<TotalOrder> read(){
-		log.info("mngr read()");
-		return totalOrderRepository.findByOrderByOrderDateDesc();
+	public Page<TotalOrder> read(Pageable pageable){
+//		log.info("mngr read()");
+		return totalOrderRepository.findByOrderByOrderDateDesc(pageable);
 	}
 	
 	/**
@@ -52,7 +54,7 @@ public class TotalOrderService {
 	 * 관리자 주문 상태 수정
 	 */
 	public TotalOrder update(long orderId, TotalOrderStatusUpdateDto dto) {
-		log.info("update(orderId={} ,dto={})", orderId, dto);
+//		log.info("update(orderId={} ,dto={})", orderId, dto);
 		TotalOrder entity = totalOrderRepository.findByOrderId(orderId);
 		entity.updateStatus(dto);
 		return totalOrderRepository.saveAndFlush(entity);
@@ -63,7 +65,7 @@ public class TotalOrderService {
 	 * 관리자 주문 상태로 검색
 	 */
 	public List<TotalOrder> searchStatus(String status) {
-		log.info("searchStatus");
+//		log.info("searchStatus");
 		return totalOrderRepository.findByStatus(status);
 	}
 	
@@ -72,7 +74,7 @@ public class TotalOrderService {
 	 * 마이페이지 주문 취소, 취소 사유 업데이트
 	 */
 	public TotalOrder updateReason(long orderId, TotalOrderReasonUpdateDto dto) {
-		log.info("update(orderId={} ,dto={})", orderId, dto);
+//		log.info("update(orderId={} ,dto={})", orderId, dto);
 		TotalOrder entity = totalOrderRepository.findByOrderId(orderId);
 		entity.updateReason(dto);
 		return totalOrderRepository.saveAndFlush(entity);
@@ -83,9 +85,9 @@ public class TotalOrderService {
 	 * @param UserId
 	 * @return
 	 */
-	public List<TotalOrder> read(String UserId){
-		log.info("mypage read()");
-		return totalOrderRepository.findByUserIdOrderByOrderIdDesc(UserId);
+	public Page<TotalOrder> read(String UserId, Pageable pageable){
+//		log.info("mypage read()");
+		return totalOrderRepository.findByUserIdOrderByOrderIdDesc(UserId, pageable);
 	}
 	
 	/**
@@ -108,20 +110,26 @@ public class TotalOrderService {
 	 */
 	@Transactional
 	public TotalOrder update(long orderId, TotalOrderUpdateDto dto) {
-		log.info("update(orderId={} ,dto={})", orderId, dto);
+//		log.info("update(orderId={} ,dto={})", orderId, dto);
 		TotalOrder entity = totalOrderRepository.findByOrderId(orderId);
-		log.info("before entity={}",entity);
+//		log.info("before entity={}",entity);
 		entity.update(dto);
 		
-		log.info("after entity={}", entity);
+//		log.info("after entity={}", entity);
 		return totalOrderRepository.saveAndFlush(entity);
 	}
 	
+	/**
+	 * 지현 검색 페이징추가
+	 * @param dto
+	 * @return
+	 * @throws ParseException
+	 */
 	@Transactional(readOnly = true)
-	public List<TotalOrder> search(TotalOrderdSearchDto dto) throws ParseException{
+	public Page<TotalOrder> search(TotalOrderdSearchDto dto, Pageable pageable) throws ParseException{
 		return totalOrderRepository
 				.search(dto.getSearchUserId(), dto.getSearchStatus()
-						,dto.getSearchOrderDateStart(), dto.getSearchOrderDateEnd());
+						,dto.getSearchOrderDateStart(), dto.getSearchOrderDateEnd(), pageable);
 		
 	}
 	

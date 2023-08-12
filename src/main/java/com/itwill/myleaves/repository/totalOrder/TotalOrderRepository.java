@@ -3,6 +3,8 @@ package com.itwill.myleaves.repository.totalOrder;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,10 +16,10 @@ import com.itwill.myleaves.dto.order.TotalOrderdSearchDto;
 public interface TotalOrderRepository extends JpaRepository<TotalOrder, Long> {
 
 	// 마이페이지 사용자 아이디로 가지고 오기
-	List<TotalOrder> findByUserIdOrderByOrderIdDesc(String UserId);
+	Page<TotalOrder> findByUserIdOrderByOrderIdDesc(String UserId, Pageable pageable);
 	
-	// 관리자 걍 다 가져옴 수빈: 주문 날짜 정렬로 바꿈
-	List<TotalOrder> findByOrderByOrderDateDesc();
+	// 관리자 걍 다 가져옴 수빈: 주문 날짜 정렬로 바꿈 지현 페이징 추가
+	Page<TotalOrder> findByOrderByOrderDateDesc(Pageable pageable);
 	
 	// 마이페이지 상세 사용자 아이디, 주문 번호로 가져오기
 	TotalOrder findByOrderId(long orderId);
@@ -41,9 +43,10 @@ public interface TotalOrderRepository extends JpaRepository<TotalOrder, Long> {
 	        + "AND (:searchOrderDateStart IS NULL OR ORDER_DATE >= :searchOrderDateStart) "
 	        + "AND (:searchOrderDateEnd IS NULL OR ORDER_DATE <= :searchOrderDateEnd) "
 	        + "ORDER BY ORDER_DATE DESC", nativeQuery = true)
-	List<TotalOrder> search(@Param("searchUserId") String searchUserId,
+	Page<TotalOrder> search(@Param("searchUserId") String searchUserId,
 	                        @Param("searchStatus") String searchStatus,
 	                        @Param("searchOrderDateStart") String searchOrderDateStart,
-	                        @Param("searchOrderDateEnd") String searchOrderDateEnd);
+	                        @Param("searchOrderDateEnd") String searchOrderDateEnd,
+	                        Pageable pageable);
 
 }

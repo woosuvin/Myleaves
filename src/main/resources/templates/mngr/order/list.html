@@ -73,6 +73,8 @@
 						class="text-center bg-transparent" th:text="|신용/체크카드|"></td>
 						<td th:case="2" 
 						class="text-center bg-transparent" th:text="무통장"></td>
+						<td th:case="3" 
+						class="text-center bg-transparent" th:text="카카오페이"></td>
 					</th:block>
 					<td class="col-2 text-center bg-transparent">
 						<select class="text-center form-select form-select-sm"
@@ -94,7 +96,27 @@
 			</tbody>
 		</table>
 	</div>
-
+	<!-- 페이징~ -->
+		<div class="pt-5">
+			<nav id="paging-block">
+				<ul class="pagination justify-content-md-center">
+					<li class="page-item">
+						<a class="page-link" th:href="@{/mngr/order/list(page=${0})}">
+							&laquo;
+						</a>
+					</li>
+					<li th:each="page : ${#numbers.sequence(startPage, endPage)}" class="paging-item page-item"
+						th:classappend="${page == nowPage} ? 'active' : ''">
+						<a class="page-link link-dark" th:href="@{/mngr/order/list(page=${page -1})}" th:text="${page}" th:value="${page}"></a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" th:href="@{/mngr/order/list(page=${totalPage})}"> 
+							&raquo;
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
 </main>
 
 <th:block layout:fragment="myscripts">

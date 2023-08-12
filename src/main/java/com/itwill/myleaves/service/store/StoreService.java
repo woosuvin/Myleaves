@@ -3,6 +3,8 @@ package com.itwill.myleaves.service.store;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,13 +33,13 @@ public class StoreService {
 	 * 관리자 페이지에서 스토어 상품 create
 	 */
 	public Store create(StoreCreateDto dto) {
-		log.info("create(dto={})", dto);
+//		log.info("create(dto={})", dto);
 		
 		Store entity = dto.toEntity();
-		log.info("entity={}", entity);
+//		log.info("entity={}", entity);
 		
 		storeRepository.save(entity);
-		log.info("entity={}", entity);
+//		log.info("entity={}", entity);
 		
 		return entity;
 	}
@@ -45,17 +47,17 @@ public class StoreService {
 	/**
 	 * 관리자 페이지 스토어 상품 리스트
 	 */
-	public List<Store> read() {
-		log.info("mngrRead()");
-		return storeRepository.findByOrderByItemIdDesc();
+	public Page<Store> read(Pageable pageable) {
+//		log.info("mngrRead()");
+		return storeRepository.findByOrderByItemIdDesc(pageable);
 	}
 	
 	/**
 	 * 회원 페이지 스토어 상품 리스트
 	 * @return
 	 */
-	public List<Store> readUserPage() {
-		return storeRepository.findByOrderBySoldAscCreatedDateDesc();
+	public Page<Store> readUserPage(Pageable pageable) {
+		return storeRepository.findByOrderBySoldAscCreatedDateDesc(pageable);
 	}
 	
 	/**
@@ -63,7 +65,7 @@ public class StoreService {
 	 */
 	@Transactional(readOnly = true)
 	public Store read(long itemId) {
-		log.info("read(itemId={})", itemId);
+//		log.info("read(itemId={})", itemId);
 		//return storeRepository.findById(itemId).orElseThrow();
 		return storeRepository.findByItemId(itemId);
 	}
@@ -74,7 +76,7 @@ public class StoreService {
 	 */
 	@Transactional
 	public void update(StoreUpdateDto dto) throws IOException {
-		log.info("update(dto={})", dto);
+//		log.info("update(dto={})", dto);
 		Store entity = storeRepository.findByItemId(dto.getItemId());
 		entity.update(dto);
 	}
@@ -94,7 +96,7 @@ public class StoreService {
 	 * @param itemId
 	 */
 	public void deleteStoreWish(String userId, long itemId) {
-		log.info("delete(userId={}, sellId={})", userId, itemId);
+//		log.info("delete(userId={}, sellId={})", userId, itemId);
 		storeWishRepository.deleteByUserIdAndItemId(userId, itemId);
 	}
 	
@@ -104,14 +106,14 @@ public class StoreService {
 	 * @return
 	 */
 	public StoreWish createStoreWish(WishStoreCreateDto dto) {
-		log.info("create(dto={})", dto);
+//		log.info("create(dto={})", dto);
 		StoreWish entity = StoreWish.builder()
 					.userId(dto.getUserId())
 					.itemId(dto.getItemId())
 					.build();
 		
 		storeWishRepository.saveAndFlush(entity);
-		log.info("entity={}", entity);
+//		log.info("entity={}", entity);
 		return entity;
 	}
 	

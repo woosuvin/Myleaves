@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -54,11 +57,19 @@ public class MyPageStoreController {
 	
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/orderList")
-	public void orderList(String userId, Model model) {
+	public void orderList(String userId, Model model, @PageableDefault(page = 0, size = 10) Pageable pageable) {
 //		log.info("read()");
-		List<TotalOrder> list = orderService.read(userId);
-		
+		Page<TotalOrder> list = orderService.read(userId, pageable);
 		model.addAttribute("totalOrders", list);
+		log.info("getTotalPages{}", list.getTotalPages());
+		int totalPage = list.getTotalPages()-1;
+		int nowPage = list.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
+		int startPage = Math.max(nowPage-4, 1);
+		int endPage = Math.min(nowPage+5, list.getTotalPages());
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 	}
 	
 	@PreAuthorize("hasRole('MEMBER')")

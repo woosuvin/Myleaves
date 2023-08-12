@@ -18,7 +18,7 @@
 		<tbody>
 			<tr th:each="order: ${ totalOrders }">
 				<td class="col-3 text-center"
-					th:text="${ #temporals.format(order.orderDate, 'yy/MM/dd HH:mm:ss')}"></td>
+					th:text="${ #temporals.format(order.orderDate, 'YYYY-MM-dd HH:mm')}"></td>
 				<td class="col-3 text-center"><a
 					th:href="@{/mypage/store/orderDetail(orderId=${ order.orderId })}"
 					th:text="${ order.itemName }"
@@ -30,5 +30,26 @@
 		</tbody>
 	</table>
 </div>
+<!-- 페이징~ -->
+	<div class="pt-5">
+		<nav id="paging-block">
+			<ul class="pagination justify-content-md-center">
+				<li class="page-item">
+					<a class="page-link" th:href="@{/mypage/store/orderList(page=${0})}">
+						&laquo;
+					</a>
+				</li>
+				<li th:each="page : ${#numbers.sequence(startPage, endPage)}" class="paging-item page-item"
+					th:classappend="${page == nowPage} ? 'active' : ''">
+					<a class="page-link link-dark" th:href="@{/mypage/store/orderList(page=${page -1})}" th:text="${page}" th:value="${page}"></a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" th:href="@{/mypage/store/orderList(page=${totalPage})}"> 
+						&raquo;
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
 </main>
 </html>

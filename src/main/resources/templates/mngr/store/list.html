@@ -27,6 +27,27 @@
 				</tr>
 			</tbody>
 		</table>
+		<!-- 페이징~ -->
+		<div class="pt-5">
+			<nav id="paging-block">
+				<ul class="pagination justify-content-md-center">
+					<li class="page-item">
+						<a class="page-link" th:href="@{/mngr/store/list(page=${0})}">
+							&laquo;
+						</a>
+					</li>
+					<li th:each="page : ${#numbers.sequence(startPage, endPage)}" class="paging-item page-item"
+						th:classappend="${page == nowPage} ? 'active' : ''">
+						<a class="page-link link-dark" th:href="@{/mngr/store/list(page=${page -1})}" th:text="${page}" th:value="${page}"></a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" th:href="@{/mngr/store/list(page=${totalPage})}"> 
+							&raquo;
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
 		<div class="text-end">
 			<a class="btn" th:href="@{/mngr/store/create}" style="background: deeppink;">상품 등록</a>
 		</div>

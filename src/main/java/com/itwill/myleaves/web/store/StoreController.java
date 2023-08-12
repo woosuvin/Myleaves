@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,16 +35,26 @@ public class StoreController {
 	private final MypageStoreService mypageStoreService;
 	
 	@GetMapping("/list")
-	public void read(Model model) {
+	public void read(Model model, @PageableDefault(page = 0, size = 8) Pageable pageable) {
 		log.info("storeList:GET");
 		
-		List<Store> list = storeService.readUserPage();
+		Page<Store> list = storeService.readUserPage(pageable);
+		model.addAttribute("stores", list);
+		
 		Map<Long, String> thumbnails = new HashMap<>();
 		for(Store store: list){
 			thumbnails.put(store.getItemId(), Base64.getEncoder().encodeToString(store.getThumbnail()));
         }
         model.addAttribute("images", thumbnails);
-		model.addAttribute("stores", list);
+		
+        int totalPage = list.getTotalPages()-1;
+		int nowPage = list.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
+		int startPage = Math.max(nowPage-4, 1);
+		int endPage = Math.min(nowPage+5, list.getTotalPages());
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 	}
 	
 	@GetMapping("/detail")

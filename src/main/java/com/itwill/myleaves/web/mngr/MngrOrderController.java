@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,13 +37,22 @@ public class MngrOrderController {
 	
 	/**
 	 * 주문 관리 페이지 리스트
+	 * 지현 페이징 추가 8/12
 	 * @param model
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/list")
-	public void mngrHome(Model model) {
+	public void mngrHome(Model model, @PageableDefault(page = 0, size = 10) Pageable pageable) {
 //		log.info("mngr order");
-		List<TotalOrder> list = totalOrderService.read();
+		Page<TotalOrder> list = totalOrderService.read(pageable);
+		int totalPage = list.getTotalPages()-1;
+		int nowPage = list.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
+		int startPage = Math.max(nowPage-4, 1);
+		int endPage = Math.min(nowPage+5, list.getTotalPages());
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 		model.addAttribute("totalOrders", list);
 	}
 	
@@ -81,10 +93,20 @@ public class MngrOrderController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/search")
-	public String search(TotalOrderdSearchDto dto, Model model) throws ParseException {
+	public String search(TotalOrderdSearchDto dto, Model model, @PageableDefault(page = 0, size = 10) Pageable pageable) throws ParseException {
 //		log.info("search(dto={})",dto);
 		
-		List<TotalOrder> list = totalOrderService.search(dto);
+		Page<TotalOrder> list = totalOrderService.search(dto, pageable);
+		
+		int totalPage = list.getTotalPages()-1;
+		int nowPage = list.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
+		int startPage = Math.max(nowPage-4, 1);
+		int endPage = Math.min(nowPage+5, list.getTotalPages());
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		
 		model.addAttribute("totalOrders", list);		
 		return "/mngr/order/list";
 	}
