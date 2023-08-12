@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="/css/community.css">
 
 <main layout:fragment="main">
-	<div>
-		<h1 class="text-center">상세보기</h1>
+	<div class="text-center mb-5">
+		<h3>상세보기</h3>
 	</div>
 	<div class="card">
 		<form id=communityModifyForm>
@@ -31,18 +31,21 @@
 	<div class="row justify-content-center">
 		<div class="col-auto">
 			<!-- th:if="${ #authentication.name } == ${ post.userId }" -->
-			<a class="btn btn-success" 
+			<a class="btn  btn-outline-dark" 
 				th:href="@{/community/modify?communityId={id} (id=${post.communityId}) }">수정</a>
 		</div>
 		<div class="col-auto">
-			<a class="btn btn-warning" th:href="@{/community}">목록</a>
+			<a class="btn btn-outline-dark" th:href="@{/community}">목록</a>
 		</div>
 	</div>
 	
 	<div class="my-2 card">
 		<div class="card-header">
 			<span>댓글</span> <span id="communityCommentCount" th:text="${communityCommentCount}"></span>개
-			<button class="btn btn-outline-dark" id="btnToggleCommunityComment">보이기</button>
+			<button class="btn" id="btnToggleCommunityComment">
+				    <img id="toggleBtnIcon" src="/images/community/toggle2-off.svg" 
+                                     alt="toggle-off" width="32"/>
+			</button>
 		</div>
 
 		<div class="d-none" id="authName" th:text="${#authentication.name}"></div>

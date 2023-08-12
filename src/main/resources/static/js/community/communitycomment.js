@@ -9,17 +9,30 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	const bsCollapse = new bootstrap.Collapse('div#communityCommentToggleDiv', { toggle: false });
 
+	 // 버튼 아이콘 이미지
+    const toggleBtnIcon = document.querySelector('img#toggleBtnIcon'); 
+    
 	const btnToggleCommunityComment = document.querySelector('#btnToggleCommunityComment');
 	btnToggleCommunityComment.addEventListener('click', (e) => {
 		bsCollapse.toggle();
 
-		if (e.target.innerText === '보이기') {
-			e.target.innerText = '숨기기';
-			getCommentsWithCommunityId();
-		} else {
-			e.target.innerText = '보이기';
-		}
-	});
+	
+         if (toggleBtnIcon.alt === 'toggle-off') {  // toggle === 'toggle-off'
+             toggleBtnIcon.src = '/images/community/toggle2-on.svg';
+             toggleBtnIcon.alt = 'toggle-on';
+
+             
+             // 댓글 전체 목록을 서버에 요청하고, 응답이 오면 화면 갱신(새로 그림).
+				getCommentsWithCommunityId();
+             
+         } else {
+                toggleBtnIcon.src = '/images/community/toggle2-off.svg';
+                toggleBtnIcon.alt = 'toggle-off';
+                replies.innerHTML = '';
+        }
+     });
+     
+
 	
 	
     // 댓글 삭제 버튼 클릭을 처리하는 이벤트 리스너 콜백
@@ -91,10 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
          // 로그인한 사용자와 댓글 작성자가 같을 때만 삭제, 수정 버튼을 보여줌.
          if (authName === comment.userId) {
 			 htmlStr += `
-            <textarea id="content_${comment.communityCommentId}">${comment.content}</textarea>
-	        <div>
-	            <button class="btnDelete btn btn-outline-danger" data-communityCommentId="${comment.communityCommentId}">삭제</button>
-	            <button class="btnModify btn btn-outline-success" data-communityCommentId="${comment.communityCommentId}">수정</button>
+			 <div class="row">
+	            <textarea class="form-control my-2 col-8" id="content_${comment.communityCommentId}">${comment.content}</textarea>
+		        <div class="col-4">
+		            <button class="btnDelete btn btn-secondary" data-communityCommentId="${comment.communityCommentId}">삭제</button>
+		            <button class="btnModify btn btn-outline-dark" data-communityCommentId="${comment.communityCommentId}">수정</button>
+		        </div>
 	        </div>
  	     `;	
 		}else {

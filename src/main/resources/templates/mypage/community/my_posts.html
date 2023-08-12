@@ -7,11 +7,11 @@
 </th:block>
 
 <main layout:fragment="main">
-	<div>
-		<h1 class="text-center">내가 쓴 글</h1>
+	<div class="text-center mb-5">
+		<h3>내가 쓴 글</h3>
 	</div>
     <div class="mb-2 text-end">
-      <button class="btn delete-button btn-secondary">글삭제</button>
+      <button class="btn delete-button btn-secondary">삭제</button>
     </div>
 	<table class="table table-hover">
 		<thead>
@@ -23,11 +23,11 @@
 				<th scope="col">작성일</th>
 			</tr>
 		</thead>
-		<tbody class="table-group-divider">
+		<tbody class="">
 			<tr th:each="post : ${posts}">
 				<td><input type="checkbox" id="row-checkbox"></td>
 				<td><span th:text="'[' + ${post.hrsHd} + ']'"></span></td>
-				<td><a th:href="@{/community/detail?id={id} (id = ${post.communityId})}">
+				<td><a class="link-dark link-underline-opacity-0" th:href="@{/community/detail?id={id} (id = ${post.communityId})}">
 				<span th:text="${post.title}"></span></a></td>
 				<td><span th:text="${post.userId}"></span></td>
 				<td><span th:text="${ #temporals.format(post.createdDate, 'yy-MM-dd HH:mm:ss')}"></span></td>
@@ -36,19 +36,21 @@
 		</tbody>
 	</table>
 	<form th:action="@{/mypage/community/search}">
-	<input  name="userId" th:value="${ #authentication.name }"/>
+	<input type="hidden" name="userId" th:value="${ #authentication.name }"/>
 	<div class="row">
-		<select class="form-control" name="type">
-			<option value="t">제목</option>
-			<option value="c">내용</option>
-			<option value="tc">제목+내용</option>
-		</select>
-	</div>	
-	<div class="col-8">
-		<input class="form-control" name="keyword" type="text" placeholder="검색어 입력" required/>
-	</div>
-	<div class="col-1">
-		<input class="form-control btn btn-outline-dark" type="submit" value="검색" />
+		<div class="col-2 mb-3">
+			<select class="form-select" aria-label="" name="type">
+				<option value="t">제목</option>
+				<option value="c">내용</option>
+				<option value="tc">제목+내용</option>
+			</select>
+		</div>	
+		<div class="col-9">
+			<input class="form-control" name="keyword" type="text" placeholder="검색어 입력" required autofocus/>
+		</div>
+		<div class="col-1">
+			<input class="form-control btn btn-outline-dark" type="submit" value="검색" />
+		</div>
 	</div>
 </form>
 <!-- 페이징처리 시작 -->

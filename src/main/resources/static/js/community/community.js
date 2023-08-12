@@ -5,6 +5,26 @@
  document.addEventListener('DOMContentLoaded', () => { 
 	
 	const communityModifyForm = document.querySelector('#communityModifyForm');
+	// 글자 수 실시간 표시 및 제한
+ 	const titleInput = document.getElementById('title');
+    const charCountElement = document.getElementById('textLengthCheck');
+
+titleInput.addEventListener('keyup', () => {
+    const inputValue = titleInput.value;
+    const maxLength = 80;
+    const currentLength = inputValue.length;
+
+    if (currentLength > maxLength) {
+        titleInput.value = inputValue.substring(0, maxLength);
+        charCountElement.style.color = 'red';
+        charCountElement.textContent = `(80 / 80) 80자까지 입력 가능합니다.`;
+    } else {
+        charCountElement.style.color = 'inherit';
+        charCountElement.textContent = `(${currentLength} / ${maxLength})`;
+    }
+});
+
+    
 	
 	btnUpdate = document.querySelector('#btnUpdate');
 	btnUpdate.addEventListener('click', (e) => {
@@ -39,4 +59,8 @@
 		communityModifyForm.method = 'post'
 		communityModifyForm.submit();
 	}); 
+	
+
+
+	
  });

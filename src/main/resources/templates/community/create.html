@@ -2,43 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/base_layout}"> 
-<th:block layout:fragment="mycsses">
-	<link th:href="@{/css/community.css}" rel="stylesheet" />
-</th:block> 
+<link rel="stylesheet" href="/css/community.css">
+ 
 <main layout:fragment="main">
-	<div>
-		<h1 class="text-center">글쓰기</h1>
+	<div class="text-center mb-5">
+		<h3>글쓰기</h3>
 	</div>
 	
  	<form method="post">
-		<div>
-			<label class="form-label" for="title">[ 말머리 ]</label>
-			<select class="form-select" name="hrsHd">
-				<option value="이게 뭔가요?" th:selected="${selectedOption == '이게 뭔가요?'}">이게 뭔가요?</option>
-				<option value="꿀팁 대방출" th:selected="${selectedOption == '꿀팁 대방출'}">꿀팁 대방출</option>
-				<option value="스토어 상품/입양 후기" th:selected="${selectedOption == '스토어 상품/입양 후기'}">스토어 상품/입양 후기</option>
-				<option value="사담" th:selected="${selectedOption == '사담'}">사담</option>
-			</select>
-			<input type="text" class="form-control" id="title" 
-				 name="title" placeholder="제목을 작성해주세요" required autofocus/>
-			
-			<div>
-				<small id="textLengthCheck" class="text-muted">(0 / 80)</small>
+		<div class="row">
+			<div class="col-4">
+				<label class="form-label" for="title">[ 말머리 ]</label>
+				<select name="hrsHd">
+					<option value="이게 뭔가요?" th:selected="${selectedOption == '이게 뭔가요?'}">이게 뭔가요?</option>
+					<option value="꿀팁 대방출" th:selected="${selectedOption == '꿀팁 대방출'}">꿀팁 대방출</option>
+					<option value="스토어 상품/입양 후기" th:selected="${selectedOption == '스토어 상품/입양 후기'}">스토어 상품/입양 후기</option>
+					<option value="사담" th:selected="${selectedOption == '사담'}">사담</option>
+				</select>
 			</div>
+			<div class="row">	
+				<input type="text" class="form-control col-8" id="title" 
+					 name="title" placeholder="제목을 작성해주세요" maxlength="80" required autofocus/>
+			    <div class="smallText text-right col-4">
+			  	  <small id="textLengthCheck" class="float-right">(0 / 80)</small>
+			    </div>
+		 	</div>
 		</div>
-		<div>
-			<label class="form-label" for="userId">작성자:  </label>	
-	 		<input id="userId" type="text" name="userId" th:value="${#authentication.name}" readonly></input>	
-     	</div>
-		<div class="my-2">
-    		<textarea id="content" class="form-control mute" name="content" placeholder="내용을 작성해주세요" required></textarea>
-		</div>
-		<div class="my-2 text-center">
-			<a class="btn btn-secondary" th:href="@{/community}">취소</a>
-			<input class="btn btn-success" type="submit" 
-				id="btnCreate" value="등록"/>
-				
-		</div>
+			<div>
+				<label class="form-label" for="userId">작성자:  </label>	
+		 		<input class="no-border" id="userId" type="text" name="userId" th:value="${#authentication.name}" readonly />
+	     	</div>
+			<div class="my-2">
+	    		<textarea id="content" class="form-control mute" name="content" placeholder="내용을 작성해주세요" required></textarea>
+			</div>
+			<div class="my-2 text-center">
+				<a class="btn btn-secondary" th:href="@{/community}">취소</a>
+				<input class="btn btn-outline-dark" type="submit" id="btnCreate" value="등록"/>
+			</div>
 	</form>
 </main>
 <th:block layout:fragment="myscripts">>

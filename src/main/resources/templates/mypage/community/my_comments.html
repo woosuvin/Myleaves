@@ -7,11 +7,11 @@
 </th:block> 
 
 <main layout:fragment="main">
-	<div>
-		<h1 class="text-center">내가 쓴 댓글</h1>
+	<div class="text-center mb-5">
+		<h3>내가 쓴 댓글</h3>
 	</div>
     <div class="mb-2 text-end">
-      <button class="btn delete-button btn-secondary">댓글삭제</button>
+      <button class="btn delete-button btn-secondary">삭제</button>
     </div>
 	<table class="table table-hover">
 		<thead>
@@ -24,7 +24,7 @@
 			</tr>
 		</thead>
 		<!-- 게시글. -->
-		<tbody class="table-group-divider">
+		<tbody class="">
 			<tr th:each="comment : ${commentList}">
 				<td><input type="checkbox" id="row-checkbox"></td>
 			<!-- 	<th:block th:if= "${communityList.get(comment.communityCommentId) == null}" >
@@ -33,7 +33,7 @@
 				</th:block> -->
 <!-- 				<th:block th:if= "${communityList.get(comment.communityCommentId) != null}">
  -->				<td><span th:text="'['+${communityList.get(comment.communityCommentId).hrsHd }+']'"></span></td>
-					<td><a th:href="@{/community/detail?id={id} (id = ${ communityList.get(comment.communityCommentId).communityId})}">
+					<td><a class="link-dark link-underline-opacity-0" th:href="@{/community/detail?id={id} (id = ${ communityList.get(comment.communityCommentId).communityId})}">
 					<span th:text="${communityList.get(comment.communityCommentId).title}"></span></a></td>
 				</th:block>
 				<td><span th:text="${comment.content}"></span></td>
@@ -64,7 +64,7 @@
 			<li th:each="page : ${#numbers.sequence(startPage, endPage)}"
 				class="page-item"><a th:if="${page == nowPage}"
 				class="page-link active" th:text="${page}"></a> <a
-				th:if="${page != nowPage}" th:href="@{/mypage/community/my_comments(userId=${ #authentication.name }(page=${page - 1})}"
+				th:if="${page != nowPage}"  th:href="@{/mypage/community/my_comments(userId=${ #authentication.name }(page=${page - 1})}"
 				class="page-link" th:text="${page}"></a>
 			</li>
 		</ul>

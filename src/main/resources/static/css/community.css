@@ -4,11 +4,10 @@
 	text-align: right;
 }
 
-span.highlight {
-	color: red;
-}
-
-#cm_notice small {
-	text-align: right;
-	color: red;
+.no-border {
+    border: none;
+    border-bottom: 1px solid #ced4da; /* 하단 테두리를 보존하기 위해 추가 */
+    padding: 0; /* 입력 상자 내부 여백 제거 */
+    outline: none; /* 포커스 시 테두리 제거 */
+    background-color: transparent; /* 배경색 투명으로 설정 */
 }
