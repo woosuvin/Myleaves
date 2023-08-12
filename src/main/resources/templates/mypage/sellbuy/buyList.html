@@ -2,35 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/base_layout}">
-    
+
 <main layout:fragment="main">
-<h3 class="text-center mb-5">🌱 입양 내역</h3>
+<h3 class="text-center mb-5">풀잎 입양 내역</h3>
 <div class="container bg-transparent border-dark">
 	<div class="row row-cols-1 row-cols-md-4 g-4 mb-2">
 		<div class="col" th:each="buy: ${ buy }">
-			<div class="container p-0"
-				style="position: sticky; text-align: center; color: black;">
+			<div class="thumbnail-div-buy container p-0">
 				<a th:switch="${buy.sold}"
 					th:href="@{/buy/detail?sellId={sellId} (sellId=${buy.sellId}) }">
 					<!-- 판매종료(buy>sold.equals("판매 종료"), 품절(store>inven==0) 흰색/문구 가운데 -->
 					<th:block th:case="1">
-							<img class="rounded mb-1" style="object-fit:cover; height: 250px; width:-webkit-fill-available;"
+							<img class="thumbnail-onSale-buy rounded mb-1" 
 								th:src="@{'data:image/png;base64,'+${images.get(buy.sellId)}}" />
-							<span class="link-dark centered rounded"
-								style="background: hotpink; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
+							<span class="thumbnail-onSale-buy-label link-dark centered rounded">
 								분양중</span>
 						</th:block> <th:block th:case="2">
-							<img class="rounded mb-1" style="object-fit:cover; height: 250px; width:-webkit-fill-available;"
+							<img class="thumbnail-onNego-buy rounded mb-1"
 								th:src="@{'data:image/png;base64,'+${images.get(buy.sellId)}}" />
-							<span class="link-dark centered rounded"
-								style="background: mediumaquamarine; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
+							<span class="thumbnail-onNego-buy-label link-dark centered rounded">
 								거래중</span>
 						</th:block> <th:block th:case="3">
-							<img class="rounded mb-1"
-								style="object-fit:cover;height: 250px; width:-webkit-fill-available; opacity: 50%;"
+							<img class="thumbnail-soldout-buy rounded mb-1"
 								th:src="@{'data:image/png;base64,'+${images.get(buy.sellId)}}" />
-							<span class="link-dark centered rounded"
-								style="background: darkgray; border: 1px solid black; padding: 3px 15px 3px 15px; position: absolute; top: 5%; right: 5%; font-size: 10pt">
+							<span class="thumbnail-soldout-buy-label link-dark centered rounded">
 								분양 종료</span>
 					</th:block> <!-- if문 돌릴 위치 -->
 				</a>
@@ -41,12 +36,13 @@
 					class="link-dark link-underline-opacity-0"> <span
 					th:text="${ buy.title }" class="card-title text-truncate"></span>
 				</a>
-				<p class="card-text"
-					th:text="|${#numbers.formatInteger(buy.price, 0, 'COMMA')}원|"></p>
+				<th:block th:switch="${sell.price == 0}">
+					<div th:case=true><i>무료 나눔</i></div>
+					<div th:case=false th:text="|${#numbers.formatInteger(sell.price, 0, 'COMMA')}원|" class=""></div>
+				</th:block>
 			</div>
 		</div>
 	</div>
 </div>
-
 </main>
 </html>

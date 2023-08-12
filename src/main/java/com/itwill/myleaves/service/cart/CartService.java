@@ -44,7 +44,7 @@ public class CartService {
 	 * @param itemId
 	 */
 	public void delete(String userId, long itemId) {
-		log.info("delete(userId={}, itemId={})", userId, itemId);
+//		log.info("delete(userId={}, itemId={})", userId, itemId);
 		cartRepository.deleteByUserIdAndItemId(userId, itemId);
 	}
 	
@@ -54,7 +54,7 @@ public class CartService {
 	 * @return
 	 */
 	public Cart create(CartCreateDto dto) {
-		log.info("create(dto={})", dto);
+//		log.info("create(dto={})", dto);
 		Cart entity = Cart.builder()
 				.userId(dto.getUserId())
 				.itemId(dto.getItemId())
@@ -62,7 +62,7 @@ public class CartService {
 				.build();
 		
 		cartRepository.saveAndFlush(entity);
-		log.info("entity={}", entity);
+//		log.info("entity={}", entity);
 		return entity;
 	}
 	
@@ -71,14 +71,14 @@ public class CartService {
 	 */
 	@Transactional
 	public void update(String userId, Long itemId, CartUpdateDto dto) {
-		log.info("update(userId={}, itemId={}, dto={})",userId, itemId, dto);
+//		log.info("update(userId={}, itemId={}, dto={})",userId, itemId, dto);
 		
 		// userId, itemId로 cart entity 검색
 		Cart entity = cartRepository.findByUserIdAndItemId(userId, itemId);
 		
-		log.info("entity cnt{}", entity.getCnt());
+//		log.info("entity cnt{}", entity.getCnt());
 		entity.update(dto.getCnt());
-		log.info("entity cnt{}", entity.getCnt());
+//		log.info("entity cnt{}", entity.getCnt());
 		
 		cartRepository.update(entity.getCnt(), userId, itemId);
 	}

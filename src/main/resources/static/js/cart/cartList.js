@@ -49,7 +49,18 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		total = deliveryCharge + sum;
 		totalItemPrice.innerHTML = sum;
+		
+		// 가격 수량 포맷 출력
+		const showTotalItem = document.querySelector('#showTotalItemPrice');
+		let showItem = (parseInt(totalItemPrice.innerHTML)).toLocaleString();
+		showTotalItem.innerHTML = `${showItem}원`;
+		
 		totalPriceDeliveryCharge.innerHTML = total;
+		
+		// 가격 수량 포맷 출력
+		const showTotalPrice = document.querySelector('#showTotalPriceDeliveryCharge');
+		let showTotal = (parseInt(totalPriceDeliveryCharge.innerHTML)).toLocaleString();
+		showTotalPrice.innerHTML = `${showTotal}원`;
 	};
 	sumPrice();
 	
@@ -84,7 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log(response);
 		})
 		.catch((error) => console.log(error));
+		
+		// 가격 수량 포맷 출력
+		const showPriceCnt = document.querySelector(`#showPriceCnt_${itemId}`);
+		let show = (parseInt(cntPrice.innerHTML)).toLocaleString();
+		showPriceCnt.innerHTML = `${show}원`;
 	};
+	
 	const minus = document.querySelectorAll('button#btnMinus');
 	for(let btn of minus) {
 		btn.addEventListener('click', cntMinus);
@@ -122,7 +139,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log(response);
 		})
 		.catch((error) => console.log(error));
+		
+		// 가격 수량 포맷 출력
+		const showPriceCnt = document.querySelector(`#showPriceCnt_${itemId}`);
+		let show = (parseInt(cntPrice.innerHTML)).toLocaleString();
+		showPriceCnt.innerHTML = `${show}원`;
 	};
+	
 	const plus = document.querySelectorAll('button#btnPlus');
 	for(let btn of plus) {
 		btn.addEventListener('click', cntPlus);

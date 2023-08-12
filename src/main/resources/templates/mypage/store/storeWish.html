@@ -13,26 +13,24 @@
 			<div class="col" th:each="store: ${wishStore}">
 				
 				<!-- sold값으로 switch문 -->
-				<div th:switch="${store.sold}" 
-					class="container p-0" style="position: relative; text-align: center; color: black;">
-					<a th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}"> 
-						<!-- 0, 품절일 경우 -->
-						<th:block th:case="1">
-							<img class="rounded mb-1" style="object-fit:cover; height: 250px; width:-webkit-fill-available; opacity: 50%;"
-								th:src="@{'data:image/png;base64,'+${images.get(store.itemId)}}" />
-							<span class="link-dark centered"
-								style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 10pt">
-								<i>품절</i>
-							</span>
-						</th:block>
-						
-						<!-- 1, 판매중일 경우 -->
-						<th:block th:case="0">
-							<img class="rounded mb-1" style="object-fit:cover; height: 250px; width:-webkit-fill-available;"
-								th:src="@{'data:image/png;base64,'+${images.get(store.itemId)}}" />
-						</th:block>
-					</a>
-				</div> <!-- 사진 div end -->
+				<div th:switch="${store.sold}" class="thumbnail-div-store container p-0">
+				<a th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}"> 
+					<!-- 1, 품절일 경우 -->
+					<th:block th:case="1">
+						<img class="thumbnail-soldout-store rounded mb-1"
+							th:src="@{'data:image/png;base64,'+${images.get(store.itemId)}}" />
+						<span class="thumbnail-soldout-store-label link-dark centered">
+							<i>품절</i>
+						</span>
+					</th:block>
+					
+					<!-- 0, 판매중일 경우 -->
+					<th:block th:case="0">
+						<img class="thumbnail-onsale-store rounded mb-1"
+							th:src="@{'data:image/png;base64,'+${images.get(store.itemId)}}" />
+					</th:block>
+				</a>
+			</div> <!-- 사진 div end -->
 				
 				<div class="text-truncate">
 					<a th:href="@{/store/detail?itemId={itemId} (itemId=${store.itemId})}"

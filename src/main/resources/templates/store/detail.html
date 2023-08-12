@@ -21,9 +21,9 @@ div {
 		<table class="table table-borderless">
 			<tbody>
 				<tr th:switch="${ store.sold }">
-					<td rowspan="4" width=300><img class="rounded" style="object-fit:cover; height:300px; width:300px;" 
+					<td class="text-end" rowspan="4" width=300><img class="rounded" style="object-fit:cover; height:300px; width:300px;" 
 						th:src="@{'data:image/png;base64,'+${image}}" /></td>
-					<td style="vertical-align: middle">
+					<td class="ps-3" style="width:50%; vertical-align: middle">
 						<h3 id="itemName" name="itemName" th:text="${store.itemName}"></h3>
 						<h5 id="itemPrice" class="d-none" th:text="${store.price}"></h5>
 						<h5
@@ -37,7 +37,7 @@ div {
 					</td>
 				</tr>
 				<tr>
-					<td style="vertical-align: middle"><span id="plusMinus"
+					<td class="ps-3" style="vertical-align: middle"><span id="plusMinus"
 						class="input-group mt-1" style="width: 5.3rem;"> <!-- 수량 줄이기 -->
 							<button id="btnMinus" class="btn btn-sm btn-outline-secondary"
 								type="button" style="height: 1.5rem; font-size: 7pt;">-</button>
@@ -50,14 +50,14 @@ div {
 					</span></td>
 				</tr>
 				<tr>
-					<td style="vertical-align: middle"><strong>총 상품금액</strong> : <span
+					<td class="ps-3" style="vertical-align: middle"><strong>총 상품금액</strong> : <span
 						class="total"> <strong id="totalPrice"
 							th:text="|${#numbers.formatInteger(store.price, 0, 'COMMA')}원|"></strong></span>
 					</td>
 				</tr>
 
 				<tr style="vertical-align: bottom">
-					<td>
+					<td class="ps-3" >
 						<div class="d-grid gap-2 d-md-flex">
 							<!-- wish=false / buywish에 내 아이디가 없음 >> 관심 상품 추가 -->
 							<th:block th:unless="${wish}">
@@ -80,7 +80,7 @@ div {
 			</tbody>
 		</table>
 
-		<div id="summernote" name="content" th:utext="${store.content}"></div>
+		<div class="p-3 text-center" id="summernote" name="content" th:utext="${store.content}"></div>
 
 		<!-- 재고 개수 -->
 		<input class="d-none" type="text" id="inven" name="inven"

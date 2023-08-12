@@ -3,7 +3,7 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/base_layout}">
 <main layout:fragment="main">
-	<h3 class="text-center mb-5">🌱 상세보기</h3>
+	<h3 class="text-center mb-5">풀잎 상세보기</h3>
 	<div class="container">
 		<div>
 			<input type="hidden" id="sellId" name="sellId"
@@ -13,17 +13,20 @@
 		<table class="table table-borderless">
 			<tbody>
 				<tr th:switch="${ sell.sold }">
-					<td rowspan="2" width="300"><img class="rounded" style="object-fit:cover; height:300px; width:300px;" 
+					<td class="text-end" rowspan="2" width="300"><img class="rounded" style="object-fit:cover; height:300px; width:300px;" 
 						th:src="@{'data:image/png;base64,'+${image}}" /></td>
-					<td style="vertical-align: middle"><small> <span
+					<td class="ps-3" style="width:50%; vertical-align: middle"><small> <span
 							th:text="${ sell.sido }" class=""></span> <span
 							th:text="${ sell.gungu }" class=""></span> <span
 							th:text="${ sell.loc }" class=""></span>
 					</small>
 						<h3 th:text="${ sell.title }" class=""></h3>
-						<div
-							th:text="|${#numbers.formatInteger(sell.price, 0, 'COMMA')}원|"
-							class=""></div> <th:block th:case="1">
+						<th:block th:switch="${sell.price == 0}">
+							<div th:case=true><i>무료 나눔</i></div>
+							<div th:case=false th:text="|${#numbers.formatInteger(sell.price, 0, 'COMMA')}원|" class=""></div>
+						</th:block>
+						<br/>
+						 <th:block th:case="1">
 							<i>분양중</i>
 						</th:block> <th:block th:case="2">
 							<i>거래중</i>
@@ -32,7 +35,7 @@
 						</th:block></td>
 				</tr>
 				<tr>
-					<td style="vertical-align: bottom">
+					<td class="ps-3" style="vertical-align: bottom">
 						<div class="d-grid gap-2 d-md-flex">
 							<th:block th:switch="${#authentication.name == sell.userId}">
 								<!-- true / 글 작성자이면 -->
@@ -66,7 +69,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<div class="m-2" th:utext="${ sell.content }"></div>
+		<div class="p-3 text-center" th:utext="${ sell.content }"></div>
 	</div>
 </main>
 <th:block layout:fragment="myscripts">

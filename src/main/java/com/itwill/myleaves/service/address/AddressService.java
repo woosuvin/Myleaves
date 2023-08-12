@@ -26,7 +26,7 @@ public class AddressService {
 	 * 배송지 추가
 	 */
 	public Address create(AddressCreateDto dto) {
-		log.info("create={}", dto);
+//		log.info("create={}", dto);
 		
 		Address entity = dto.toEntity();
 		addressRepository.save(entity);
@@ -50,7 +50,7 @@ public class AddressService {
 	 */
 	@Transactional
 	public void update(String userId, AddressUpdateDto dto) {
-		log.info("update(dto={})", dto);
+//		log.info("update(dto={})", dto);
 		
 		Address entity = addressRepository.findByUserIdAndDefAddr(userId, 1);
 		entity.update(dto);

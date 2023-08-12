@@ -1,2 +1,85 @@
 @charset "UTF-8";
 
+/*지현 스토어 리스트 css*/
+.thumbnail-div-store {
+	position: relative;
+}
+
+.thumbnail-soldout-store {
+	 object-fit:cover; 
+	 height: 250px; 
+	 width:-webkit-fill-available; 
+	 opacity: 50%
+}
+
+.thumbnail-soldout-store-label {
+	position: absolute; 
+	top: 50%; 
+	left: 50%; 
+	transform: translate(-50%, -50%); 
+	font-size: 10pt;
+}
+
+.thumbnail-onsale-store {
+	 object-fit:cover; 
+	 height: 250px; 
+	 width:-webkit-fill-available;
+}
+
+/*지현 입양 리스트 css*/
+.thumbnail-div-buy {
+	position: sticky; 
+	text-align: center; 
+	color: black;
+}
+
+.thumbnail-onSale-buy {
+	object-fit:cover; 
+	height: 250px; 
+	width:-webkit-fill-available;
+}
+
+.thumbnail-onSale-buy-label {
+	background: hotpink; 
+	border: 1px solid black; 
+	padding: 3px 15px 3px 15px; 
+	position: absolute; 
+	top: 5%; 
+	right: 5%; 
+	font-size: 10pt;
+}
+
+.thumbnail-onNego-buy {
+	object-fit:cover; 
+	height: 250px; 
+	width:-webkit-fill-available;
+}
+
+.thumbnail-onNego-buy-label {
+	background: mediumaquamarine; 
+	border: 1px solid black; 
+	padding: 3px 15px 3px 15px; 
+	position: absolute; 
+	top: 5%; 
+	right: 5%; 
+	font-size: 10pt;
+}
+
+.thumbnail-soldout-buy {
+	object-fit:cover; 
+	height:250px; 
+	width:-webkit-fill-available; 
+	opacity: 50%;
+						
+}
+
+.thumbnail-soldout-buy-label {
+	background: darkgray; 
+	border: 1px solid black; 
+	padding: 3px 15px 3px 15px; 
+	position: absolute; 
+	top: 5%; 
+	right: 5%; 
+	font-size: 10pt;
+								
+}
