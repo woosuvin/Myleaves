@@ -53,6 +53,7 @@ public class MngrOrderController {
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
+		
 		model.addAttribute("totalOrders", list);
 	}
 	
@@ -93,22 +94,13 @@ public class MngrOrderController {
 	
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/search")
-	public String search(TotalOrderdSearchDto dto, Model model, @PageableDefault(page = 0, size = 10) Pageable pageable) throws ParseException {
+	public void search(TotalOrderdSearchDto dto, Model model) throws ParseException {
 //		log.info("search(dto={})",dto);
 		
-		Page<TotalOrder> list = totalOrderService.search(dto, pageable);
-		
-		int totalPage = list.getTotalPages()-1;
-		int nowPage = list.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
-		int startPage = Math.max(nowPage-4, 1);
-		int endPage = Math.min(nowPage+5, list.getTotalPages());
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("nowPage", nowPage);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
+		List<TotalOrder> list = totalOrderService.search(dto);
 		
 		model.addAttribute("totalOrders", list);		
-		return "/mngr/order/list";
+//		return "/mngr/order/list";
 	}
 	
 }

@@ -2,6 +2,8 @@ package com.itwill.myleaves.service.mypage;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.itwill.myleaves.repository.sellbuy.BuyWish;
@@ -23,8 +25,8 @@ public class MypageSellBuyService {
 	 * @param buyWish
 	 * @return
 	 */
-	public List<BuyWish> read(BuyWish wishList) {
-		List<BuyWish> list = buyWishRepository.findByUserId(wishList.getUserId());
+	public Page<BuyWish> read(BuyWish wishList, Pageable pageable) {
+		Page<BuyWish> list = buyWishRepository.findByUserId(wishList.getUserId(), pageable);
 		return list;
 	}
 	

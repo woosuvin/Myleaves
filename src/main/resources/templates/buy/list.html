@@ -45,26 +45,28 @@
 	</div>
 	
 	<!-- 페이징~ -->
-	<div class="pt-5">
-		<nav id="paging-block">
-			<ul class="pagination justify-content-md-center">
-				<li class="page-item">
-					<a class="page-link" th:href="@{/buy/list(page=${0})}">
-						&laquo;
-					</a>
-				</li>
-				<li th:each="page : ${#numbers.sequence(startPage, endPage)}" class="paging-item page-item"
-					th:classappend="${page == nowPage} ? 'active' : ''">
-					<a class="page-link link-dark" th:href="@{/buy/list(page=${page -1})}" th:text="${page}" th:value="${page}"></a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" th:href="@{/buy/list(page=${totalPage})}"> 
-						&raquo;
-					</a>
-				</li>
-			</ul>
-		</nav>
-	</div>
+	<th:block th:if="${totalPage>=1}">
+		<div class="pt-5">
+			<nav id="paging-block">
+				<ul class="pagination justify-content-md-center">
+					<li class="page-item">
+						<a class="page-link" th:href="@{/buy/list(page=${0})}">
+							&laquo;
+						</a>
+					</li>
+					<li th:each="page : ${#numbers.sequence(startPage, endPage)}" class="paging-item page-item"
+						th:classappend="${page == nowPage} ? 'active' : ''">
+						<a class="page-link link-dark" th:href="@{/buy/list(page=${page -1})}" th:text="${page}" th:value="${page}"></a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" th:href="@{/buy/list(page=${totalPage})}"> 
+							&raquo;
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</th:block>
 </main>
 <th:block layout:fragment="myscripts">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

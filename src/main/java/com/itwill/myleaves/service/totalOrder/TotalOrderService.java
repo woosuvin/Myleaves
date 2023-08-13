@@ -125,11 +125,11 @@ public class TotalOrderService {
 	 * @return
 	 * @throws ParseException
 	 */
-	@Transactional(readOnly = true)
-	public Page<TotalOrder> search(TotalOrderdSearchDto dto, Pageable pageable) throws ParseException{
+	@Transactional
+	public List<TotalOrder> search(TotalOrderdSearchDto dto) throws ParseException{
 		return totalOrderRepository
 				.search(dto.getSearchUserId(), dto.getSearchStatus()
-						,dto.getSearchOrderDateStart(), dto.getSearchOrderDateEnd(), pageable);
+						,dto.getSearchOrderDateStart(), dto.getSearchOrderDateEnd());
 		
 	}
 	

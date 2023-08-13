@@ -1,5 +1,6 @@
 package com.itwill.myleaves.web.mypage;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -42,17 +43,33 @@ public class MyPageStoreController {
 	
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/storeWish")
-	public void wishList(StoreWish storeWishList, Model model) {
+	public void wishList(StoreWish wishList, Model model, @PageableDefault(page = 0, size = 8) Pageable pageable) {
 //		log.info("read()");
 		
-		List<Store> list = myPageStoreService.read(storeWishList);
+		Page<StoreWish> storeWishList = myPageStoreService.read(wishList, pageable);
+		List<Store> storeList = new ArrayList<>();
+		for(StoreWish s : storeWishList) {
+			Store store = storeService.read(s.getItemId());
+			storeList.add(store);
+		}
+		
+		
 		Map<Long, String> thumbnails = new HashMap<>();
-		for(Store store: list){
+		for(Store store: storeList){
 			thumbnails.put(store.getItemId(), Base64.getEncoder().encodeToString(store.getThumbnail()));
         }
         model.addAttribute("images", thumbnails);
-		model.addAttribute("wishStore", list);
+//		model.addAttribute("wishStore", list);
+        model.addAttribute("store", storeList);
 	
+		int totalPage = storeWishList.getTotalPages()-1;
+		int nowPage = storeWishList.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
+		int startPage = Math.max(nowPage-4, 1);
+		int endPage = Math.min(nowPage+5, storeWishList.getTotalPages());
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 	}
 	
 	@PreAuthorize("hasRole('MEMBER')")

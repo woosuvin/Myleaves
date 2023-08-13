@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.itwill.myleaves.repository.store.Store;
@@ -27,17 +29,13 @@ public class MypageStoreService {
 	 * @param storeWishList
 	 * @return Store 상품 정보 list
 	 */
-	public List<Store> read(StoreWish storeWish){
-		List<StoreWish> wishList = storeWishRepository.findByUserId(storeWish.getUserId());
-		List<Store> list = new ArrayList<>();
-		for(StoreWish sWishList: wishList) {
-			list.add(storeRepository.findByItemId(sWishList.getItemId()));
-		}
+	public Page<StoreWish> read(StoreWish storeWish, Pageable pageable){
+		Page<StoreWish> list = storeWishRepository.findByUserId(storeWish.getUserId(), pageable);
 		return list;
 	}
 	
-	public List<StoreWish> readWish(Long itemId){
-		return storeWishRepository.findByItemId(itemId);
-	}
+//	public List<StoreWish> readWish(Long itemId){
+//		return storeWishRepository.findByItemId(itemId);
+//	}
 	
 }

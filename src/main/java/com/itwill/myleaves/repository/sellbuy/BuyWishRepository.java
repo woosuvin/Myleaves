@@ -2,6 +2,8 @@ package com.itwill.myleaves.repository.sellbuy;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +12,7 @@ import jakarta.transaction.Transactional;
 
 public interface BuyWishRepository extends JpaRepository<BuyWish, BuyWishId> {
 	
-	List<BuyWish> findByUserId(String userId);
+	Page<BuyWish> findByUserId(String userId, Pageable pageable);
 	
 	// 관심목록 삭제
 	@Transactional

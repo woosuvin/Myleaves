@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,32 +36,40 @@ public class MyPageSellBuyController {
 	// 입양 위시리스트
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/buyWish")
-	public void read(BuyWish wishList, Model model) {
+	public void read(BuyWish wishList, Model model, @PageableDefault(page = 0, size = 8) Pageable pageable) {
 //		log.info("read()");
-		List<BuyWish> buyWishlist = mypageService.read(wishList);
+		Page<BuyWish> buyWishlist = mypageService.read(wishList, pageable);
 		List<Sell> sellList = new ArrayList<>();
-		
 		for(BuyWish b : buyWishlist) {
 			Sell sell = sellService.read(b.getSellId());
 			sellList.add(sell);
 		}
-		Map<Long, String> thumbnails = new HashMap<>();
 		
+		Map<Long, String> thumbnails = new HashMap<>();
         for(Sell sell: sellList){
         	thumbnails.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
         }
         model.addAttribute("images", thumbnails);
 //		model.addAttribute("buyWish", buyWishlist);
 		model.addAttribute("sell", sellList);
+		
+		int totalPage = buyWishlist.getTotalPages()-1;
+		int nowPage = buyWishlist.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
+		int startPage = Math.max(nowPage-4, 1);
+		int endPage = Math.min(nowPage+5, buyWishlist.getTotalPages());
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 	}
 	
 	// 분양 리스트
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/sellList")
-	public void sellList(String userId, Model model) {
+	public void sellList(String userId, Model model, @PageableDefault(page = 0, size = 8) Pageable pageable) {
 //		log.info("read(userId={})", userId);
 		
-		List<Sell> sellList = sellService.readSellList(userId);
+		Page<Sell> sellList = sellService.readSellList(userId, pageable);
 
 		Map<Long, String> thumbnails = new HashMap<>();
 		
@@ -70,15 +79,25 @@ public class MyPageSellBuyController {
         model.addAttribute("images", thumbnails);
 		
 		model.addAttribute("sell", sellList);
+		
+		int totalPage = sellList.getTotalPages()-1;
+		int nowPage = sellList.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
+		int startPage = Math.max(nowPage-4, 1);
+		int endPage = Math.min(nowPage+5, sellList.getTotalPages());
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 	}
 	
 	// 입양 리스트
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/buyList")
-	public void buyList(String buyerId, Model model) {
+	public void buyList(String buyerId, Model model, @PageableDefault(page = 0, size = 8) Pageable pageable) {
 //	    log.info("read(buyerId={})", buyerId);
 
-	    List<Buy> buyList = sellService.readBuyList(buyerId);
+	    Page<Buy> buyList = sellService.readBuyList(buyerId, pageable);
+	    
 	    Map<Long, String> thumbnails = new HashMap<>();
 		
         for(Buy buy: buyList){
@@ -87,6 +106,15 @@ public class MyPageSellBuyController {
         model.addAttribute("images", thumbnails);
 	    
 	    model.addAttribute("buy", buyList);
+	    
+	    int totalPage = buyList.getTotalPages()-1;
+		int nowPage = buyList.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
+		int startPage = Math.max(nowPage-4, 1);
+		int endPage = Math.min(nowPage+5, buyList.getTotalPages());
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 	}
 	
 }

@@ -5,6 +5,15 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 	
+	const btnSearch = document.querySelector('#btnSearch');
+	btnSearch.addEventListener('click', (e) => {
+        const dateStart = document.querySelector('#searchOrderDateStart').value;
+        const dateEnd = document.querySelector('#searchOrderDateEnd').value;
+        if (dateStart > dateEnd) {
+			alert('검색 기간 날짜 확인 필요');
+			return;
+		}
+    });
 	// 주문 상태 변경 함수
 	const modifyStatus = (e) => {
 		
@@ -35,4 +44,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	
 });
+
 

@@ -41,6 +41,7 @@
 		</div>
 	</div>
    <!-- 페이징~ -->
+<th:block th:if="${totalPage>=1}">
 	<div class="pt-5">
 		<nav id="paging-block">
 			<ul class="pagination justify-content-md-center">
@@ -61,6 +62,7 @@
 			</ul>
 		</nav>
 	</div>
+</th:block>
 </main>
 
 </html>

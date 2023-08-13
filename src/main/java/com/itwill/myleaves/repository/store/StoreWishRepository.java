@@ -2,6 +2,8 @@ package com.itwill.myleaves.repository.store;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +14,7 @@ import com.itwill.myleaves.repository.sellbuy.BuyWish;
 
 public interface StoreWishRepository extends JpaRepository<StoreWish, StoreWishId> {
 
-	List<StoreWish> findByUserId(String userId);
+	Page<StoreWish> findByUserId(String userId, Pageable pageable);
 	
 	List<StoreWish> findByItemId(long itemId);
 	

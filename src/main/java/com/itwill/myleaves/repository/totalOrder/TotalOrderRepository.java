@@ -37,16 +37,16 @@ public interface TotalOrderRepository extends JpaRepository<TotalOrder, Long> {
 	 * @param userId
 	 * @return
 	 */
+	
 	@Query(value = "SELECT * FROM TOTAL_ORDER WHERE "
-	        + "(:searchUserId IS NULL OR LOWER(USER_ID) LIKE LOWER('%' || :searchUserId || '%')) "
+	        + "(:searchUserId IS NULL OR USER_ID = :searchUserId) "
 	        + "AND (:searchStatus IS NULL OR STATUS = :searchStatus) "
 	        + "AND (:searchOrderDateStart IS NULL OR ORDER_DATE >= :searchOrderDateStart) "
 	        + "AND (:searchOrderDateEnd IS NULL OR ORDER_DATE <= :searchOrderDateEnd) "
 	        + "ORDER BY ORDER_DATE DESC", nativeQuery = true)
-	Page<TotalOrder> search(@Param("searchUserId") String searchUserId,
+	List<TotalOrder> search(@Param("searchUserId") String searchUserId,
 	                        @Param("searchStatus") String searchStatus,
 	                        @Param("searchOrderDateStart") String searchOrderDateStart,
-	                        @Param("searchOrderDateEnd") String searchOrderDateEnd,
-	                        Pageable pageable);
+	                        @Param("searchOrderDateEnd") String searchOrderDateEnd);
 
 }

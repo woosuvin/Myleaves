@@ -64,8 +64,8 @@ public class SellService {
 	 * @param userId
 	 * @return
 	 */
-	public List<Sell> readSellList(String userId) {
-		return sellRepository.findByUserId(userId);
+	public Page<Sell> readSellList(String userId, Pageable pageable) {
+		return sellRepository.findByUserId(userId, pageable);
 	}
 
 	/**
@@ -73,18 +73,18 @@ public class SellService {
 	 * @param buyerId
 	 * @return
 	 */
-	public List<Buy> readBuyList(String buyerId) {
-		return buyRepository.findByBuyerId(buyerId);
+	public Page<Buy> readBuyList(String buyerId, Pageable pageable) {
+		return buyRepository.findByBuyerId(buyerId, pageable);
 	}
 
 	/**
-	 * 입양 메뉴 리스트
+	 * 입양 메뉴 리스트, 사용 안함
 	 * @return
 	 */
-	public List<Sell> read() {
-//		log.info("read()");
-		return sellRepository.findByOrderBySoldAscSellIdDesc();
-	}
+//	public List<Sell> read() {
+////		log.info("read()");
+//		return sellRepository.findByOrderBySoldAscSellIdDesc();
+//	}
 	
 	/**
 	 * 입양 메뉴 리스트 페이징 

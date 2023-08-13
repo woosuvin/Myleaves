@@ -14,6 +14,6 @@ public interface SellRepository extends JpaRepository<Sell, Long>{
 	Page<Sell> findByOrderBySoldAscSellIdDesc(Pageable pageable);
 	
 	// 마이페이지 분양 리스트 
-	List<Sell> findByUserId(String userId);
+	Page<Sell> findByUserId(String userId, Pageable pageable);
 
 }

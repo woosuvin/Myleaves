@@ -2,11 +2,10 @@ package com.itwill.myleaves.repository.sellbuy;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 
-import jakarta.transaction.Transactional;
 
 public interface BuyRepository extends JpaRepository<Buy, Long> {
 
@@ -17,6 +16,6 @@ public interface BuyRepository extends JpaRepository<Buy, Long> {
 	 * @param BuyerId
 	 * @return
 	 */
-	List<Buy> findByBuyerId(String BuyerId);
+	Page<Buy> findByBuyerId(String BuyerId, Pageable pageable);
 	
 }
