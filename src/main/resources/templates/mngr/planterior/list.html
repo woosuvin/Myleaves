@@ -6,9 +6,12 @@
 <main layout:fragment="mngrHome">
 
 	<div>
-		<h1>플랜테리어 관리자 북마크</h1>
+		<h3>플랜테리어 관리자 북마크</h3>
 		<!-- 8개로 한정짓는 것 만들기-->
-		<a th:href="@{/planterior}"><button>북마크하러 가기</button></a>
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<a th:href="@{/planterior}"><button class="btn btn-outline-dark me-md-2">북마크하러 가기</button></a>
+			<button class="btn btn-secondary ">삭제</button>
+		</div>
 
 		<table class="table table-hover">
 			<thead>
@@ -30,7 +33,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<button class="delete">삭제</button>
 		<!-- 	카드 형태
 		<div class="m-2">
 			<div class="row row-cols-1 row-cols-md-4 g-4">

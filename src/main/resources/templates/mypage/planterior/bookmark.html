@@ -2,12 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/base_layout}">
-
+<th:block layout:fragment="mycsses">
+	<link th:href="@{/css/planterior.css}" rel="stylesheet" />
+</th:block>
 <main layout:fragment="main">
 
 	<div class="container text-center">
 		<div class="m-5">
-			<h1>플랜테리어 북마크</h1>
+			<h3>플랜테리어 북마크</h3>
 		</div>
 		<div class="m-2">
 			<div class="row row-cols-1 row-cols-md-4 g-4">
@@ -20,11 +22,11 @@
 						<!-- <img th:text="${list.img}" />  -->
 						<div class="card-body row">
 							<div class="col-9">
-								<p class="planteriorButtonEle text-start"
+								<p class="planteriorButtonEle"
 									th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
 							</div>
 							<div class="col-3 text-end">
-								<button class="imgButtonFill" th:value="${list.planteriorId}">
+								<button class="imgButtonFill btn-outline-dark" th:value="${list.planteriorId}">
 									<img th:src="@{/images/planterior/bookmarkFill.svg}" />
 								</button>
 							</div>

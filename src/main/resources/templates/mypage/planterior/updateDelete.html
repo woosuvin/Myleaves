@@ -10,7 +10,7 @@
 <main layout:fragment="main">
 	<div class="container">
 		<div class=" createTitle">
-			<h1 class="text-center">수정하기</h1>
+			<h3 class="text-center">수정하기</h3>
 		</div>
 		<form class="form-box" id="updateForm" encType="multipart/form-data">
 			<dl>
@@ -62,26 +62,26 @@
 						<ul class="filterLists list-unstyled">
 							<li>
 								<input type="image" th:src="@{/images/common/reset.svg}" name="reset" id="filter_reset_btn" />
-								<input type="button" class="filterBtn"  value="거실"  />
-								<input type="button" class="filterBtn"  value="주방"  />
-								<input type="button" class="filterBtn"  value="욕실"  />
-								<input type="button" class="filterBtn"  value="방"  />
-								<input type="button" class="filterBtn"  value="베란다"  />
+								<input type="button" class="filterBtn btn btn-outline-dark"  value="거실"  />
+								<input type="button" class="filterBtn btn btn-outline-dark"  value="주방"  />
+								<input type="button" class="filterBtn btn btn-outline-dark"  value="욕실"  />
+								<input type="button" class="filterBtn btn btn-outline-dark"  value="방"  />
+								<input type="button" class="filterBtn btn btn-outline-dark"  value="베란다"  />
 							</li>
 						</ul>
 						<input class="d-none" name="stateContent" id="stateContent" />
 						<input class="d-none" name="conditionContent" id="conditionContent" />
 						<ul class="d-none secondFilterSection" id="secondFilter" >
 							<li>
-								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="초보자용"  />
-								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="선물하기 좋은"  />
-								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="공기정화"  />
-								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="빛이 적어도 되는"  />
-								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="향기나는"  />
-								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="반려동물 안전한"  />
-								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="목대있는"  />
-								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="흙이 필요없는"  />
-								<input type="button" class="filterSecondBtn" id="filterSecondBtn" value="덩굴로 자라는"  />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="초보자용"  />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="선물하기 좋은"  />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="공기정화"  />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="빛이 적어도 되는"  />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="향기나는"  />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="반려동물 안전한"  />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="목대있는"  />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="흙이 필요없는"  />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="덩굴로 자라는"  />
 							</li>
 						</ul>
 					</div>
@@ -90,9 +90,9 @@
 			<div>
 				<div>
 					<div class="my-2 text-center">
-						<a class="btn btn-secondary" id="btnCancel">취소</a> <input
-							class="btn btn-classic" type="submit" id="btnUpdate" value="수정" />
-						<input class="btn btn-classic" type="submit" id="btnDelete"
+						<a class="btn btn-outline-dark" id="btnCancel">취소</a> <input
+							class="btn btn-outline-dark" type="submit" id="btnUpdate" value="수정 등록" />
+						<input class="btn btn-secondary" type="submit" id="btnDelete"
 							value="삭제" />
 					</div>
 				</div>

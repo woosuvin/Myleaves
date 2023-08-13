@@ -2,18 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/base_layout}">
-
+<th:block layout:fragment="mycsses">
+	<link th:href="@{/css/planterior.css}" rel="stylesheet" />
+</th:block>
 <main layout:fragment="main">
 
 	<div class="container text-center">
 		<div class="m-5">
-			<h1> 플랜테리어 내가 쓴 글 </h1>
+			<h3> 플랜테리어 내가 쓴 글 </h3>
 			<h4> <small> 카드 선택시 해당 글을 수정 및 삭제 가능합니다. </small> </h4>
 		</div>
 		<div class="m-2">
 			<div class="row row-cols-1 row-cols-md-4 g-4">
 				<div class="col" th:each="list: ${cardList}">
-					<a th:href="@{/mypage/planterior/updateDelete(planteriorId=${list.planteriorId})}">
+					<a th:href="@{/mypage/planterior/updateDelete(planteriorId=${list.planteriorId})}" 
+								class="link-dark link-underline-opacity-0">
 						<div class="card">
 							<img th:src="@{/images/planterior/eucalyptus.png}" />
 							<!-- <img th:text="${list.img}" />  -->

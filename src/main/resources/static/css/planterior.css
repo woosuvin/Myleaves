@@ -74,8 +74,7 @@ button#filterBtn {
 	color: #00b564
 }
 
-button.filterBtn
-	{
+button.filterBtn {
 	position: relative
 }
 
@@ -89,9 +88,7 @@ button#filter_reset_btn
 	justify-content: center;
 	align-items: center
 }*/
-
-button#filter_reset_btn img
-	{
+button#filter_reset_btn img {
 	display: inline-block;
 	width: 20px
 }
@@ -107,17 +104,39 @@ span.pick {
 	font-size: 25px;
 }
 
-.planteriorButton{
+.planteriorButton {
 	float: right;
-	border:none;
+	border: none;
+	background-color: transparent;
+}
+
+.planteriorButtonEle {
+	width: 140px;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.imgButtonFill {
+	border: none;
 	background-color:transparent;
 }
 
-.planteriorButtonEle{
-	display: inline-block;
+.imgButton {
+	border: none;
+	background-color:transparent;
 }
 
+.notBookmark {
+	border: none;
+	background-color:transparent;
+}
 
+.none {
+	border: none;
+	background-color:transparent;
+}
 
 /*작성하기 + 수정하기 페이지 적용*/
 
@@ -126,12 +145,13 @@ span.pick {
 	margin-top: 42px;
 	margin-bottom: 20px
 }
+
 .highlight {
 	color: red;
 	float: right;
 }
+
 .highlight-left {
 	color: red;
 	float: left;
 }
-
