@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			htmlStr += `
 				 	<div id="cancel">
 				 		<div class="mt-3 text-center">
-							<button id="btnBack" onclick="back()" class="btn btn-outline-dark">돌아가기</button>
+							<button id="btnBack" class="btn btn-outline-dark">돌아가기</button>
 						</div>
 				 		<div class="mt-3 input-group">
 							<input id="reason" type="text" class="form-control" placeholder="취소 사유를 입력해주세요.">
@@ -24,6 +24,25 @@ document.addEventListener('DOMContentLoaded', () => {
 				 	</div>
 				 `;
 		cancelArea.innerHTML = htmlStr;
+		
+			const back = (e) => {
+				const orderId = document.querySelector('#orderId').innerText;
+
+				const cancelArea = document.querySelector('div#cancel');
+				cancelArea.innerHTML = '';
+				let htmlStr = '';
+				htmlStr += `
+					<div id="cancel" class="m-3 text-center">
+						<button id="btnCancel" class="btn btn-outline-dark">주문 취소하기</button>
+					</div>
+					`;
+				cancelArea.innerHTML = htmlStr;
+
+				const btnCancel = document.querySelector('#btnCancel');
+				btnCancel.addEventListener('click', writeReason);
+			};
+			const btnBack = document.querySelector('#btnBack');
+			btnBack.addEventListener('click', back);
 		
 		
 		// 수빈: 주문 취소 버튼 이벤트(취소 사유 등록, 주문 상태 변경)
@@ -42,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		    const data = {orderId, reason, status}; // {replyText: replyText}, 요청 데이터(수정할 댓글 내용)
 		    
 		    const check = confirm(`주문을 취소하시겠습니까?
-취소 접수 후 변경이 불가합니다.
+취소 접수 이후 변경이 불가합니다.
 이후 문의사항은 고객센터에 문의 바랍니다.`);
 		    
 		    if(check) {
@@ -50,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		        .put(reqUrl, data) // PUT 방식의 Ajax 요청을 보냄.
 		        .then((response) => {
 		            console.log(response);
-		            alert('취소 접수 완.');
+		            alert('취소 접수가 완료되었습니다.');
 		            location.reload();
 		        })
 		        .catch((error) => console.log(error));
@@ -60,27 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		const btnUpdate = document.querySelector('#updateReason');
 		btnUpdate.addEventListener('click', updateReason);
 	
+	
 	};
 	const btnCancel = document.querySelector('#btnCancel');
 	btnCancel.addEventListener('click', writeReason);
 
-
-	const back = (e) => {
-		const orderId = document.querySelector('#orderId').innerText;
-		
-		const cancelArea = document.querySelector('div#cancel');
-		cancelArea.innerHTML = '';
-		let htmlStr = '';
-		htmlStr += `
-		<div id="cancel" class="m-3 text-center">
-			<button id="btnCancel" class="btn btn-outline-dark">주문 취소하기</button>
-		</div>
-		`;
-		cancelArea.innerHTML = htmlStr;
-		
-		const btnCancel = document.querySelector('#btnCancel');
-		btnCancel.addEventListener('click', writeReason);
-	};
 	
 });
 
