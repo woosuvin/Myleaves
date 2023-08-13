@@ -41,6 +41,9 @@ public class CommunityHomeController {
 		// 포스트 목록 검색
 	    Page<Community> list = communityService.read(pageable);
 	    
+//	    long count = communityCommentService.countByCommunityId(communityId);
+//	    model.addAttribute("communityCommentCount", count);
+	    
 	    int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
         int startPage =  Math.max(nowPage - 4, 1); // 시작 페이지
         int endPage = Math.min(nowPage +5, list.getTotalPages()); // 끝 페이지

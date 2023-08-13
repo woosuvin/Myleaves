@@ -10,8 +10,8 @@
 	<div class="text-center mb-5">
 		<h3>내가 쓴 글</h3>
 	</div>
-    <div class="mb-2 text-end">
-      <button class="btn delete-button btn-secondary">삭제</button>
+    <div class="text-end">
+      <button class="btn delete-button btn-secondary my-2">삭제</button>
     </div>
 	<table class="table table-hover">
 		<thead>
@@ -56,11 +56,10 @@
 <!-- 페이징처리 시작 -->
 <nav aria-label="...">
 	<ul class="pagination pagination-sm justify-content-center">
-		<li th:each="page : ${#numbers.sequence(startPage, endPage)}"
-			class="page-item"><a th:if="${page == nowPage}"
-			class="page-link active" th:text="${page}"></a> <a
-			th:if="${page != nowPage}" th:href="@{/mypage/community/my_posts(userId=${ #authentication.name },page=${page - 1})}"
-			class="page-link" th:text="${page}"></a></li>
+		<li th:each="page : ${#numbers.sequence(startPage, endPage)}" class="page-item">
+			<a style="color: white; background-color: black; border-color: black;" th:if="${page == nowPage}" class="page-link active" th:text="${page}"></a> 
+			<a style="color: black;" th:if="${page != nowPage}" th:href="@{/mypage/community/my_posts(userId=${ #authentication.name },page=${page - 1})}" class="page-link" th:text="${page}"></a>
+		</li>
 	</ul>
 </nav>
 <!-- 페이징처리 끝 -->

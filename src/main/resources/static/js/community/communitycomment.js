@@ -11,9 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	 // 버튼 아이콘 이미지
     const toggleBtnIcon = document.querySelector('img#toggleBtnIcon'); 
+
     
 	const btnToggleCommunityComment = document.querySelector('#btnToggleCommunityComment');
-	btnToggleCommunityComment.addEventListener('click', (e) => {
+	btnToggleCommunityComment.addEventListener('click', () => {
 		bsCollapse.toggle();
 
 	
@@ -28,12 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
          } else {
                 toggleBtnIcon.src = '/images/community/toggle2-off.svg';
                 toggleBtnIcon.alt = 'toggle-off';
-                replies.innerHTML = '';
         }
      });
      
-
-	
 	
     // 댓글 삭제 버튼 클릭을 처리하는 이벤트 리스너 콜백
 	const deleteCommunityComment = (e) => {
@@ -62,18 +60,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 수정할 댓글 아이디
         const communityCommentId = e.target.getAttribute('data-communityCommentId');
-        // 댓글 입력 textarea 아이디
-        const textAreaId = `textarea#content_${communityCommentId}`;
-        
+        const before = $('div#text' + communityCommentId).text().trim();
+
+		$('div#text' + communityCommentId).html('<textarea name="updateText" class="form-control mt-2">' + before + '</textarea>');
+		$('div#buttonDiv' + communityCommentId).html(`
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				<button id="btnUpdateDiv" type="button" class="btn btn-outline-dark btn-sm" data-id="${communityCommentId}">
+					등록
+				</button>
+			</div>
+		`);
+		
+		$('#btnUpdateDiv').click(function(e) {
+
+        // 댓글 입력 아이디
+        // const textAreaId = `#content_${communityCommentId}`;
+        // console.log(`${textAreaId}`);
+       
         //  수정할 댓글 내용
-        const content = document.querySelector(textAreaId).value;
+        // const content = document.querySelector(textAreaId).value;
+		const reqUrl = `/api/communitycomment/${communityCommentId}`;
+		const content = $('textarea[name="updateText"]').val().trim();
+        const data = {content};  // 수정한 댓글 내용
+
         if(content ===''){
             alert('수정할 댓글 내용을 입력하세요.')
             return;
         }
-		const reqUrl = `/api/communitycomment/${communityCommentId}`;
-        const data = {content};  // 수정한 댓글 내용
-
 	  
         axios
             .put(reqUrl, data)
@@ -82,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				getCommentsWithCommunityId(); // 댓글 새로고침 
             })
             .catch((error) => console.log(error)); 
+       })
     };
     
 
@@ -93,28 +107,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		let htmlStr = '';
 		for (let comment of data) {
+			if (authName === comment.userId) {
+
 			htmlStr += `
-		        <div class="card my-2">
-		          <div>
+			<div class="card p-3 mb-2">
+		        <div class="row">
+		          <div class="col-10">
 		            <span class="d-none">${comment.communityCommentId}</span>
 		            <span class="fw-bold">${comment.userId}</span>
 		          </div>
-		          `;
-          
-         // 로그인한 사용자와 댓글 작성자가 같을 때만 삭제, 수정 버튼을 보여줌.
-         if (authName === comment.userId) {
-			 htmlStr += `
-			 <div class="row">
-	            <textarea class="form-control my-2 col-8" id="content_${comment.communityCommentId}">${comment.content}</textarea>
-		        <div class="col-4">
-		            <button class="btnDelete btn btn-secondary" data-communityCommentId="${comment.communityCommentId}">삭제</button>
-		            <button class="btnModify btn btn-outline-dark" data-communityCommentId="${comment.communityCommentId}">수정</button>
-		        </div>
-	        </div>
+			      <div class="col-2 d-grid gap-2 d-md-flex justify-content-md-end" id="buttonDiv${comment.communityCommentId}">
+				        <button class="btnDelete btn btn-secondary btn-sm" data-communityCommentId="${comment.communityCommentId}">삭제</button>
+				        <button class="btnModify btn btn-outline-dark btn-sm" data-communityCommentId="${comment.communityCommentId}">수정</button>
+			     </div>  
+                 <div id="modifyContent${comment.communityCommentId}">
+					    <div id="text${comment.communityCommentId}">
+					        <pre class="pre-bootstrap" id="content_${comment.communityCommentId}">${comment.content}</pre>
+					   </div>
+				 </div>  
+			</div>
  	     `;	
 		}else {
             htmlStr += `
-            <textarea id="content_${comment.communityCommentId}" readonly>${comment.content}</textarea>
+            	<div class="card p-3 mb-2">
+			          <div>
+			          	  <span class="d-none">${comment.communityCommentId}</span>
+			          	  <span class="fw-bold">${comment.userId}</span>
+			          </div>
+					  <div>
+				       	 <pre class="pre-bootstrap" id="content_${comment.communityCommentId}">${comment.content}</pre>
+					  </div>
+				</div>
             `;
         }
         
@@ -146,15 +169,18 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log(error);
 		}
 	};
-
+	
 	// 댓글 등록 버튼 클릭 시 이벤트 리스너 등록
 	const btnCommunityCommentCreate = document.querySelector('button#btnCommunityCommentCreate');
 	btnCommunityCommentCreate.addEventListener('click', () => {
 		// 몇번 게시물의 댓글?
 		const communityId = document.querySelector('input#communityId').value;
-		console.log(communityId);
 		const content = document.querySelector('textarea#content').value;
 		const userId = authName;
+		
+		console.log(`${communityId}`);
+		console.log(`${content}`);
+		console.log(`${userId}`);
 
 		if (content === '') {
 			alert('댓글 내용을 입력하세요.');
@@ -167,12 +193,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		axios
 			.post(reqUrl, data)
 			.then((response) => {
+				alert('댓글 등록완료');
 				console.log(response);
 				getCommentsWithCommunityId();
 				document.querySelector('textarea#content').value = '';
 			})
 			.catch((error) => console.log(error));
 	});
+	
+
+	
+
 });	
 	
 

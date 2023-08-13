@@ -13,50 +13,44 @@
 	</div>
 	<div class="card">
 		<form id=communityModifyForm>
-			<div class="">
+			<div class="card-header">
 				<input class="d-none" id="communityId" th:value="${post.communityId}" />
-				<span th:text="'[' + ${post.hrsHd} + ']'"></span> <label th:text="${post.title}"></label>
-				<br> 
-				<span>작성자:</span>
-				<span id="userId" th:text="${post.userId}"></span>
-				
+				<p class="fs-5 fw-semibold"><span th:text="'[' + ${post.hrsHd} + ']'"></span> <span th:text="${post.title}"></span></p>
+				<p class="fs-6 fw-lighter mb-0"><span>작성자: <span id="userId" th:text="${post.userId}"></span></span></p>
 			</div>
-			<hr>
-			<div th:utext="${post.content}"></div>
-			<hr>
-			<p class="text-sm-end" th:text="${ #temporals.format(post.modifiedDate, 'yyyy-MM-dd HH:mm')}"></p>
+			<div class="card-body">	
+				<div th:utext="${post.content}"></div>
+				<p class="text-end fs-6 fw-lighter mb-0" th:text="${ #temporals.format(post.modifiedDate, 'yyyy-MM-dd HH:mm')}"></p>
+			</div>
+			<input type="hidden" name="userId" th:value="${post.userId}"/>
 		</form>
 	</div>
 
-	<div class="row justify-content-center">
-		<div class="col-auto">
-			<!-- th:if="${ #authentication.name } == ${ post.userId }" -->
-			<a class="btn  btn-outline-dark" 
-				th:href="@{/community/modify?communityId={id} (id=${post.communityId}) }">수정</a>
+	<div class="row justify-content-center mt-3">
+		<div class="col-auto " th:if="${ #authentication.name } == ${ post.userId }">
+			<a class="btn  btn-outline-dark" th:href="@{/community/modify?communityId={id} (id=${post.communityId}) }">수정</a>
+			<a class="btn btn-outline-dark" th:href="@{/community}">목록</a>
 		</div>
-		<div class="col-auto">
+			<div class="col-auto " th:if="${ #authentication.name } != ${ post.userId }">
 			<a class="btn btn-outline-dark" th:href="@{/community}">목록</a>
 		</div>
 	</div>
 	
-	<div class="my-2 card">
+	<div class="my-2 card mt-3">
 		<div class="card-header">
 			<span>댓글</span> <span id="communityCommentCount" th:text="${communityCommentCount}"></span>개
 			<button class="btn" id="btnToggleCommunityComment">
-				    <img id="toggleBtnIcon" src="/images/community/toggle2-off.svg" 
-                                     alt="toggle-off" width="32"/>
+				 <img id="toggleBtnIcon" src="/images/community/toggle2-off.svg" alt="toggle-off" width="32"/>
 			</button>
 		</div>
 
 		<div class="d-none" id="authName" th:text="${#authentication.name}"></div>
 		<div class="card-body collapse" id="communityCommentToggleDiv">
 			<div class="my-2 row">
-				<div class="col-10">
-					<textarea class="form-control" id="content"
-						placeholder="댓글 내용을 입력하세요"></textarea>
-				</div>
-				<div class="col-2">
-					<button class="form-control btn btn-outline-success"
+                <label class="form-label" for="content">나의 댓글</label>
+				<div class="input-group mb-3">
+					<textarea class="form-control" id="content" placeholder="댓글 내용을 입력하세요"></textarea>
+					<button class="btn btn-outline-dark"
 						id="btnCommunityCommentCreate">등록</button>
 				</div>
 			</div>
@@ -64,7 +58,9 @@
 		</div>
 	</div>
 </main>
-<th:block layout:fragment="myscripts">>
+<th:block layout:fragment="myscripts">
+	 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
      <script src="/js/community/communitycomment.js"></script>
+	 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </th:block>
 </html>	

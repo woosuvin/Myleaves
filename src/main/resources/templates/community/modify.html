@@ -11,39 +11,37 @@
 	<div class="text-center mb-5">
 		<h3>수정하기</h3>
 	</div>
-	<div class="card">
+	<div>
 		<form id="communityModifyForm">
-		 	<div class="">
+		 	<div class="input-group mb-3">
 		 		<input type="hidden" name="communityId" th:value="${post.communityId}"/>
-				<select name="hrsHd">
+				<label class="input-group-text" for="hrsHd">말머리</label>
+				<select class="form-select" id="hrsHd" name="hrsHd">
 				    <option value="이게 뭔가요?" th:selected="${post.hrsHd == '이게 뭔가요?'}">이게 뭔가요?</option>
 				    <option value="꿀팁 대방출" th:selected="${post.hrsHd == '꿀팁 대방출'}">꿀팁 대방출</option>
 				    <option value="스토어 상품/입양 후기" th:selected="${post.hrsHd == '스토어 상품/입양 후기'}">스토어 상품/입양 후기</option>
 				    <option value="사담" th:selected="${post.hrsHd == '사담'}">사담</option>
 				</select>
-				<input type="text" id="title" name="title" th:value="${post.title}"></input>
-				<br>
-				<span>작성자:</span>
-				<span th:text="${post.userId}"></span>
-				<input type="hidden" name="userId" th:value="${post.userId}"/>
 			</div>
-			<hr>
+			<div class="input-group mb-3">
+				<span class="input-group-text">제목</span>
+				<input type="text" class="form-control" id="title" name="title" th:value="${post.title}" autofocus></input>
+    		  	<span class="input-group-text" id="textLengthCheck">(0 / 80)</span>
+			</div>
 			<div>
 				<textarea name="content" id="content" th:utext="${post.content}"></textarea>
 			</div>
-			<hr>
+				<p class="text-end fs-6 mt-1 fw-lighter"><span>작성자: <span id="userId" th:text="${post.userId}"></span></span></p>
+				<input type="hidden" name="userId" th:value="${post.userId}"/>
 			<div class="text-end">
-				<label th:text= "${ #temporals.format(post.modifiedDate, 'yyyy-MM-dd HH:mm' )}" ></label>
+				<label class="d-none" th:text= "${ #temporals.format(post.modifiedDate, 'yyyy-MM-dd HH:mm' )}" ></label>
 			</div>
 		</form>	
 	</div>
 	
-	<!-- 로그인 사용자와 포스트 작성자 동일  -->
-<div class="row justify-content-center"> <!-- <div th:if="${ #authentication.name } == ${ post.userId }" -->
+<div class="row justify-content-center mt-3"> 
     <div class="col-auto">
         <a class="btn btn-secondary" id="btnDelete">삭제</a>
-    </div>
-    <div class="col-auto">
         <a class="btn btn-outline-dark" id="btnUpdate">수정 완료</a>
     </div>
 </div>
