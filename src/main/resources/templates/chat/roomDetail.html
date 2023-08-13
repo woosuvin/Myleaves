@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/chat.css">
@@ -8,6 +8,7 @@ h2 {
 }
 </style>
 </head>
+<div class="col" th:each="chat: ${ chat }" ></div>
 <div>
 	<h2>식물이좋다</h2>
 </div>
@@ -38,11 +39,11 @@ h2 {
 	</table>
 </div>
 <hr>
-<!-- 채팅 -->
+채팅
 <div class="chat_wrap">
 	<div class="chat">
 		<ul>
-			<!-- 동적 생성 -->
+			동적 생성
 		</ul>
 	</div>
 	<div class="input-div">
@@ -52,7 +53,7 @@ h2 {
 		</div>
 	</div>
 
-	<!-- format -->
+	format
 
 	<div class="chat format">
 		<ul>
@@ -70,4 +71,18 @@ h2 {
 <th:block layout:fragment="myscripts">
 	<script src="/js/chat.js"></script>
 </th:block>
+</html> -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base_layout}">
+
+<main layout:fragment="main">
+	<h2 th:text="|${#authentication.name}의 채팅목록|"></h2>
+	<input th:value="">
+
+</main>
+    <th:block layout:fragment="myscripts">
+        <script src="/js/chat.js"></script>
+    </th:block>
 </html>

@@ -7,7 +7,10 @@
 	<div class="container">
 		<div>
 			<input type="hidden" id="sellId" name="sellId"
-				th:value="${ sell.sellId }" /> <input type="hidden" id="userId"
+				th:value="${ sell.sellId }" /> 
+			<input type="hidden" id="sellerId" name="sellerId"
+				th:value="${ sell.userId }" /> 
+			<input type="hidden" id="userId"
 				name="userId" th:value="${ #authentication.name }" />
 		</div>
 		<table class="table table-borderless">
@@ -42,7 +45,7 @@
 								<th:block th:case="true">
 									<a class="btn btn-outline-dark"
 										th:href="@{ /sell/modify?sellId={sellId} (sellId = ${sell.sellId})}">수정하기</a>
-									<a class="btn btn-outline-dark" th:href="@{ /chat }">대화내역</a>
+									<a class="btn btn-outline-dark" target="_blank" onclick="openChatPopup()">대화내역</a>
 								</th:block>
 								
 								<!-- false / 글 작성자가 아니면 -->
@@ -60,7 +63,7 @@
 													상품 삭제</button>
 										</th:block>
 									<!-- 항상 보일 것 -->
-									<button id="" class="btn btn-outline-dark" type="button">판매자와
+									<button id="chatButton" class="btn btn-outline-dark" type="button">판매자와
 										대화하기</button>
 								</th:block>
 							</th:block>
@@ -76,5 +79,6 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 	<script src="/js/sellbuy/buyDetail.js"></script>
+	<script src="/js/chat.js"></script>
 </th:block>
 </html>

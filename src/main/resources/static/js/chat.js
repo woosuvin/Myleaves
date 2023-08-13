@@ -4,92 +4,180 @@
  * 
  */
 
-function openCenteredWindow(url, width, height) {
-  var left = (screen.width - width) / 2;
-  var top = (screen.height - height) / 2;
-  var options = 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top;
-  window.open(url, '_blank', options);
-}
+/*function openChatList() {
+	const myId = document.querySelector('input#myId').value;
+	const sellId = document.querySelector('input#sellId').value;
 
-// Usage example:
-function openChatList() {
-  openCenteredWindow('/chat/chatList', 600, 400);
+	console.log(myId);
+	let data = {
+		myId : myId,
+		sellId : sellId		
+	}
+	
+		axios.get(`/chat/chatList`, myId, 600, 400)
+			.then(response => {
+			const chatrooms = response.data;
+		
+			openCenteredWindow(chatrooms);  
+		  })
+		  .catch(error => {
+			  console.error("Error", error);
+		  });
+}*/
+
+function openChatPopup() {
+	const userId = document.querySelector('input#userId').value;
+	const width = 600;
+	const height = 400;
+	const left = (window.innerWidth - width) / 2;
+	const top = (window.innerHeight - height) / 2;
+	const options = "width=" + width + ",height=" + height + ",top=" + top + ",left=" + left;
+
+	// 새 창으로 이동
+	window.open("/chat/room?myId=" + encodeURIComponent(userId), "_blank", options);
 }
 
 function openChatRoom() {
-  openCenteredWindow('/chat/chatRoom', 600, 400);
+	openCenteredWindow('/chat/room/enter/{roomId}', 600, 400);
 }
 
-const Chat = (function(){
-    const myName = "blue";
- 
-    // init 함수
-    function init() {
-        // enter 키 이벤트
-        $(document).on('keydown', 'div.input-div textarea', function(e){
-            if(e.keyCode == 13 && !e.shiftKey) {
-                e.preventDefault();
-                const message = $(this).val();
- 
-                // 메시지 전송
-                sendMessage(message);
-                // 입력창 clear
-                clearTextarea();
-            }
-        });
-    }
- 
-    // 메세지 태그 생성
-    function createMessageTag(LR_className, senderName, message) {
-        // 형식 가져오기
-        let chatLi = $('div.chat.format ul li').clone();
- 
-        // 값 채우기
-        chatLi.addClass(LR_className);
-        chatLi.find('.sender span').text(senderName);
-        chatLi.find('.message span').text(message);
- 
-        return chatLi;
-    }
- 
-    // 메세지 태그 append
-    function appendMessageTag(LR_className, senderName, message) {
-        const chatLi = createMessageTag(LR_className, senderName, message);
- 
-        $('div.chat:not(.format) ul').append(chatLi);
- 
-        // 스크롤바 아래 고정
-        $('div.chat').scrollTop($('div.chat').prop('scrollHeight'));
-    }
- 
-    // 메세지 전송
-    function sendMessage(message) {
-        // 서버에 전송하는 코드로 후에 대체
-        const data = {
-            "senderName"    : "blue",
-            "message"        : message
-        };
- 
-        // 통신하는 기능이 없으므로 여기서 receive
-        resive(data);
-    }
- 
-    // 메세지 입력박스 내용 지우기
-    function clearTextarea() {
-        $('div.input-div textarea').val('');
-    }
- 
-    // 메세지 수신
-    function resive(data) {
-        const LR = (data.senderName != myName)? "left" : "right";
-        appendMessageTag("right", data.senderName, data.message);
-    }
- 
-    return {
-        'init': init
+document.addEventListener('DOMContentLoaded', () => {
+	
+    const chatBtn = document.querySelector('#chatButton');
+    const sellId = document.querySelector('input#sellId').value;
+    const myId = document.querySelector('input#sellerId').value;
+    const otherId = document.querySelector('input#userId').value;
+
+    const openChatRoom = () => {
+		console.log(myId, sellId, otherId);
+        const data = { myId, sellId, otherId };
+        const reqUrl = '/chat/startChat';
+        
+        axios.post(reqUrl, data)
+            .then(response => {
+                if (response.data === 'Chat room already exists.') {
+                    window.location.href = '/chat/roomDetail?sellId=' + sellId + '&otherId=' + otherId;
+                } else {
+                    // New chat room created. 경우의 동작
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
     };
-})();
- 
-$(function(){
-    Chat.init();
+
+    if (chatBtn != null) {
+        chatBtn.addEventListener('click', openChatRoom);
+    }
 });
+
+// 판매자와 대화하기 버튼
+/*document.getElementById('chatButton').addEventListener('click', function() {
+	// 클라이언트에서 필요한 데이터 설정
+	const sellId = document.querySelector('input#sellId').value;
+	const myId = document.querySelector('input#sellerId').value;
+	const otherId = document.querySelector('input#userId').value;
+	
+	// HTTP POST 요청 보내기
+	fetch('/startChat', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+		body: `sellId=${sellId}&myId=${myId}&otherId=${otherId}`,
+	})
+		.then(response => response.text())
+		.then(data => {
+			const newChatWindow = window.open('', '_blank', 'width=600,height=400');
+			if (data.includes('New chat room created.')) {
+				newChatWindow.location.href = '/chat/roomDetail?sellId=' + sellId + '&otherId=' + otherId;
+			} else {
+				// 이미 존재하는 채팅방인 경우, 위에서 이미 새 창을 열었으므로 추가 작업 필요 없음
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+});*/
+
+// 클라이언트에서 stomp 연결
+/*function connect() {
+	const socket = new SockJS('/ws-stomp'); // WebSocketConfig SockJs 연결 주소
+	stompClient = Stomp.over(socket);
+	stompClient.connect({}, function (frame) {
+		setConnected(true);
+		console.log('Connected: ' + frame);
+		loadChat(chatList) // 채팅 불러오기
+		
+		// room/{roomId}를 구독
+		stompClient.subscribe('/room/' + roomId, function (chatMessage) {
+			showChat(JSON.parse(chatMessage.body));
+		})
+	})
+}
+
+// send
+function sendChat() {
+	stompClient.send("/send/" + roomId, {},
+		JSON.stringify({
+			'sender': $("#sender").val(),
+			'message': $("#message").val()
+		}));
+}
+
+// 채팅 보기
+function showChat(chat) {
+	$("#chatting").append(
+		"<tr><td>" + "[" + chat.userId + "]" + chat.message + "</td></tr>"
+	);
+}*/
+
+/*function createRoom() {
+	if("" === this.room)
+	
+	
+}*/
+
+/*const vm = new Vue({
+	el: '#app',
+	data: {
+		room_name: '',
+		chatrooms: []
+	},
+	created() {
+		this.findAllRoom();
+	},
+	methods: {
+		findAllRoom() {
+			axios.get('/chat/rooms').then(response => {
+				this.chatrooms = response.data;
+			});
+		},
+		createRoom() {
+			if (this.room_name === "") {
+				alert("방 제목을 입력해 주십시요.");
+				return;
+			} else {
+				const params = new URLSearchParams();
+				params.append("name", this.room_name);
+				axios.post('/chat/room', params)
+					.then(response => {
+						alert(response.data.roomName + "방 개설에 성공하였습니다.");
+						this.room_name = '';
+						this.findAllRoom();
+					})
+					.catch(response => {
+						alert("채팅방 개설에 실패하였습니다.");
+					});
+			}
+		},
+		enterRoom(roomId) {
+			const sender = prompt('대화명을 입력해 주세요.');
+			if (sender !== "") {
+				localStorage.setItem('wschat.sender', sender);
+				localStorage.setItem('wschat.roomId', roomId);
+				location.href = "/chat/room/enter/" + roomId;
+			}
+		}
+	}
+});*/
