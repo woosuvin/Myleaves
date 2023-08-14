@@ -18,11 +18,9 @@
 					<a th:href="@{/mypage/planterior/updateDelete(planteriorId=${list.planteriorId})}" 
 								class="link-dark link-underline-opacity-0">
 						<div class="card">
-							<img th:src="@{/images/planterior/eucalyptus.png}" />
-							<!-- <img th:text="${list.img}" />  -->
+							<img class="imgSize" th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
 							<div class="card-body">
-								<!-- 일렬로 맞추기 -->
-								<p class="planteriorButtonEle"
+								<p class="planteriorButtonEleMyPost text-center"
 									th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
 							</div>
 						</div>

@@ -3,12 +3,48 @@
  */
 document.addEventListener('DOMContentLoaded', () => {
 
+	// 한글만 입력가능
+	const plantName = document.querySelector("#plantName");
+
+	plantName.addEventListener("keypress", function(event) {
+		onlyKorean(event);
+	});
+
+	function onlyKorean(event) {
+		var keyCode = event.which || event.keyCode;
+		var inputValue = event.target.value;
+
+		// 허용되는 키 코드: 한글 자모음 및 스페이스, 백스페이스, 딜리트
+		if ((keyCode >= 12592 && keyCode <= 12687) || keyCode === 32 || keyCode === 8 || keyCode === 46) {
+			return true;
+		} else {
+			event.preventDefault();
+			alert('한글만 입력가능합니다.')
+			return false;
+		}
+	}
+
+	// 영어만 입력가능
+
+	const plantNameEnglish = document.querySelector('#plantNameEnglish');
+
+	plantNameEnglish.addEventListener("input", function(event) {
+		var cleanedValue = this.value.replace(/[^a-zA-Z\s]/g, '');
+		if (cleanedValue !== this.value) {
+			alert("한글과 숫자는 입력할 수 없습니다.");
+		}
+		this.value = cleanedValue;
+	});
+
+
+
+
 	// 플랜테리어 작성 취소 버튼
 	const createForm = document.querySelector('#createForm');
 
 	const inputStateContent = document.querySelector('input#stateContent');
 	const inputConditionContent = document.querySelector('input#conditionContent');
-	
+
 	const btnCancel = document.querySelector('#btnCancel');
 	btnCancel.addEventListener('click', () => {
 		const check = confirm('작성하신 내용은 저장되지 않습니다. 취소하시겠습니까?');
@@ -18,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 
 	// 플랜테리어 작성: 영문/한문
-	let formFile = document.querySelector('#formFile').value;
 	const btnCreate = document.querySelector('#btnCreate');
 	const filterBtns = document.querySelectorAll('.filterBtn');
 	let stateContent = '';
@@ -34,10 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			secondFilter.classList.remove('d-none');
 
 			console.log(e.target.value);
-			
+
 			inputStateContent.value = e.target.value;
 			inputConditionContent.value = '';
-			
+
 			// 추가
 			/*
 			let htmlStr = '';
@@ -64,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				})
 			}
 			*/
-			
+
 		});
 	}
 
@@ -72,8 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	for (let btn of filterSecondBtns) {
 		btn.addEventListener('click', (e) => {
 			console.log(e.target.value);
-			inputConditionContent.value +=  e.target.value + ',';
-			
+			inputConditionContent.value += e.target.value + ',';
+
 		})
 	}
 
@@ -84,14 +119,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		const plantName = document.querySelector('#plantName').value; // 한글만 가능하게 설정
 		const plantNameEnglish = document.querySelector('#plantNameEnglish').value; // 영어만 가능하게 설정
 		const userId = document.querySelector('#userId').value;
-		
+
 		const stateContent = document.querySelector('input#stateContent').value;
 		const conditionContent = document.querySelector('input#conditionContent').value;
-		
+		const file = document.querySelector('#file').value;
+
 		// 카테고리 삽입 가능성 존재
 		// 이미지 성공시 !formFile 넣기
-		if (plantName === '' || plantNameEnglish === '' || 
-			stateContent === '' || conditionContent === '') {
+		if (plantName === '' || plantNameEnglish === '' ||
+			stateContent === '' || conditionContent === '' ) {
 			alert('비어있는 부분을 선택해주세요')
 			return;
 		}

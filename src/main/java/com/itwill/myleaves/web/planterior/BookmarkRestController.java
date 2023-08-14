@@ -1,6 +1,9 @@
 package com.itwill.myleaves.web.planterior;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +28,7 @@ public class BookmarkRestController {
 	
 	private final BookmarkService bookmarkService;
 	
+	@PreAuthorize("hasAnyRole('MEMBER', 'ADMIN')")
 	@PostMapping("/like")
 	public Bookmark createBookmark(@RequestBody BookmarkDto dto) {
 		log.info("createBookmark(dto = {}), dto");
@@ -36,6 +40,7 @@ public class BookmarkRestController {
 	}
 	
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@DeleteMapping("/delete/{planteriorId}/{userId}")
 	@ResponseBody
 	public ResponseEntity<String> deleteBookmark(@PathVariable long planteriorId, @PathVariable String userId) {
@@ -46,5 +51,17 @@ public class BookmarkRestController {
 		return ResponseEntity.ok("Success");
 	}
 	
+	@DeleteMapping("/delete")
+	public ResponseEntity<Integer> deleteMngr(@RequestBody List<BookmarkDto> data) {
+		log.info("deleteMngr(data = {})", data);
+		
+		for(BookmarkDto dto: data) {
+			long planteriorId = dto.getPlanteriorId();
+			log.info("planteriorId={}", planteriorId );
+			
+			bookmarkService.delete(planteriorId, dto.getUserId());
+		}
+		return ResponseEntity.ok(1);
+	}
 
 }

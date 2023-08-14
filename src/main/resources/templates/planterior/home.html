@@ -20,29 +20,40 @@
 				<div class="plants_filter_section" id="first_filter">
 					<!-- 선택시 선택한 목록들 확인가능하게 하기: css 덧붙이기 -->
 					<ul class="filterLists list-unstyled">
-						<li>
-							<input type="image"  class="btn btn-outline-dark" th:src="@{/images/common/reset.svg}" name="reset" id="filter_reset_btn" />
-							<input type="button" class="filterBtn btn btn-outline-dark" value="거실" /> 
-							<input type="button" class="filterBtn btn btn-outline-dark" value="주방" /> 
-							<input type="button" class="filterBtn btn btn-outline-dark" value="욕실" /> 
-							<input type="button" class="filterBtn btn btn-outline-dark" value="방" />
-							<input type="button" class="filterBtn btn btn-outline-dark" value="베란다" />
+						<li><input type="image" class="btn btn-outline-dark"
+							th:src="@{/images/common/reset.svg}" name="reset"
+							id="filter_reset_btn" /> <input type="button"
+							class="filterBtn btn btn-outline-dark" value="거실" /> <input
+							type="button" class="filterBtn btn btn-outline-dark" value="주방" />
+							<input type="button" class="filterBtn btn btn-outline-dark"
+							value="욕실" /> <input type="button"
+							class="filterBtn btn btn-outline-dark" value="방" /> <input
+							type="button" class="filterBtn btn btn-outline-dark" value="베란다" />
 						</li>
 					</ul>
-					<input class="d-none" name="stateContent" id="stateContent" />
-				    <input class="d-none" name="conditionContent" id="conditionContent" />
-					<ul class="d-none list-unstyled secondFilterSection" id="secondFilter">
-						<li>
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="초보자용" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="선물하기 좋은" />
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="공기정화" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="빛이 적어도 되는" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="향기나는" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="반려동물 안전한" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="목대있는" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="흙이 필요없는" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="덩굴로 자라는" />
-						</li>
+					<input class="d-none" name="stateContent" id="stateContent" /> <input
+						class="d-none" name="conditionContent" id="conditionContent" />
+					<ul class="d-none list-unstyled secondFilterSection"
+						id="secondFilter">
+						<li><input type="button"
+							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
+							value="초보자용" /> <input type="button"
+							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
+							value="선물하기 좋은" /> <input type="button"
+							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
+							value="공기정화" /> <input type="button"
+							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
+							value="빛이 적어도 되는" /> <input type="button"
+							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
+							value="향기나는" /> <input type="button"
+							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
+							value="반려동물 안전한" /> <input type="button"
+							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
+							value="목대있는" /> <input type="button"
+							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
+							value="흙이 필요없는" /> <input type="button"
+							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
+							value="덩굴로 자라는" /></li>
 					</ul>
 				</div>
 				<!-- condition_content -->
@@ -50,7 +61,8 @@
 					name="secondfilter"></ul>
 				<ul class="list-unstyled">
 					<!-- 색상 바꾸기 -->
-					<input type="image" class="btn btn-outline-dark" th:src="@{/images/planterior/check-square.svg}" id="click" />
+					<input type="image" class="btn btn-outline-dark"
+						th:src="@{/images/planterior/check-square.svg}" id="click" />
 				</ul>
 				<div class="filterDivision"></div>
 
@@ -66,18 +78,23 @@
 			<span class="pick">이 달의 MD 픽</span>
 		</div>
 
-		<!-- 캐러셀 -->
-		<div class="row m-2">
-			<div class="col-xl-3 col-lg-3 col-md-6">
-				<div class="card">
-					<img th:src="@{/images/planterior/eucalyptus.png}" />
-					<div class="card-body">
-						<p class="card-text">Some quick example text to build on the
-							card title and make up the bulk of the card's content.</p>
+		<!-- 캐러셀 일단 8개 안되면 4개 -->
+		<div class="m-2">
+			<div class="row row-cols-1 row-cols-md-4 g-4">
+				<div class="col cardBox" th:each="mngrList: ${mngrList}">
+					<div class="card">
+						<img
+							th:src="@{'data:image/png;base64,'+${imagesMngr.get(mngrList.planteriorId)}}"
+							class="imgSize" />
+						<div class="card-body">
+							<div class="">
+								<p class="planteriorButtonEle text-start"
+									th:text="${mngrList.plantName} + '(' + ${mngrList.plantNameEnglish} +')'" />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 
 		<div class="p-4"></div>
@@ -85,24 +102,35 @@
 		<!-- 사용자 All card -->
 		<div class="m-2">
 			<span class="m-2">All</span>
-			<!-- 로그인 하지 않은 사용자이면 -->
 			<th:block sec:authorize="isAnonymous()">
-				<a class="float-end btn btn-outline-dark notCreate" type="button">
-					글쓰기 </a>
+				<a class="float-end btn btn-outline-dark"
+					th:href="@{/planterior/create}" type="button"> 글쓰기 </a>
 			</th:block>
 			<th:block sec:authorize="isAuthenticated()">
-				<a class="float-end btn btn-outline-dark" th:href="@{/planterior/create}"
-					type="button"> 글쓰기 </a>
+				<th:block th:if="${#authentication.name.equals('admin')}">
+					<a th:href="@{/mngr/planterior}"
+						class="float-end btn btn-outline-dark" type="button"> 관리자
+						플랜테리어 페이지로 돌아가기</a>
+				</th:block>
+				<th:block th:unless="${#authentication.name.equals('admin')}">
+					<a class="float-end btn btn-outline-dark"
+						th:href="@{/planterior/create}" type="button"> 글쓰기 </a>
+				</th:block>
 			</th:block>
+
+
+
 		</div>
 		<br>
 		<div class="m-2">
 			<!-- 로그인 안 했을 경우 -->
 			<th:block sec:authorize="isAnonymous()">
 				<div class="row row-cols-1 row-cols-md-4 g-4">
-					<div class="col" th:each="list: ${cardList}">
+					<div class="col cardBox" th:each="list: ${cardList}">
 						<div class="card">
-							<img th:src="@{/images/planterior/eucalyptus.png}" />
+							<img
+								th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}"
+								class="imgSize" />
 							<div class="card-body row">
 								<div class="col-9">
 									<p class="planteriorButtonEle"
@@ -130,7 +158,8 @@
 						</div>
 						<th:block th:if="${list.userId == #authentication.name}">
 							<div class="card">
-								<img th:src="@{/images/planterior/eucalyptus.png}" />
+								<img class="imgSize"
+									th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
 								<div class="card-body row">
 									<div class="col-9">
 										<p class="planteriorButtonEle"
@@ -148,14 +177,16 @@
 						<th:block th:unless="${list.userId == #authentication.name}">
 							<th:block th:if="${bookmark[list.planteriorId] == null}">
 								<div class="card">
-									<img th:src="@{/images/planterior/eucalyptus.png}" />
+									<img class="imgSize"
+										th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
 									<div class="card-body row">
 										<div class="col-9">
 											<p class="planteriorButtonEle"
 												th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
 										</div>
 										<div class="col-3 text-end">
-											<button class="btn-outline-dark imgButton" th:value="${list.planteriorId}">
+											<button class="btn-outline-dark imgButton"
+												th:value="${list.planteriorId}">
 												<img th:src="@{/images/planterior/bookmark.svg}" />
 											</button>
 										</div>
@@ -164,14 +195,16 @@
 							</th:block>
 							<th:block th:unless="${bookmark[list.planteriorId] == null}">
 								<div class="card">
-									<img th:src="@{/images/planterior/eucalyptus.png}" />
+									<img class="imgSize"
+										th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
 									<div class="card-body row">
 										<div class="col-9">
 											<p class="planteriorButtonEle"
 												th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
 										</div>
 										<div class="col-3 text-end">
-											<button class="btn-outline-dark imgButtonFill" th:value="${list.planteriorId}">
+											<button class="btn-outline-dark imgButtonFill"
+												th:value="${list.planteriorId}">
 												<img th:src="@{/images/planterior/bookmarkFill.svg}" />
 											</button>
 										</div>
@@ -190,14 +223,6 @@
 		<input type="hidden" class="userId" th:value="${#authentication.name}" />
 		<button id="loadMoreButton" class="m-4 btn btn-outline-dark ">더보기</button>
 	</div>
-	<th:block sec:authorize="isAuthenticated()">
-		<th:block th:if="${#authentication.name.equals('admin')}">
-			<div class="d-flex justify-content-end">
-				<a th:href="@{/mngr/planterior}"><button
-						class="m-4 btn btn-outline-dark  ">관리자 플랜테리어 페이지로 돌아가기</button></a>
-			</div>
-		</th:block>
-	</th:block>
 
 	<!-- end -->
 </main>

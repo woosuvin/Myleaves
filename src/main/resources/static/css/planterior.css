@@ -78,16 +78,7 @@ button.filterBtn {
 	position: relative
 }
 
-/*
-button#filter_reset_btn
-	{
-	border: 1px solid #00b564;
-	background: #00b564;
-	color: #fff;
-	display: flex;
-	justify-content: center;
-	align-items: center
-}*/
+
 button#filter_reset_btn img {
 	display: inline-block;
 	width: 20px
@@ -104,12 +95,22 @@ span.pick {
 	font-size: 25px;
 }
 
+
+/* 카드 이미지 조정 */
+.imgSize {
+	width: 100%; 
+	height: 15em; 
+	object-fit: cover;
+}
+
+/* 책갈피 버튼 조정 */
 .planteriorButton {
 	float: right;
 	border: none;
 	background-color: transparent;
 }
 
+/* p 태그 줄 정의 */
 .planteriorButtonEle {
 	width: 140px;
 	display: block;
@@ -117,6 +118,15 @@ span.pick {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+/* 마이페이지- 내가 쓴 글 전용*/
+.planteriorButtonEleMyPost{
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 
 .imgButtonFill {
 	border: none;
@@ -138,7 +148,6 @@ span.pick {
 	background-color:transparent;
 }
 
-/*작성하기 + 수정하기 페이지 적용*/
 
 /*상단 제목*/
 .createTitle {

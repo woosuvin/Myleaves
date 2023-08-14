@@ -2,6 +2,8 @@ package com.itwill.myleaves.dto.planterior;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.itwill.myleaves.repository.planterior.Planterior;
 
 import lombok.Data;
@@ -21,6 +23,8 @@ public class TotalCreateDto {
 	private Long pcid;
 	private String stateContent;
 	private String conditionContent;
+	
+	private MultipartFile file;
 	
 	public PlanteriorCreateDto planteriorCreateDto() {
 		return new PlanteriorCreateDto(planteriorId, userId, plantName, content, plantNameEnglish, thumbnail);

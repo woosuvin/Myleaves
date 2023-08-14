@@ -1,8 +1,13 @@
 package com.itwill.myleaves.web.mypage;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,35 +40,48 @@ public class MypagePlanteriorController {
 	private final CategoryService categoryService;
 	
 	// 내가 쓴 글 읽기
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/my_posts")
 	public String planteriorMine(Model model, String userId ) {
 		log.info("planteriorMine(userId = {})", userId);
 		
 		List<Planterior> list = mypageService.read(userId);
 		
+		Map<Long, String> thumbnails = new HashMap<>();
+		for(Planterior p : list) {
+			log.info("{}", p.getThumbnail());
+			thumbnails.put(p.getPlanteriorId(), Base64.getEncoder().encodeToString(p.getThumbnail()));
+		}
+		
+		model.addAttribute("images", thumbnails);
 		model.addAttribute("cardList", list);
 		
 		return "mypage/planterior/planteriorMyposts";
 	}
 	
 	// 내가 쓴 글 수정
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/updateDelete")
 	public void planteriorUpdate(Model model, Long planteriorId) {
 		log.info("planteriorUpdate(planteriorId={})", planteriorId);
 		
 		Planterior list = mypageService.read(planteriorId);
+		String image = Base64.getEncoder().encodeToString(list.getThumbnail());
 		
+		model.addAttribute("image", image);
 		model.addAttribute("cardList", list);
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/update")
-	public String update(PlanteriorUpdateDto dto) {
+	public String update(PlanteriorUpdateDto dto) throws IOException {
 		log.info("update(dto ={})", dto);
 		
 		mypageService.update(dto);
 		return "redirect:/mypage/planterior/my_posts?userId=" + dto.getUserId();
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("delete")
 	public String delete(long planteriorId, String userId) {
 		log.info("delete(planteriorId = {})", planteriorId);
@@ -73,6 +91,7 @@ public class MypagePlanteriorController {
 	}
 	
 	// 북마크
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("bookmark")
 	public void bookmarkRead(Model model, String userId) {
 		log.info("bookmarkRead");
@@ -97,8 +116,14 @@ public class MypagePlanteriorController {
 				}
 			}
 		}
-		log.info("size={}",result.size());
+		// log.info("size={}",result.size());
 		
+		Map<Long, String> thumbnails = new HashMap<>();
+		for(Planterior p : result) {
+			thumbnails.put(p.getPlanteriorId(), Base64.getEncoder().encodeToString(p.getThumbnail()));
+		}
+		
+		model.addAttribute("images", thumbnails);
 		model.addAttribute("cardList", result);
 	}
 	

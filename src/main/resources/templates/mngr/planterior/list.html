@@ -10,13 +10,13 @@
 		<!-- 8개로 한정짓는 것 만들기-->
 		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 			<a th:href="@{/planterior}"><button class="btn btn-outline-dark me-md-2">북마크하러 가기</button></a>
-			<button class="btn btn-secondary ">삭제</button>
+			<button class="btn btn-secondary delete-button">삭제</button>
 		</div>
 
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th scope="col"><input type="checkbox" class="imgButtonFill"/></th>
+					<th scope="col"><input type="checkbox" class="all-checkbox"/></th>
 					<th scope="col">아이디</th>
 					<th scope="col">식물이름(한글)</th>
 					<th scope="col">식물이름(영문)</th>
@@ -25,37 +25,16 @@
 			</thead>
 			<tbody class="table-group-divider">
 				<tr th:each="list: ${cardList}">
-					<td><input type="checkbox"></td>
-					<td th:text="${list.planteriorId}"></td>
+					<td><input type="checkbox" id="row-checkbox"></td>
+					<td th:text="${list.planteriorId}" id="planteriorId"></td>
 					<td th:text="${list.plantName}"></td>
 					<td th:text="${list.plantNameEnglish}"></td>
 					<td th:text="${list.userId}"></td>
 				</tr>
 			</tbody>
 		</table>
-		<!-- 	카드 형태
-		<div class="m-2">
-			<div class="row row-cols-1 row-cols-md-4 g-4">
-				<div class="col" th:each="list: ${cardList}">
-					<div class="card">
-						<img th:src="@{/images/planterior/eucalyptus.png}" />
-						<div class="card-body">
-							<p class="planteriorButtonEle"
-								th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')' + '-' + ${list.userId}" />
-							<div>
-								<button class="imgButtonFill" th:value="${list.planteriorId}">
-									<img th:src="@{/images/planterior/bookmarkFill.svg}" />
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
- -->
 </main>
 <th:block layout:fragment="myscripts">
-	<script src="/js/planterior/planteriorBookmark.js"></script>
+	<script src="/js/planterior/mngr.js"></script>
 </th:block>
 </html>

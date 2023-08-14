@@ -18,10 +18,9 @@
 					<input type="hidden" id="plantName" th:value="${list.plantName}" /> 
 					<input type="hidden" id="planteriorId" th:value="${list.planteriorId}" />
 					<div class="card">
-						<img th:src="@{/images/planterior/eucalyptus.png}" />
-						<!-- <img th:text="${list.img}" />  -->
+						<img class="imgSize" th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
 						<div class="card-body row">
-							<div class="col-9">
+							<div class="col-9 text-start">
 								<p class="planteriorButtonEle"
 									th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
 							</div>

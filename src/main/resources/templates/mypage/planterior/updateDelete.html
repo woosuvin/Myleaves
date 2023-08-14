@@ -21,16 +21,20 @@
 						id="planteriorId" name="planteriorId" th:value="${cardList.planteriorId}" />
 				</div>
 				<dt align="left" class="dt_class">
-					플랜테리어 사진 <span class="highlight">* 1개만 선택 가능</span>
+					수정 전 사진
 				</dt>
-				<!-- th:value="${cardList.thumbnail}" -->
+				<dd align="left">
+					<img name="" id="" style="height:10rem;" class="rounded" th:src="@{'data:image/png;base64,'+${image}}" />				
+				</dd>
+				
+				<dt align="left" class="dt_class">
+					플랜테리어 사진 변경<span class="highlight">* 1개만 선택 가능</span>
+				</dt>
 				<dd align="left">
 					<div id="inputContainer">
 						<div class="input-group mb-3">
 							<input class="form-control file-input m-2" type="file"
-								id="formFile" name="formFile" accept="image/*" autofocus>
-							<!-- required -->
-							<img class="imagePreview" id="imagePreview">
+								id="file" name="file" required>
 						</div>
 					</div>
 				</dd>
@@ -39,7 +43,7 @@
 				<dt align="left" class="dt_class">식물 이름(한글)</dt>
 				<dd align="left">
 					<div class="input-group">
-						<input type="text" id="plantName" name="plantName"
+						<input type="text" id="plantName" name="plantName" 
 							class="form-control" th:value="${cardList.plantName}" required />
 					</div>
 				</dd>
@@ -48,8 +52,7 @@
 				<dd align="left">
 					<div class="input-group">
 						<input type="text" id="plantNameEnglish" name="plantNameEnglish"
-							class="form-control" th:value="${cardList.plantNameEnglish}"
-							oninput="updateCharCount()" required />
+							class="form-control" th:value="${cardList.plantNameEnglish}"  required />
 					</div>
 				</dd>
 				<br>
@@ -61,7 +64,7 @@
 					<div class="input-group">
 						<ul class="filterLists list-unstyled">
 							<li>
-								<input type="image" th:src="@{/images/common/reset.svg}" name="reset" id="filter_reset_btn" />
+								<input type="image"  class="btn btn-outline-dark" th:src="@{/images/common/reset.svg}" name="reset" id="filter_reset_btn" />
 								<input type="button" class="filterBtn btn btn-outline-dark"  value="거실"  />
 								<input type="button" class="filterBtn btn btn-outline-dark"  value="주방"  />
 								<input type="button" class="filterBtn btn btn-outline-dark"  value="욕실"  />
@@ -71,7 +74,7 @@
 						</ul>
 						<input class="d-none" name="stateContent" id="stateContent" />
 						<input class="d-none" name="conditionContent" id="conditionContent" />
-						<ul class="d-none secondFilterSection" id="secondFilter" >
+						<ul class="d-none secondFilterSection list-unstyled" id="secondFilter" >
 							<li>
 								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="초보자용"  />
 								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="선물하기 좋은"  />
