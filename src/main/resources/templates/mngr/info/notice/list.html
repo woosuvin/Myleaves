@@ -3,6 +3,26 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/mngr_base_layout}">
 
+<th:block layout:fragment="mycsses">
+	<style>
+		.page-link {
+			color: black;
+		}
+		
+		.active>.page-link {
+			color: white;
+			background-color: black;
+			border-color: black;
+		}
+		
+		.page-link:hover {
+			color: green;
+			outline: none !important;
+			box-shadow: none !important;
+		}
+	</style>
+</th:block>
+
 <main layout:fragment="mngrHome">
    	<h1>공지사항</h1>
    	<table class="table table-hover">
