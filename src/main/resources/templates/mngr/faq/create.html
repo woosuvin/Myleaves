@@ -5,8 +5,8 @@
     
 	<main layout:fragment="mngrHome">
 		<div class="container">
-			<div class="text-center my-4">
-				<h1 class="my-2" style="text-align: center;">FAQ 작성하기</h1>
+			<div class="mb-5 text-center">
+				<h1 class="my-4" style="text-align: center;">FAQ 관리자 작성하기</h1>
 			</div>
 			<div class="card">
 				<form method="post">
@@ -18,14 +18,14 @@
 						</div>
 						<div>
 							<label class="form-label" for="answer">답변</label>
-							<textarea class="form-control" id="answer" name="answer" required></textarea>
+							<textarea class="form-control" id="answer" name="answer" style="width: 100%; height: 300px;" required></textarea>
 						</div>
 					</div>
 				</form>
 			</div>
-			<div class="my-4 text-center">
-				<input class="btn btn-outline-success justify-content-md-end" id="btnFaqSubmit" type="submit" value="등록" />
-				<a class="btn btn-outline-success" th:href="@{/mngr/faq/list}">취소</a>
+			<div class="my-4 text-end">
+				<input class="btn btn-outline-dark justify-content-md-end" id="btnFaqSubmit" type="submit" value="등록" />
+				<a class="btn btn-secondary" th:href="@{/mngr/faq/list}">취소</a>
 			</div>
 		</div>	
 </main>

@@ -4,11 +4,11 @@
     layout:decorate="~{layout/mngr_base_layout}">
 	<main layout:fragment="mngrHome">
 	<div class="container">
-    	<div class="text-center my-4">
-			<h1 class="my-2" style="text-align: center;">QnA 관리자 페이지</h1>
+    	<div class="mb-5 text-center">
+			<h1 class="my-4" style="text-align: center;">QnA 관리자</h1>
 		</div>
-    	<table class="table center">
-		<thead>
+    	<table class="table table-hover">
+		<thead class="text-center">
 			<tr>
 				<th scope="col">No</th>
 				<th scope="col">제목</th>
@@ -16,7 +16,7 @@
 				<th scope="col">작성상태</th>
 			</tr>
 		</thead>
-		<tbody class="table-group-divider">
+		<tbody class="text-center">
 				<tr th:each="qna :${qnas}">
 					<th scope="row" th:text="${qna.qid}"></th>
 					<td th:text="${qna.title}"></td>
@@ -26,7 +26,7 @@
 						<a class="btn btn-secondary" th:href="@{/mngr/qna/detail?qid={id} (id= ${qna.qid})}">답변확인완료</a>
 					</td>
 					<td th:if="${#strings.isEmpty(qna.an_title)}">
-						<a class="btn btn-primary" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">답변확인중</a>
+						<a class="btn btn-outline-dark" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">답변확인중</a>
 					</td>
 				</tr>
 			</tbody>
@@ -34,8 +34,9 @@
 		<!-- 페이징처리 시작 -->
 		<div class="text-center">
 			<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
-	            <a th:if="${page != nowPage}" th:href="@{/mngr/qna/list(page=${page - 1})}" th:text="${page}"></a>
-	            <strong th:if="${page==nowPage}" th:text ="${page}" style="color:red"></strong>
+	            <a th:if="${page != nowPage}" th:href="@{/mngr/qna/list(page=${page - 1})}" th:text="${page}"
+	            class="text-decoration-none text-reset"></a>
+	            <strong th:if="${page==nowPage}" th:text ="${page}" style="color:black"></strong>
 	        </th:block>
         </div>
 		<!-- 페이징처리 끝 -->	

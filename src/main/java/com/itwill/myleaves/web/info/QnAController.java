@@ -55,26 +55,36 @@ public class QnAController {
 	 */
 	@GetMapping
 	public String qnaList(Model model,
-			@PageableDefault(page = 0, size = 10, sort = "qid", direction = Sort.Direction.DESC) Pageable pageable) {
+			@PageableDefault(page = 0, size = 3, sort = "qid", direction = Sort.Direction.DESC) Pageable pageable) {
 		log.info("QnA My list()");
 
 		Page<QnA> list = qnaService.read(pageable);
 
-		int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
-		int maxPage = list.getTotalPages();
+	    int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
+	    int maxPage = list.getTotalPages();
 
-		int visiblePageCount = 5; // 한 번에 표시될 페이지 번호의 갯수
-		int halfVisiblePageCount = visiblePageCount / 2;
+	    int visiblePageCount = 5; // 한 번에 표시될 페이지 번호의 갯수
+	    int halfVisiblePageCount = visiblePageCount / 2;
 
-		int startPage = Math.max(nowPage - halfVisiblePageCount, 1);
-		int endPage = Math.min(startPage + visiblePageCount - 1, maxPage);
+	    int startPage, endPage;
 
-		model.addAttribute("qnas", list);
-		model.addAttribute("nowPage", nowPage);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
+	    if (nowPage <= halfVisiblePageCount) {
+	        startPage = 1;
+	        endPage = Math.min(visiblePageCount, maxPage);
+	    } else if (nowPage >= maxPage - halfVisiblePageCount) {
+	        startPage = Math.max(maxPage - visiblePageCount + 1, 1);
+	        endPage = maxPage;
+	    } else {
+	        startPage = nowPage - halfVisiblePageCount;
+	        endPage = nowPage + halfVisiblePageCount;
+	    }
 
-		return "info/qna/read";
+	    model.addAttribute("qnas", list);
+	    model.addAttribute("nowPage", nowPage);
+	    model.addAttribute("startPage", startPage);
+	    model.addAttribute("endPage", endPage);
+
+	    return "info/qna/read";
 	}
 
 	/*

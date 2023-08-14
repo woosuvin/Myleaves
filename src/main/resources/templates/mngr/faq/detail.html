@@ -5,15 +5,15 @@
     
 	<main layout:fragment="mngrHome">
 	<div class="container">
-		<div class="text-center my-4">	
-			<h1 class="my-2" style="text-align: center;">FAQ 상세페이지</h1>
+		<div class="mb-5 text-center">	
+			<h1 class="my-4" style="text-align: center;">FAQ 관리자 상세페이지</h1>
 		</div>
 		<div class="card">
 			<form id="faqDetailForm">
 				<div class="card-body">
 					<!-- 상세내용 div -->
-						<div class="my-4">
-							<label class="form-label" for="fqid">NO.1</label> 
+						<div class="my-4 d-none">
+							<label class="form-label" for="fqid">NO.</label> 
 							<input class="form-control" id="fqid" name="fqid" th:value="${faq.fqid}"readonly />
 							</div>
 							<div class="my-4">
@@ -22,16 +22,15 @@
 							</div>
 							<div class="my-4">
 								<label class="form-label" for="answer">answer</label>
-								<textarea class="form-control" id="answer" name="answer" th:text="${faq.answer}">답변</textarea>
+								<textarea class="form-control" id="answer" name="answer" th:text="${faq.answer}" style="width: 100%; height: 300px;"></textarea>
 							</div>
 						</div>
 					</form>
 				</div>
 
-				<div class="card-footer my-2 text-center">
-	
-					<button class="btn btn-outline-success" id="btnFaqUpdate">수정</button>
-					<button class="btn btn-outline-success" id="btnFaqDelete">삭제</button>
+				<div class="card-footer my-2 text-end">
+					<button class="btn btn-outline-dark" id="btnFaqUpdate">수정</button>
+					<button class="btn btn-secondary" id="btnFaqDelete">삭제</button>
 				</div>
 			<script src="/js/info/faq/faq_modify_mngr.js"></script>   	
 		</div>

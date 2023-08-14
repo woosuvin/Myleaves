@@ -4,11 +4,10 @@
     layout:decorate="~{layout/mngr_base_layout}">
 <main layout:fragment="mngrHome">
 	<div class="container my-4">
-		<div class="card">
-			<div class="card-header text-center">
-				<h1>QNA 관리자 답변 수정 페이지</h1>
+			<div class="mb-5 text-center">
+				<h1 class="my-4" style="text-align: center;">QNA 관리자 답변 수정 페이지</h1>
 			</div>
-			<form class="card-body" id="modifyQnAMngrForm">
+			<form id="modifyQnAMngrForm">
 				<div class="my-2">
 					<label class="form-label d-none" for="qid">번호</label> 
 					<input class="form-control d-none" id="qid" name="qid" th:value="${qna.qid}" readonly />
@@ -18,11 +17,8 @@
 					<input class="form-control d-none" id="content" name="content" th:value="${qna.content}" readonly />
 					<label class="form-label d-none" for="userId">작성한 아이디</label> 
 					<input class="form-control d-none" id="userId" name="userId" th:value="${qna.userId}" readonly />
-					
-					
 				</div>
 				<!-- 사용자 문의 출력 -->
-				
 				<div class="card">
 					<div class="card-body">
 						<!-- 제목 -->
@@ -44,26 +40,27 @@
 					</div>
 				</div>
 					<!-- 관리자 답변 -->
+				<div class="card my-4">
+					<div class="card-body">	
+						<div class="my-2">
+							<label class="form-label" for="an_title">제목</label> 
+							<input class="form-control" type="text" id="an_title" value="답변드립니다." name="an_title" required readonly />
+						</div>
 					
-					<div class="my-2">
-						<label class="form-label" for="an_title">제목</label> 
-						<input class="form-control" type="text" id="an_title" value="답변드립니다." name="an_title" required readonly />
+						<div class="my-2">
+							<label class="form-label" for="an_content">답변</label>
+							<textarea class="form-control" style="height: 100px;" id="an_content" name="an_content" required autofocus></textarea>
+						</div>
 					</div>
-				
-					<div class="my-2">
-						<label class="form-label" for="an_content">답변</label>
-						<textarea class="form-control" style="height: 100px;" id="an_content" name="an_content" required autofocus></textarea>
-					</div>
+				</div>	
 			</form>
-		</div>	
+			
+			
 			<div class="my-3" style="text-align: right;">
-				<button class="btn btn-outline-success" type="submit" id="btnUpdate" name="btnUpdate">등록</button>
-				<a class="btn btn-outline-success" th:href="@{/mngr/qna/list}">취소</a>
+				<button class="btn btn-outline-dark" type="submit" id="btnUpdate" name="btnUpdate">등록</button>
+				<a class="btn btn-secondary" th:href="@{/mngr/qna/list}">취소</a>
 			</div>
 			
-			<div class="my-3" style="text-align: center;">							
-					<a class="btn btn-outline-success  col-2" th:href="@{/mngr/qna/list}">목록</a>
-			</div>
 	</div>
 	<script src="/js/info/qna/qna_update_mngr.js"></script> 		
 </main>

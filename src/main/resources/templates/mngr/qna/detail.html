@@ -3,34 +3,31 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/mngr_base_layout}">
 <main layout:fragment="mngrHome">
-	<div class="container my-4">
-		<div class="card">
-			<div class="card-header text-center">
-				<h1>QNA 관리자 답변 상세 페이지</h1>
-			</div>
-			<div class="card-body">
-				<div class="card">
-					<div class="card-body">
-						<!-- 제목 -->
-						<h2 class="card-text" th:text="${qna.title}" id="title"></h2>
-						
-						<!-- 작성자 -->
-						<p id="author" class="card-text" th:text="${qna.userId}"></p>
-										
-						<!-- 내용 -->
-						<hr />
-						<div class="my-2">
-							<label class="form-label d-none" for="content">내용</label>
-							<div class="card-text" id="content" style="height: 10rem" th:text="${qna.content}"></div>
-						</div>
-						
-						<hr />
-						<!-- 작성날짜 -->
-						<p class="card-text text-end small" id="created_date" th:text="${#temporals.format(qna.createdDate, 'yyyy-mm-dd HH:mm' ) }"></p>
-					</div>
-				</div>	
-			</div>
+	<div class="container">
+		<div class="mb-5 text-center">
+			<h1 class="my-4" style="text-align: center;">QNA 관리자 답변 상세 페이지</h1>
 		</div>
+			<div class="card">
+				<div class="card-body">
+					<!-- 제목 -->
+					<h2 class="card-text" th:text="${qna.title}" id="title"></h2>
+						
+					<!-- 작성자 -->
+					<p id="author" class="card-text" th:text="${qna.userId}"></p>
+										
+					<!-- 내용 -->
+					<hr />
+					<div class="my-2">
+						<label class="form-label d-none" for="content">내용</label>
+						<div class="card-text" id="content" style="height: 10rem" th:text="${qna.content}"></div>
+					</div>
+						
+					<hr />
+					<!-- 작성날짜 -->
+					<p class="card-text text-end small mb-3 me-3" id="created_date" th:text="${#temporals.format(qna.createdDate, 'yyyy-mm-dd HH:mm' ) }"></p>
+				</div>
+			</div>	
+			
 		<div class="card my-4">
 			<div class="card-body">
 				<h4 class="card-text" th:text="${qna.an_title}" ></h4>
@@ -42,7 +39,7 @@
 			</div>
 		</div>
 		<div class="my-3" style="text-align: right;">
-			<a class="btn btn-outline-success" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">수정</a>
+			<a class="btn btn-outline-dark" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">수정</a>
 		</div>	
 	</div>		
 </main>
