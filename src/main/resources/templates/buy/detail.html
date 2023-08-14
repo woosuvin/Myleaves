@@ -45,7 +45,7 @@
 								<th:block th:case="true">
 									<a class="btn btn-outline-dark"
 										th:href="@{ /sell/modify?sellId={sellId} (sellId = ${sell.sellId})}">수정하기</a>
-									<a class="btn btn-outline-dark" target="_blank" onclick="openChatPopup()">대화내역</a>
+									<a class="btn btn-outline-dark" target="_blank" th:href="@{/chat/room(otherId=${#authentication.name})}">대화내역</a>
 								</th:block>
 								
 								<!-- false / 글 작성자가 아니면 -->
@@ -79,6 +79,6 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 	<script src="/js/sellbuy/buyDetail.js"></script>
-	<script src="/js/chat.js"></script>
+	<script src="/js/chat/chat.js"></script>
 </th:block>
 </html>

@@ -13,8 +13,12 @@ import com.itwill.myleaves.repository.sellbuy.Sell;
 import com.itwill.myleaves.service.chat.ChatService;
 import com.itwill.myleaves.service.sellbuy.SellService;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -23,66 +27,35 @@ public class ChatController {
     private final ChatService chatService;
     private final SellService sellService;
 
-//    @GetMapping("/chat/roomDetail")
-//    public void chatRoomDetail(String myId, String otherId, Long sellId) {
-//    	Sell sell = sellService.
-//    }
+    // 채팅방
+    @GetMapping("/chat/roomDetail")
+    public void chatRoomDetail(String myId, String otherId, long sellId, Model model) {
+    	 Sell sell = sellService.read(sellId);
+    	 String image = Base64.getEncoder().encodeToString(sell.getThumbnail());
+ 		
+ 		 model.addAttribute("image", image);
+    	 model.addAttribute("sell", sell);
+    }
     
 	// 채팅방 리스트
+    @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/chat/room")
-    public void chatRoom(@RequestParam String myId, @RequestParam(required = false) Long sellId, Model model) {
-        log.info("chatRoom(myId={}, sellId={})", myId, sellId);
-        List<ChatRoom> chatRoomList = chatService.readChatRoom(myId);
-        Sell sell = null;
-        if (sellId != null) {
-            sell = sellService.read(sellId);
+    public void chatRoom(ChatRoom chatRoom, String otherId, Long sellId, Model model) {
+    	 
+    	List<ChatRoom> chatRoomList = chatService.readChatRoom(otherId);
+    	List<Sell> sellList = new ArrayList<>();
+    	for(ChatRoom c : chatRoomList) {
+    		Sell sell = sellService.read(c.getSellId());
+    		sellList.add(sell);
+    	}
+    	
+    	Map<Long, String> thumbnails = new HashMap<>();
+    	for(Sell sell: sellList){
+        	thumbnails.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
         }
-        
-        model.addAttribute("chatRoomList", chatRoomList);
-        model.addAttribute("sell", sell); 
+        model.addAttribute("images", thumbnails);
+		model.addAttribute("sell", sellList);
     }
-	
-//	// 채팅방 리스트
-//	@GetMapping("/chatList")
-//	public void chatRoom(String myId, Long sellId, Model model) {
-//	    log.info("chatRoom(myId={}, sellId={})", myId, sellId);
-//	    List<ChatRoom> chatRoomList = chatService.readChatRoom(myId);
-//	    Sell sell = sellService.read(sellId);
-//	    
-//	    model.addAttribute("chatRoom", chatRoomList);
-//	    model.addAttribute("sell", sell);
-//	}
-    
-//    // 채팅 리스트 화면
-//    @GetMapping("/room")
-//    public String rooms(String myId, Long sellId, Long roomId, Model model) {
-//    	log.info("rooms(sellId={}, roomId={}, myId={})", sellId, roomId, myId);
-//    	
-////    	List<ChatRoom> chatRoom = chatService.findAllRoom()
-//        return "/chat/room";
-//    }
-//
-//    // 채팅방 생성
-//    @PostMapping("/room")
-//    @ResponseBody
-//    public ChatRoom createRoom(@RequestParam Long sellId, String myId, String otherId) {
-//        return chatService.createRoom(sellId, myId, otherId);
-//    }
-//    
-//    // 채팅방 입장 화면
-//    @GetMapping("/room/enter/{roomId}")
-//    public String roomDetail(Model model, @PathVariable Long roomId) {
-//        model.addAttribute("roomId", roomId);
-//        return "/chat/roomdetail";
-//    }
-//    
-//    // 특정 채팅방 조회
-//    @GetMapping("/room/{roomId}")
-//    @ResponseBody
-//    public ChatRoom roomInfo(@PathVariable Long roomId) {
-//        return chatService.findById(roomId);
-//    }
-    
 }
 
 //import java.util.List;

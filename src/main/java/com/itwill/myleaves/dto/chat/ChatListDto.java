@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class ChatListDto {
 	private long sellId;
 	private String myId;
+	private String otherId;
 }

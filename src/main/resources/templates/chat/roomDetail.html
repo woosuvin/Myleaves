@@ -1,88 +1,83 @@
-<!-- <!DOCTYPE html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/css/chat.css">
-<style>
-h2 {
-	text-align: center;
-}
-</style>
-</head>
-<div class="col" th:each="chat: ${ chat }" ></div>
-<div>
-	<h2>식물이좋다</h2>
-</div>
-<div style="float: right;">
-	<select class="form-select" id="select" name="select">
-		<option value="판매중">판매중</option>
-		<option value="거래중">거래중</option>
-		<option value="판매완료">판매완료</option>
-	</select>
-</div>
-<div class="list" style="float: left;">
-	<img src="/images/common/chat_sample1.png" alt="" width="80"
-		height="80">
-</div>
-<div>
-	<table>
-		<tbody>
-			<tr>
-				<td style="font-size: 16px; font-weight: bold;">몬스테라 분양합니다.</td>
-			</tr>
-			<tr>
-				<td style="font-size: 16px; font-weight: bold;">분양자이름</td>
-			</tr>
-			<tr class="xans-record- modi-price modi-price-tr last-modi-price-tr">
-				<td>5,000원</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-<hr>
-채팅
-<div class="chat_wrap">
-	<div class="chat">
-		<ul>
-			동적 생성
-		</ul>
-	</div>
-	<div class="input-div">
-		<div class="input2" style="float: left;">
-			<textarea placeholder="채팅을 입력해주세요."></textarea>
-			<button>보내기</button>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<main layout:fragment="main">
+	<div class="container">
+		<hr>
+		<div style="float: right;">
+			<select class="form-select" id="select" name="select">
+				<option value="판매중">판매중</option>
+				<option value="거래중">거래중</option>
+				<option value="판매완료">판매완료</option>
+			</select>
+		</div>
+		<div class="list" style="float: left;">
+			<img class="rounded" style="object-fit: cover; width: 80px;"
+				th:src="@{'data:image/png;base64,'+${image}}" />
+		</div>
+		<div>
+			<input id="sellId" type="hidden" th:value="${sell.sellId}"/>
+			<input id="userId" type="hidden" th:value="${sell.userId}"/>
+			<input id="otherId" type="hidden" th:value="${#authentication.name}"/>
+			<table class="table table-borderless" style="padding-left: 10px;">
+				<tbody>
+					<tr>
+						<td th:text="${sell.title}"
+							style="font-size: 20px; font-weight: bold;"></td>
+					</tr>
+					<tr>
+						<td th:text="${sell.userId}"
+							style="font-size: 16px; font-weight: bold;"></td>
+					</tr>
+					<tr
+						class="xans-record- modi-price modi-price-tr last-modi-price-tr">
+						<td th:text="|${#numbers.formatInteger(sell.price, 0, 'COMMA')}원|"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<hr>
+		<div id="main-content" class="container">
+			<div class="row">
+				<div class="col-md-6">
+<!-- 					<form class="form-inline">
+						<div class="form-group">
+							<label for="connect">WebSocket connection:</label>
+							<button id="connect" class="btn btn-default" type="submit">Connect</button>
+							<button id="disconnect" class="btn btn-default" type="submit"
+								disabled="disabled">Disconnect</button>
+						</div>
+					</form> -->
+				</div>
+				<div class="col-md-6">
+					<form class="form-inline">
+						<div class="form-group">
+							<label for="message">메세지 입력</label> <input type="text"
+								id="message" class="form-control" placeholder="메세지 임력">
+						</div>
+						<button id="send" class="btn btn-default" type="submit">Send</button>
+					</form>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<table id="conversation" class="table table-striped">
+						<tbody id="greetings">
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 
-	format
-
-	<div class="chat format">
-		<ul>
-			<li>
-				<div class="sender">
-					<span></span>
-				</div>
-				<div class="message">
-					<span></span>
-				</div>
-			</li>
-		</ul>
-	</div>
-</div>
-<th:block layout:fragment="myscripts">
-	<script src="/js/chat.js"></script>
-</th:block>
-</html> -->
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/base_layout}">
-
-<main layout:fragment="main">
-	<h2 th:text="|${#authentication.name}의 채팅목록|"></h2>
-	<input th:value="">
-
 </main>
-    <th:block layout:fragment="myscripts">
-        <script src="/js/chat.js"></script>
-    </th:block>
+<th:block layout:fragment="myscripts">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	<!-- <script src="/js/chat/chat.js"></script> -->
+	<script src="/js/chat/chatRoom.js"></script>
+	<script src="/js/app.js"></script>
+</th:block>
 </html>
