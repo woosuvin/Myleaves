@@ -12,7 +12,6 @@ public class TotalOrderUpdateDto {
 	private String userId;
 	private Long price;
 	private Long payment;
-	private String card;
 	private String reason;
 	private String reAcc;
 	private String name;
@@ -23,7 +22,6 @@ public class TotalOrderUpdateDto {
 	private String req;
 	private Long cnt;
 	private String itemName;
-	private byte[] itemImg;
 	
 	
 	public TotalOrder toEntity() {
@@ -31,7 +29,6 @@ public class TotalOrderUpdateDto {
 				.userId(userId)
 				.price(price)
 				.payment(payment)
-				.card(card)
 				.reAcc(reAcc)
 				.name(name)
 				.zipcode(zipcode)
@@ -41,7 +38,6 @@ public class TotalOrderUpdateDto {
 				.req(req)
 				.cnt(cnt)
 				.itemName(itemName)
-				.itemImg(itemImg)
 				.build();
 	}
 }

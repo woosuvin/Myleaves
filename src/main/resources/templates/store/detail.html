@@ -20,7 +20,7 @@ div {
 		<!-- <form id="storeForm"> -->
 		<table class="table table-borderless">
 			<tbody>
-				<tr th:switch="${ store.sold }">
+				<tr>
 					<td class="text-end" rowspan="4" width=300><img class="rounded" style="object-fit:cover; height:300px; width:300px;" 
 						th:src="@{'data:image/png;base64,'+${image}}" /></td>
 					<td class="ps-3" style="width:50%; vertical-align: middle">
@@ -31,8 +31,11 @@ div {
 						<span><strong>배송비:</strong> 3,000원</span><small>(제주 및 도서
 							산간 2,500원 추가)</small>
 						<br />
-						<th:block th:if="${store.sold} == 1">
+						<th:block th:if="${store.sold == 1}">
 							<i>품절</i>
+						</th:block>
+						<th:block th:unless="${store.inven != 0}">
+							<i>일시 품절</i>
 						</th:block>
 					</td>
 				</tr>
@@ -72,7 +75,8 @@ div {
 									상품 삭제</button>
 							</th:block>
 							<!-- 항상 보일 것 -->
-							<button class="btn btn-outline-dark" id="addCartBtn"
+							<button th:if="${store.sold == 0 and store.inven != 0}"
+							class="btn btn-outline-dark" id="addCartBtn"
 								name="addCartBtn">장바구니에 담기</button>
 						</div>
 					</td>

@@ -13,7 +13,7 @@
 				<div th:switch="${store.sold}" class="thumbnail-div-store container p-0">
 					<a th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}"> 
 						<!-- 1, 품절일 경우 -->
-						<th:block th:case="1">
+						<th:block th:case="1" >
 							<img class="thumbnail-soldout-store rounded mb-1"
 								th:src="@{'data:image/png;base64,'+${images.get(store.itemId)}}" />
 							<span class="thumbnail-soldout-store-label link-dark centered">
@@ -23,8 +23,18 @@
 						
 						<!-- 0, 판매중일 경우 -->
 						<th:block th:case="0">
-							<img class="thumbnail-onsale-store rounded mb-1"
-								th:src="@{'data:image/png;base64,'+${images.get(store.itemId)}}" />
+							<!-- 재고 0일 경우 -->
+							<th:block th:if="${store.inven == 0}">
+								<img class="thumbnail-soldout-store rounded mb-1"
+									th:src="@{'data:image/png;base64,'+${images.get(store.itemId)}}" />
+								<span class="thumbnail-soldout-store-label link-dark centered">
+									<i>일시 품절</i>
+								</span>
+							</th:block>
+							<th:block th:unless="${store.inven == 0}">
+								<img class="thumbnail-onsale-store rounded mb-1"
+									th:src="@{'data:image/png;base64,'+${images.get(store.itemId)}}" />
+							</th:block>
 						</th:block>
 					</a>
 				</div> <!-- 사진 div end -->

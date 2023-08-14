@@ -12,6 +12,7 @@
 					<th class="text-center bg-transparent" scope="col">No</th>
 					<th class="text-center bg-transparent" scope="col">제품명</th>
 					<th class="text-center bg-transparent" scope="col">재고</th>
+					<th class="text-center bg-transparent" scope="col">판매</th>
 					<th class="text-center bg-transparent" scope="col">가격</th>
 				</tr>
 			</thead>
@@ -23,10 +24,20 @@
 						 class="link-offset-2 link-underline-opacity-0 link-dark"></a>
 					</td>
 					<td class="text-center bg-transparent" th:text="${store.inven}"></td>
+					<td class="text-center bg-transparent" >
+						<th:block th:if="${store.sold == 1}"><i>품절</i></th:block>
+						<th:block th:if="${store.inven == 0}"><i>일시 품절</i></th:block>
+						<th:block th:unless="${store.sold == 1 or store.inven == 0}">판매</th:block>
+					</td>
 					<td class="text-center bg-transparent" th:text="${store.price}"></td>
 				</tr>
 			</tbody>
 		</table>
+		
+		<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+			<a class="btn btn-outline-dark btn-lg"  th:href="@{/mngr/store/create}">상품 등록</a>
+		</div>
+		
 		<!-- 페이징~ -->
 		<div class="pt-5">
 			<nav id="paging-block">
@@ -48,9 +59,7 @@
 				</ul>
 			</nav>
 		</div>
-		<div class="text-end">
-			<a class="btn" th:href="@{/mngr/store/create}" style="background: deeppink;">상품 등록</a>
-		</div>
+		
 	</div>
     
 	</main>

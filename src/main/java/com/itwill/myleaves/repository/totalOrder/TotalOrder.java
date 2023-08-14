@@ -54,9 +54,6 @@ public class TotalOrder {
 	private Long payment;
 	
 	@Column(nullable = true)
-	private String card;
-	
-	@Column(nullable = true)
 	private String status;
 
 	@Column(nullable = true)
@@ -89,18 +86,9 @@ public class TotalOrder {
 	@Column(nullable = true)
 	private String itemName;
 
-	@Column(nullable = true)
-	private byte[] itemImg;
-	
-//	public TotalOrder update(TotalOrderUpdateDto dto) {
-//		this.status = dto.getStatus();
-//		this.reason = dto.getReason();
-//		return this;
-//	}
 	public TotalOrder update(TotalOrderUpdateDto dto) {
 		this.price = dto.getPrice();
 		this.payment = dto.getPayment();
-		this.card = dto.getCard();
 		this.status = "주문 완료";
 		this.reAcc = dto.getReAcc();
 		this.name = dto.getName();
@@ -111,7 +99,6 @@ public class TotalOrder {
 		this.req = dto.getReq();
 		this.cnt = dto.getCnt();
 		this.itemName = dto.getItemName();
-		this.itemImg = dto.getItemImg();
 		return this;
 	}
 	
