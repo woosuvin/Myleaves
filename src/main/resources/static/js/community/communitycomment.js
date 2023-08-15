@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					        <pre class="pre-bootstrap" id="content_${comment.communityCommentId}">${comment.content}</pre>
 					   </div>
 				 </div>  
-			</div>
+			  </div>
  	     `;	
 		}else {
             htmlStr += `
@@ -140,9 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				</div>
             `;
         }
-        
         htmlStr += '</div>';
-		
 	}
 	
 		comments.innerHTML = htmlStr;
