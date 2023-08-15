@@ -8,7 +8,7 @@ import com.itwill.myleaves.repository.sellbuy.BuyWish;
 
 public interface ChatRoomRepository extends JpaRepository<ChatRoom, ChatRoomId> {
 	
-	List<ChatRoom> findByMyId(String myId);
+	List<ChatRoom> findByOtherId(String otherId);
 	
 	List<ChatRoom> findBySellId(long sellId);
 	

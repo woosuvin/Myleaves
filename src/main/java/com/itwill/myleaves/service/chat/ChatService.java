@@ -26,10 +26,14 @@ public class ChatService {
     }
 
     // 채팅방 리스트 불러오기
-    public List<ChatRoom> readChatRoom(String myId) {
+    public List<ChatRoom> readChatRoom(String otherId) {
     	// List<ChatRoom> result = new ArrayList<>(chatRooms.values());
-        return chatRoomRepository.findByMyId(myId);
+        return chatRoomRepository.findByOtherId(otherId);
     }
+    
+//    public List<ChatRoom> readBySellId(long sellId) {
+//    	return chatRoomRepository.findBySellId(sellId);
+//    }
 
     //채팅방 하나 불러오기
     public ChatRoom findById(Long roomId) {

@@ -3,6 +3,7 @@ package com.itwill.myleaves.web.chat;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +19,8 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
+// 정지언
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -28,6 +29,7 @@ public class ChatController {
     private final SellService sellService;
 
     // 채팅방
+    @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/chat/roomDetail")
     public void chatRoomDetail(String myId, String otherId, long sellId, Model model) {
     	 Sell sell = sellService.read(sellId);
@@ -40,21 +42,25 @@ public class ChatController {
 	// 채팅방 리스트
     @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/chat/room")
-    public void chatRoom(ChatRoom chatRoom, String otherId, Long sellId, Model model) {
-    	 
-    	List<ChatRoom> chatRoomList = chatService.readChatRoom(otherId);
-    	List<Sell> sellList = new ArrayList<>();
-    	for(ChatRoom c : chatRoomList) {
-    		Sell sell = sellService.read(c.getSellId());
-    		sellList.add(sell);
-    	}
-    	
-    	Map<Long, String> thumbnails = new HashMap<>();
-    	for(Sell sell: sellList){
-        	thumbnails.put(sell.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
+    public void chatRoom(String otherId, Model model) {
+        
+        // 해당 아이디로 채팅방 리스트를 불러옴
+        List<ChatRoom> chatRoomList = chatService.readChatRoom(otherId);
+        List<Sell> sellList = new ArrayList<>();
+        
+        // 해당 리스트에 있는 sellId로 해당 물건의 썸네일 찾음
+        Map<Long, String> thumbnails = new HashMap<>();
+        for(ChatRoom c : chatRoomList) {
+            // 해당 sellId로 Sell 검색
+            Sell sell = sellService.read(c.getSellId());
+            sellList.add(sell);
+            // thumbnails에 넣음.
+            thumbnails.put(c.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
         }
-        model.addAttribute("images", thumbnails);
-		model.addAttribute("sell", sellList);
+        
+        model.addAttribute("sell", sellList);
+        model.addAttribute("image", thumbnails);
+        model.addAttribute("chatRoom", chatRoomList);
     }
 }
 
