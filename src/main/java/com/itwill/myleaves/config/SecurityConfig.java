@@ -10,6 +10,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
+import com.itwill.myleaves.repository.member.CustomLoginSuccessHandler;
+
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
@@ -37,7 +39,8 @@ public class SecurityConfig {
         				.loginProcessingUrl("/member/login") // 로그인 처리 URL
         				.usernameParameter("userId") // 아이디 파라미터 이름
         				.passwordParameter("pwd") // 비밀번호 파라미터 이름
-        				.defaultSuccessUrl("/") // 로그인 성공 시 이동할 URL
+        				.defaultSuccessUrl("/")
+        				.successHandler(new CustomLoginSuccessHandler())// 로그인 성공 시 이동할 URL
         				.failureHandler(failureHandler); // 로그인 실패 시 이동할 URL
 
 		// 로그아웃 이후 이동할 페이지

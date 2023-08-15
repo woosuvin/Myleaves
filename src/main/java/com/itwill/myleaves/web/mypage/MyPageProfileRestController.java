@@ -1,6 +1,7 @@
 package com.itwill.myleaves.web.mypage;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ public class MyPageProfileRestController {
 	
 	private final MemberService memberService;
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@PutMapping("/update")
 	public ResponseEntity<String> update(@RequestBody MemberUpdateDto dto) {
 		log.info("modify(dto={})", dto);
@@ -32,6 +34,7 @@ public class MyPageProfileRestController {
 		return ResponseEntity.ok("Success");
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/check/pwd")
 	public ResponseEntity<String> checkPwd(@RequestParam String userId) {
 //		log.info("checkPwd(pwd={})", pwd);

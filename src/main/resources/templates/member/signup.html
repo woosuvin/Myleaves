@@ -4,89 +4,147 @@
     layout:decorate="~{layout/base_layout}">
 <head>
     <script defer src="/js/member/signup.js"></script>
+    <style>
+    	input.form-control {
+    		width:300px;
+    		height:40px;
+    		font-size:15px;
+    	}
+    	.center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+            text-align: center;
+        }
+        .left-text {
+            text-align: left;
+        }
+    </style>
 </head>
-
 <main layout:fragment="main">
-	<div class="head">
-		<h1>회원가입 페이지</h1>
-	</div>
-	<div class="body">
-		<form id="signup-form" method="post" th:action="@{ /member/signup }">
-			<div>
-				<strong>아이디</strong>
-				<input type="text"
-					   class="form-control"
-					   name="userId"
-					   placeholder="아이디"
-					   required autofocus />
-			</div>
-			<div>
-				<strong>비밀번호</strong>
-				<input type="password"
-					   class="form-control"
-					   name="pwd"
-					   placeholder="비밀번호"
-					   required />
-			</div>
-			<div>
-				<strong>이름</strong>
-				<input type="text"
-					   class="form-control"
-					   name="name"
-					   placeholder="이름"
-					   required />
-			</div>
-			<div>
-				<strong>생년월일</strong>
-				<input type="text"
-					   class="form-control"
-					   name="birth"
-					   placeholder="생년월일"
-					   required />
-			</div>
-			<div>
-				<strong>성별</strong>
-				<input type="radio"
-					   name="gender"
-					   value="M"
-					   id="M" /><label for="M">남자</label>
-				<input type="radio"
-					   name="gender"
-					   value="F" 
-					   id="F" /><label for="F">여자</label>
-			</div>
-			<div>
-				<strong>전화번호</strong>
-				<input type="text"
-					   class="form-control"
-					   placeholder="전화번호"
-					   name="phone"
-					   required />
-			</div>
-			<div>
-				<strong>이메일</strong>
-				<input type="email"
-					   class="form-control"
-					   name="email"
-					   placeholder="email"
-					   required />
-				<button type="button" class="btn btn-secondary" id="btnSend">전송</button>
-			</div>
-			<div>
-				<strong>인증번호</strong>
-				<input type="text"
-					   class="form-control"
-					   placeholder="인증번호"
-					   required />
-				<button type="button" class="btn btn-primary" id="btnConfirm">확인</button>
-			</div>
-			<div>
-				<input type="submit"
-					   class="form-control btn btn-success"
-					   id="btnJoin"
-					   value="가입완료">
-			</div>
-		</form>
+	<div>
+		<div>
+			<h3 class="text-center mb-5">회원가입 페이지</h3>
+		</div>
+		<div class="center-content">
+			<form id="signup-form" method="post" th:action="@{ /member/signup }">
+				<div>
+					<div class="left-text">
+						<strong>아이디</strong>
+					</div>
+					<input type="text"
+						   class="form-control mb-3"
+						   name="userId"
+						   placeholder="아이디"
+						   required autofocus />
+				</div>
+				<div>
+					<div class="left-text">
+						<strong>비밀번호</strong>
+					</div>
+					<input type="password"
+						   class="form-control mb-3"
+						   name="pwd"
+						   placeholder="비밀번호"
+						   required />
+				</div>
+				<div>
+					<div class="left-text">
+						<strong>이름</strong>
+					</div>
+					<input type="text"
+						   class="form-control mb-3"
+						   name="name"
+						   placeholder="이름"
+						   required />
+				</div>
+				<div>
+					<div class="left-text">
+						<strong>생년월일</strong>
+					</div>
+					<input type="text"
+						   class="form-control mb-3"
+						   name="birth"
+						   placeholder="생년월일"
+						   required />
+				</div>
+				<div>
+					<div class="mb-3"
+						 style="height: 40px;">
+						<div class="left-text">
+							<strong>성별</strong>
+						</div>
+						<div>
+							<input type="radio"
+								   name="gender"
+								   value="M"
+								   id="M" /><label for="M">남자</label>
+							<input type="radio"
+								   name="gender"
+								   value="F" 
+								   id="F" /><label for="F">여자</label>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="left-text">
+						<strong>전화번호</strong>
+					</div>
+					<input type="text"
+						   class="form-control mb-3"
+						   placeholder="전화번호"
+						   name="phone"
+						   required />
+				</div>
+				<div>
+					<div class="left-text">
+						<strong>이메일</strong>
+					</div>
+					<div class="input-group mb-3"
+						 style="height: 40px;">
+					  <input type="email"
+					  		 class="form-control mb-3"
+					  		 name="email"
+					  		 placeholder="이메일을 입력해주세요"
+					  		 aria-label="이메일을 입력해주세요"
+					  		 aria-describedby="btnSend"
+					  		 required >
+					  <button class="btn btn-outline-secondary"
+					  		  type="button"
+					  		  id="btnSend"
+					  		  style="height: 40px;">전송</button>
+					</div>
+
+				</div>
+				<div>
+					<div class="left-text">
+						<strong>인증번호</strong>
+					</div>
+					
+					<div class="input-group mb-3"
+						 style="height: 40px;">
+					  <input type="text"
+					  		 class="form-control mb-3"
+					  		 id="inputCode"
+					  		 placeholder="인증번호를 입력해주세요"
+					  		 aria-label="인증번호를 입력해주세요"
+					  		 aria-describedby="btnConfirm"
+					  		 required >
+					  <button class="btn btn-outline-secondary"
+					  		  type="button"
+					  		  id="btnConfirm"
+					  		  style="height: 40px;">확인</button>
+					</div>
+				</div>
+				<div>
+					<input type="submit"
+						   class="form-control btn btn-success"
+						   id="btnJoin"
+						   value="가입완료">
+				</div>
+			</form>
+		</div>
 	</div>
 </main>
 </html>

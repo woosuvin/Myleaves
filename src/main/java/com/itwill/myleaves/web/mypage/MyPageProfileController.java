@@ -24,6 +24,7 @@ public class MyPageProfileController {
 	
 	private final MyPageProfileService myPageProfileService;
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/info")
 	public void myprofile(@RequestParam String userId, Model model) {
 		log.info("profile(userId={})", userId);
@@ -31,11 +32,13 @@ public class MyPageProfileController {
 		model.addAttribute("member", myPageProfileService.read(userId));
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/modifyPwd")
 	public void modifyPwd() {
 		log.info("modifyPwd()");
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/matches/pwd")
 	public ResponseEntity<Boolean> matchesPwd(String userId, String currentPwd) {
 		log.info("matchesPwd(userId={}, currentPwd={})", userId, currentPwd);
@@ -46,6 +49,7 @@ public class MyPageProfileController {
 		return ResponseEntity.ok(bool);
 	}
 	
+	@PreAuthorize("hasRole('MEMBER')")
 	@PutMapping("/modify/pwd")
 	public ResponseEntity<String> modifyPwd(@RequestBody MemberModifyPwdDto dto) {
 		log.info("modifyPwd(dto={})", dto);

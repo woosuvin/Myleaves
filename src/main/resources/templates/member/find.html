@@ -4,83 +4,118 @@
     layout:decorate="~{layout/base_layout}">
 <head>
 	<script defer src="/js/member/find.js"></script>
+	<style>
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 10vh;
+        }
+        .left-text {
+            text-align: left;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: row; /* 가로 방향으로 정렬 */
+            gap: 10px; /* 버튼 사이 간격 조절 */
+        }
+    </style>	
 </head>
 <main layout:fragment="main">
-	<div>
-      <button id="findIdButton">아이디 찾기</button>
-      <button id="findPwdButton">비밀번호 찾기</button>
-    </div>
-    <div id="findIdForm" style="display: none;" >
-        <form class="find-form" method="get" th:action="@{ /member/login }">
-       		<div>
-	        	<strong>이름</strong>
-	        	<input type="text"
-	        		   class="form-control"
-	        		   placeholder="이름을 입력해주세요"
-	        		   required />
-       		</div>
-       		<div>
-	        	<strong>이메일</strong>
-	         	<input type="text"
-	         		   id="idForm-inputEmail"
-	         		   class="form-control"
-	         		   placeholder="이메일을 입력해주세요"
-	         		   required />
-       		</div>
-       		<div>
-       			<button type="button"
-       				    class="btn btn-success"
-       				    id="btnIdConfirm">확인</button>
-       		</div>
-       		<div>
-       			<input type="submit"
-       				   class="form-control"
-       				   value="로그인 페이지로 돌아가기">
-       		</div>
-        </form>
-    </div>
-    <div id="findPwdForm" style="display: none;">
-        <form class="find-form" method="get" th:action="@{ /member/login }">
-        	<div>
-        		<strong>아이디</strong>
-        		<input type="text"
-        			   id="inputId"
-        			   class=form-control
-        			   placeholder="아이디를 입력해주세요"
-        			   required />
-        	</div>
-        	<div>
-	        	<strong>이메일</strong>
-	        	<input type="text"
-	        		   id="pwdForm-inputEmail"
-	        		   class="form-control"
-	        		   placeholder="이메일을 입력해주세요"
-	        		   required />
-        	</div>
-        	<div>
-        		<button type="button"
-        		        id="btnSubmit"
-        		        class="btn btn-secondary">전송</button>
-        	</div>
-        	<div>
-	        	<strong>인증번호</strong>
-	         	<input type="text"
-	         		   id="inputCode"
-	         		   class="form-control"
-	         		   placeholder="인증번호를 입력해주세요"
-	         		   required />
-        	</div>
-        	<div>
-        		<button type="button"
-        				id="btnPwdConfirm"
-        				class="btn btn-success">확인</button>
-        	</div>
-        	<div>
-        		<input type="submit"
-       				   class="form-control"
-       				   value="로그인페이지로 돌아가기">
-        	</div>
-        </form>
-    </div>
+	<div class="center-content">
+		<div>
+			<h3 class="text-center mb-5">아이디/비밀번호 찾기</h3>
+		</div>
+		<div class="button-container mb-3">
+	      <button id="findIdButton">아이디 찾기</button>
+	      <button id="findPwdButton">비밀번호 찾기</button>
+	    </div>
+	    <div class="center-content" id="findIdForm" style="display: none;">
+	        <form class="find-form" method="get" th:action="@{ /member/login }">
+	       		<div>
+	       			<div class="left-text">
+			        	<strong>이름</strong>
+	       			</div>
+		        	<input type="text"
+		        		   class="form-control"
+		        		   placeholder="이름을 입력해주세요"
+		        		   required />
+	       		</div>
+	       		<div class="left-text">
+			        	<strong>이메일</strong>
+	       		</div>
+    			<div class="input-group mb-3">
+					  <input type="text"
+					  		 id="idForm-inputEmail"
+					  		 class="form-control"
+					  		 placeholder="이메일을 입력해주세요"
+					  		 aria-label="이메일을 입력해주세요"
+					  		 aria-describedby="btnIdConfirm">
+					  <button class="btn btn-outline-secondary"
+					  		  type="button"
+					  		  id="btnIdConfirm">확인</button>
+				</div>
+	       		<div>
+	       			<input type="submit"
+	       				   class="form-control btn btn-success btn-outline-dark"
+	       				   value="로그인 페이지로 돌아가기">
+	       		</div>
+	        </form>
+	    </div>
+	    <div class="center-content" id="findPwdForm" style="display: none;">
+	        <form class="find-form" method="get" th:action="@{ /member/login }">
+	        	<div>
+	        		<div class="left-text">
+		        		<strong>아이디</strong>
+	        		</div>
+	        		<input type="text"
+	        			   id="inputId"
+	        			   class="form-control"
+	        			   placeholder="아이디를 입력해주세요"
+	        			   required />
+	        	</div>
+	        	<div>
+	        		<div class="left-text">
+			        	<strong>이메일</strong>
+	        		</div>
+	        		<div class="input-group mb-3">
+					  <input type="text"
+					  		 id="pwdForm-inputEmail"
+					  		 class="form-control"
+					  		 placeholder="이메일을 입력해주세요"
+					  		 aria-label="이메일을 입력해주세요"
+					  		 aria-describedby="btnSubmit" />
+					  <button class="btn btn-outline-secondary"
+					  		  type="button"
+					  		  id="btnSubmit">전송</button>
+					</div>
+	        	</div>
+	        	<div>
+	        		<div class="left-text">
+			        	<strong>인증번호</strong>
+	        		</div>
+	        		
+	        		<div class="input-group mb-3">
+					  <input type="text"
+					  		 id="inputCode"
+					  		 class="form-control"
+					  		 placeholder="인증번호를 입력해주세요"
+					  		 aria-label="인증번호를 입력해주세요"
+					  		 aria-describedby="btnSubmit" />
+					  <button class="btn btn-outline-secondary"
+					  		  type="button"
+					  		  id="btnPwdConfirm">확인</button>
+					</div>
+				</div>
+	        	<div>
+	        		<input type="submit"
+	       				   class="form-control btn btn-success btn-outline-dark"
+	       				   value="로그인페이지로 돌아가기">
+	        	</div>
+	        </form>
+	    </div>
+	</div>
 </main>
 </html>

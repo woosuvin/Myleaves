@@ -2,6 +2,7 @@ package com.itwill.myleaves.web.mngr;
 
  import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MngrMemberController {
 
 	private final MemberService memberService;
-
+	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/member/manage")
 	public void manage(Criteria cri, Model model) {
 		log.info("manage()");
@@ -36,14 +38,19 @@ public class MngrMemberController {
 		model.addAttribute("pageMaker", new PageDto(cri, size));
 	}
 	
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/member/search")
-	public void memberSearch(Criteria cri, Model model, MemberSearchDto dto) {
+	public String memberSearch(Criteria cri, Model model, MemberSearchDto dto) {
 		log.info("memberSearch(cri={}, dto={})", cri, dto);
 		
 		List<Member> members = memberService.readWithPagingAndSearch(cri, dto);
-		//TODO: 사이즈 가져와야되는데 귀찮
-
+		
+		int size = memberService.read(dto);
+		log.info("memberSearch(size={})", size);
+		
 		model.addAttribute("members", members);
-		model.addAttribute("pageMaker", new PageDto(cri, 100));
+		model.addAttribute("pageMaker", new PageDto(cri, size));
+		
+		return "/mngr/member/manage";
 	}
 }

@@ -7,12 +7,26 @@
 	<script th:inline="javascript">
     	var userId = /*[[${#authentication.name}]]*/ null;
 	</script>
+	<style>
+       .center-content {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           justify-content: center;
+           text-align: center;
+           height: 10vh;
+       }
+       table {
+        border-collapse: separate;
+        border-spacing: 0 10px; /* 여기서 10px를 조절하여 원하는 간격을 설정하세요 */
+       }
+   </style>
 </head>
 <main layout:fragment="main">
-	<div>
-		<h1>비밀번호 수정</h1>
+	<div class="center-content">
+		<h3 class="text-content mb-5">비밀번호 변경</h3>
 	</div>
-	<div>
+	<div class="center-content mt-3">
 		<table>
 			<tr>
 				<th>현재 비밀번호</th>

@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	btnConfirm.addEventListener('click', (e) => {
 		e.preventDefault();
 		
-		const inputCode = document.querySelector('input[placeholder=인증번호]').value;
+		const inputCode = document.querySelector('input#inputCode').value;
+		console.log(inputCode);
 		if (authCode == inputCode) {
 			isMatched = true;
 			alert('확인되었습니다.');
