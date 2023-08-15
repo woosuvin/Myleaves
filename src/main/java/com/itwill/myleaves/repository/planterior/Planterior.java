@@ -1,5 +1,7 @@
 package com.itwill.myleaves.repository.planterior;
 
+import java.io.IOException;
+
 import org.hibernate.annotations.DialectOverride.GeneratedColumn;
 
 import com.itwill.myleaves.dto.planterior.BookmarkDto;
@@ -52,11 +54,13 @@ public class Planterior extends BaseTimeEntity {
 	@Column(nullable = true)
 	private byte[] thumbnail;
 	
-	public Planterior update(PlanteriorUpdateDto dto) {
+	public Planterior update(PlanteriorUpdateDto dto) throws IOException {
 		this.userId = dto.getUserId();
+		if (dto.getFile() != null && dto.getFile().getBytes().length > 0) {
+			this.thumbnail = dto.getFile().getBytes();
+		}
 		this.plantName = dto.getPlantName();
 		this.plantNameEnglish = dto.getPlantNameEnglish();
-		this.thumbnail = dto.getThumbnail();
 		return this;
 				
 	}

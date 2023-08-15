@@ -19,6 +19,8 @@
 						th:value="${#authentication.name}" /> 
 					<input type="hidden"
 						id="planteriorId" name="planteriorId" th:value="${cardList.planteriorId}" />
+					<input type="hidden"
+						id="pcid" name="pcid" th:value="${cate.pcid}" />
 				</div>
 				<dt align="left" class="dt_class">
 					수정 전 사진
@@ -35,6 +37,7 @@
 						<div class="input-group mb-3">
 							<input class="form-control file-input m-2" type="file"
 								id="file" name="file" required>
+							<div class="d-none preview"></div>
 						</div>
 					</div>
 				</dd>

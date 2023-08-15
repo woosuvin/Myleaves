@@ -1,5 +1,7 @@
 package com.itwill.myleaves.repository.planterior;
 
+import java.io.IOException;
+
 import com.itwill.myleaves.dto.planterior.PlanteriorCategoryUpdateDto;
 import com.itwill.myleaves.dto.planterior.PlanteriorCreateDto;
 
@@ -39,11 +41,10 @@ public class PlanteriorCategory {
 	@Column(nullable = false)
 	private String conditionContent;
 	
-	public PlanteriorCategory update(PlanteriorCategoryUpdateDto dto, PlanteriorCreateDto pdto) {
-		this.planteriorId = pdto.getPlanteriorId();
+	public PlanteriorCategory update(PlanteriorCategoryUpdateDto dto) {
+		this.planteriorId = dto.getPlanteriorId();
 		this.conditionContent = dto.getConditionContent();
 		this.stateContent = dto.getStateContent();
-		this.pcid = dto.getPcid();
 		return this;
 	}
 

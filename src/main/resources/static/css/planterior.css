@@ -21,63 +21,16 @@ p.plants_title {
 	margin: 8px 0 16px 0
 }
 
-button#filterBtn {
-	position: relative;
-	margin: 0 auto;
-	width: var(- -btn-w);
-	color: var(- -primary);
-	border: .15em solid var(- -primary);
-	border-radius: 5em;
-	text-transform: uppercase;
-	text-align: center;
-	font-size: 1.3em;
-	line-height: 2em;
-	cursor: pointer;
+.clicked  {
+	border-color: red;
+	border-width: 2px;
 }
 
-.plants__page#plants__page section.plants_filter_section .secondFilterSection
-	{
-	display: none
-}
-
-.plants__page#plants__page section.plants_filter_section .secondFilterSection.active
-	{
-	display: block
-}
-
-.plants__page#plants__page section.plants_filter_section .filterLists {
-	display: flex;
-	flex-wrap: wrap
-}
-
-.plants__page#plants__page section.plants_filter_section .filterLists button
-	{
-	padding: 6px 18px;
-	border: 1px solid #aaa;
-	border-radius: 50px;
-	font-size: 16px;
-	line-height: 1.5;
-	letter-spacing: -0.8px;
-	text-align: center;
-	color: #666;
-	margin-bottom: 8px
-}
-
-.plants__page#plants__page section.plants_filter_section .filterLists button:not(:last-child)
-	{
-	margin-right: 4px
-}
-
-.plants__page#plants__page section.plants_filter_section .filterLists button.active
-	{
-	border: 1px solid #00b564;
-	color: #00b564
-}
+/*.filterSecondBtn*/
 
 button.filterBtn {
 	position: relative
 }
-
 
 button#filter_reset_btn img {
 	display: inline-block;
@@ -95,11 +48,10 @@ span.pick {
 	font-size: 25px;
 }
 
-
 /* 카드 이미지 조정 */
 .imgSize {
-	width: 100%; 
-	height: 15em; 
+	width: 100%;
+	height: 15em;
 	object-fit: cover;
 }
 
@@ -120,34 +72,32 @@ span.pick {
 }
 
 /* 마이페이지- 내가 쓴 글 전용*/
-.planteriorButtonEleMyPost{
+.planteriorButtonEleMyPost {
 	display: block;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
 
-
 .imgButtonFill {
 	border: none;
-	background-color:transparent;
+	background-color: transparent;
 }
 
 .imgButton {
 	border: none;
-	background-color:transparent;
+	background-color: transparent;
 }
 
 .notBookmark {
 	border: none;
-	background-color:transparent;
+	background-color: transparent;
 }
 
 .none {
 	border: none;
-	background-color:transparent;
+	background-color: transparent;
 }
-
 
 /*상단 제목*/
 .createTitle {

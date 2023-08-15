@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itwill.myleaves.dto.planterior.PlanteriorUpdateDto;
+import com.itwill.myleaves.dto.planterior.TotalUpdateDto;
 import com.itwill.myleaves.repository.planterior.Bookmark;
 import com.itwill.myleaves.repository.planterior.BookmarkRepository;
 import com.itwill.myleaves.repository.planterior.Planterior;
+import com.itwill.myleaves.repository.planterior.PlanteriorCategory;
 import com.itwill.myleaves.repository.planterior.PlanteriorRepository;
 import com.itwill.myleaves.service.palnterior.BookmarkService;
 import com.itwill.myleaves.service.palnterior.CategoryService;
@@ -66,18 +68,22 @@ public class MypagePlanteriorController {
 		log.info("planteriorUpdate(planteriorId={})", planteriorId);
 		
 		Planterior list = mypageService.read(planteriorId);
+		PlanteriorCategory plist = categoryService.read(planteriorId);
 		String image = Base64.getEncoder().encodeToString(list.getThumbnail());
 		
+		model.addAttribute("cate", plist);
 		model.addAttribute("image", image);
 		model.addAttribute("cardList", list);
 	}
 	
 	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/update")
-	public String update(PlanteriorUpdateDto dto) throws IOException {
+	public String update(TotalUpdateDto dto) throws IOException {
 		log.info("update(dto ={})", dto);
 		
-		mypageService.update(dto);
+		categoryService.update(dto.planteriorCategoryUpdateDto());
+		mypageService.update(dto.planteriorUpdateDto());
+		
 		return "redirect:/mypage/planterior/my_posts?userId=" + dto.getUserId();
 	}
 	

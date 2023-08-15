@@ -97,7 +97,7 @@ public class PlanteriorHomecontroller {
 				}
 			}
 		}
-
+		model.addAttribute("mngrCount", result.size());
 		model.addAttribute("mngrList", result);
 
 		return "planterior/home";

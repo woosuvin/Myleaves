@@ -1,5 +1,6 @@
 package com.itwill.myleaves.service.palnterior;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
@@ -46,7 +47,7 @@ public class MypageService {
 	}
 
 	// 수정
-	public Planterior update(PlanteriorUpdateDto dto) {
+	public Planterior update(PlanteriorUpdateDto dto) throws IOException {
 		log.info("update(dto = {})", dto);
 
 		Planterior entity = planteriorRepository.findById(dto.getPlanteriorId()).orElseThrow();

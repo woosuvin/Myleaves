@@ -2,8 +2,12 @@ package com.itwill.myleaves.dto.planterior;
 
 import com.itwill.myleaves.repository.planterior.PlanteriorCategory;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class PlanteriorCategoryUpdateDto {
 	
@@ -17,7 +21,8 @@ public class PlanteriorCategoryUpdateDto {
 				.planteriorId(planteriorId)
 				.conditionContent(conditionContent)
 				.stateContent(stateContent)
-				.pcid(pcid)
 				.build();
 	}
+	
+
 }

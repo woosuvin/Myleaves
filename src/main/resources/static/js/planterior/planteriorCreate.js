@@ -53,64 +53,92 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	// 플랜테리어 작성: 영문/한문
 	const btnCreate = document.querySelector('#btnCreate');
 	const filterBtns = document.querySelectorAll('.filterBtn');
 	let stateContent = '';
 	let conditionContent = '';
+	let lastClickedBtn = null; // 마지막으로 클릭한 버튼을 추적
+	let lastClickedValue = null; // 마지막으로 클릭한 버튼의 값 추적
+
 	for (const filterBtn of filterBtns) {
 		filterBtn.addEventListener('click', (e) => {
 
-			console.log('ghkrdls');
-			e.preventDefault();
-
 			// li 삽입할 ul 요소를 찾음
 			const secondFilter = document.querySelector('#secondFilter');
-			secondFilter.classList.remove('d-none');
+			// 이미 'clicked' 클래스가 추가된 버튼을 다시 클릭한 경우
+			if (filterBtn === lastClickedBtn) {
+				filterBtn.classList.remove('clicked');
+				secondFilter.classList.add('d-none');
+				lastClickedBtn = null; // 버튼 추적 상태 초기화
+				lastClickedValue = null; // 버튼 값 추적 상태 초기화
+			} else {
+				// 다른 버튼의 'clicked' 클래스 제거
+				for (const otherBtn of filterBtns) {
+					if (otherBtn !== filterBtn) {
+						otherBtn.classList.remove('clicked');
+					}
+				}
 
-			console.log(e.target.value);
+				// 클릭한 버튼에 'clicked' 클래스 추가
+				filterBtn.classList.add('clicked');
+				secondFilter.classList.remove('d-none');
 
-			inputStateContent.value = e.target.value;
-			inputConditionContent.value = '';
+				// 마지막으로 클릭한 버튼을 업데이트
+				lastClickedBtn = filterBtn;
+				lastClickedValue = e.target.value;
 
-			// 추가
-			/*
-			let htmlStr = '';
-			htmlStr += `
-				<li>
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="초보자용"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="선물하기 좋은"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="공기정화"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="빛이 적어도 되는"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="향기나는"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="반려동물 안전한"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="목대있는"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="흙이 필요없는"  />
-					<input type="button" class="filterSecondBtn" id="filterSecondBtn" name="conditionContent" value="덩굴로 자라는"  />
-				</li>
-				`;
-			secondFilter.innerHTML = htmlStr;
-			
-			const filterSecondBtns = document.querySelectorAll('input.filterSecondBtn');
-			for (let btn of filterSecondBtns) {
-				btn.addEventListener('click', () => {
-					conditionContent += btn.value;
-					console.log(conditionContent);
-				})
 			}
-			*/
 
+
+
+			// 클릭한 버튼의 값을 가져와 input 요소에 설정
+			inputStateContent.value = lastClickedValue || ''; // 값이 없는 경우는 빈 문자열로 설정
+			console.log(inputStateContent.value)
+			inputConditionContent.value = '';
 		});
 	}
 
+	let lastClickedBtnFilterSecond = null; // 마지막으로 클릭한 버튼을 추적
+	let lastClickedValueFilterSecond = null;
 	const filterSecondBtns = document.querySelectorAll('input.filterSecondBtn');
 	for (let btn of filterSecondBtns) {
 		btn.addEventListener('click', (e) => {
+			// 이미 'clicked' 클래스가 추가된 버튼을 다시 클릭한 경우
+			if (btn === lastClickedBtnFilterSecond) {
+				btn.classList.remove('clicked');
+				lastClickedBtnFilterSecond = null; // 버튼 추적 상태 초기화
+				lastClickedValueFilterSecond = null; // 버튼 값 추적 상태 초기화
+			} else {
+
+				// 클릭한 버튼에 'clicked' 클래스 추가
+				btn.classList.add('clicked');
+				lastClickedBtn = btn;
+				lastClickedValue = e.target.value;
+			}
+
 			console.log(e.target.value);
-			inputConditionContent.value += e.target.value + ',';
+			inputConditionContent.value += lastClickedValue + ',';
 
 		})
 	}
+
+	
+	// 리셋 버튼 선택
+	const filter_reset_btn = document.querySelector('#filter_reset_btn');
+	filter_reset_btn.addEventListener('click', () => {
+		
+		// 버튼의 선택 해제
+		for (const filterBtn of filterBtns) {
+			filterBtn.classList.remove('clicked');
+		}
+
+		// 'secondFilter'의 'd-none' 클래스 추가하여 숨김
+		secondFilter.classList.add('d-none');
+
+		// 값 초기화
+		inputStateContent.value = '';
+		inputConditionContent.value = '';
+	});
 
 
 	btnCreate.addEventListener('click', (e) => {
@@ -127,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// 카테고리 삽입 가능성 존재
 		// 이미지 성공시 !formFile 넣기
 		if (plantName === '' || plantNameEnglish === '' ||
-			stateContent === '' || conditionContent === '' ) {
+			stateContent === '' || conditionContent === '') {
 			alert('비어있는 부분을 선택해주세요')
 			return;
 		}
