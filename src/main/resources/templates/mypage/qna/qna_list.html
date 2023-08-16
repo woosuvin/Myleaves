@@ -6,18 +6,21 @@
 		<div class="mb-5 text-center">
 				<h3>MY QnA</h3>
 		</div>
-		<div style="text-align: right;" class="my-2">
-			<a class="btn btn-outline-dark" th:href="@{/info/qna/create}">문의</a>
-			<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
-		</div>
+		
 		<form id="qnamyalldeleteForm" method="post" class="my-2">	
 		   	<table class="table table-hover">
+		   	<colgroup>
+				<col width="2%">
+				<col width="7%">
+				<col width="2%">
+				<col width="2%">
+			</colgroup>
 				<thead class="text-center">
 					<tr>
 						<th scope="col"><input type="checkbox" id="selectAll" /></th>
-						<th scope="col">No.</th>
 						<th scope="col">제목</th>
 						<th scope="col">작성일</th>
+						<th scope="col">진행상태</th>
 					</tr>
 				</thead>
 				<tbody class="text-center">
@@ -27,16 +30,22 @@
 							<input type="hidden" id="hiddenSelectedQnaIds" name="hiddenSelectedQnaIds" th:value="${qnalist.qid}" />
 							<input type="hidden" id="hiddenuserId" name="hiddenSelectedQnaIds" th:value="${qnalist.userId}" />
 						</td>
-						<th th:text=${qnalist.qid}></th>
 						<td scope="col">
 							<a th:href="@{/mypage/qna/detail?(userId=${#authentication.name},qid=${qnalist.qid})}" th:text=${qnalist.title}
 							class="text-decoration-none text-reset"></a>
 						</td>
 						<td scope="col" th:text="${#temporals.format(qnalist.createdDate, 'yy-MM-dd HH:mm')}"></td> 
+						<td th:if="${#strings.isEmpty(qnalist.an_title)}">확인중</td>
+						<td th:if="${not #strings.isEmpty(qnalist.an_title)}">확인완료</td>
 					</tr>	
 				</tbody>
 			</table>
+		
 		</form>
+
+		<div class="my-2  d-flex justify-content-end">
+        	<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
+		</div>	
 		<!-- 페이징처리 시작 -->
         <nav aria-label="...">
 	    <ul class="pagination pagination-sm justify-content-center">

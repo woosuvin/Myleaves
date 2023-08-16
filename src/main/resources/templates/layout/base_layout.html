@@ -22,11 +22,11 @@
 		<ul class="mb-2 nav nav-tab justify-content-end">
 			<th:block sec:authorize="isAuthenticated()">
 				<li class="nav-item"><a class="nav-link-login"
-					onclick="openChatList()">채팅</a></li>
+					onclick="openNavChatList()">채팅</a></li>
 				<li class="nav-item"><a class="nav-link-login"
 					th:href="@{/cart/list(userId=${#authentication.name})}">장바구니</a></li>
 				<li class="nav-item"><a class="nav-link-login fw-normal"
-					th:href="@{/mypage}">[<span sec:authentication="name"></span>]
+					th:href="@{/mypage}">[<span id="userId" sec:authentication="name"></span>]
 						마이페이지
 				</a></li>
 				<li class="nav-item">
@@ -84,7 +84,7 @@
 		</div>
 
 		<!-- footer -->
-		<footer class="container">
+		<footer class="">
 			<div class="row">
 				<div class="col-8 text-muted text-decoration-none">
 					<p class="basic">(주) 8월</p>
@@ -101,12 +101,13 @@
 						<li class="ms-3 nav-item"><a
 							th:href="@{https://github.com/ITWILL-MYLEAVES/Myleaves}"
 							target="_blank" class="text-dark"> <img
-								th:src="@{/images/common/gitHub.png}" class="github" />
+								th:src="@{/images/common/github.png}" class="github" />
 						</a></li>
-						<li class="ms-3 nav-item"><a
-							th:href="@{https://www.itwill.co.kr/}" target="_blank"> <img
-								th:src="@{/images/common/itwill.png}" class="github" />
-						</a></li>
+						<li class="ms-3 nav-item">
+							<a th:href="@{https://www.itwill.co.kr/}" target="_blank">
+								<img th:src="@{/images/common/build.svg}" class="github" />
+							</a>
+						</li>
 					</ul>
 					<div class="footer-link">
 						<a th:href="@{https://www.picturethisai.com/ko/wiki}"
@@ -127,7 +128,7 @@
 	<script src="/js/moveButtons.js"></script>
 	<script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
-	<script src="/js/chat.js"></script>
+	<script src="/js/chat/chatList.js"></script>
 	<th:block layout:fragment="myscripts">
 	</th:block>
 </body>

@@ -19,15 +19,15 @@
 				<th scope="col">작성일</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr th:each="post : ${posts}">
-				<td th:text="'[' + ${post.hrsHd} + ']'"></td>
-				<td> <a class="link-dark link-underline-opacity-0" th:href="@{/community/detail?id={id} (id = ${post.communityId})}"
-						th:text="${post.title}"></a></td>
-				<td th:text="${post.userId}"></td>
-				<td th:text="${ #temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
-			</tr>
-		</tbody>
+	<tbody>
+	    <tr th:each="post : ${posts}">
+	        <td th:text="'[' + ${post.hrsHd} + ']'"></td>
+	        <td><a class="link-dark link-underline-opacity-0" th:href="@{/community/detail?id={id} (id = ${post.communityId})}" th:text="${post.title}"></a>
+	            <span th:text="'[' +${commentCountMap.get(post.communityId)}+ ']'"class="red-text"></span></td>
+	        <td th:text="${post.userId}"></td>
+	        <td th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
+	    </tr>
+	</tbody>
 	</table>
 	<form th:action="@{/community/search}">
 		<div class="input-group mt-5 mb-5">

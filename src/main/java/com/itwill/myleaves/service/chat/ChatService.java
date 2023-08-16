@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import com.itwill.myleaves.dto.chat.ChatRoomCreateDto;
 import com.itwill.myleaves.repository.chat.ChatRoom;
 import com.itwill.myleaves.repository.chat.ChatRoomRepository;
 
@@ -26,21 +27,34 @@ public class ChatService {
     }
 
     // 채팅방 리스트 불러오기
-    public List<ChatRoom> readChatRoom(String myId) {
+    public List<ChatRoom> readChatRoom(Long sellId) {
     	// List<ChatRoom> result = new ArrayList<>(chatRooms.values());
-        return chatRoomRepository.findByMyId(myId);
+        return chatRoomRepository.findBySellId(sellId);
     }
+    
+    // 상단바 채팅리스트 find by myId otherId
+    public List<ChatRoom> readChatRoom(String myId) {
+    	log.info("myId={}, otherId={}", myId);
+    	return chatRoomRepository.findByMyIdOrOtherId(myId, myId);
+    }
+    
+    
 
     //채팅방 하나 불러오기
-    public ChatRoom findById(Long roomId) {
-        return chatRooms.get(roomId);
+    public ChatRoom readChatRoom(String myId, String otherId, long sellId) {
+    	return chatRoomRepository.findByMyIdAndOtherIdAndSellId(myId, otherId, sellId);
+    }
+    
+    // 채팅방 하나 불러오기 roomId
+    public ChatRoom readChatRoom(long roomId) {
+    	return chatRoomRepository.findByRoomId(roomId);
     }
 
     //채팅방 생성
-    public ChatRoom createRoom(long sellId, String myId, String otherId) {
-        ChatRoom chatRoom = ChatRoom.create(sellId, myId, otherId);
-        chatRooms.put(chatRoom.getRoomId(), chatRoom);
-        return chatRoom;
+    public ChatRoom createRoom(ChatRoomCreateDto dto) {
+        ChatRoom entity = dto.toEntity();
+        chatRoomRepository.save(entity);
+        return entity;
     }
     
     /**
@@ -49,9 +63,9 @@ public class ChatService {
      * @param sellId
      * @return
      */
-    public List<ChatRoom> checkedRoom(String otherId, Long sellId) {
-        return chatRoomRepository.findByOtherIdAndSellId(otherId, sellId);
-    }
+//    public List<ChatRoom> checkedRoom(String otherId, Long sellId) {
+//        return chatRoomRepository.findByOtherIdAndSellId(otherId, sellId);
+//    }
     
 }
 

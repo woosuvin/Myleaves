@@ -8,7 +8,6 @@
 <main layout:fragment="mngrHome">
 	<div>
 		<h3>통계</h3>
-		<div></div>
 	</div>
 	<div>
 		<div>
@@ -16,40 +15,39 @@
 		</div>
 		<div>
 			<div>
-				<table>
+				<table class="table">
 					<thead>
 						<tr>
-							<th>이름</th>
-							<th>아이디</th>
-							<th>전화번호</th>
-							<th>E-MAIL</th>
-							<th>생년월일</th>
-							<th>가입일자</th>
-							<th>성별</th>
+							<th class="text-center">이름</th>
+							<th class="text-center">아이디</th>
+							<th class="text-center">전화번호</th>
+							<th class="text-center">E-MAIL</th>
+							<th class="text-center">생년월일</th>
+							<th class="text-center">가입일자</th>
+							<th class="text-center">성별</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="member : ${ members }" th:object="${ member }">
-						    <td th:text="*{ name }"></td>
-						    <td th:text="*{ userId }"></td>
-						    <td th:text="*{ phone }"></td>
-						    <td th:text="*{ email }"></td>
-						    <td th:text="*{ birth }"></td>
-						    <td th:text="*{ joinDate }"></td>
-						    <td th:text="*{ gender }"></td>
+						    <td class="text-center" th:text="*{ name }"></td>
+						    <td class="text-center" th:text="*{ userId }"></td>
+						    <td class="text-center" th:text="*{ phone }"></td>
+						    <td class="text-center" th:text="*{ email }"></td>
+						    <td class="text-center" th:text="*{ birth }"></td>
+						    <td class="text-center" th:text="*{ joinDate }"></td>
+						    <td class="text-center" th:text="*{ gender }"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div>
-				<ul class="pagination"
+				<ul class="pagination justify-content-md-center"
 					th:each="pageMaker : ${ pageMaker }">
 					
 					<li class="page-item"
 						th:if="${ pageMaker.prev }">
 				      <a class="page-link" th:href="@{ |${pageMaker.startPage - 1}| }" tabindex="-1">Previous</a>
 				    </li>
-				    
 				    <li class="page-item"
 				    	th:each="i : ${ #numbers.sequence(pageMaker.startPage, pageMaker.endPage) }">
 				    	<a class="page-link"
@@ -71,7 +69,8 @@
 					<input type="hidden" name="amount" th:value="${ pageMaker.cri.amount}" />				
 				</form>
 			</div>
-			 <div>
+		
+			<div>
                 <form method="get" th:action="@{ /mngr/member/search }">
                     <div class="row">
                         <div class="col-3">

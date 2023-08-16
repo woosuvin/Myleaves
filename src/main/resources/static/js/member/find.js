@@ -28,7 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		const name = document.querySelector('input[placeholder="이름을 입력해주세요"]').value;
 		const email = document.querySelector('input#idForm-inputEmail').value;
-
+		
+		
+		
 		let reqUrl = '/member/find/id';
 		reqUrl += `?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
 
@@ -71,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					alert('임시 비밀번호는 ' + response.data + '입니다.');
 				})
 				.catch((error) => {
-					console.log(error);
+					alert('존재하지 않은 사용자입니다.');
 				})
 		} else {
 			alert('인증번호가 일치하지 않습니다.');

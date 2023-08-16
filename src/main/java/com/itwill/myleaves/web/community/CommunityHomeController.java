@@ -1,6 +1,8 @@
 package com.itwill.myleaves.web.community;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,8 +43,17 @@ public class CommunityHomeController {
 		// 포스트 목록 검색
 	    Page<Community> list = communityService.read(pageable);
 	    
-//	    long count = communityCommentService.countByCommunityId(communityId);
-//	    model.addAttribute("communityCommentCount", count);
+	    // 각 게시글에 해당하는 댓글 수를 맵에 저장
+	    Map<Long, Long> commentCountMap = new HashMap<>();
+	    for (Community post : list) {
+	        Long commentCount = communityCommentService.countByCommunityId(post);
+	        commentCountMap.put(post.getCommunityId(), commentCount);
+	    }
+	    model.addAttribute("posts", list);
+	    model.addAttribute("commentCountMap", commentCountMap);
+	    
+	    log.info("commentCountMap: {}", commentCountMap);
+
 	    
 	    int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
         int startPage =  Math.max(nowPage - 4, 1); // 시작 페이지
@@ -50,7 +61,6 @@ public class CommunityHomeController {
        
         
 	    // Model 검색 결과를 세팅.
-	    model.addAttribute("posts", list );
 	    model.addAttribute("nowPage",nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);

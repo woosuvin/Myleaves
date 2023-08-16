@@ -2,14 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/base_layout}">
-    
+<head>
+	<style>
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 10vh;
+        }
+         a {
+         	color: black;
+            text-decoration: none;
+        }
+        .left-text {
+            text-align: left;
+        }
+    </style>
+</head>
 <main layout:fragment="main">
 	<div>
-		<div>로그인</div>
-		<div>
-			<form id="login-form" method="post" th:action="@{ /member/login }">
+		<div class="center-content">
+			<h3 class="text-center mb-5"> 로그인</h3>
+		</div>
+		<div class="center-content">
+			<form class="mt-5" id="login-form" method="post" th:action="@{ /member/login }">
 				<div>
-					<strong>아이디</strong>
+					<div class="left-text">
+						<strong>아이디</strong>
+					</div>
 					<input type="text"
 						   class="form-control"
 						   name=userId
@@ -17,7 +39,9 @@
 						   required />
 				</div>
 				<div>
-					<strong>비밀번호</strong>
+					<div class="left-text">
+						<strong>비밀번호</strong>
+					</div>
 					<input type="password"
 						   class="form-control"
 						   name=pwd
@@ -36,7 +60,7 @@
 						   id="btn-login"
 						   value="로그인" >
 				    <a th:href="@{ https://kauth.kakao.com/oauth/authorize?client_id=314c0325ca91badd1284203c73a36949&redirect_uri=http://localhost:8090/member/kakao/callback&response_type=code }">
-				    <img height="38px" th:src="@{ /images/login/kakao_login_button.png }" alt="Kakao Login">
+				    	<img height="38px" th:src="@{ /images/login/kakao_login_button.png }" alt="Kakao Login">
 				    </a>
 				</div>
 			</form>

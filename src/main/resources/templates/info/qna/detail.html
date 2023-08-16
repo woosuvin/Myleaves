@@ -5,13 +5,8 @@
 <main layout:fragment="main">
 	<div class="container my-4">
 			<div class="mb-5 text-center">
-		    	<h3>QNA 상세페이지</h3>
+		    	<h3>QNA</h3>
 		    </div>
-		    <div class="my-3" style="text-align: right;">
-						<!-- 수정버튼은 관리자가 확인중일시 수정 버튼 가능 c:if 써야함 -->
-						<a class="btn btn-outline-dark" th:href="@{/info/qna/modify?qid={id} (id = ${qna.qid}) }">설정</a>
-						<a class="btn btn-outline-dark" th:href="@{/info/qna}">목록</a>
-			</div>
 		    <div class="card my-2">
 		    	<div class="card-body">
 					<form id="qnaModifyForm">
@@ -57,7 +52,7 @@
 					</div>			
 				</div>
 				<!-- 관리자 페이지 답변 -->
-				<div class="card my-4" th:if="${not #strings.isEmpty(qna.an_title)}">
+				<div class="card my-3" th:if="${not #strings.isEmpty(qna.an_title)}">
 					<div class="card-body">
 						<h4 class="card-text" th:text="${qna.an_title}" ></h4>
 						<div class="card-text" id="content" style="height: 10rem"th:text="${qna.an_content}"></div>
@@ -67,6 +62,10 @@
 						<p class="card-text text-end small mb-3 me-3" id="answer_date" th:text="${#temporals.format(qna.modifiedDate, 'yyyy-MM-dd HH:mm' ) }"></p>	
 					</div>
 				</div> 
+			<div class="my-3" style="text-align: center;">
+				<a class="btn btn-outline-dark" th:href="@{/info/qna}">목록</a>
+				<a class="btn btn-outline-dark" th:href="@{/info/qna/modify?qid={id} (id = ${qna.qid}) }">수정</a>
+			</div>	
 		</div>
 	</main>
 </html>

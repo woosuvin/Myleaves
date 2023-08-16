@@ -79,6 +79,7 @@ public class MemberService implements UserDetailsService {
 
 	/**
 	 * 전체 회원수 반환
+	 * 
 	 * @return 전체 회원수
 	 */
 	public int read() {
@@ -89,9 +90,10 @@ public class MemberService implements UserDetailsService {
 
 		return size;
 	}
-	
+
 	/**
 	 * 이름, email 일치하는 사용자의 userId 리턴
+	 * 
 	 * @param name
 	 * @param email
 	 * @return userId
@@ -161,25 +163,67 @@ public class MemberService implements UserDetailsService {
 
 	public List<Member> readWithPagingAndSearch(Criteria cri, MemberSearchDto dto) {
 		log.info("readWithPagingAndSearch(cri={}, dto={})", cri, dto);
-		
+
 		List<Member> members = null;
-		
+
 		switch (dto.getType()) {
-		
-		case "name": members = memberRepository.readWithPagingByName(cri.getPageNum(), cri.getAmount(), dto.getKeyword());
+
+		case "name":
+			members = memberRepository.readWithPagingByName(cri.getPageNum(), cri.getAmount(), dto.getKeyword());
 			break;
-		case "userId": members = memberRepository.readByUserId(cri.getPageNum(), cri.getAmount(), dto.getKeyword());
+		case "userId":
+			members = memberRepository.readByUserId(cri.getPageNum(), cri.getAmount(), dto.getKeyword());
 			break;
-		case "phone": members = memberRepository.readByPhone(cri.getPageNum(), cri.getAmount(),dto.getKeyword());
+		case "phone":
+			members = memberRepository.readByPhone(cri.getPageNum(), cri.getAmount(), dto.getKeyword());
 			break;
-		case "eamil": members = memberRepository.readByEmail(cri.getPageNum(), cri.getAmount(),dto.getKeyword());
+		case "eamil":
+			members = memberRepository.readByEmail(cri.getPageNum(), cri.getAmount(), dto.getKeyword());
 			break;
-		case "birth": members = memberRepository.readWithPagingByBirth(cri.getPageNum(), cri.getAmount(),dto.getKeyword());
+		case "birth":
+			members = memberRepository.readWithPagingByBirth(cri.getPageNum(), cri.getAmount(), dto.getKeyword());
 			break;
-		case "gender": members = memberRepository.readWithPagingByGender(cri.getPageNum(), cri.getAmount(),dto.getKeyword());
+		case "gender":
+			members = memberRepository.readWithPagingByGender(cri.getPageNum(), cri.getAmount(), dto.getKeyword());
+			break;
+		}
+
+		return members;
+	}
+
+	/**
+	 * 키워드별 사이즈 가져오기
+	 * 
+	 * @param dto
+	 * @return
+	 */
+	public int read(MemberSearchDto dto) {
+		log.info("read(dto={})", dto);
+
+		int size = 0;
+
+		switch (dto.getType()) {
+		case "name":
+			size = memberRepository.countByName(dto.getKeyword());
+			break;
+		case "userId":
+			size = memberRepository.countByUserId(dto.getKeyword());
+			break;
+		case "phone":
+			size = memberRepository.countByPhone(dto.getKeyword());
+			break;
+		case "email":
+			size = memberRepository.countByEmail(dto.getKeyword());
+			break;
+		case "birth":
+			int birthYear = Integer.parseInt(dto.getKeyword());
+	        size = memberRepository.countByBirth(birthYear);
+	        break;
+		case "gender":
+			size = memberRepository.countByGender(dto.getKeyword());
 			break;
 		}
 		
-		return members;
+		return size;
 	}
 }

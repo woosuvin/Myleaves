@@ -18,8 +18,10 @@
 		</div>
 		<div>
 			<input id="sellId" type="hidden" th:value="${sell.sellId}"/>
-			<input id="userId" type="hidden" th:value="${sell.userId}"/>
-			<input id="otherId" type="hidden" th:value="${#authentication.name}"/>
+			<input id="roomId" type="hidden" th:value="${chatRoom.roomId}"/>
+			<input id="myId" type="hidden" th:value="${chatRoom.myId}"/>
+			<input id="otherId" type="hidden" th:value="${chatRoom.otherId}"/>
+			<input id="userId" type="hidden" th:value="${#authentication.name}"/>
 			<table class="table table-borderless" style="padding-left: 10px;">
 				<tbody>
 					<tr>
@@ -40,16 +42,6 @@
 		<hr>
 		<div id="main-content" class="container">
 			<div class="row">
-				<div class="col-md-6">
-<!-- 					<form class="form-inline">
-						<div class="form-group">
-							<label for="connect">WebSocket connection:</label>
-							<button id="connect" class="btn btn-default" type="submit">Connect</button>
-							<button id="disconnect" class="btn btn-default" type="submit"
-								disabled="disabled">Disconnect</button>
-						</div>
-					</form> -->
-				</div>
 				<div class="col-md-6">
 					<form class="form-inline">
 						<div class="form-group">
@@ -76,8 +68,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
 	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
-	<!-- <script src="/js/chat/chat.js"></script> -->
-	<script src="/js/chat/chatRoom.js"></script>
+	<!-- <script src="/js/chat/chatRoom.js"></script> -->
 	<script src="/js/app.js"></script>
 </th:block>
 </html>
