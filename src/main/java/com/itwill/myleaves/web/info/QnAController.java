@@ -55,7 +55,7 @@ public class QnAController {
 	 */
 	@GetMapping
 	public String qnaList(Model model,
-			@PageableDefault(page = 0, size = 3, sort = "qid", direction = Sort.Direction.DESC) Pageable pageable) {
+			@PageableDefault(page = 0, size = 10, sort = "qid", direction = Sort.Direction.DESC) Pageable pageable) {
 		log.info("QnA My list()");
 
 		Page<QnA> list = qnaService.read(pageable);
