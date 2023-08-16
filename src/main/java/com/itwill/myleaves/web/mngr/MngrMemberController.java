@@ -24,35 +24,49 @@ import lombok.extern.slf4j.Slf4j;
 public class MngrMemberController {
 
 	private final MemberService memberService;
-
+	
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping()
 	public String manage(Criteria cri, Model model) {
-		log.info("manage()");
+//		log.info("manage()");
 
 		List<Member> members = memberService.readWithPaging(cri);
+//		log.info("manage(members={})", members);
 		int size = memberService.read();
 		log.info("manage(size={})", size);
-
+		
+		String json1 = memberService.readGender();
+		
+		String json2 = memberService.readMonth();
+		
+		model.addAttribute("json1", json1);
+		model.addAttribute("json2", json2);
 		model.addAttribute("members", members);
 		model.addAttribute("pageMaker", new PageDto(cri, size));
-
+		
 		return "/mngr/member/manage";
 	}
-
+	
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/member/search")
 	public String memberSearch(Criteria cri, Model model, MemberSearchDto dto) {
-		log.info("memberSearch(cri={}, dto={})", cri, dto);
-
+//		log.info("memberSearch(cri={}, dto={})", cri, dto);
+		
 		List<Member> members = memberService.readWithPagingAndSearch(cri, dto);
-
+		
 		int size = memberService.read(dto);
-		log.info("memberSearch(size={})", size);
-
+//		log.info("memberSearch(size={})", size);
+		
+		
+		String json1 = memberService.readGender();
+		
+		String json2 = memberService.readMonth();
+		
+		model.addAttribute("json1", json1);
+		model.addAttribute("json2", json2);
 		model.addAttribute("members", members);
 		model.addAttribute("pageMaker", new PageDto(cri, size));
-
+		
 		return "/mngr/member/manage";
 	}
 }

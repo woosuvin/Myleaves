@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 	let authCode;
-
+	
+	showForm('findIdForm');
+	
 	function showForm(formId) {
 		const forms = document.querySelectorAll('div[id$="Form"]');
 		forms.forEach(form => {

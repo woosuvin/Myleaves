@@ -1,4 +1,4 @@
-package com.itwill.myleaves.repository.member;
+package com.itwill.myleaves.config;
 
 import java.io.IOException;
 

@@ -58,7 +58,7 @@ public class MemberController {
 	public String kakaoCallback(String code) {
 		log.info("kakaoCallback(code={})", code);
 		
-		kakaoProfileService.kakaoCallback(code);
+		kakaoProfileService.kakaoCallback(code); 
 		
 		return "/member/login";
 	}

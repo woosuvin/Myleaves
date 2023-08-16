@@ -10,8 +10,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
-import com.itwill.myleaves.repository.member.CustomLoginSuccessHandler;
-
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {

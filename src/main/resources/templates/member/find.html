@@ -25,12 +25,9 @@
 </head>
 <main layout:fragment="main">
 	<div class="center-content">
-		<div>
-			<h3 class="text-center mb-5">아이디/비밀번호 찾기</h3>
-		</div>
 		<div class="button-container mb-3">
-	      <button id="findIdButton">아이디 찾기</button>
-	      <button id="findPwdButton">비밀번호 찾기</button>
+	      <button id="findIdButton" class="btn btn-outline-dark">아이디 찾기</button>
+	      <button id="findPwdButton" class="btn btn-outline-dark">비밀번호 찾기</button>
 	    </div>
 	    <div class="center-content" id="findIdForm" style="display: none;">
 	        <form class="find-form" method="get" th:action="@{ /member/login }">
@@ -59,7 +56,7 @@
 				</div>
 	       		<div>
 	       			<input type="submit"
-	       				   class="form-control btn btn-success btn-outline-dark"
+	       				   class="form-control btn-outline-dark"
 	       				   value="로그인 페이지로 돌아가기">
 	       		</div>
 	        </form>
@@ -111,7 +108,7 @@
 				</div>
 	        	<div>
 	        		<input type="submit"
-	       				   class="form-control btn btn-success btn-outline-dark"
+	       				   class="form-control btn-outline-dark"
 	       				   value="로그인페이지로 돌아가기">
 	        	</div>
 	        </form>

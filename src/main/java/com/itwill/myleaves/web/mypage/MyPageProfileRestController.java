@@ -1,5 +1,8 @@
 package com.itwill.myleaves.web.mypage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +30,8 @@ public class MyPageProfileRestController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@PutMapping("/update")
 	public ResponseEntity<String> update(@RequestBody MemberUpdateDto dto) {
-		log.info("modify(dto={})", dto);
+		log.info("update(dto={})", dto);
+		log.info("update(birth={})", dto.getBirth());
 		
 		memberService.update(dto);
 		

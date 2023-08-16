@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<th>생년월일</th>
-				<td><input th:value="${ member.birth }" id="birth"/></td>
+				<td><input type="date" th:value="${member.birth}" id="birth"/></td>
 			</tr>
 			<tr>
 				<th>성별</th>
@@ -62,10 +62,10 @@
 			</tr>
 		</table>
 		<div>
-			<button class="btn btn-primary"
+			<button class="btn btn-outline-dark"
 					type="button"
 					id="btnUpdate">회원정보 수정</button>
-			<button class="btn btn-success"
+			<button class="btn btn-outline-dark"
         			type="button"
         			onclick="window.location.href='/mypage/profile/modifyPwd'">비밀번호 수정</button>
 		</div>

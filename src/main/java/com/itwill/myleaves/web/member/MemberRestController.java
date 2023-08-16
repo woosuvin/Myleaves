@@ -41,6 +41,16 @@ public class MemberRestController {
 		return ResponseEntity.ok(userId);
 	}
 	
+	@GetMapping("/check/id")
+	public ResponseEntity<String> checkId(String inputId) {
+		log.info("checkId(inputId={})", inputId);
+		
+		String userId = memberService.read(inputId);
+		log.info("checkId(userId={})", userId);
+		
+		return ResponseEntity.ok(userId);
+	}
+	
 	@GetMapping("/modify/pwd")
 	public ResponseEntity<String> modifyPwd(@RequestParam String userId) {
 		log.info("modifyPwd(userId={})", userId);

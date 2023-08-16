@@ -11,7 +11,5 @@ public class MemberUpdateDto {
 	
 	private String phone;
 	
-	private int birth;
-	
-	
+	private String birth;
 }

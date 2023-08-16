@@ -1,7 +1,12 @@
 package com.itwill.myleaves.service.member;
 
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.itwill.myleaves.dto.member.MemberGenderDto;
+import com.itwill.myleaves.dto.member.MemberJoinDateDto;
 import com.itwill.myleaves.dto.member.MemberSearchDto;
 import com.itwill.myleaves.dto.member.MemberSignUpDto;
 import com.itwill.myleaves.dto.member.MemberUpdateDto;
@@ -162,7 +172,7 @@ public class MemberService implements UserDetailsService {
 	}
 
 	public List<Member> readWithPagingAndSearch(Criteria cri, MemberSearchDto dto) {
-		log.info("readWithPagingAndSearch(cri={}, dto={})", cri, dto);
+//		log.info("readWithPagingAndSearch(cri={}, dto={})", cri, dto);
 
 		List<Member> members = null;
 
@@ -198,7 +208,7 @@ public class MemberService implements UserDetailsService {
 	 * @return
 	 */
 	public int read(MemberSearchDto dto) {
-		log.info("read(dto={})", dto);
+//		log.info("read(dto={})", dto);
 
 		int size = 0;
 
@@ -216,14 +226,125 @@ public class MemberService implements UserDetailsService {
 			size = memberRepository.countByEmail(dto.getKeyword());
 			break;
 		case "birth":
-			int birthYear = Integer.parseInt(dto.getKeyword());
-	        size = memberRepository.countByBirth(birthYear);
-	        break;
+			size = memberRepository.countByBirth(dto.getKeyword());
+			break;
 		case "gender":
 			size = memberRepository.countByGender(dto.getKeyword());
 			break;
 		}
-		
+
 		return size;
 	}
+
+	public String read(String inputId) {
+//		log.info("read(inputId={})", inputId);
+
+		try {
+			return memberRepository.findByUserId(inputId).getUserId();
+		} catch (Exception e) {
+			return "fail";
+		}
+	}
+
+	/**
+	 * 시각화
+	 * 
+	 * @return
+	 */
+	public String readGender() {
+
+		List<Member> members = memberRepository.findAll();
+
+		List<MemberGenderDto> genders = new ArrayList<>();
+		MemberGenderDto genderDto = new MemberGenderDto();
+
+		int maleCount = 0;
+		int femaleCount = 0;
+
+		for (Member member : members) {
+			String gender = member.getGender();
+			if ("M".equals(gender)) {
+				maleCount++;
+			} else if ("F".equals(gender)) {
+				femaleCount++;
+			}
+		}
+
+		genderDto.setGender("M");
+		genderDto.setCnt(maleCount);
+		genders.add(genderDto);
+
+		genderDto = new MemberGenderDto();
+		genderDto.setGender("F");
+		genderDto.setCnt(femaleCount);
+		genders.add(genderDto);
+
+		Gson gson = new Gson();
+		JsonArray jArray = new JsonArray();
+
+		Iterator<MemberGenderDto> it = genders.iterator();
+		while (it.hasNext()) {
+			MemberGenderDto curVO = it.next();
+			JsonObject object = new JsonObject();
+			String gender = curVO.getGender();
+			int cnt = curVO.getCnt();
+
+			object.addProperty("gender", gender);
+			object.addProperty("cnt", cnt);
+			jArray.add(object);
+		}
+
+		String json = gson.toJson(jArray);
+
+		return json;
+	}
+
+	/**
+	 * 시각화
+	 * 
+	 * @return
+	 */
+	public String readMonth() {
+        List<Member> members = memberRepository.findAll();
+
+        List<MemberJoinDateDto> months = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+        	MemberJoinDateDto monthDto = new MemberJoinDateDto();
+            monthDto.setMonth(i);
+            monthDto.setCnt(0); // Initialize count to 0
+
+            months.add(monthDto);
+        }
+
+        for (Member member : members) {
+            // Assuming joinDate is of type LocalDateTime
+        	
+        	try {
+        		Month joinMonth = member.getJoinDate().getMonth();
+        		
+        		for (MemberJoinDateDto monthDto : months) {
+        			if (monthDto.getMonth() == joinMonth.getValue()) {
+        				monthDto.setCnt(monthDto.getCnt() + 1);
+        				break;
+        			}
+        		}
+        	} catch (Exception e) {
+//        		log.info(null);
+        	}
+        }
+
+        Gson gson = new Gson();
+        JsonArray jArray = new JsonArray();
+
+        for (MemberJoinDateDto monthDto : months) {
+            JsonObject object = new JsonObject();
+            object.addProperty("month", monthDto.getMonth());
+            object.addProperty("cnt", monthDto.getCnt());
+            jArray.add(object);
+        }
+
+        String json = gson.toJson(jArray);
+
+        return json;
+    }
 }

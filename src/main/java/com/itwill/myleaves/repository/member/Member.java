@@ -41,7 +41,7 @@ public class Member implements UserDetails {
 	private String gender;
 	
 	@Column(nullable = true)
-	private int birth;
+	private String birth;
 	
 	@Column(nullable = true)
 	private String phone;
@@ -70,7 +70,7 @@ public class Member implements UserDetails {
     }
     
 	@Builder
-	private Member(String userId, String name, String pwd, String gender, int birth, String phone, String email) {
+	private Member(String userId, String name, String pwd, String gender, String birth, String phone, String email) {
 		this.userId = userId;
 		this.name = name;
 		this.pwd = pwd;

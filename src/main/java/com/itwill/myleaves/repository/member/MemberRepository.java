@@ -68,7 +68,7 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
 	int countByEmail(String email);
 
-	int countByBirth(int birth);
+	int countByBirth(String birth);
 
 	int countByGender(String gender);
 
