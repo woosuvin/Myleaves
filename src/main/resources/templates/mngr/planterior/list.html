@@ -24,9 +24,10 @@
 				</tr>
 			</thead>
 			<tbody class="table-group-divider">
-				<tr th:each="list: ${cardList}">
+				<tr th:each="list, indexName: ${cardList}">
 					<td><input type="checkbox" id="row-checkbox"></td>
-					<td th:text="${list.planteriorId}" id="planteriorId"></td>
+					<td class="" th:text="${indexName.count}"><center></center></td>
+					<td class="d-none" th:text="${list.planteriorId}" id="planteriorId"></td>
 					<td th:text="${list.plantName}"></td>
 					<td th:text="${list.plantNameEnglish}"></td>
 					<td th:text="${list.userId}"></td>
