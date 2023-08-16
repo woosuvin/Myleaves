@@ -31,21 +31,27 @@ public class ChatController {
     // 채팅방
     @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/chat/roomDetail")
-    public void chatRoomDetail(String myId, String otherId, long sellId, Model model) {
-    	 Sell sell = sellService.read(sellId);
+    public void chatRoomDetail(long roomId, Model model) {
+    	log.info("roomId={}", roomId);
+    	ChatRoom chatRoom = chatService.readChatRoom(roomId);
+   	 	log.info("chatRoom={}", chatRoom);
+    	 Sell sell = sellService.read(chatRoom.getSellId());
+    	 log.info("sell={}", sell);
+    	 
     	 String image = Base64.getEncoder().encodeToString(sell.getThumbnail());
- 		
+ 		 
+    	 model.addAttribute("chatRoom", chatRoom);
  		 model.addAttribute("image", image);
     	 model.addAttribute("sell", sell);
     }
     
-	// 채팅방 리스트
+	// sellbuyDetail 대화내역 채팅방 리스트
     @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/chat/room")
-    public void chatRoom(String otherId, Model model) {
+    public void chatRoom(Long sellId, Model model) {
         
         // 해당 아이디로 채팅방 리스트를 불러옴
-        List<ChatRoom> chatRoomList = chatService.readChatRoom(otherId);
+        List<ChatRoom> chatRoomList = chatService.readChatRoom(sellId);
         List<Sell> sellList = new ArrayList<>();
         
         // 해당 리스트에 있는 sellId로 해당 물건의 썸네일 찾음
@@ -62,65 +68,34 @@ public class ChatController {
         model.addAttribute("image", thumbnails);
         model.addAttribute("chatRoom", chatRoomList);
     }
+    
+    // 상단 바 채팅 리스트(myId or otherId)
+    @PreAuthorize("hasRole('MEMBER')")
+    @GetMapping("/chat/list")
+    public void chat(String myId, Model model) {
+        
+        // 해당 아이디로 채팅방 리스트를 불러옴
+        List<ChatRoom> chatRoomList = chatService.readChatRoom(myId);
+        log.info("chatRoomList={}",chatRoomList);
+        List<Sell> sellList = new ArrayList<>();
+        Map<Long, Sell> sellMap = new HashMap<>();
+        
+        // 해당 리스트에 있는 sellId로 해당 물건의 썸네일 찾음
+        Map<Long, String> thumbnails = new HashMap<>();
+        for(ChatRoom c : chatRoomList) {
+            // 해당 sellId로 Sell 검색
+            Sell sell = sellService.read(c.getSellId());
+            log.info("sell={}",sell);
+            //sellList.add(sell);
+            sellMap.put(c.getRoomId(), sell);
+            // thumbnails에 넣음.
+            thumbnails.put(c.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
+        }
+        
+        //model.addAttribute("sell", sellList);
+        model.addAttribute("map", sellMap);
+        model.addAttribute("image", thumbnails);
+        model.addAttribute("chatRoom", chatRoomList);
+    }
+    
 }
-
-//import java.util.List;
-//import java.util.Optional;
-//
-//import org.springframework.messaging.handler.annotation.DestinationVariable;
-//import org.springframework.messaging.handler.annotation.MessageMapping;
-//import org.springframework.messaging.handler.annotation.SendTo;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//
-//import com.itwill.myleaves.dto.chat.ChatCreateDto;
-//import com.itwill.myleaves.repository.chat.Chat;
-//import com.itwill.myleaves.repository.chat.ChatRoom;
-//import com.itwill.myleaves.repository.sellbuy.Sell;
-//import com.itwill.myleaves.service.chat.ChatService;
-//import com.itwill.myleaves.service.sellbuy.SellService;
-//
-//import lombok.RequiredArgsConstructor;
-//import lombok.extern.slf4j.Slf4j;
-//
-//@Slf4j
-//@Controller
-//@RequiredArgsConstructor
-//@RequestMapping("/chat")
-//public class ChatController {
-//	
-//	private final ChatService chatService;
-//	private final SellService sellService;
-//	
-	
-
-//	@MessageMapping("/{roomId}")
-//	@SendTo("/chatRoom/{roomId}")
-//	public Chat test(@DestinationVariable ChatCreateDto dto) {
-//		
-//		// 채팅 저장
-//		Chat chat = chatService.create(dto);
-//		return Chat.builder()
-//				.roomId(chat.getRoomId())
-//				.userId(chat.getUserId())
-//				.message(chat.getMessage())
-//				.build();
-//	}
-//		
-//	// 채팅 내역
-//	@GetMapping("/chatList")
-//    public void chatList(Long roomId, Long sellId, Model model) {
-//		log.info("chatList(roomId={}", roomId);
-//		List<Chat> chat = chatService.readChat(roomId);
-//		log.info("{}", chat);
-//		
-//		Sell sell = sellService.read(sellId);
-//		
-//		model.addAttribute("sell", sell);
-//		model.addAttribute("chat", chat);
-//    }
-//	
-

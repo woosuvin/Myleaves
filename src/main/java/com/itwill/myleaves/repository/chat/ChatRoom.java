@@ -1,11 +1,8 @@
 package com.itwill.myleaves.repository.chat;
 
-import java.util.UUID;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-//import com.itwill.myleaves.dto.chat.ChatCreateDto;
-//import com.itwill.myleaves.dto.chat.ChatRoomCreateDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,14 +13,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Getter
@@ -37,27 +34,19 @@ public class ChatRoom {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CHAT_ROOM_SEQ_GEN")
+	@Column(name = "ROOM_ID")
 	private long roomId;
 	
 	@Id
-    @Column(name = "sell_Id")
+    @Column(name = "SELL_ID")
     private long sellId;
     
-    @Column(nullable = false)
+    @Column(name = "MY_ID")
     private String myId;
 	
     @Id
-    @Column(nullable = false)
+    @Column(name = "OTHER_ID")
     private String otherId;
 
-    /**
-     * 채팅방 생성
-     */
-    public static ChatRoom create(long sellId, String myId, String otherId) {
-	    return ChatRoom.builder()
-	    		.sellId(sellId)
-	    		.myId(myId)
-	    		.otherId(otherId)
-	    		.build();
-    }
+
 }

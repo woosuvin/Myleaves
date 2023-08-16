@@ -6,42 +6,42 @@
 	<div align="center">
 		<h2 th:text="|${#authentication.name}님의 채팅목록|"></h2>
 	</div>
-	<div class="list" style="cursor: pointer;" id="chatButton">
-	<hr>
-		<div class="col" th:each="sell: ${sell}">
-			<div class="list" style="float: left;">
+	<hr />
+	<th:block th:each="sell: ${sell}">
+
+		<div class="col" style="cursor: pointer;" id="chatButton" th:attr="data-id=${sell.sellId}">
+			<div style="float: left;">
 				<img class="rounded" style="object-fit: cover; width: 80px;"
-					th:src="@{'data:image/png;base64,'+${image.get(sell.sellId)}}" />
+					th:src="@{'data:image/png;base64,'+${image.get(sell.sellId)}}" th:attr="data-id=${sell.sellId}"/>
 			</div>
-			<div>
-				<input id="sellId" name="sellId" type="hidden" th:value="${sell.sellId}" /> <input
-					id="sellerId" name="sellerId" type="hidden" th:value="${sell.userId}" /> <input
-					id="userId" name="userId" type="hidden" th:value="${#authentication.name}" />
-				<table class="table table-borderless" style="padding-left: 10px;">
-					<tbody>
-						<tr>
-							<td th:text="${sell.title}"
-								style="font-size: 20px; font-weight: bold;"></td>
-						</tr>
-						<tr>
-							<td th:text="${sell.userId}"
-								style="font-size: 16px; font-weight: bold;"></td>
-						</tr>
-						<tr>
-							<td>입양하고 싶은데요~</td>
-							<!-- 최근 메세지 -->
-						</tr>
-						<tr>
-							<td class="time">오후 4:10</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<hr>
+			<input id="sellId" name="sellId" type="hidden" th:value="${sell.sellId}" /> 
+			<input id="sellerId" name="sellerId" type="hidden" th:value="${sell.userId}" /> 
+			<input id="userId" name="userId" type="hidden" th:value="${#authentication.name}" />
+			
+			<table class="table table-borderless" style="padding-left: 10px;" th:attr="data-id=${sell.sellId}">
+				<tbody>
+					<tr>
+						<td th:text="${sell.title}"
+							style="font-size: 20px; font-weight: bold;" th:attr="data-id=${sell.sellId}"></td>
+					</tr>
+					<tr>
+						<td th:text="${sell.userId}"
+							style="font-size: 16px; font-weight: bold;" th:attr="data-id=${sell.sellId}"></td>
+					</tr>
+					<tr>
+						<td th:attr="data-id=${sell.sellId}">입양하고 싶은데요~</td>
+						<!-- 최근 메세지 -->
+					</tr>
+					<tr>
+						<td class="time" th:attr="data-id=${sell.sellId}">오후 4:10</td>
+					</tr>
+				</tbody>
+			</table>
+			<hr />
 		</div>
-		</div>
+	</th:block>
 </main>
 <th:block layout:fragment="myscripts">
-	<script src="/js/chat/chat.js"></script>
+	<script src="/js/chat/chatList.js"></script>
 </th:block>
 </html>

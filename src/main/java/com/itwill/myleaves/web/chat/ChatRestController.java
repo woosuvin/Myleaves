@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.itwill.myleaves.dto.chat.ChatListDto;
+import com.itwill.myleaves.dto.chat.ChatRoomCreateDto;
 import com.itwill.myleaves.repository.chat.ChatRoom;
 import com.itwill.myleaves.repository.chat.ChatRoomRepository;
 import com.itwill.myleaves.service.chat.ChatService;
@@ -39,16 +39,19 @@ public class ChatRestController {
 	 
 	  @PostMapping("/startChat")
 	  @ResponseBody
-	    public ResponseEntity<String> startChat(@RequestBody ChatListDto dto) {
+	    public ResponseEntity<Long> startChat(@RequestBody ChatRoomCreateDto dto) {
 		  	log.info("dto = {}", dto);
-	        List<ChatRoom> checkedChatRooms = chatService.checkedRoom(dto.getOtherId(), dto.getSellId());
+	        ChatRoom checkedChatRooms = chatService.readChatRoom(dto.getMyId(), dto.getOtherId(), dto.getSellId());
+	        log.info("checkedChatRooms={}", checkedChatRooms);
 	        
-	        if (checkedChatRooms != null && !checkedChatRooms.isEmpty()) {
-	            return ResponseEntity.ok("Chat room already exists.");
+	        if (checkedChatRooms != null) {
+//	        	ChatRoom chat = c hatService.readChatRoom(dto.getMyId(), dto.getOtherId());
+//	 	        log.info("charRoom={}", chat);
+	            return ResponseEntity.ok(chatService.readChatRoom(dto.getMyId(), dto.getOtherId(), dto.getSellId()).getRoomId());
 	        } else {
-	            ChatRoom chatRoom = ChatRoom.create(dto.getSellId(), dto.getMyId(), dto.getOtherId());
-	            chatRoomRepository.save(chatRoom);
-	            return ResponseEntity.ok("New chat room created.");
+	        	ChatRoom chatRoom = chatService.createRoom(dto);
+	        	long roomId = chatRoom.getRoomId();
+	            return ResponseEntity.ok(roomId);
 	        }
 	        
 	    }
