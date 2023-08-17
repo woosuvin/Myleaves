@@ -34,9 +34,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
-		// "/topic"으로 시작하는 destination 헤더를 가진 메시지를 브로커로 라우팅 한다.
-		config.enableSimpleBroker("/topic");
-		// "/app" 경로로 시작하는 STOMP 메시지의 destination 헤더는 Controller 객체의 @MessageMapping 메서드로 라우팅된다.
+		// "/topic"으로 시작하는 destination 헤더를 가진 메시지를 브로커로 라우팅 한다. connect
+		config.enableSimpleBroker("/connect");
+		// "/app" 경로로 시작하는 STOMP 메시지의 destination 헤더는 Controller 객체의 @MessageMapping 메서드로 라우팅된다. sendMessage
 		config.setApplicationDestinationPrefixes("/app");
 	}
                                                                                                                                             

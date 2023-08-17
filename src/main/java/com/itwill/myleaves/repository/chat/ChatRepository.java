@@ -8,5 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ChatRepository extends JpaRepository<Chat, Long> {
 	
 		// 채팅 내역 리스트
-		List<Chat> findByRoomId(long roomId);
+		List<Chat> findByRoomIdOrderByCreatedDate(Long roomId);
+		
 }

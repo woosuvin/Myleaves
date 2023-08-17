@@ -1,21 +1,20 @@
 package com.itwill.myleaves.web.chat;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.simp.SimpMessageSendingOperations;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.util.HtmlUtils;
 
 import com.itwill.myleaves.repository.chat.Chat;
+import com.itwill.myleaves.stomp.Greeting;
 
-import lombok.RequiredArgsConstructor;
-
-@RestController
-@RequiredArgsConstructor
+@Controller
 public class MessageController {
 
-    private final SimpMessageSendingOperations sendingOperations;
-
-    @MessageMapping("/chat/message")
-    public void enter(Chat message) {
-        sendingOperations.convertAndSend("/topic/chat/room/"+message.getRoomId(),message);
+    @MessageMapping("/sendMessage")
+    @SendTo("/connect/chatting")
+    public Greeting greeting(Chat message) throws Exception {
+        Thread.sleep(1000);
+        return new Greeting(HtmlUtils.htmlEscape(message.getMessage()));
     }
 }

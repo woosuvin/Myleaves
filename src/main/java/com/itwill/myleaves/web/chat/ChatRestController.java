@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itwill.myleaves.dto.chat.ChatRoomCreateDto;
 import com.itwill.myleaves.repository.chat.ChatRoom;
 import com.itwill.myleaves.repository.chat.ChatRoomRepository;
-import com.itwill.myleaves.service.chat.ChatService;
+import com.itwill.myleaves.service.chat.ChatRoomService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/chat")
 public class ChatRestController {
 	
-	 private final ChatService chatService;
+	 private final ChatRoomService chatService;
 	 private final ChatRoomRepository chatRoomRepository;  // ChatRoomRepository 인터페이스를 사용하도록 가정
 	 	 
 	 

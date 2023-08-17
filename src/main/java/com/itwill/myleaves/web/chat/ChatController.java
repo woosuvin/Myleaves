@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.itwill.myleaves.repository.chat.ChatRoom;
 import com.itwill.myleaves.repository.sellbuy.Sell;
-import com.itwill.myleaves.service.chat.ChatService;
+import com.itwill.myleaves.service.chat.ChatRoomService;
 import com.itwill.myleaves.service.sellbuy.SellService;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 public class ChatController {
-    private final ChatService chatService;
+    private final ChatRoomService chatService;
     private final SellService sellService;
 
     // 채팅방

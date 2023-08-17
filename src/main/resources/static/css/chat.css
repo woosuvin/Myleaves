@@ -13,7 +13,7 @@ hr {
 	height: 20px;
 }
 
-#greetings{
+#chatting{
 	height: 370px;
 	overflow: auto;
 }
@@ -74,4 +74,9 @@ hr {
 	object-fit: cover; 
 	height: 60px; 
 	width: 60px;
+}
+
+
+.writer{
+	text-align: right;
 }
