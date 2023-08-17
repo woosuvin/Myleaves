@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SellRepository extends JpaRepository<Sell, Long>{
 
-	//id 내림차순
+	//id 내림차순 메인페이지
 	List<Sell> findByOrderBySoldAscSellIdDesc();
 	
 	Page<Sell> findByOrderBySoldAscSellIdDesc(Pageable pageable);
