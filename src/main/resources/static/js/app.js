@@ -24,8 +24,8 @@ function connect() {
     console.log('소켓');
     console.log(data);
 
-    // const socket = new SockJS('ws://59.12.40.45:8090/gs-guide-websocket');
-    const socket = new SockJS('localhost:8090/gs-guide-websocket');
+    // const socket = new SockJS('/gs-guide-websocket');
+    const socket = new SockJS(location.host + '/gs-guide-websocket');
     console.log(socket);
     stompClient = Stomp.over(socket);
     stompClient.connect({ data }, function (frame) {
