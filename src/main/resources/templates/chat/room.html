@@ -1,47 +1,59 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
-<main layout:fragment="main">
-	<div align="center">
-		<h2 th:text="|${#authentication.name}님의 채팅목록|"></h2>
-	</div>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Myleaves</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+	crossorigin="anonymous" />
+<link th:href="@{/css/chat.css}" rel="stylesheet" />
+</head>
+<div align="center">
+	<h3 class="m-2" th:text="|${#authentication.name}님의 채팅목록|"></h3>
 	<hr />
-	<th:block th:each="room: ${chatRoom}">
-
-		<div class="col" style="cursor: pointer;" id="chatButton" th:attr="data-id=${room.roomId}">
-			<div style="float: left;">
-				<img class="rounded" style="object-fit: cover; width: 80px;"
-					th:src="@{'data:image/png;base64,'+${image.get(room.sellId)}}" th:attr="data-id=${room.roomId}"/>
-			</div>
-			<input id="sellId" name="sellId" type="hidden" th:value="${map.get(room.roomId).sellId}" /> 
-			<input id="sellerId" name="sellerId" type="hidden" th:value="${map.get(room.roomId).userId}" /> 
-			<input id="userId" name="userId" type="hidden" th:value="${#authentication.name}" />
-			
-			<table class="table table-borderless" style="padding-left: 10px;" th:attr="data-id=${room.roomId}">
-				<tbody>
-					<tr>
-						<td th:text="${map.get(room.roomId).title}"
-							style="font-size: 20px; font-weight: bold;" th:attr="data-id=${room.roomId}"></td>
-					</tr>
-					<tr>
-						<td th:text="${room.otherId}"
-							style="font-size: 16px; font-weight: bold;" th:attr="data-id=${room.roomId}"></td>
-					</tr>
-					<tr>
-						<td th:attr="data-id=${room.roomId}">입양하고 싶은데요~</td>
-						<!-- 최근 메세지 -->
-					</tr>
-					<tr>
-						<td class="time" th:attr="data-id=${room.roomId}">오후 4:10</td>
-					</tr>
-				</tbody>
-			</table>
-			<hr />
-		</div>
-	</th:block>
-</main>
-<th:block layout:fragment="myscripts">
-	<script src="/js/chat/chatList.js"></script>
+</div>
+<th:block th:each="room: ${chatRoom}">
+	<div class="buy-detail" id="chatButton" th:attr="data-id=${room.roomId}">
+		<table class="table table-borderless m-0 g-0"
+			th:attr="data-id=${room.roomId}">
+			<tbody>
+				<tr>
+					<td class="image-td" rowspan="3">
+						<div class="image-div">
+							<img class="image rounded"
+								th:src="@{'data:image/png;base64,'+${image.get(room.sellId)}}"
+								th:attr="data-id=${room.roomId}" />
+						</div>
+						<input id="sellId" name="sellId" type="hidden" th:value="${map.get(room.roomId).sellId}" /> 
+						<input id="sellerId" name="sellerId" type="hidden" th:value="${map.get(room.roomId).userId}" /> 
+						<input id="userId" name="userId" type="hidden" th:value="${#authentication.name}" /> 
+						<input id="roomId" name="roomId" type="hidden" th:value="${room.roomId}" />
+					</td>
+					<td class="title text-trancate px-1 pt-2 pb-0" colspan="2" th:attr="data-id=${room.roomId}"
+						th:text="${map.get(room.roomId).title}">
+					</td>
+				</tr>
+				<tr>
+					<td class="other p-1" colspan="2" th:text="${room.otherId}"
+						th:attr="data-id=${room.roomId}"></td>
+				</tr>
+				<tr>
+					<!-- 최근 메세지 -->
+					<td class="message p-1" th:attr="data-id=${room.roomId}">입양하고 싶은데요~입양하고 싶은데요~입양하고 싶은데요~입양하고 싶은데요~</td>
+					<td class="time p-1" th:attr="data-id=${room.roomId}">오후 4:10</td>
+				</tr>
+			</tbody>
+			</tbody>
+		</table>
+		<hr />
+	</div>
 </th:block>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+	crossorigin="anonymous"></script>
+<script src="/js/chat/chatList.js"></script>
+</body>
 </html>

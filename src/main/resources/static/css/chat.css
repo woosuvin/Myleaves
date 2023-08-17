@@ -1,21 +1,77 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 
-*{ margin: 0; padding: 0; }
- 
-.chat_wrap .header { font-size: 14px; padding: 15px 0; background: #F18C7E; color: white; text-align: center;  }
- 
-.chat_wrap .chat { padding-bottom: 80px; }
-.chat_wrap .chat ul { width: 100%; list-style: none; }
-.chat_wrap .chat ul li { width: 100%; }
-.chat_wrap .chat ul li.left { text-align: left; }
-.chat_wrap .chat ul li.right { text-align: right; }
- 
-.chat_wrap .chat ul li > div { font-size: 13px;  }
-.chat_wrap .chat ul li > div.sender { margin: 10px 20px 0 20px; font-weight: bold; }
-.chat_wrap .chat ul li > div.message { display: inline-block; word-break:break-all; margin: 5px 20px; max-width: 75%; border: 1px solid #888; padding: 10px; border-radius: 5px; background-color: #FCFCFC; color: #555; text-align: left; }
- 
-.chat_wrap .input-div { position: fixed; bottom: 0; width: 100%; background-color: #FFF; text-align: center; border-top: 1px solid #006334; }
-.chat_wrap .input2 { position: fixed; bottom: 0; width: 100%; background-color: #FFF; text-align: center; }
-.chat_wrap .input-div > textarea { width: 100%; height: 40px; border: none; padding: 10px; }
- 
-.format { display: none; }
+hr {
+	margin: 0;
+}
+
+#body-wrapper {
+	min-height: 100%;
+	position: relative;
+}
+
+#footer-logo{
+	height: 20px;
+}
+
+#greetings{
+	height: 370px;
+	overflow: auto;
+}
+
+.buy-detail{
+	cursor: pointer;
+}
+
+.image-td{
+	width: 120px;
+}
+
+.image-div{
+	float: left;
+	position: relative;
+}
+
+.image{
+	object-fit: cover; 
+	height: 120px; 
+	width: 120px;
+}
+
+.title{
+	font-weight: bold;
+}
+
+.other{
+	font-size: small;
+}
+
+.message{
+	font-size: small;
+	vertical-align: bottom;
+}
+
+.time{
+	font-size: small;
+	width: 4rem;
+	text-align: right;
+	vertical-align: bottom;
+}
+
+.detail-select{
+    text-align: -webkit-right;
+}
+
+.detail-image-td{
+	width: 60px;
+}
+
+.detail-image-div{
+	float: left;
+	position: relative;
+}
+
+.detail-image{
+	object-fit: cover; 
+	height: 60px; 
+	width: 60px;
+}
