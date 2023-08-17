@@ -21,13 +21,13 @@ p.plants_title {
 	margin: 8px 0 16px 0
 }
 
-.clicked  {
-	border-color: red;
-	border-width: 2px;
+.clicked {
+	background-color: green;
+	border-color: green;
+	color:white;
 }
 
 /*.filterSecondBtn*/
-
 button.filterBtn {
 	position: relative
 }
@@ -67,8 +67,7 @@ span.pick {
 	width: 140px;
 	display: block;
 	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+	margin: 0px 0px 0px 0px;
 }
 
 /* 마이페이지- 내가 쓴 글 전용*/

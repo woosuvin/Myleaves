@@ -6,7 +6,12 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,23 +45,33 @@ public class MypagePlanteriorController {
 	private final MypageService mypageService;
 	private final BookmarkService bookmarkService;
 	private final CategoryService categoryService;
+	private final PlanteriorService planteriorSerivce;
 	
 	// 내가 쓴 글 읽기
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/my_posts")
-	public String planteriorMine(Model model, String userId ) {
-		log.info("planteriorMine(userId = {})", userId);
+	public String planteriorMine(Model model, String userId, @PageableDefault(page = 0, size = 8) Pageable pageable ) {
+		//log.info("planteriorMine(userId = {})", userId);
 		
-		List<Planterior> list = mypageService.read(userId);
+		Page<Planterior> list = mypageService.read(userId, pageable);
+		model.addAttribute("cardList", list);
 		
 		Map<Long, String> thumbnails = new HashMap<>();
 		for(Planterior p : list) {
 			log.info("{}", p.getThumbnail());
 			thumbnails.put(p.getPlanteriorId(), Base64.getEncoder().encodeToString(p.getThumbnail()));
 		}
-		
 		model.addAttribute("images", thumbnails);
-		model.addAttribute("cardList", list);
+
+		// 페이징 설정
+		int totalPage = list.getTotalPages()-1;
+		int nowPage = list.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
+		int startPage = Math.max(nowPage-4, 1);
+		int endPage = Math.min(nowPage+5, list.getTotalPages());
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 		
 		return "mypage/planterior/planteriorMyposts";
 	}
@@ -70,8 +85,15 @@ public class MypagePlanteriorController {
 		Planterior list = mypageService.read(planteriorId);
 		PlanteriorCategory plist = categoryService.read(planteriorId);
 		String image = Base64.getEncoder().encodeToString(list.getThumbnail());
-		
-		model.addAttribute("cate", plist);
+		 
+		Map<String, String> conditionContentMap = new HashMap<>();
+		String[] result = plist.getConditionContent().split(",");
+        for(int i = 0; i < result.length; i++) {
+        	conditionContentMap.put(result[i], result[i]);
+        }
+        
+        model.addAttribute("conditionContentMap", conditionContentMap);
+		model.addAttribute("category", plist);
 		model.addAttribute("image", image);
 		model.addAttribute("cardList", list);
 	}
@@ -93,44 +115,45 @@ public class MypagePlanteriorController {
 		log.info("delete(planteriorId = {})", planteriorId);
 		
 		mypageService.delete(planteriorId);
+		bookmarkService.delete(planteriorId);
 		return "redirect:/mypage/planterior/my_posts?userId=" + userId;
 	}
 	
 	// 북마크
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("bookmark")
-	public void bookmarkRead(Model model, String userId) {
+	public void bookmarkRead(Model model, String userId, @PageableDefault(page = 0, size = 8) Pageable pageable) {
 		log.info("bookmarkRead");
 		
 		// 북마크 가져오기
-		List<Bookmark> list = mypageService.bookmarkRead(userId);
-		log.info("sizeb={}",list.size());
-		
-		// 그 List와 플랜테리어 아이디비교해서 값 가져오기
-		List<Planterior> plist = mypageService.read();
-		log.info("sizep={}",plist.size());
-		
-		// 보낼 list
+		Page<Bookmark> list = mypageService.bookmarkRead(userId, pageable);
 		List<Planterior> result = new ArrayList<>();
-
-		
-		for(int i = 0; i < plist.size(); i++) {
-			for(int j = 0; j<list.size(); j++) {
-				if(plist.get(i).getPlanteriorId() == list.get(j).getPlanteriorId()) {
-					log.info("result = {}", plist.get(i));
-					result.add(plist.get(i));
-				}
-			}
+		for(Bookmark b: list) {
+			Planterior planterior = planteriorSerivce.read(b.getPlanteriorId());
+			log.info("확인:{}", planterior.getPlanteriorId());
+			result.add(planterior);
 		}
-		// log.info("size={}",result.size());
 		
 		Map<Long, String> thumbnails = new HashMap<>();
-		for(Planterior p : result) {
-			thumbnails.put(p.getPlanteriorId(), Base64.getEncoder().encodeToString(p.getThumbnail()));
+		for(Planterior planterior : result) {
+			if (planterior != null) {
+		        thumbnails.put(planterior.getPlanteriorId(), Base64.getEncoder().encodeToString(planterior.getThumbnail()));
+		    } else {
+		        log.warn("Encountered a null Planterior object.");
+		    }
 		}
 		
 		model.addAttribute("images", thumbnails);
 		model.addAttribute("cardList", result);
+		
+		int totalPage = list.getTotalPages()-1;
+		int nowPage = list.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
+		int startPage = Math.max(nowPage-4, 1);
+		int endPage = Math.min(nowPage+5, list.getTotalPages());
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 	}
 	
 	

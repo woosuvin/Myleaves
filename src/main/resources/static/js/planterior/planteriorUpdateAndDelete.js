@@ -83,14 +83,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 	const filterBtns = document.querySelectorAll('.filterBtn');
+	const filterSecondBtns = document.querySelectorAll('input.filterSecondBtn');
 	let lastClickedBtn = null; // 마지막으로 클릭한 버튼을 추적
 	let lastClickedValue = null; // 마지막으로 클릭한 버튼의 값 추적
 
+
+
 	for (const filterBtn of filterBtns) {
+
+		if (filterBtn.classList.contains('clicked')) {
+			inputStateContent.value = filterBtn.value;
+			console.log(inputStateContent.value)
+		}
+
+
 		filterBtn.addEventListener('click', (e) => {
 
 			// li 삽입할 ul 요소를 찾음
 			const secondFilter = document.querySelector('#secondFilter');
+
+			// 넘어온 값 설정
+			if (filterBtn.classList.contains('clicked')) {
+				filterBtn.classList.remove('clicked');
+				secondFilter.classList.add('d-none');
+				inputStateContent.value = ''
+				for (const btn of filterSecondBtns) {
+					btn.classList.remove('clicked');
+					inputConditionContent.value = ''
+				}
+				return;
+			}
+
+
 			// 이미 'clicked' 클래스가 추가된 버튼을 다시 클릭한 경우
 			if (filterBtn === lastClickedBtn) {
 				filterBtn.classList.remove('clicked');
@@ -126,9 +150,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	let lastClickedBtnFilterSecond = null; // 마지막으로 클릭한 버튼을 추적
 	let lastClickedValueFilterSecond = null;
-	const filterSecondBtns = document.querySelectorAll('input.filterSecondBtn');
 	for (let btn of filterSecondBtns) {
+		
+		if (btn.classList.contains('clicked')) {
+			inputConditionContent.value = btn.value;
+			console.log(inputConditionContent.value)
+		}
+		
 		btn.addEventListener('click', (e) => {
+
+			// db에서 넘어온 값 처리
+			if (btn.classList.contains('clicked')) {
+				btn.classList.remove('clicked');
+				inputStateContent.value = ''
+				inputConditionContent.value = ''
+				return;
+			}
+
+
+
 			// 이미 'clicked' 클래스가 추가된 버튼을 다시 클릭한 경우
 			if (btn === lastClickedBtnFilterSecond) {
 				btn.classList.remove('clicked');
@@ -151,10 +191,14 @@ document.addEventListener('DOMContentLoaded', function() {
 	// 리셋 버튼 선택
 	const filter_reset_btn = document.querySelector('#filter_reset_btn');
 	filter_reset_btn.addEventListener('click', () => {
-		
+
 		// 버튼의 선택 해제
 		for (const filterBtn of filterBtns) {
 			filterBtn.classList.remove('clicked');
+		}
+
+		for (const btn of filterSecondBtns) {
+			btn.classList.remove('clicked');
 		}
 
 		// 'secondFilter'의 'd-none' 클래스 추가하여 숨김
@@ -172,8 +216,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		e.preventDefault();
 
-		const stateContent = document.querySelector('input#stateContent').value;
-		const conditionContent = document.querySelector('input#conditionContent').value;
+		const stateContent = inputStateContent.value;
+		const conditionContent = inputConditionContent.value;
 
 		const planteriorId = document.querySelector('#planteriorId').value;
 		const plantName = document.querySelector('#plantName').value; // 한글만 가능하게 설정

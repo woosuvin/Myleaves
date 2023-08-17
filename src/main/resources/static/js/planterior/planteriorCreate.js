@@ -131,6 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		for (const filterBtn of filterBtns) {
 			filterBtn.classList.remove('clicked');
 		}
+		
+		for(const btn of filterSecondBtns) {
+			btn.classList.remove('clicked');
+		}
 
 		// 'secondFilter'의 'd-none' 클래스 추가하여 숨김
 		secondFilter.classList.add('d-none');

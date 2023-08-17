@@ -44,9 +44,18 @@ public class BookmarkService {
 	
 	// 삭제
 	public void delete(Long PlanteriorId, String userId) {
-		log.info("delete(planterior = {})", PlanteriorId, userId);
+		log.info("delete(planterior = {}, userId={})", PlanteriorId, userId);
 		
-		bookmarkRepository.deleteByPlanteriorAndUserId(PlanteriorId, userId);
+		Bookmark entity = bookmarkRepository.findByPlanteriorIdAndUserId(PlanteriorId, userId);
+		bookmarkRepository.delete(entity);
+	}
+	
+	// 삭제-홈에서 사용
+	public void delete(Long PlanteriorId) {
+		log.info("delete(planterior = {})", PlanteriorId);
+		
+		Bookmark entity = bookmarkRepository.findByPlanteriorId(PlanteriorId);
+		bookmarkRepository.delete(entity);
 	}
 	
 	// 읽기

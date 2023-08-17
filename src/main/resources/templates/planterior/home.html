@@ -20,15 +20,19 @@
 				<div class="plants_filter_section" id="first_filter">
 					<!-- 선택시 선택한 목록들 확인가능하게 하기: css 덧붙이기 -->
 					<ul class="filterLists list-unstyled">
-						<li><input type="image" class="btn btn-outline-dark"
-							th:src="@{/images/common/reset.svg}" name="reset"
-							id="filter_reset_btn" /> <input type="button"
-							class="filterBtn btn btn-outline-dark" value="거실" /> <input
-							type="button" class="filterBtn btn btn-outline-dark" value="주방" />
-							<input type="button" class="filterBtn btn btn-outline-dark"
-							value="욕실" /> <input type="button"
-							class="filterBtn btn btn-outline-dark" value="방" /> <input
-							type="button" class="filterBtn btn btn-outline-dark" value="베란다" />
+						<li style="margin: 0 0 6px 0;">
+							<input type="image" class="btn button-outline-bright"
+									th:src="@{/images/planterior/reset.svg}" name="reset"
+									id="filter_reset_btn" /> 
+							<input type="image" class="btn button-outline-bright" th:src="@{/images/planterior/search.svg}" id="click" />
+							
+						</li>
+						<li>
+							<input type="button" class="filterBtn btn btn-outline-dark" value="거실" /> 
+							<input type="button" class="filterBtn btn btn-outline-dark" value="주방" />
+							<input type="button" class="filterBtn btn btn-outline-dark" value="욕실" /> 
+							<input type="button" class="filterBtn btn btn-outline-dark" value="방" /> 
+							<input type="button" class="filterBtn btn btn-outline-dark" value="베란다" />
 						</li>
 					</ul>
 					<input class="d-none" name="stateContent" id="stateContent" /> <input
@@ -57,13 +61,6 @@
 					</ul>
 				</div>
 				<!-- condition_content -->
-				<ul class="list-unstyled secondFilterSection" id="secondFilter"
-					name="secondfilter"></ul>
-				<ul class="list-unstyled">
-					<!-- 색상 바꾸기 -->
-					<input type="image" class="btn btn-outline-dark"
-						th:src="@{/images/planterior/check-square.svg}" id="click" />
-				</ul>
 				<div class="filterDivision"></div>
 
 
@@ -89,8 +86,9 @@
 							class="imgSize" />
 						<div class="card-body">
 							<div class="">
-								<p class="planteriorButtonEle text-start"
-									th:text="${mngrList.plantName} + '(' + ${mngrList.plantNameEnglish} +')'" />
+								<p class="planteriorButtonEle" th:text="${mngrList.plantName}" />
+								<p class="planteriorButtonEle"
+									th:text="'(' + ${mngrList.plantNameEnglish} +')'" />
 							</div>
 						</div>
 					</div>
@@ -134,8 +132,9 @@
 								class="imgSize" />
 							<div class="card-body row">
 								<div class="col-9">
+									<p class="planteriorButtonEle" th:text="${list.plantName}" />
 									<p class="planteriorButtonEle"
-										th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+										th:text="'(' + ${list.plantNameEnglish} +')'" />
 								</div>
 								<div class="col-3 text-end">
 									<button class="btn-outline-dark none">
@@ -152,7 +151,7 @@
 				<div class="row row-cols-1 row-cols-md-4 g-4">
 					<div class="col" th:each="list: ${cardList}">
 						<div>
-							<input type="hidden" id="userId" name="userId"
+							<input type="hidden" class="userId" name="userId"
 								th:value="${#authentication.name}" /> <input type="hidden"
 								id="plantName" th:value="${list.plantName}" /> <input
 								type="hidden" id="planteriorId" th:value="${list.planteriorId}" />
@@ -163,8 +162,9 @@
 									th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
 								<div class="card-body row">
 									<div class="col-9">
+										<p class="planteriorButtonEle" th:text="${list.plantName}" />
 										<p class="planteriorButtonEle"
-											th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+											th:text="'(' + ${list.plantNameEnglish} +')'" />
 									</div>
 									<div class="col-3 text-end">
 										<button class="btn-outline-dark notBookmark">
@@ -182,8 +182,9 @@
 										th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
 									<div class="card-body row">
 										<div class="col-9">
+											<p class="planteriorButtonEle" th:text="${list.plantName}" />
 											<p class="planteriorButtonEle"
-												th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+												th:text="'(' + ${list.plantNameEnglish} +')'" />
 										</div>
 										<div class="col-3 text-end">
 											<button class="btn-outline-dark imgButton"
@@ -200,8 +201,9 @@
 										th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
 									<div class="card-body row">
 										<div class="col-9">
+											<p class="planteriorButtonEle" th:text="${list.plantName}" />
 											<p class="planteriorButtonEle"
-												th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+												th:text="'(' + ${list.plantNameEnglish} +')'" />
 										</div>
 										<div class="col-3 text-end">
 											<button class="btn-outline-dark imgButtonFill"
@@ -221,7 +223,6 @@
 	</div>
 	<!-- 더보기 버튼 -->
 	<div class="d-flex justify-content-center">
-		<input type="hidden" class="userId" th:value="${#authentication.name}" />
 		<button id="loadMoreButton" class="m-4 btn btn-outline-dark ">더보기</button>
 	</div>
 

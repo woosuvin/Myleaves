@@ -3,6 +3,7 @@ package com.itwill.myleaves.service.palnterior;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -32,10 +33,10 @@ public class MypageService {
 
 	// 내가 쓴 글 가져오기
 	@Transactional(readOnly = true)
-	public List<Planterior> read(String userId) {
-		log.info("read()");
+	public Page<Planterior> read(String userId, Pageable pageable) {
+		//log.info("read()");
 
-		return planteriorRepository.findAllByUserIdOrderByPlanteriorIdDesc(userId);
+		return planteriorRepository.findAllByUserIdOrderByPlanteriorIdDesc(userId, pageable);
 	}
 
 	// 수정페이지에 가져오는 것
@@ -67,8 +68,15 @@ public class MypageService {
 	 * 북마크
 	 */
 
+	public Page<Bookmark> bookmarkRead(String userId, Pageable pageabel) {
+		Page<Bookmark> list = bookmarkRepository.findAllByUserId(userId, pageabel);
+		
+		return list;
+	}
+	
+	// planteriorhomecontroller에서 사용
 	public List<Bookmark> bookmarkRead(String userId) {
-		log.info("bookmarkRead(userId ={})", userId);
+		// log.info("bookmarkRead(userId ={})", userId);
 
 		return bookmarkRepository.findAllByUserId(userId);
 	}
@@ -77,8 +85,6 @@ public class MypageService {
 	public List<Planterior> read() {
 		log.info("read()");
 
-		//int pageNumber, int pageSize
-		//Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "planteriorId"));
 		return planteriorRepository.findAllByOrderByPlanteriorIdDesc();
 	}
 

@@ -20,7 +20,7 @@
 					<input type="hidden"
 						id="planteriorId" name="planteriorId" th:value="${cardList.planteriorId}" />
 					<input type="hidden"
-						id="pcid" name="pcid" th:value="${cate.pcid}" />
+						id="pcid" name="pcid" th:value="${category.pcid}" />
 				</div>
 				<dt align="left" class="dt_class">
 					수정 전 사진
@@ -67,27 +67,27 @@
 					<div class="input-group">
 						<ul class="filterLists list-unstyled">
 							<li>
-								<input type="image"  class="btn btn-outline-dark" th:src="@{/images/common/reset.svg}" name="reset" id="filter_reset_btn" />
-								<input type="button" class="filterBtn btn btn-outline-dark"  value="거실"  />
-								<input type="button" class="filterBtn btn btn-outline-dark"  value="주방"  />
-								<input type="button" class="filterBtn btn btn-outline-dark"  value="욕실"  />
-								<input type="button" class="filterBtn btn btn-outline-dark"  value="방"  />
-								<input type="button" class="filterBtn btn btn-outline-dark"  value="베란다"  />
+								<input type="image"  class="btn button-outline-bright" th:src="@{/images/planterior/reset.svg}" name="reset" id="filter_reset_btn" />
+								<input type="button" class="filterBtn btn btn-outline-dark"  value="거실"  th:classappend="${category.stateContent == '거실' ? 'clicked' : ''}"/>
+								<input type="button" class="filterBtn btn btn-outline-dark"  value="주방" th:classappend="${category.stateContent == '주방' ? 'clicked' : ''}" />
+								<input type="button" class="filterBtn btn btn-outline-dark"  value="욕실"  th:classappend="${category.stateContent == '욕실' ? 'clicked' : ''}"/>
+								<input type="button" class="filterBtn btn btn-outline-dark"  value="방" th:classappend="${category.stateContent == '방' ? 'clicked' : ''}"/>
+								<input type="button" class="filterBtn btn btn-outline-dark"  value="베란다" th:classappend="${category.stateContent == '베란다' ? 'clicked' : ''}"/>
 							</li>
 						</ul>
 						<input class="d-none" name="stateContent" id="stateContent" />
 						<input class="d-none" name="conditionContent" id="conditionContent" />
-						<ul class="d-none secondFilterSection list-unstyled" id="secondFilter" >
+						<ul class=" secondFilterSection list-unstyled" id="secondFilter" >
 							<li>
-								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="초보자용"  />
-								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="선물하기 좋은"  />
-								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="공기정화"  />
-								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="빛이 적어도 되는"  />
-								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="향기나는"  />
-								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="반려동물 안전한"  />
-								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="목대있는"  />
-								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="흙이 필요없는"  />
-								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="덩굴로 자라는"  />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="초보자용"  th:classappend="${conditionContentMap['초보자용'] == '초보자용' ? 'clicked' : ''}"/>
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="선물하기 좋은"  th:classappend="${conditionContentMap['선물하기 좋은']  == '선물하기 좋은' ? 'clicked' : ''}"/>
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="공기정화" th:classappend="${conditionContentMap['공기정화']  == '공기정화' ? 'clicked' : ''}" />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="빛이 적어도 되는"  th:classappend="${conditionContentMap['빛이 적어도 되는'] == '빛이 적어도 되는' ? 'clicked' : ''}"/>
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="향기나는"  th:classappend="${conditionContentMap['향기나는']  == '향기나는' ? 'clicked' : ''}"/>
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="반려동물 안전한"  th:classappend="${conditionContentMap['반려동물 안전한']  == '반려동물 안전한' ? 'clicked' : ''}"/>
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="목대있는" th:classappend="${conditionContentMap['목대있는']  == '목대있는' ? 'clicked' : ''}" />
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="흙이 필요없는"  th:classappend="${conditionContentMap['흙이 필요없는']  == '흙이 필요없는' ? 'clicked' : ''}"/>
+								<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="덩굴로 자라는"  th:classappend="${conditionContentMap['덩굴로 자라는']  == '덩굴로 자라는' ? 'clicked' : ''}" />
 							</li>
 						</ul>
 					</div>

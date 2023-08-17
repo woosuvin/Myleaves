@@ -96,6 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		for (const filterBtn of filterBtns) {
 			filterBtn.classList.remove('clicked');
 		}
+		
+		for(const btn of filterSecondBtns) {
+			btn.classList.remove('clicked');
+		}
 
 		// 'secondFilter'의 'd-none' 클래스 추가하여 숨김
 		secondFilter.classList.add('d-none');
@@ -155,10 +159,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	const imgButtons = document.querySelectorAll('.imgButton');
 	let mngrCount = document.querySelector('#mngrCount').value;
 	for (const imgButton of imgButtons) {
-		imgButton.addEventListener('click', (e) => {
+		imgButton.addEventListener('click', () => {
 			const planteriorId = imgButton.value;
-			const userId = document.querySelector('#userId').value;
-			console.log(mngrCount)
+			const userId = document.querySelector('.userId').value;
+			console.log(planteriorId, userId)
 
 			if (userId === 'admin') {
 				if (mngrCount < 4) {
@@ -203,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			e.preventDefault();
 
 			const planteriorId = imgButtonFill.value;
-			const userId = document.querySelector('#userId').value;
+			const userId = document.querySelector('.userId').value;
 
 			console.log(planteriorId, userId);
 			const data = { planteriorId, userId }

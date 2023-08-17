@@ -2,6 +2,7 @@ package com.itwill.myleaves.repository.planterior;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,7 +19,7 @@ public interface PlanteriorRepository extends JpaRepository<Planterior, Long> {
 	Slice<Planterior> findAllByOrderByPlanteriorIdDesc(Pageable pagealbe);
 	
 	// mypage내가 쓴 글
-	List<Planterior> findAllByUserIdOrderByPlanteriorIdDesc(String userId);
+	Page<Planterior> findAllByUserIdOrderByPlanteriorIdDesc(String userId, Pageable pagealbe);
 	
 	Planterior findAllByPlanteriorId(Long PlanteriorId);
 	

@@ -39,6 +39,12 @@ public class PlanteriorService {
 		
 	}
 	
+	// read(b.getPlanteriorId()); PlanteriorId 읽기
+	public Planterior read(Long planteriorId) {
+		return planeteriorRepository.findAllByPlanteriorId(planteriorId);
+	}
+	
+	
 	// 페이징 처리 포함된 전체 읽기
 	@Transactional(readOnly = true)
 	public Slice<Planterior> read(int pageNumber, int pageSize) {

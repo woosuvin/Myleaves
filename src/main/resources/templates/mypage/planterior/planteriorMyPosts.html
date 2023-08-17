@@ -9,16 +9,20 @@
 
 	<div class="container text-center">
 		<div class="m-5">
-			<h3> 플랜테리어 내가 쓴 글 </h3>
-			<h4> <small> 카드 선택시 해당 글을 수정 및 삭제 가능합니다. </small> </h4>
+			<h3>플랜테리어 내가 쓴 글</h3>
+			<h4>
+				<small> 카드 선택시 해당 글을 수정 및 삭제 가능합니다. </small>
+			</h4>
 		</div>
 		<div class="m-2">
 			<div class="row row-cols-1 row-cols-md-4 g-4">
 				<div class="col" th:each="list: ${cardList}">
-					<a th:href="@{/mypage/planterior/updateDelete(planteriorId=${list.planteriorId})}" 
-								class="link-dark link-underline-opacity-0">
+					<a
+						th:href="@{/mypage/planterior/updateDelete(planteriorId=${list.planteriorId})}"
+						class="link-dark link-underline-opacity-0">
 						<div class="card">
-							<img class="imgSize" th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
+							<img class="imgSize"
+								th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
 							<div class="card-body">
 								<p class="planteriorButtonEleMyPost text-center"
 									th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
@@ -29,9 +33,32 @@
 			</div>
 		</div>
 	</div>
-		<!-- 페이징 -->
-	<div>
-	</div>
+	
+	<!-- 페이징 -->
+	<th:block th:if="${totalPage>=1}">
+		<div class="pt-5">
+			<nav id="paging-block">
+				<ul class="pagination justify-content-md-center">
+					<li class="page-item">
+						<a class="page-link" th:href="@{/mypage/planterior/my_posts(userId=${#authentication.name}, page=${0})}"> &laquo; </a>
+					</li>
+					<li th:each="page : ${#numbers.sequence(startPage, endPage)}"
+						class="paging-item page-item"
+						th:classappend="${page == nowPage} ? 'active' : ''">
+							<a class="page-link link-dark"
+								th:href="@{/mypage/planterior/my_posts(userId=${#authentication.name}, page=${page -1})}" 
+								th:text="${page}"
+								th:value="${page}">
+							</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link"
+						th:href="@{/mypage/planterior/my_posts(userId=${#authentication.name}, page=${totalPage})}"> &raquo; </a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</th:block>
 
 </main>
 </html>
