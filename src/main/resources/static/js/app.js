@@ -11,18 +11,19 @@ const messageListElement = (data) => {
 	
 	let htmlStr = '';
 	for(let chat of data) {
+  		const date = new Date(chat.createdDate).toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
 		if(chat.userId != userId) { // 로그인 유저랑 글쓴이랑 다르면 상대방
 			htmlStr += `
-				<div class="other">
-					<span>${chat.userId}</span>: <span>${chat.message}</span>
-					<small>${chat.createdDate}</small>
+				<div class="chat-other">
+					<div><span>${chat.userId}</span>: <span>${chat.message}</span></div>
+					<small>${date}</small>
 				</div>
 			`;
 		} else {  // 로그인 유저가 글쓴이이면
 			htmlStr += `
-				<div class="writer">
+				<div class="chat-writer">
 					<div>${chat.message}</div>
-					<small>${chat.createdDate}</small>
+					<small>${date}</small>
 				</div>
 			`;
 		}
@@ -56,6 +57,7 @@ function connect() {
     console.log(socket);
     stompClient = Stomp.over(socket);
     stompClient.connect({ data }, function (frame) {
+    	showMessageList(); // 리스트 새로고침
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/connect/chatting', function (showChat) {  
@@ -75,7 +77,6 @@ function disconnect() {
 // 페이지 로딩 시 자동으로 연결 시도
 $(document).ready(function () {
     connect();
-    showMessageList();
 });
 
 // 페이지가 언로드될 때 자동으로 연결 닫기
@@ -124,15 +125,14 @@ function showMessageList() {
 	.catch((error) => console.log(error));
 }
 
-// 메세지 채팅방에 보임 -> 안씀
-function showGreeting(message) {
-    const userId = document.querySelector('input#userId').value;
-    $("#chatting").append("<div><strong>" + userId + "</strong>: " + message + "</div>");
-}
+
 
 $(function () { 
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $("#send").click(function() { saveMessage(); });
+    $("#send").click(function() { 
+		saveMessage();
+		document.querySelector('input#message').value = '';
+	 });
 });
