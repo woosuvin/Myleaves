@@ -19,7 +19,6 @@ function connect() {
     const sellId = document.querySelector('input#sellId').value;
     const myId = document.querySelector('input#myId').value;
     const otherId = document.querySelector('input#otherId').value;
-    const userId = document.querySelector('input#userId').value;
     const data = { sellId, myId, otherId };
 
     console.log('소켓');
@@ -103,7 +102,7 @@ function sendMessage() {
 }
 
 function showGreeting(message) {
-	const otherId = document.querySelector('input#otherId').value;
+    const userId = document.querySelector('input#userId').value;
     $("#greetings").append("<tr><td><strong>" + userId + "</strong>: " + message + "</td></tr>");
 }
 

@@ -52,19 +52,21 @@ public class ChatController {
         
         // 해당 아이디로 채팅방 리스트를 불러옴
         List<ChatRoom> chatRoomList = chatService.readChatRoom(sellId);
-        List<Sell> sellList = new ArrayList<>();
+        //List<Sell> sellList = new ArrayList<>();
+        Map<Long, Sell> sellMap = new HashMap<>();
         
         // 해당 리스트에 있는 sellId로 해당 물건의 썸네일 찾음
         Map<Long, String> thumbnails = new HashMap<>();
         for(ChatRoom c : chatRoomList) {
             // 해당 sellId로 Sell 검색
             Sell sell = sellService.read(c.getSellId());
-            sellList.add(sell);
+            //sellList.add(sell);
+            sellMap.put(c.getRoomId(), sell);
             // thumbnails에 넣음.
             thumbnails.put(c.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
         }
-        
-        model.addAttribute("sell", sellList);
+        model.addAttribute("map", sellMap);
+        //model.addAttribute("sell", sellList);
         model.addAttribute("image", thumbnails);
         model.addAttribute("chatRoom", chatRoomList);
     }

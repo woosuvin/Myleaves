@@ -9,34 +9,34 @@
 	<hr />
 	
 	<th:block th:each="room: ${chatRoom}">
-		<div class="col" style="cursor: pointer;" id="chatButton" th:attr="data-id=${room.sellId}">
+		<div class="col" style="cursor: pointer;" id="chatButton" th:attr="data-id=${room.roomId}">
 			<div style="float: left;">
 				<img class="rounded" style="object-fit: cover; width: 80px;"
-					th:src="@{'data:image/png;base64,'+${image.get(room.sellId)}}" th:attr="data-id=${room.sellId}"/>
+					th:src="@{'data:image/png;base64,'+${image.get(room.sellId)}}" th:attr="data-id=${room.roomId}"/>
 			</div>
 			<input id="sellId" name="sellId" type="hidden" th:value="${map.get(room.roomId).sellId}" /> 
 			<input id="sellerId" name="sellerId" type="hidden" th:value="${map.get(room.roomId).userId}" /> 
 			<input id="userId" name="userId" type="hidden" th:value="${#authentication.name}" />
 			<input id="roomId" name="roomId" type="hidden" th:value="${room.roomId}" />
 			
-			<table class="table table-borderless" style="padding-left: 10px;" th:attr="data-id=${room.sellId}">
+			<table class="table table-borderless" style="padding-left: 10px;" th:attr="data-id=${room.roomId}">
 				<tbody>
 					<tr>
 						<td th:text="${map.get(room.roomId).title}"
-							style="font-size: 20px; font-weight: bold;" th:attr="data-id=${room.sellId}"></td>
+							style="font-size: 20px; font-weight: bold;" th:attr="data-id=${room.roomId}"></td>
 					</tr>
 					<tr>
 						<td th:if="${room.otherId} == ${#authentication.name}" th:text="${room.myId}"
-							style="font-size: 16px; font-weight: bold;" th:attr="data-id=${room.sellId}"></td>
+							style="font-size: 16px; font-weight: bold;" th:attr="data-id=${room.roomId}"></td>
 						<td th:if="${room.myId} == ${#authentication.name}" th:text="${room.otherId}"
-							style="font-size: 16px; font-weight: bold;" th:attr="data-id=${room.sellId}"></td>
+							style="font-size: 16px; font-weight: bold;" th:attr="data-id=${room.roomId}"></td>
 					</tr>
 					<tr>
-						<td th:attr="data-id=${room.sellId}">입양하고 싶은데요~</td>
+						<td th:attr="data-id=${room.roomId}">입양하고 싶은데요~</td>
 						<!-- 최근 메세지 -->
 					</tr>
 					<tr>
-						<td class="time" th:attr="data-id=${room.sellId}">오후 4:10</td>
+						<td class="time" th:attr="data-id=${room.roomId}">오후 4:10</td>
 					</tr>
 				</tbody>
 			</table>

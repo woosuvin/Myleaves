@@ -62,11 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		const popupFeatures = `width=${popupWidth},height=${popupHeight},left=${leftPosition},top=${topPosition},modal=yes,dependent=yes`;
 
 		axios.post(reqUrl, data)
-			.then(response => {
+			.then((response) => {
 				console.log(response.data);
 				window.open('/chat/roomDetail?roomId='+response.data, '_blank', popupFeatures); // db에서 찾아
 			})
-			.catch(error => {
+			.catch((error) => {
 				console.log(error);
 			});
 	};
@@ -82,11 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		const myId = document.querySelector('input#sellerId').value;
 		const otherId = document.querySelector('input#userId').value;
 		console.log(myId, otherId);
-		const sellId = e.target.getAttribute('data-id');
+		//const sellId = e.target.getAttribute('data-id');
 		console.log(e.target);
 		console.log(sellId);
 		
-		const roomId = document.querySelector('input#roomId').value;
+		const roomId = e.target.getAttribute('data-id');
 		
 		const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 		const screenHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;

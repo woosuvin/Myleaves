@@ -18,6 +18,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 @Entity
+@ToString
 @Data
 @IdClass(ChatRoomId.class)
 @Table(name = "CHAT_ROOM")
@@ -35,11 +37,11 @@ public class ChatRoom {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CHAT_ROOM_SEQ_GEN")
 	@Column(name = "ROOM_ID")
-	private long roomId;
+	private Long roomId;
 	
 	@Id
     @Column(name = "SELL_ID")
-    private long sellId;
+    private Long sellId;
     
     @Column(name = "MY_ID")
     private String myId;
@@ -47,6 +49,14 @@ public class ChatRoom {
     @Id
     @Column(name = "OTHER_ID")
     private String otherId;
-
+    
+    
+    public static ChatRoom create(long sellId, String myId, String otherId) {
+	    return ChatRoom.builder()
+	    		.sellId(sellId)
+	    		.myId(myId)
+	    		.otherId(otherId)
+	    		.build();
+    }
 
 }

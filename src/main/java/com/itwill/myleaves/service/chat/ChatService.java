@@ -52,8 +52,11 @@ public class ChatService {
 
     //채팅방 생성
     public ChatRoom createRoom(ChatRoomCreateDto dto) {
+    	log.info("dto={}", dto);
         ChatRoom entity = dto.toEntity();
-        chatRoomRepository.save(entity);
+        log.info("entity={}", entity);
+        chatRoomRepository.saveAndFlush(entity);
+        log.info("entity={}", entity);
         return entity;
     }
     

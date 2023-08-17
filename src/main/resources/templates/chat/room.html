@@ -7,33 +7,33 @@
 		<h2 th:text="|${#authentication.name}님의 채팅목록|"></h2>
 	</div>
 	<hr />
-	<th:block th:each="sell: ${sell}">
+	<th:block th:each="room: ${chatRoom}">
 
-		<div class="col" style="cursor: pointer;" id="chatButton" th:attr="data-id=${sell.sellId}">
+		<div class="col" style="cursor: pointer;" id="chatButton" th:attr="data-id=${room.roomId}">
 			<div style="float: left;">
 				<img class="rounded" style="object-fit: cover; width: 80px;"
-					th:src="@{'data:image/png;base64,'+${image.get(sell.sellId)}}" th:attr="data-id=${sell.sellId}"/>
+					th:src="@{'data:image/png;base64,'+${image.get(room.sellId)}}" th:attr="data-id=${room.roomId}"/>
 			</div>
-			<input id="sellId" name="sellId" type="hidden" th:value="${sell.sellId}" /> 
-			<input id="sellerId" name="sellerId" type="hidden" th:value="${sell.userId}" /> 
+			<input id="sellId" name="sellId" type="hidden" th:value="${map.get(room.roomId).sellId}" /> 
+			<input id="sellerId" name="sellerId" type="hidden" th:value="${map.get(room.roomId).userId}" /> 
 			<input id="userId" name="userId" type="hidden" th:value="${#authentication.name}" />
 			
-			<table class="table table-borderless" style="padding-left: 10px;" th:attr="data-id=${sell.sellId}">
+			<table class="table table-borderless" style="padding-left: 10px;" th:attr="data-id=${room.roomId}">
 				<tbody>
 					<tr>
-						<td th:text="${sell.title}"
-							style="font-size: 20px; font-weight: bold;" th:attr="data-id=${sell.sellId}"></td>
+						<td th:text="${map.get(room.roomId).title}"
+							style="font-size: 20px; font-weight: bold;" th:attr="data-id=${room.roomId}"></td>
 					</tr>
 					<tr>
-						<td th:text="${sell.userId}"
-							style="font-size: 16px; font-weight: bold;" th:attr="data-id=${sell.sellId}"></td>
+						<td th:text="${room.otherId}"
+							style="font-size: 16px; font-weight: bold;" th:attr="data-id=${room.roomId}"></td>
 					</tr>
 					<tr>
-						<td th:attr="data-id=${sell.sellId}">입양하고 싶은데요~</td>
+						<td th:attr="data-id=${room.roomId}">입양하고 싶은데요~</td>
 						<!-- 최근 메세지 -->
 					</tr>
 					<tr>
-						<td class="time" th:attr="data-id=${sell.sellId}">오후 4:10</td>
+						<td class="time" th:attr="data-id=${room.roomId}">오후 4:10</td>
 					</tr>
 				</tbody>
 			</table>

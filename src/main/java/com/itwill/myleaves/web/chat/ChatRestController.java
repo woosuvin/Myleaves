@@ -28,30 +28,21 @@ public class ChatRestController {
 	 private final ChatService chatService;
 	 private final ChatRoomRepository chatRoomRepository;  // ChatRoomRepository 인터페이스를 사용하도록 가정
 	 	 
-	 // 채팅리스트에서 채팅방 불러오기
-//	 @GetMapping("/startChat")
-//	 @ResponseBody
-//	 public ResponseEntity<String> startChat(@RequestParam String sellId, @RequestParam String myId, @RequestParam String otherId) {
-//	     ChatRoom chatRoom = ChatRoom.create(sellId, myId, otherId);
-//	     chatRoomRepository.save(chatRoom);
-//	     return ResponseEntity.ok("Chat room created.");
-//	 }
 	 
-	  @PostMapping("/startChat")
-	  @ResponseBody
+	  	@PostMapping("/startChat")
 	    public ResponseEntity<Long> startChat(@RequestBody ChatRoomCreateDto dto) {
 		  	log.info("dto = {}", dto);
 	        ChatRoom checkedChatRooms = chatService.readChatRoom(dto.getMyId(), dto.getOtherId(), dto.getSellId());
 	        log.info("checkedChatRooms={}", checkedChatRooms);
 	        
-	        if (checkedChatRooms != null) {
-//	        	ChatRoom chat = c hatService.readChatRoom(dto.getMyId(), dto.getOtherId());
-//	 	        log.info("charRoom={}", chat);
+	        if (checkedChatRooms != null) { // DB에 있으면
 	            return ResponseEntity.ok(chatService.readChatRoom(dto.getMyId(), dto.getOtherId(), dto.getSellId()).getRoomId());
-	        } else {
+	        } else { // DB에 없으면
 	        	ChatRoom chatRoom = chatService.createRoom(dto);
-	        	long roomId = chatRoom.getRoomId();
-	            return ResponseEntity.ok(roomId);
+	        	
+	        	ChatRoom newChatRoom = chatService.readChatRoom(dto.getMyId(), dto.getOtherId(), dto.getSellId());
+	        	
+	            return ResponseEntity.ok(newChatRoom.getRoomId());
 	        }
 	        
 	    }
