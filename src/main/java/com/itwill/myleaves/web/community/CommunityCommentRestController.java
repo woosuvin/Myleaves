@@ -31,7 +31,7 @@ public class CommunityCommentRestController {
 	private final CommunityCommentService communityCommentService;
 
 	// 댓글 목록 불러오기
-//  @PreAuthorize(" hasRole('USER') ") 
+    @PreAuthorize("hasRole('MEMBER')") 
 	@GetMapping("/all/{id}")
 	public ResponseEntity<List<CommunityComment>> all(@PathVariable long id) {
 		log.info("all(communityId)={}", id);
@@ -44,7 +44,7 @@ public class CommunityCommentRestController {
 	// request body안의 내용을 분석해서 객체로 만들어달라. cf) get 방식: 쿼리스트링에 있음.
 	// ajax에서 post, put, delete: @RequestBody를 써줘야 동작함.
 	// response의 의미: 하나의 데이터. 이 데이터 안에 data 속성이 있음.
-//	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping
 	public ResponseEntity<CommunityComment> create(@RequestBody CommunityCommentCreateDto dto) {
 		log.info("Create(dto={})", dto);
@@ -56,7 +56,7 @@ public class CommunityCommentRestController {
 	}
 
 	// 댓글 삭제
-//	 @PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	@DeleteMapping("/{communityCommentId}")
 	public ResponseEntity<String> delete(@PathVariable long communityCommentId) {
 		log.info("delete(communityCommentId)={}", communityCommentId);
@@ -82,7 +82,7 @@ public class CommunityCommentRestController {
 
 
 	// 댓글 업데이트
-	// @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('MEMBER')")
 	@PutMapping("/{communityCommentId}")
 	public ResponseEntity<String> update(@PathVariable long communityCommentId,
 			@RequestBody CommunityCommentUpdateDto dto) {
