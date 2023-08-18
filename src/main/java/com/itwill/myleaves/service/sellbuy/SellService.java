@@ -134,6 +134,18 @@ public class SellService {
 		Sell entity = sellRepository.findById(dto.getSellId()).orElseThrow();
 		entity.update(dto);
 	}
+	
+	/**
+	 * 수빈
+	 * 채팅방에서 판매 여부 수정
+	 * @param sellId
+	 * @param sold
+	 */
+	@Transactional
+	public void update(Long sellId, Long sold) {
+		Sell entity = sellRepository.findById(sellId).orElseThrow();
+		entity.update(sold);
+	}
 
 	/**
 	 * 분양 삭제

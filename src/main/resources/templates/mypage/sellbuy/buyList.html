@@ -9,7 +9,7 @@
 	<div class="row row-cols-1 row-cols-md-4 g-4 mb-2">
 		<div class="col" th:each="buy: ${ buy }">
 			<div class="thumbnail-div-buy container p-0">
-				<a th:switch="${buy.sold}"
+				<a th:switch="${sell.get(buy.sellId).sold}"
 					th:href="@{/buy/detail?sellId={sellId} (sellId=${buy.sellId}) }">
 					<!-- 판매종료(buy>sold.equals("판매 종료"), 품절(store>inven==0) 흰색/문구 가운데 -->
 					<th:block th:case="1">
@@ -34,11 +34,11 @@
 				<a
 					th:href="@{/buy/detail?sellId={sellId} (sellId=${buy.sellId}) }"
 					class="link-dark link-underline-opacity-0"> <span
-					th:text="${ buy.title }" class="card-title text-truncate"></span>
+					th:text="${ sell.get(buy.sellId).title }" class="card-title text-truncate"></span>
 				</a>
-				<th:block th:switch="${sell.price == 0}">
+				<th:block th:switch="${sell.get(buy.sellId).price == 0}">
 					<div th:case=true><i>무료 나눔</i></div>
-					<div th:case=false th:text="|${#numbers.formatInteger(sell.price, 0, 'COMMA')}원|" class=""></div>
+					<div th:case=false th:text="|${#numbers.formatInteger(sell.get(buy.sellId).price, 0, 'COMMA')}원|" class=""></div>
 				</th:block>
 			</div>
 		</div>

@@ -43,18 +43,4 @@ public class Buy {
 	private String buyerId;
 	// 구매자 ID(입양자)
 	
-	@Column(nullable = true)
-	private String title;
-	// from SELL table
-	
-	@Column(nullable = true)
-	private byte[] thumbnail;
-	
-	@Column(nullable = true)
-	private Long price;
-	
-	@Column(nullable = true)
-	private Long sold;
-	// 결과적으로 항상 '판매종료'
-	
 }

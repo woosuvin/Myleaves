@@ -97,14 +97,17 @@ public class MyPageSellBuyController {
 //	    log.info("read(buyerId={})", buyerId);
 
 	    Page<Buy> buyList = sellService.readBuyList(buyerId, pageable);
-	    
+	    log.info("buLisit={}",buyList);
 	    Map<Long, String> thumbnails = new HashMap<>();
-		
+		Map<Long, Sell> sellList = new HashMap<>();
+	    
         for(Buy buy: buyList){
-        	thumbnails.put(buy.getSellId(), Base64.getEncoder().encodeToString(buy.getThumbnail()));
+        	Sell sell = sellService.read(buy.getSellId());
+        	thumbnails.put(buy.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
+        	sellList.put(buy.getSellId(), sell);
         }
         model.addAttribute("images", thumbnails);
-	    
+	    model.addAttribute("sell", sellList);
 	    model.addAttribute("buy", buyList);
 	    
 	    int totalPage = buyList.getTotalPages()-1;

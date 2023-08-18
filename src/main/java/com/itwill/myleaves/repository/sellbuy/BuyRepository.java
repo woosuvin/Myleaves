@@ -18,4 +18,6 @@ public interface BuyRepository extends JpaRepository<Buy, Long> {
 	 */
 	Page<Buy> findByBuyerId(String BuyerId, Pageable pageable);
 	
+	
+	
 }

@@ -79,4 +79,9 @@ public class Sell extends BaseTimeEntity {
 		return this;
 	}
 	
+	public Sell update(Long sold) {
+		this.sold = sold;
+		return this;
+	}
+	
 }
