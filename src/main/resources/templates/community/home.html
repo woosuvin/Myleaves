@@ -13,32 +13,38 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col">[ 말머리 ]</th>
+				<th scope="col" class="text-center">[ 말머리 ]</th>
 				<th scope="col">제목</th>
-				<th scope="col">작성자</th>
-				<th scope="col">작성일</th>
+				<th scope="col" class="text-center">작성자</th>
+				<th scope="col" class="text-center">작성일</th>
 			</tr>
 		</thead>
 	<tbody>
 	    <tr th:each="post : ${posts}">
-	        <td th:text="'[' + ${post.hrsHd} + ']'"></td>
+	        <td class="text-center" th:text="'[' + ${post.hrsHd} + ']'"></td>
 	        <td><a class="link-dark link-underline-opacity-0" th:href="@{/community/detail?id={id} (id = ${post.communityId})}" th:text="${post.title}"></a>
 	            <span th:text="'[' +${commentCountMap.get(post.communityId)}+ ']'"class="red-text"></span></td>
-	        <td th:text="${post.userId}"></td>
-	        <td th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
+	        <td class="text-center" th:text="${post.userId}"></td>
+	        <td class="text-center" th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
 	    </tr>
 	</tbody>
 	</table>
 	<form th:action="@{/community/search}">
-		<div class="input-group mt-5 mb-5">
-			<select class="form-select dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" name="type">
-				<option class="dropdown-item" value="t">제목</option>
-				<option class="dropdown-item" value="c">내용</option>
-				<option class="dropdown-item" value="tc">제목+내용</option>
-				<option class="dropdown-item" value="u">작성자</option>
-			</select>
-			<input class="form-control" name="keyword" type="text" placeholder="검색어 입력" aria-describedby="search" required/>
-			<button class="btn btn-outline-dark" id="search">검색</button>
+		<div class="row">
+			<div class="col-2 mb-3">
+				<select class="form-select" name="type">
+					<option value="t">제목</option>
+					<option value="c">내용</option>
+					<option value="tc">제목+내용</option>
+					<option value="u">작성자</option>
+				</select>
+			</div>
+			<div class="col-9">
+				<input class="form-control" name="keyword" type="text" placeholder="검색어 입력" required autofocus/>
+			</div>
+			<div class="col-1">
+				<button class="form-control btn btn-outline-dark" id="search">검색</button>
+			</div>
 		</div>
 	</form>
 	<!-- 페이징처리 시작 -->

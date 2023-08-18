@@ -171,6 +171,29 @@ footer {
 								
 }
 
+/* main page */
+
+.mainH2 {
+	margin-bottom: 0px;
+	font-family: 'Pretendard-Regular';
+}
+
+a.mainMore { text-decoration: none; color: gray; }
+a.mainMore:visited { color: gray; }
+a.mainMore:hover { color: #3B7CFF; }
+a.mainMore:active { color: #3B7CFF; }
+
+.mainMore {
+	font-family: 'Pretendard-Regular';
+	margin-left: 15px;
+	margin-bottom: 0px;
+    height: 25px;
+    padding-right: 0px;
+    padding-left: 0px;
+    width: 70px;
+    align-self: self-end;
+}
+
 /* 페이징.. */
 .pagination{
 	--bs-pagination-hover-color: gray;

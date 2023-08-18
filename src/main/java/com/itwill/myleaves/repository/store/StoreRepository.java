@@ -21,4 +21,7 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 	
 	Store findByItemId(long itemId);
 	
+	// 메인페이지에서 사용
+	List<Store> findByOrderBySoldAscCreatedDateDesc();
+	
 }

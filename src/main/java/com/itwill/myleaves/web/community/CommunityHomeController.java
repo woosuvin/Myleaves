@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -70,14 +71,14 @@ public class CommunityHomeController {
 	}
 	
 	// 커뮤니티 게시글 작성하기 
-//	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/create")
 	public void create() {
 		log.info("create() Get");
 		
 	}
 	
-//	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/create")
 	public String create(CommunityCreateDto dto) {
 		log.info("create(dto={}) POST", dto);
@@ -131,7 +132,7 @@ public class CommunityHomeController {
 	
 	
 	// 커뮤니티 게시글 삭제하기
-//	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/delete")
 	public String delete(Long communityId) {
 		log.info("delete(communityId={})", communityId);
@@ -167,7 +168,7 @@ public class CommunityHomeController {
 	}
 	
 	
-//	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/update")
 	public String update(CommunityUpdateDto dto) { // communityId, title, content 
 		log.info("update(dto={})", dto.getCommunityId());

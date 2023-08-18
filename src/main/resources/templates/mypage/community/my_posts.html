@@ -10,32 +10,32 @@
 	<div class="text-center mb-5">
 		<h3>내가 쓴 글</h3>
 	</div>
-    <div class="text-end">
-      <button class="btn delete-button btn-secondary my-2">삭제</button>
-    </div>
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col"><input type="checkbox" class="all-checkbox"/></th>
-				<th scope="col">말머리</th>
+				<th class="text-center" scope="col"><input type="checkbox" class="all-checkbox"/></th>
+				<th class="text-center" scope="col">말머리</th>
 				<th scope="col">제목</th>
-				<th scope="col">작성자</th>
-				<th scope="col">작성일</th>
+				<th class="text-center" scope="col">작성자</th>
+				<th class="text-center" scope="col" colspan="2">작성일</th>
 			</tr>
 		</thead>
 		<tbody class="">
 			<tr th:each="post : ${posts}">
-				<td><input type="checkbox" id="row-checkbox"></td>
-				<td><span th:text="'[' + ${post.hrsHd} + ']'"></span></td>
+				<td class="text-center"><input type="checkbox" id="row-checkbox"></td>
+				<td class="text-center"><span th:text="'[' + ${post.hrsHd} + ']'"></span></td>
 				<td><a class="link-dark link-underline-opacity-0" th:href="@{/community/detail?id={id} (id = ${post.communityId})}">
 				<span th:text="${post.title}"></span></a></td>
-				<td><span th:text="${post.userId}"></span></td>
-				<td><span th:text="${ #temporals.format(post.createdDate, 'yy-MM-dd HH:mm:ss')}"></span></td>
+				<td class="text-center"><span th:text="${post.userId}"></span></td>
+				<td class="text-center"><span th:text="${ #temporals.format(post.createdDate, 'yy-MM-dd HH:mm:ss')}"></span></td>
 				<td><span id="communityId" class="d-none" th:text="${post.communityId}"></span></td>
 			</tr>
 		</tbody>
 	</table>
-	<form th:action="@{/mypage/community/search}">
+	<div class="text-start">
+      <button class="btn delete-button btn-secondary my-2">삭제</button>
+    </div>
+<!-- 	<form th:action="@{/mypage/community/search}">
 	<input type="hidden" name="userId" th:value="${ #authentication.name }"/>
 	<div class="row">
 		<div class="col-2 mb-3">
@@ -52,7 +52,7 @@
 			<input class="form-control btn btn-outline-dark" type="submit" value="검색" />
 		</div>
 	</div>
-</form>
+</form> -->
 <!-- 페이징처리 시작 -->
 <nav aria-label="...">
 	<ul class="pagination pagination-sm justify-content-center">

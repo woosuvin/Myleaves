@@ -78,13 +78,13 @@ public class SellService {
 	}
 
 	/**
-	 * 입양 메뉴 리스트, 사용 안함
+	 * 입양 메뉴 리스트 (메인에서 사용)
 	 * @return
 	 */
-//	public List<Sell> read() {
-////		log.info("read()");
-//		return sellRepository.findByOrderBySoldAscSellIdDesc();
-//	}
+	public List<Sell> read() {
+//		log.info("read()");
+		return sellRepository.findByOrderBySoldAscSellIdDesc();
+	}
 	
 	/**
 	 * 입양 메뉴 리스트 페이징 
