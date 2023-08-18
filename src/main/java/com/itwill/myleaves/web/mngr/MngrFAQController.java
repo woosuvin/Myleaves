@@ -28,6 +28,7 @@ public class MngrFAQController {
 	/*
 	 * FAQ 리스트 보기
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/list")
 	public void mngrListFaq(Model model) {
 		
@@ -42,16 +43,16 @@ public class MngrFAQController {
 	/*
 	 * FAQ 글 작성하기
 	 */
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	@GetMapping("/create")
     public void create() {
         log.info("create() GET");
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	 @PostMapping("/create") 
 	 public String create(FaQCreateDto dto) {
-		 log.info("FaQ create(dto={}) POST" , dto); 
+		log.info("FaQ create(dto={}) POST" , dto); 
 	 	faqService.create(dto);
 	  
 	 	return "redirect:/mngr/faq/list"; 
@@ -60,7 +61,7 @@ public class MngrFAQController {
 	/*
 	 * FAQ 상세보기 페이지
 	 */
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	@GetMapping("/detail")
 	public void detailFaq(Long fqid , Model model) {
         log.info("detailFaq(id={})" , fqid);
@@ -72,7 +73,7 @@ public class MngrFAQController {
 	/*
 	 * FaQ 수정 페이지
 	 */
-	@PreAuthorize("hasRole('ADMIN')")
+	
 	@PostMapping("/update")
 	public String updateFaq(FaQUpdateDto dto) {
 		log.info("updatefaq dto={}" , dto);
@@ -85,7 +86,6 @@ public class MngrFAQController {
 	/*
 	 * FaQ 삭제 페이지
 	 */
-	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/delete")
 	public String deleteFaq(long fqid) {
 		log.info("deleteFaQ(fqid={})" , fqid);

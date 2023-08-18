@@ -4,7 +4,7 @@
 	layout:decorate="~{layout/base_layout}">
 <main layout:fragment="main">
 	<div class="mb-5 text-center">
-		<h3>QnA</h3>
+		<h3>Q&A</h3>
 	</div>
 	<div style="text-align: right;" class="my-4">
 		<a class="btn btn-outline-dark" th:href="@{/info/qna/create}">문의</a>
@@ -12,23 +12,25 @@
 	<div>
 		<table class="table table-hover">
 			<colgroup>
-				<col width="7%">
-				<col width="4%">
-				<col width="4%">
-				<col width="4%">
-				<col width="4%">
+				<col width="1%">
+				<col width="8%">
+				<col width="1%">
+				<col width="1%">
+				<col width="1%">
 			</colgroup>
 			<thead class="text-center">
 				<tr>
+					<th scope="col">비밀글</th>
 					<th scope="col">제목</th>
 					<th scope="col">작성자</th>
-					<th scope="col">작성일</th>
-					<th scope="col">비밀글</th>
+					<th scope="col">작성일</th>					
 					<th scope="col">진행상태</th>
 				</tr>
 			</thead>
 			<tbody class="text-center">
 				<tr th:each="qna: ${qnas}">
+					<td th:if="${qna.secret == 1}">🔒</td>
+					<td th:if="${qna.secret == 0}">🗝
 					<td class="d-none" th:text="${qna.qid}" ></td>
 					<td
 						th:if="${qna.secret == 1 && qna.userId == #authentication.name}">
@@ -44,14 +46,13 @@
 					</td>
 					<td
 						th:if="${qna.secret == 0}">
-						<a th:href="@{/info/qna/detail?qid={id}(id=${qna.qid})}"
+						<a th:href="@{/info/qna/detail?qid={id}(id=${qna.qid})}" 
 						class="text-decoration-none text-reset"
 						th:text="${qna.title}"></a>
 					</td>
 					<td th:text="${qna.userId}"></td>
 					<td th:text="${#temporals.format(qna.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
-					<td th:if="${qna.secret == 1}">🔒</td>
-					<td th:if="${qna.secret == 0}">공개</td>
+					
 					<!-- 관리자 페이지에 확인 할 거임 -->
 					<td th:if="${#strings.isEmpty(qna.an_title)}">확인중</td>
 					<td th:if="${not #strings.isEmpty(qna.an_title)}">확인완료</td>

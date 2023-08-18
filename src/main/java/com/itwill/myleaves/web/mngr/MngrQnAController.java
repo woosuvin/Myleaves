@@ -1,6 +1,8 @@
 package com.itwill.myleaves.web.mngr;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,10 +41,13 @@ public class MngrQnAController {
 		
 		Page<QnA> list = qnaService.read(pageable);
 		
+		
+		
 		int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
         int startPage =  Math.max(nowPage - 4, 1); // 시작 페이지
         int endPage = Math.min(nowPage +5, list.getTotalPages()); // 끝 페이지
 		
+        
 		model.addAttribute("qnas" , list);
 		model.addAttribute("nowPage",nowPage);
 	    model.addAttribute("startPage", startPage);

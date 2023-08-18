@@ -5,7 +5,7 @@
 <main layout:fragment="mngrHome">
 	<div class="container my-4">
 			<div class="mb-5 text-center">
-				<h1 class="my-4" style="text-align: center;">QNA 관리자 답변 수정 페이지</h1>
+				<h1 class="my-4" style="text-align: center;">Q&A 관리자 답변 수정</h1>
 			</div>
 			<form id="modifyQnAMngrForm">
 				<div class="my-2">
@@ -36,7 +36,7 @@
 						
 						<hr />
 						<!-- 작성날짜 -->
-						<p class="card-text text-end small" id="created_date" th:text="${#temporals.format(qna.createdDate, 'yyyy-mm-dd HH:mm' ) }"></p>
+						<p class="card-text text-end small" id="created_date" th:text="${#temporals.format(qna.createdDate, 'yyyy-MM-dd HH:mm' ) }"></p>
 					</div>
 				</div>
 					<!-- 관리자 답변 -->

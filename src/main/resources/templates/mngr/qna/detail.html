@@ -5,7 +5,7 @@
 <main layout:fragment="mngrHome">
 	<div class="container">
 		<div class="mb-5 text-center">
-			<h1 class="my-4" style="text-align: center;">QNA 관리자 답변 상세 페이지</h1>
+			<h1 class="my-4" style="text-align: center;">Q&A 관리자 답변 상세 </h1>
 		</div>
 			<div class="card">
 				<div class="card-body">
@@ -24,7 +24,7 @@
 						
 					<hr />
 					<!-- 작성날짜 -->
-					<p class="card-text text-end small mb-3 me-3" id="created_date" th:text="${#temporals.format(qna.createdDate, 'yyyy-mm-dd HH:mm' ) }"></p>
+					<p class="card-text text-end small mb-3 me-3" id="created_date" th:text="${#temporals.format(qna.createdDate, 'yyyy-MM-dd HH:mm' ) }"></p>
 				</div>
 			</div>	
 			
@@ -35,7 +35,7 @@
 							
 				<!-- 관리자가 답변한 답변 날짜 -->
 				<hr />
-				<p class="card-text text-end small mb-3 me-3" id="answer_date" th:text="${#temporals.format(qna.modifiedDate, 'yyyy-mm-dd HH:mm' ) }"></p>	
+				<p class="card-text text-end small mb-3 me-3" id="answer_date" th:text="${#temporals.format(qna.modifiedDate, 'yyyy-MM-dd HH:mm' ) }"></p>	
 			</div>
 		</div>
 		<div class="my-3" style="text-align: right;">

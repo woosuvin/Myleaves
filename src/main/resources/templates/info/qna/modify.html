@@ -3,44 +3,42 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/base_layout}">
 	<main layout:fragment="main">
-		<div class="container my-4">
+		<div class="container">
 			<div class="mb-5 text-center">
-				<h3>QNA</h3>
+				<h3>Q&A 수정글</h3>
 			</div>
-			<div class="card">
-			    <div class="card-body my-2">
+			<div>
+			    <div>
 					<form id="qnaModifyForm" name="qnaModifyForm">
 						<!-- 사용자 문의 출력 -->
 						<div class="my-2">
 							<label class="form-label d-none" for="qid">번호</label> 
 							<input class="form-control d-none" id="qid"  name="qid" th:value="${qna.qid}" readonly />
 						</div>
+						<!-- 작성자 -->
+						<div class="card-text d-none">
+							<label class="form-label" for="userId">작성자</label>
+		                    <input class="form-control" id="userId" name="userId" th:value="${qna.userId}" readonly />
+						</div>
+						<br/>
 						<!-- 제목 -->
-						<div class="card-text">
+						<div>
 							<label class="form-label" for="title">제목</label>
 		                    <input class="form-control" id="title" name="title" th:value="${qna.title}" />
 						</div>
 							<!-- 내용 -->
 						<br/>
-						<div class="my-2">
-							<div class="card-text">
-								<label class="form-label" for="content">내용</label>
-		                    	<textarea class="form-control" id="content" name="content" th:text="${qna.content}"></textarea>
-							</div>
+						<div>
+							<label class="form-label" for="summernote">내용</label>
+		                    <textarea class="form-control" id="content" name="content" th:text="${qna.content}"></textarea>
 						</div>
-						<br />
-							<!-- 작성자 -->
-						<div class="card-text d-none">
-							<label class="form-label" for="userId">작성자</label>
-		                    <input class="form-control" id="userId" name="userId" th:value="${qna.userId}" readonly />
-						</div>
-						<br/>	
+						<br />	
 						<!-- 작성날짜 -->
 					</form>
 				</div>
 			</div>
 				<!-- 관리자 페이지 답변 -->
-				<div class="card my-3" th:if="${not #strings.isEmpty(qna.an_title)}">
+				<div class="card" th:if="${not #strings.isEmpty(qna.an_title)}">
 					<div class="card-body">
 						<h4 class="card-text" th:text="${qna.an_title}" ></h4>
 						<div class="card-text" id="content" style="height: 10rem"th:text="${qna.an_content}"></div>
@@ -49,16 +47,20 @@
 						<p class="card-text text-end small mb-3 me-3" id="answer_date" th:text="${#temporals.format(qna.modifiedDate, 'yyyy-mm-dd HH:mm' ) }"></p>	
 					</div>
 				</div>
-				<div  style="text-align: right;" class="my-2">
+				<div style="text-align: right;">
 					<!-- 수정버튼은 관리자가 확인중일시 수정 버튼 가능 c:if 써야함 -->
 					<button class="btn btn-outline-dark" id="btnUpdate" th:if="${#strings.isEmpty(qna.an_title)}">수정</button>
 					<button class="btn btn-secondary" id = "btnDelete">삭제</button>
 				</div>	
 			</div>
-			<div class="my-3" style="text-align: center;">
+			<div class="my-4" style="text-align: center;">
 				<a class="btn btn-outline-dark" th:href="@{/info/qna}">목록</a>	 
-			</div>	
+			</div>
+		<th:block layout:fragment="myscripts">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>		
+		<script src="/js/info/qna/qna_summernote.js"></script>
 		<script src="/js/info/qna/qna_update.js"></script>
-		<script src="/js/info/qna/qna_delete.js"></script>     
+		<script src="/js/info/qna/qna_delete.js"></script>
+		</th:block>      
 	</main>
 </html>

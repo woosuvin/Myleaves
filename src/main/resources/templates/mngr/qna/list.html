@@ -17,16 +17,16 @@
 			</tr>
 		</thead>
 		<tbody class="text-center">
-				<tr th:each="qna :${qnas}">
-					<th scope="row" th:text="${qna.qid}"></th>
+				<tr th:each="qna , qnaStat :${qnas}">
+					<td th:text="${qna.qid}"></td> 
 					<td th:text="${qna.title}"></td>
-					<td th:text="${#temporals.format(qna.createdDate, 'yy-mm-dd HH:mm' ) }"></td>
+					<td th:text="${#temporals.format(qna.createdDate, 'yyyy-MM-dd HH:mm' ) }"></td>
 					
 					<td th:if="${not #strings.isEmpty(qna.an_title)}">
-						<a class="btn btn-secondary" th:href="@{/mngr/qna/detail?qid={id} (id= ${qna.qid})}">답변확인완료</a>
+						<a class="btn btn-secondary" th:href="@{/mngr/qna/detail?qid={id} (id= ${qna.qid})}">확인완료</a>
 					</td>
 					<td th:if="${#strings.isEmpty(qna.an_title)}">
-						<a class="btn btn-outline-dark" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">답변확인중</a>
+						<a class="btn btn-outline-dark" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">확인중</a>
 					</td>
 				</tr>
 			</tbody>

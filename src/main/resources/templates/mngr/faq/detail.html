@@ -6,11 +6,11 @@
 	<main layout:fragment="mngrHome">
 	<div class="container">
 		<div class="mb-5 text-center">	
-			<h1 class="my-4" style="text-align: center;">FAQ 관리자 상세페이지</h1>
+			<h1 class="my-4" style="text-align: center;">FAQ 관리자 수정</h1>
 		</div>
-		<div class="card">
+		<div>
 			<form id="faqDetailForm">
-				<div class="card-body">
+				<div>
 					<!-- 상세내용 div -->
 						<div class="my-4 d-none">
 							<label class="form-label" for="fqid">NO.</label> 
@@ -22,7 +22,7 @@
 							</div>
 							<div class="my-4">
 								<label class="form-label" for="answer">answer</label>
-								<textarea class="form-control" id="answer" name="answer" th:text="${faq.answer}" style="width: 100%; height: 300px;"></textarea>
+								<textarea class="form-control" id="answer" name="answer" th:utext="${faq.answer}" style="width: 100%; height: 300px;"></textarea>
 							</div>
 						</div>
 					</form>
@@ -32,7 +32,11 @@
 					<button class="btn btn-outline-dark" id="btnFaqUpdate">수정</button>
 					<button class="btn btn-secondary" id="btnFaqDelete">삭제</button>
 				</div>
-			<script src="/js/info/faq/faq_modify_mngr.js"></script>   	
+		<th:block layout:fragment="myscripts">
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+			<script src="/js/info/faq/faq_mngr_summernot.js"></script> 
+			<script src="/js/info/faq/faq_modify_mngr.js"></script> 	
+		</th:block>   	  	
 		</div>
 	</main>
 </html>

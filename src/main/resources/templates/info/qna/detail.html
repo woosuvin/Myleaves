@@ -27,8 +27,8 @@
 							<div class="my-2">
 								<div class="card-text">
 									<label class="form-label d-none" for="content">내용</label>
-		                        	<textarea class="form-control d-none" id="content" th:text="${qna.content}" readonly></textarea>
-									<div class="card-text" id="content" style="height: 10rem" th:text="${qna.content}"></div>	
+		                        	<textarea class="form-control d-none" id="content" th:utext="${qna.content}" readonly></textarea>
+									<div class="card-text" id="content" style="height: 10rem" th:utext="${qna.content}"></div>	
 								</div>
 							</div>
 							<br />
