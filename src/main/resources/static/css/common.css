@@ -1,6 +1,46 @@
 @charset "UTF-8";
 /* 푸터영역 */
 /* footer 하단 고정 [S] */
+@font-face {
+    font-family: 'AritaBuri';
+    font-weight: 300;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/amore/AritaBuri-Light.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/amore/AritaBuri-Light.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/amore/AritaBuri-Light.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/amore/AritaBuri-Light.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/amore/AritaBuri-Light.ttf') format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'AritaBuriBold';
+    font-weight: 500;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/amore/AritaBuri-Medium.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/amore/AritaBuri-Medium.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/amore/AritaBuri-Medium.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/amore/AritaBuri-Medium.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/amore/AritaBuri-Medium.ttf') format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'ChosunNm';
+    font-weight: normal;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/ChosunNm/ChosunNm.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/ChosunNm/ChosunNm.eot?#iefix') format('embedded-opentype'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/ChosunNm/ChosunNm.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/ChosunNm/ChosunNm.woff') format('woff'),
+         url('https://cdn.jsdelivr.net/gh/webfontworld/ChosunNm/ChosunNm.ttf') format("truetype");
+    font-display: swap;
+}
+
+main, body {
+	font-family: 'ChosunNm';
+}
+
 html, body {
 	margin: 0;
 	padding: 0;
@@ -8,7 +48,7 @@ html, body {
 }
 
 #top-logo {
-	width:120pt;
+	width: 120pt;
 }
 
 #body-wrapper {
@@ -30,7 +70,7 @@ footer {
 	left: 0;
 }
 
-.nav-link-login{
+.nav-link-login {
 	color: black;
 	margin: 0px 10px;
 	font-weight: lighter;
@@ -38,8 +78,7 @@ footer {
 	font-size: 12px;
 }
 
-
-.nav-link{
+.nav-link {
 	color: black;
 	margin: 0px 10px;
 	font-weight: lighter
@@ -76,16 +115,14 @@ footer {
 }
 
 .topBtnImage {
-	width: 85px;
-	height: 85px;
-		
+	width: 50px;
+	height: 30px;
 }
 
 .bottomBtnImage {
-	width: 85px;
-	height: 85px;
+	width: 50px;
+	height: 30px;
 }
-
 
 /*지현 스토어 리스트 css*/
 .thumbnail-div-store {
@@ -93,119 +130,155 @@ footer {
 }
 
 .thumbnail-soldout-store {
-	 object-fit:cover; 
-	 height: 250px; 
-	 width:-webkit-fill-available; 
-	 opacity: 50%
+	object-fit: cover;
+	height: 250px;
+	width: -webkit-fill-available;
+	opacity: 50%
 }
 
 .thumbnail-soldout-store-label {
-	position: absolute; 
-	top: 50%; 
-	left: 50%; 
-	transform: translate(-50%, -50%); 
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	font-size: 12pt;
 }
 
 .thumbnail-onsale-store {
-	 object-fit:cover; 
-	 height: 250px; 
-	 width:-webkit-fill-available;
+	object-fit: cover;
+	height: 250px;
+	width: -webkit-fill-available;
 }
 
 /*지현 입양 리스트 css*/
 .thumbnail-div-buy {
-	position: sticky; 
-	text-align: center; 
+	position: sticky;
+	text-align: center;
 	color: black;
 }
 
 .thumbnail-onSale-buy {
-	object-fit:cover; 
-	height: 250px; 
-	width:-webkit-fill-available;
+	object-fit: cover;
+	height: 250px;
+	width: -webkit-fill-available;
 }
 
 .thumbnail-onSale-buy-label {
-	background: hotpink; 
-	border: 1px solid black; 
-	padding: 3px 15px 3px 15px; 
-	position: absolute; 
-	top: 5%; 
-	right: 5%; 
+	background: hotpink;
+	border: 1px solid black;
+	padding: 3px 15px 3px 15px;
+	position: absolute;
+	top: 5%;
+	right: 5%;
 	font-size: 10pt;
 }
 
 .thumbnail-onNego-buy {
-	object-fit:cover; 
-	height: 250px; 
-	width:-webkit-fill-available;
+	object-fit: cover;
+	height: 250px;
+	width: -webkit-fill-available;
 }
 
 .thumbnail-onNego-buy-label {
-	background: mediumaquamarine; 
-	border: 1px solid black; 
-	padding: 3px 15px 3px 15px; 
-	position: absolute; 
-	top: 5%; 
-	right: 5%; 
+	background: mediumaquamarine;
+	border: 1px solid black;
+	padding: 3px 15px 3px 15px;
+	position: absolute;
+	top: 5%;
+	right: 5%;
 	font-size: 10pt;
 }
 
 .thumbnail-soldout-buy {
-	object-fit:cover; 
-	height:250px; 
-	width:-webkit-fill-available; 
+	object-fit: cover;
+	height: 250px;
+	width: -webkit-fill-available;
 	opacity: 50%;
-						
 }
 
 .thumbnail-soldout-buy-label {
-	background: darkgray; 
-	border: 1px solid black; 
-	padding: 3px 15px 3px 15px; 
-	position: absolute; 
-	top: 5%; 
-	right: 5%; 
+	background: darkgray;
+	border: 1px solid black;
+	padding: 3px 15px 3px 15px;
+	position: absolute;
+	top: 5%;
+	right: 5%;
 	font-size: 10pt;
-								
 }
 
 /* main page */
-
 .mainH2 {
 	margin-bottom: 0px;
-	font-family: 'Pretendard-Regular';
+	font-family: 'ChosunNm';
 }
 
-a.mainMore { text-decoration: none; color: gray; }
-a.mainMore:visited { color: gray; }
-a.mainMore:hover { color: #3B7CFF; }
-a.mainMore:active { color: #3B7CFF; }
+a.mainMore {
+	text-decoration: none;
+	color: gray;
+	font-family: 'ChosunNm';
+}
+
+a.mainMore:visited {
+	color: gray;
+}
+
+a.mainMore:hover {
+	color: #3B7CFF;
+}
+
+a.mainMore:active {
+	color: #3B7CFF;
+}
 
 .mainMore {
 	font-family: 'Pretendard-Regular';
 	margin-left: 15px;
 	margin-bottom: 0px;
-    height: 25px;
-    padding-right: 0px;
-    padding-left: 0px;
-    width: 70px;
-    align-self: self-end;
+	height: 25px;
+	padding-right: 0px;
+	padding-left: 0px;
+	width: 70px;
+	align-self: self-end;
 }
+
+.container2 {
+	width: 90%;
+	margin: 10px auto;
+	display: flex;
+}
+
+.containerList {
+	flex: 1;
+	width: 50%;
+}
+
+.mainPic {
+	width: -webkit-fill-available;
+}
+
+.mainBannerS1 {
+	flex: 1;
+	width: 50%;
+}
+
+.planteriorImage {
+	flex: 1;
+	width: 50%
+}
+
 
 /* 페이징.. */
-.pagination{
-	--bs-pagination-hover-color: gray;
-	--bs-pagination-focus-color: darkgray;
-	--bs-pagination-focus-box-shadow: 0;
+.pagination { 
+	-bs-pagination-hover-color: gray;
+	-bs-pagination-focus-color: darkgray; 
+	-bs-pagination-focus-box-shadow: 0;
 }
 
-.page-link{
+.page-link {
 	color: gray;
 }
 
-.active>.page-link{
+.active>.page-link {
 	border-color: gray;
 	background-color: white;
 	color: black;

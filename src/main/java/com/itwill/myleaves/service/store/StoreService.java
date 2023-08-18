@@ -30,14 +30,6 @@ public class StoreService {
 	private final StoreWishRepository storeWishRepository;
 	
 	/**
-	 * 스토어 리스트 (메인페이지에서 사용)
-	 * @return
-	 */
-	public List<Store> read() {
-		return storeRepository.findByOrderBySoldAscCreatedDateDesc();
-	}
-	
-	/**
 	 * 관리자 페이지에서 스토어 상품 create
 	 */
 	public Store create(StoreCreateDto dto) {

@@ -11,16 +11,34 @@
         * th:text 경고가 뜨는 이유: 표준 html이 가지고 있는 것이 아닌 타임리프라는 템플릿 엔진이 사용하는 문법
              ==> 해결을 위해서 xmlns 사용하기.
         -->
-	<h1>내풀잎스에 오신 것을 환영합니다...</h1>
-	<h3>배너 큰거 1개(캐로셀인지 카로셀인지 해 말어), 작은 배너 2~3개정도 하단에 더 넣고 입양 하기는 정사각형으로 네개 뽑고 그 옆에 커뮤니티 리스트 불러오기? 메인 글씨체 변경하기</h3>
-		<div class="container-fluid container py-5">
-		<div class="row my-3">
-			<h2 class="col-11 mainH2">반려식물 입양하기</h2>
-			<a class="col-1 mainMore" th:href="@{/buy/list}">더보기></a>
+<!-- <input class="mainPic" type="image" th:src="@{/images/common/main.png}"> -->
+	<div class="container2">
+		<div class="container-fluid container py-5 planteriorImage">
+			<div class="row my-3">
+			<h2 class="col-10 mainH2">베스트 플랜테리어</h2>
+			<div class="row row-cols-1 row-cols-md-2 g-4 mb-2">
+				<input class="planterior" type="image" th:src="@{/images/common/planterior.png}">
+			</div>
 		</div>
+		</div>
+		<div class="container-fluid container py-5 containerList">
+			<div class="row my-3">
+				<h2 class="col-10 mainH2"></h2>
+				<a class="col-1 mainMore" th:href="@{/planterior}">더보기></a>
+				<!-- MD픽 플랜테리어 리스트 3개 출력 -->
+			</div>
+		</div>
+		</div>
+	<div class="container2">
+		<div class="container-fluid container py-5 containerList">
+			<div class="row my-3">
+				<h2 class="col-10 mainH2">반려식물 입양하기</h2>
+				<a class="col-1 mainMore" th:href="@{/buy/list}">더보기></a>
+			</div>
 			<div class="container bg-transparent border-dark">
-				<div class="row row-cols-1 row-cols-md-4 g-4 mb-2">
-					<div class="col" th:each="sell, limit : ${sells}" th:if="${limit.index} &lt; 4">
+				<div class="row row-cols-1 row-cols-md-2 g-4 mb-2">
+					<div class="col" th:each="sell, limit : ${sells}"
+						th:if="${limit.index} &lt; 4">
 						<div class="thumbnail-div-buy container p-0">
 							<a th:switch="${sell.sold}"
 								th:href="@{/buy/detail(userId=${#authentication.name}, sellId=${sell.sellId}) }">
@@ -63,62 +81,91 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		
+		<div class="container-fluid container py-5 containerList">
+			<div class="row my-3">
+				<h2 class="col-10 mainH2">커뮤니티</h2>
+				<a class="col-1 mainMore" th:href="@{/community}">더보기></a>
+			</div>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col">[ 말머리 ]</th>
+						<th scope="col">제목</th>
+						<th scope="col">작성자</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="post : ${posts}">
+						<td th:text="'[' + ${post.hrsHd} + ']'"></td>
+						<td><a class="link-dark link-underline-opacity-0"
+							th:href="@{/community/detail?id={id} (id = ${post.communityId})}"
+							th:text="${post.title}"></a> <span
+							th:text="'[' +${commentCountMap.get(post.communityId)}+ ']'"
+							class="red-text"></span></td>
+						<td th:text="${post.userId}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
+	<input class="mainPic" type="image" th:src="@{/images/common/storeImage.png}">
 	<div class="container-fluid container py-5">
 		<div class="row my-3">
 			<h2 class="col-11 mainH2">내풀잎스 스토어</h2>
 			<a class="col-1 mainMore" th:href="@{/store/list}">더보기></a>
 		</div>
 		<div class="border-dark container">
-		<div class="row row-cols-1 row-cols-md-4 g-4 mb-2">
-			<div class="col" th:each="store, limit : ${stores}" th:if="${limit.index} &lt; 4"> 
-				
-				<!-- sold값으로 switch문 -->
-				<div th:switch="${store.sold}" class="thumbnail-div-store container p-0">
-					<a th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}"> 
-						<!-- 1, 품절일 경우 -->
-						<th:block th:case="1" >
-							<img class="thumbnail-soldout-store rounded mb-1"
-								th:src="@{'data:image/png;base64,'+${storeImages.get(store.itemId)}}" />
-							<span class="thumbnail-soldout-store-label link-dark centered">
-								<i>품절</i>
-							</span>
-						</th:block>
-						
-						<!-- 0, 판매중일 경우 -->
-						<th:block th:case="0">
-							<!-- 재고 0일 경우 -->
-							<th:block th:if="${store.inven == 0}">
+			<div class="row row-cols-1 row-cols-md-4 g-4 mb-2">
+				<div class="col" th:each="store, limit : ${stores}"
+					th:if="${limit.index} &lt; 4">
+
+					<!-- sold값으로 switch문 -->
+					<div th:switch="${store.sold}"
+						class="thumbnail-div-store container p-0">
+						<a
+							th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}">
+							<!-- 1, 품절일 경우 --> <th:block th:case="1">
 								<img class="thumbnail-soldout-store rounded mb-1"
 									th:src="@{'data:image/png;base64,'+${storeImages.get(store.itemId)}}" />
 								<span class="thumbnail-soldout-store-label link-dark centered">
-									<i>일시 품절</i>
+									<i>품절</i>
 								</span>
+							</th:block> <!-- 0, 판매중일 경우 --> <th:block th:case="0">
+								<!-- 재고 0일 경우 -->
+								<th:block th:if="${store.inven == 0}">
+									<img class="thumbnail-soldout-store rounded mb-1"
+										th:src="@{'data:image/png;base64,'+${storeImages.get(store.itemId)}}" />
+									<span class="thumbnail-soldout-store-label link-dark centered">
+										<i>일시 품절</i>
+									</span>
+								</th:block>
+								<th:block th:unless="${store.inven == 0}">
+									<img class="thumbnail-onsale-store rounded mb-1"
+										th:src="@{'data:image/png;base64,'+${storeImages.get(store.itemId)}}" />
+								</th:block>
 							</th:block>
-							<th:block th:unless="${store.inven == 0}">
-								<img class="thumbnail-onsale-store rounded mb-1"
-									th:src="@{'data:image/png;base64,'+${storeImages.get(store.itemId)}}" />
-							</th:block>
-						</th:block>
-					</a>
-				</div> <!-- 사진 div end -->
-				
-				<div class="text-truncate">
-					<a th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}"
-						class="link-dark link-underline-opacity-0"> 
-						<span th:text="${store.itemName}" class="card-title text-truncate"></span>
-					</a>
-					<p th:text="|${#numbers.formatInteger(store.price, 0, 'COMMA')}원|"></p>
-				</div> <!-- 이름 가격 div end -->
-				
+						</a>
+					</div>
+					<!-- 사진 div end -->
+
+					<div class="text-truncate">
+						<a
+							th:href="@{/store/detail(userId=${#authentication.name},itemId=${store.itemId})}"
+							class="link-dark link-underline-opacity-0"> <span
+							th:text="${store.itemName}" class="card-title text-truncate"></span>
+						</a>
+						<p th:text="|${#numbers.formatInteger(store.price, 0, 'COMMA')}원|"></p>
+					</div>
+					<!-- 이름 가격 div end -->
+
+				</div>
 			</div>
 		</div>
 	</div>
-		</div>
-	<div class="container-fluid container py-5">
-		<div class="row my-3">
-			<h2 class="col-11 mainH2">커뮤니티</h2>
-		</div>
+	<div class="container2">
+		<input class="mainBannerS1" type="image" th:src="@{/images/common/gardeningClass.png}">
 	</div>
 </main>
 
