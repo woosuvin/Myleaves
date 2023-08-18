@@ -187,6 +187,14 @@ public class CommunityHomeController {
         int startPage =  Math.max(nowPage - 4, 1); // 시작 페이지
         int endPage = Math.min(nowPage +5, list.getTotalPages()); // 끝 페이지
         
+        // 각 게시글에 해당하는 댓글 수를 맵에 저장
+	    Map<Long, Long> commentCountMap = new HashMap<>();
+	    for (Community post : list) {
+	        Long commentCount = communityCommentService.countByCommunityId(post);
+	        commentCountMap.put(post.getCommunityId(), commentCount);
+	    }
+	    model.addAttribute("commentCountMap", commentCountMap);
+        
 		model.addAttribute("posts", list);
 	    model.addAttribute("nowPage",nowPage);
         model.addAttribute("startPage", startPage);

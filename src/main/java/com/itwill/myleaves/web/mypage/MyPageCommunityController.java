@@ -74,23 +74,23 @@ public class MyPageCommunityController {
 
 	}
 
-	// 마이페이지 내가 쓴 게시글 검색
-	@GetMapping("/search")
-	public String search(CommunitySearchDto dto, Model model, @PageableDefault(page=0, size=10, sort="communityId", direction=Sort.Direction.DESC) Pageable pageable) {
-		log.info("search(dto={})", dto);
-
-		Page<Community> list = mypageCommunityService.search(dto, pageable);
-		 int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
-	     int startPage =  Math.max(nowPage - 4, 1); // 시작 페이지
-	     int endPage = Math.min(nowPage +5, list.getTotalPages()); // 끝 페이지
-		
-		model.addAttribute("posts", list);
-	    model.addAttribute("nowPage",nowPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-
-		return "mypage/community/my_posts";
-	}
+//	// 마이페이지 내가 쓴 게시글 검색
+//	@GetMapping("/search")
+//	public String search(CommunitySearchDto dto, Model model, @PageableDefault(page=0, size=10, sort="communityId", direction=Sort.Direction.DESC) Pageable pageable) {
+//		log.info("search(dto={})", dto);
+//
+//		Page<Community> list = mypageCommunityService.search(dto, pageable);
+//		 int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
+//	     int startPage =  Math.max(nowPage - 4, 1); // 시작 페이지
+//	     int endPage = Math.min(nowPage +5, list.getTotalPages()); // 끝 페이지
+//		
+//		model.addAttribute("posts", list);
+//	    model.addAttribute("nowPage",nowPage);
+//        model.addAttribute("startPage", startPage);
+//        model.addAttribute("endPage", endPage);
+//
+//		return "mypage/community/my_posts";
+//	}
 
 	
 //	// 마이페이지 내가 쓴 댓글 검색

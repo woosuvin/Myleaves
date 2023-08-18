@@ -1,12 +1,10 @@
 package com.itwill.myleaves.service.mypage;
 
-import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.itwill.myleaves.dto.community.CommunitySearchDto;
 import com.itwill.myleaves.repository.community.Community;
 import com.itwill.myleaves.repository.community.CommunityRepository;
 import com.itwill.myleaves.repository.community_comment.CommunityComment;
@@ -45,22 +43,22 @@ public class MypageCommunityService {
 		}
 
 	
-	// 마이페이지 게시글 검색 기능 	
-	public Page<Community> search(CommunitySearchDto dto, Pageable pageable) {
-		log.info("search(dto)={}", dto);
-		Page<Community> list = null;
-		switch (dto.getType()) {
-		case "t":
-			list = communityRepository.findByUserIdAndTitle(dto.getUserId(), dto.getKeyword(), pageable);
-			break;
-		case "c":
-			list = communityRepository.findByContentAndUserId(dto.getKeyword(), dto.getUserId(), pageable);
-			break;
-		}
-		
-//		log.info("lise size = {}", list.size());
-		return list;
-	}
+//	// 마이페이지 게시글 검색 기능 	
+//	public Page<Community> search(CommunitySearchDto dto, Pageable pageable) {
+//		log.info("search(dto)={}", dto);
+//		Page<Community> list = null;
+//		switch (dto.getType()) {
+//		case "t":
+//			list = communityRepository.findByUserIdAndTitle(dto.getUserId(), dto.getKeyword(), pageable);
+//			break;
+//		case "c":
+//			list = communityRepository.findByContentAndUserId(dto.getKeyword(), dto.getUserId(), pageable);
+//			break;
+//		}
+//		
+////		log.info("lise size = {}", list.size());
+//		return list;
+//	}
 	
 //	public List<CommunityComment> readByUserId(String userId, CommunitySearchDto dto) {
 //		

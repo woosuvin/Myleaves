@@ -9,25 +9,25 @@
 	<div class="text-center mb-5">
 		<h3>커뮤니티</h3>
 	</div>
-    <a th:href="@{/community/create}" class="btn btn-outline-dark float-end my-2">글쓰기</a>
+    <a th:href="@{/community/create}" class="btn btn-outline-dark float-end">글쓰기</a>
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col" class="text-center">[ 말머리 ]</th>
+				<th class="text-center" scope="col">[ 말머리 ]</th>
 				<th scope="col">제목</th>
-				<th scope="col" class="text-center">작성자</th>
-				<th scope="col" class="text-center">작성일</th>
+				<th class="text-center" scope="col">작성자</th>
+				<th class="text-center" scope="col">작성일</th>
 			</tr>
 		</thead>
-	<tbody>
-	    <tr th:each="post : ${posts}">
-	        <td class="text-center" th:text="'[' + ${post.hrsHd} + ']'"></td>
-	        <td><a class="link-dark link-underline-opacity-0" th:href="@{/community/detail?id={id} (id = ${post.communityId})}" th:text="${post.title}"></a>
-	            <span th:text="'[' +${commentCountMap.get(post.communityId)}+ ']'"class="red-text"></span></td>
-	        <td class="text-center" th:text="${post.userId}"></td>
-	        <td class="text-center" th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
-	    </tr>
-	</tbody>
+		<tbody class="">
+			<tr th:each="post : ${posts}">
+				<td class="text-center" th:text="'[' + ${post.hrsHd} + ']'"></td>
+				<td> <a class="link-dark link-underline-opacity-0" th:href="@{/community/detail?id={id} (id = ${post.communityId})}"
+						th:text="${post.title}"></a> <span th:text="'[' +${commentCountMap.get(post.communityId)}+ ']'"class="red-text"></span></td>
+				<td class="text-center" th:text="${post.userId}"></td>
+				<td class="text-center" th:text="${ #temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></td>
+			</tr>
+		</tbody>
 	</table>
 	<form th:action="@{/community/search}">
 		<div class="row">
@@ -38,12 +38,12 @@
 					<option value="tc">제목+내용</option>
 					<option value="u">작성자</option>
 				</select>
-			</div>
+			</div>	
 			<div class="col-9">
-				<input class="form-control" name="keyword" type="text" placeholder="검색어 입력" required autofocus/>
+				<input class="form-control" name="keyword" type="text" placeholder="검색어 입력" required/>
 			</div>
 			<div class="col-1">
-				<button class="form-control btn btn-outline-dark" id="search">검색</button>
+				<input class="form-control btn btn-outline-dark" type="submit" value="검색" />
 			</div>
 		</div>
 	</form>
@@ -51,8 +51,8 @@
 	<nav aria-label="...">
 		<ul class="pagination pagination-sm justify-content-center">
 			<li th:each="page : ${#numbers.sequence(startPage, endPage)}" class="page-item">
-				<a style="color: white; background-color: black; border-color: black;" th:if="${page == nowPage}" class="page-link active" th:text="${page}"></a> 
-				<a style="color: black;" th:if="${page != nowPage}" th:href="@{/community(page=${page - 1})}" class="page-link" th:text="${page}"></a></li>
+			<a style="color: white; background-color: black; border-color: black;" th:if="${page == nowPage}" class="page-link active" th:text="${page}"></a> 
+			<a style="color: black;" th:if="${page != nowPage}" th:href="@{/community(page=${page - 1})}" class="page-link" th:text="${page}"></a></li>
 		</ul>
 	</nav>
 	<!-- 페이징처리 끝 -->

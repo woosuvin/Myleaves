@@ -63,7 +63,7 @@
 		<ul class="pagination pagination-sm justify-content-center">
 			<li th:each="page : ${#numbers.sequence(startPage, endPage)}" class="page-item">
 				<a style="color: white; background-color: black; border-color: black;" th:if="${page == nowPage}" class="page-link active" th:text="${page}"></a> 
-				<a style="color: black;" th:if="${page != nowPage}"  th:href="@{/mypage/community/my_comments(userId=${ #authentication.name }(page=${page - 1})}" class="page-link" th:text="${page}"></a>
+				<a style="color: black;" th:if="${page != nowPage}"  th:href="@{/mypage/community/my_comments(userId=${ #authentication.name }, page=${page - 1})}" class="page-link" th:text="${page}"></a>
 			</li>
 		</ul>
 	</nav>
