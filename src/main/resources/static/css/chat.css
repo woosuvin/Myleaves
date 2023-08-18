@@ -14,8 +14,9 @@ hr {
 }
 
 #chatting{
-	height: 370px;
+	height: 400px;
 	overflow: auto;
+	padding: 5px;
 }
 
 .table-list{

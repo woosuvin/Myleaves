@@ -72,8 +72,10 @@ function connect() {
     	showMessageList(); // 리스트 새로고침
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/connect/chatting', function (showChat) {  
-            showGreeting(JSON.parse(showChat.body).content); //send 클릭하고 메세지 채팅방에 보임
+        stompClient.subscribe('/connect/chatting', function (showChat) { 
+			const userId = JSON.parse(showChat.body).id;
+			const message = JSON.parse(showChat.body).content; 
+            showGreeting(userId, message); //send 클릭하고 메세지 채팅방에 보임
         });
     });
 }
@@ -98,10 +100,14 @@ $(window).on('beforeunload', function () {
 
 
 
-
 // 메세지 보냄
 function sendMessage() {
-    stompClient.send("/app/sendMessage", {}, JSON.stringify({'message': $("#message").val()}));
+	data= {};
+	data.userId = $("#userId").val();
+	data.message = $("#message").val();
+		
+    stompClient.send("/app/sendMessage", {}, JSON.stringify(data));
+    
 }
 
 // 메세지 저장
@@ -118,7 +124,7 @@ function saveMessage() {
 	.post(reqUrl, data)
 	.then((response) => {
 		console.log(response);
-		showMessageList();
+		//showMessageList();
 	})
 	.catch((error) => console.log(error));
 }
@@ -128,13 +134,48 @@ function saveMessage() {
 function showMessageList() {
 	const roomId = document.querySelector('input#roomId').value;
 	const reqUrl = `/chat/${roomId}`;
+	const chatting = document.getElementById('chatting');
 	
 	axios.get(reqUrl)
 	.then((response) => {
 		console.log(response);
 		messageListElement(response.data);
+		chatting.scrollTop = chatting.scrollHeight;
 	})
 	.catch((error) => console.log(error));
+}
+
+function showGreeting(userId, message) {
+	
+	const logInId = document.querySelector('input#userId').value;
+	const otherId = document.querySelector('input#otherId').value;
+	const myId = document.querySelector('input#myId').value;
+	const chatting = document.getElementById('chatting');
+	const date = new Date().toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+	
+	if(logInId === userId) { // 판매자
+		$("#chatting").append(`<div class="writer"><div class="card mt-2 card-writer"><div class="card-body p-2 chat-writer"><div>`
+					    + message + `</div></div></div><div class="card mb-2 writer-date"><small class="chat-time chat-writer">`
+					     + date + `</small></div></div>`);
+	} else if (logInId !== userId) { // 말 건 놈
+		$("#chatting").append(`
+							<div>
+								<div class="card mt-2 card-other">
+									<div class="card-body p-2 chat-other">
+										<div>`+ userId +`: `+message+`</div>
+									</div>
+								</div>
+								<div class="card mb-2 other-date">
+									<small class="chat-time">` + date + `</small>
+								</div>
+							</div>
+					`);
+	}
+	
+	chatting.scrollTop = chatting.scrollHeight;
+	
+	
+						    
 }
 
 
@@ -144,6 +185,7 @@ $(function () {
         e.preventDefault();
     });
     $("#send").click(function() { 
+		sendMessage();
 		saveMessage();
 		document.querySelector('input#message').value = '';
 	 });

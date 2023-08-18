@@ -14,7 +14,7 @@ public class MessageController {
     @MessageMapping("/sendMessage")
     @SendTo("/connect/chatting")
     public Greeting greeting(Chat message) throws Exception {
-        Thread.sleep(1000);
-        return new Greeting(HtmlUtils.htmlEscape(message.getMessage()));
+        Thread.sleep(100);
+        return new Greeting(message.getUserId(), message.getMessage());
     }
 }
