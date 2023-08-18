@@ -18,12 +18,16 @@ hr {
 	overflow: auto;
 }
 
+.table-list{
+    table-layout: fixed;
+}
+
 .buy-detail{
 	cursor: pointer;
 }
 
 .image-td{
-	width: 120px;
+	width: 100px;
 }
 
 .image-div{
@@ -33,8 +37,8 @@ hr {
 
 .image{
 	object-fit: cover; 
-	height: 120px; 
-	width: 120px;
+	height: 85px; 
+	width: 85px;
 }
 
 .title{
@@ -45,6 +49,11 @@ hr {
 	font-size: small;
 }
 
+.message-none{
+	font-size: small;
+	vertical-align: middle;
+}
+
 .message{
 	font-size: small;
 	vertical-align: bottom;
@@ -52,7 +61,7 @@ hr {
 
 .time{
 	font-size: small;
-	width: 4rem;
+	width: 6rem;
 	text-align: right;
 	vertical-align: bottom;
 }
@@ -76,7 +85,36 @@ hr {
 	width: 60px;
 }
 
+.card{
+	width: fit-content;
+	max-width: 300px;
+	margin: 2px 0 0;
+}
+
+.writer{
+	text-align: -webkit-right;
+}
+
+.card-body{
+	font-size: 14px;
+}
+
+.card-writer{
+	border: 1px solid darkseagreen;
+}
 
 .chat-writer{
 	text-align: right;
+}
+
+.other-date{
+	border: none;
+}
+
+.writer-date{
+	border: none;
+}
+
+.chat-time{
+	font-size: 4px;
 }

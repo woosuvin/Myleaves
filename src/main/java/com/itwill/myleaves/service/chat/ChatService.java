@@ -31,4 +31,18 @@ public class ChatService {
 	public List<Chat> read(Long roomId) {
 		return chatRepository.findByRoomIdOrderByCreatedDate(roomId);
 	}
+	
+	/**
+	 * 채팅 목록에서 사용할 것임
+	 * @param roomId
+	 * @return
+	 */
+	public Chat readforList(Long roomId){
+		List<Chat> chat = chatRepository.findByRoomIdOrderByCreatedDateDesc(roomId);
+		Chat c = null;
+		if(chat.size() != 0) {
+			c = chat.get(0);
+		}
+		return c;
+	}
 }

@@ -14,16 +14,28 @@ const messageListElement = (data) => {
   		const date = new Date(chat.createdDate).toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
 		if(chat.userId != userId) { // 로그인 유저랑 글쓴이랑 다르면 상대방
 			htmlStr += `
-				<div class="chat-other">
-					<div><span>${chat.userId}</span>: <span>${chat.message}</span></div>
-					<small>${date}</small>
+				<div>
+					<div class="card mt-2 card-other">
+						<div class="card-body p-2 chat-other">
+							<div>${chat.userId}: ${chat.message}</div>
+						</div>
+					</div>
+					<div class="card mb-2 other-date">
+						<small class="chat-time">${date}</small>
+					</div>
 				</div>
 			`;
 		} else {  // 로그인 유저가 글쓴이이면
 			htmlStr += `
-				<div class="chat-writer">
-					<div>${chat.message}</div>
-					<small>${date}</small>
+				<div class="writer">
+					<div class="card mt-2 card-writer">
+						<div class="card-body p-2 chat-writer">
+							<div>${chat.message}</div>
+						</div>
+					</div>
+					<div class="card mb-2 writer-date">
+						<small class="chat-time chat-writer">${date}</small>
+					</div>
 				</div>
 			`;
 		}

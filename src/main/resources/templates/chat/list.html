@@ -16,7 +16,7 @@
 </div>
 <th:block th:each="room: ${chatRoom}">
 	<div class="buy-detail col" id="chatButton" th:attr="data-id=${room.roomId}">
-		<table class="table table-borderless m-0 g-0"
+		<table class="table table-list table-borderless m-0 g-0"
 			th:attr="data-id=${room.roomId}">
 			<tbody>
 				<tr>
@@ -44,8 +44,13 @@
 						th:attr="data-id=${room.roomId}"></td>
 				</tr>
 				<tr>
-					<td class="message px-1 pt-0 pb-2" th:attr="data-id=${room.roomId}">입양하고 싶은데요~입양하고 싶은데요~입양하고 싶은데요~입양하고 싶은데요~</td>
-					<td class="time px-1 pt-0 pb-2" th:attr="data-id=${room.roomId}">오후 4:10</td>
+					<th:block th:if="${chat.get(room.roomId) != null}">
+						<td class="message px-1 pt-0 pb-2 text-truncate" th:attr="data-id=${room.roomId}" th:text="${chat.get(room.roomId).message}"></td>
+						<td class="time px-1 pt-0 pb-2" th:attr="data-id=${room.roomId}" th:text="${ #temporals.format(chat.get(room.roomId).createdDate, 'MM.dd. HH:mm')}"></td>
+					</th:block>
+					<th:block th:if="${chat.get(room.roomId) == null}">
+						<td class="message-none px-1 pt-0 pb-2" th:attr="data-id=${room.roomId}"> 채팅 내용이 없습니다.</td>
+					</th:block>
 				</tr>
 			</tbody>
 		</table>

@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.itwill.myleaves.repository.chat.Chat;
 import com.itwill.myleaves.repository.chat.ChatRoom;
 import com.itwill.myleaves.repository.sellbuy.Sell;
 import com.itwill.myleaves.service.chat.ChatRoomService;
+import com.itwill.myleaves.service.chat.ChatService;
 import com.itwill.myleaves.service.sellbuy.SellService;
 
 import java.util.ArrayList;
@@ -25,18 +27,19 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 public class ChatController {
-    private final ChatRoomService chatService;
+    private final ChatRoomService chatRoomService;
+    private final ChatService chatService;
     private final SellService sellService;
 
     // 채팅방
     @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/chat/roomDetail")
     public void chatRoomDetail(long roomId, Model model) {
-    	log.info("roomId={}", roomId);
-    	ChatRoom chatRoom = chatService.readChatRoom(roomId);
-   	 	log.info("chatRoom={}", chatRoom);
+//    	log.info("roomId={}", roomId);
+    	ChatRoom chatRoom = chatRoomService.readChatRoom(roomId);
+//   	 	log.info("chatRoom={}", chatRoom);
     	 Sell sell = sellService.read(chatRoom.getSellId());
-    	 log.info("sell={}", sell);
+//    	 log.info("sell={}", sell);
     	 
     	 String image = Base64.getEncoder().encodeToString(sell.getThumbnail());
  		 
@@ -51,12 +54,16 @@ public class ChatController {
     public void chatRoom(Long sellId, Model model) {
         
         // 해당 아이디로 채팅방 리스트를 불러옴
-        List<ChatRoom> chatRoomList = chatService.readChatRoom(sellId);
+        List<ChatRoom> chatRoomList = chatRoomService.readChatRoom(sellId);
         //List<Sell> sellList = new ArrayList<>();
         Map<Long, Sell> sellMap = new HashMap<>();
         
         // 해당 리스트에 있는 sellId로 해당 물건의 썸네일 찾음
         Map<Long, String> thumbnails = new HashMap<>();
+        
+        // roomId로 각각의 채팅 찾아줌
+        Map<Long, Chat> chatMap = new HashMap<>();
+        
         for(ChatRoom c : chatRoomList) {
             // 해당 sellId로 Sell 검색
             Sell sell = sellService.read(c.getSellId());
@@ -64,11 +71,15 @@ public class ChatController {
             sellMap.put(c.getRoomId(), sell);
             // thumbnails에 넣음.
             thumbnails.put(c.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
+            
+            // chat 넣음
+            chatMap.put(c.getRoomId(), chatService.readforList(c.getRoomId()));
         }
         model.addAttribute("map", sellMap);
         //model.addAttribute("sell", sellList);
         model.addAttribute("image", thumbnails);
         model.addAttribute("chatRoom", chatRoomList);
+        model.addAttribute("chat", chatMap);
     }
     
     // 상단 바 채팅 리스트(myId or otherId)
@@ -77,27 +88,35 @@ public class ChatController {
     public void chat(String myId, Model model) {
         
         // 해당 아이디로 채팅방 리스트를 불러옴
-        List<ChatRoom> chatRoomList = chatService.readChatRoom(myId);
-        log.info("chatRoomList={}",chatRoomList);
+        List<ChatRoom> chatRoomList = chatRoomService.readChatRoom(myId);
+        //log.info("chatRoomList={}",chatRoomList);
         List<Sell> sellList = new ArrayList<>();
         Map<Long, Sell> sellMap = new HashMap<>();
+        
+        // roomId로 각각의 채팅 찾아줌
+        Map<Long, Chat> chatMap = new HashMap<>();
+        
         
         // 해당 리스트에 있는 sellId로 해당 물건의 썸네일 찾음
         Map<Long, String> thumbnails = new HashMap<>();
         for(ChatRoom c : chatRoomList) {
             // 해당 sellId로 Sell 검색
             Sell sell = sellService.read(c.getSellId());
-            log.info("sell={}",sell);
+            //log.info("sell={}",sell);
             //sellList.add(sell);
             sellMap.put(c.getRoomId(), sell);
             // thumbnails에 넣음.
             thumbnails.put(c.getSellId(), Base64.getEncoder().encodeToString(sell.getThumbnail()));
+            // chat 넣음
+            chatMap.put(c.getRoomId(), chatService.readforList(c.getRoomId()));
         }
+        log.info("chatMap= {}", chatMap);
         
         //model.addAttribute("sell", sellList);
         model.addAttribute("map", sellMap);
         model.addAttribute("image", thumbnails);
         model.addAttribute("chatRoom", chatRoomList);
+        model.addAttribute("chat", chatMap);
     }
     
 }
