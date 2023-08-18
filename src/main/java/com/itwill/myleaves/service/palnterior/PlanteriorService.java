@@ -47,10 +47,7 @@ public class PlanteriorService {
 	
 	// 페이징 처리 포함된 전체 읽기
 	@Transactional(readOnly = true)
-	public Slice<Planterior> read(int pageNumber, int pageSize) {
-		log.info("read(pageNumber = {}, pageSize ={})", pageNumber, pageSize);
-		
-		Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.DESC, "planteriorId"));
+	public Slice<Planterior> read(Pageable pageable) {
 		
 		return planeteriorRepository.findAllByOrderByPlanteriorIdDesc(pageable);
 	}

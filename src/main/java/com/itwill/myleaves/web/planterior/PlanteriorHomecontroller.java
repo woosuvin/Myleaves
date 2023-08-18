@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -50,11 +52,23 @@ public class PlanteriorHomecontroller {
 	@GetMapping
 	// catertgorydto-> param
 	public String planterior(Model model, Authentication auth) {
-		log.info("planterior");
+//		log.info("planterior");
 
 		// 플랜테리어 카드 전체 출력
-		Slice<Planterior> list = planteriorService.read(0, 20);
+		List<Planterior> list = planteriorService.read();
 		model.addAttribute("cardList", list);
+		
+//		// 페이징
+//		Boolean hasNext = list.hasNext(); // 다음 Slice가 존재하는지 존재할 경우 return 값 true
+//		log.info("확인: {}", hasNext);
+////		Pageable nextContains = list.nextPageable().
+//		List<Planterior> nextpl = list.getContent();
+//		int num = list.getNumber();
+//		
+//		model.addAttribute("num", num);
+//		model.addAttribute("next", nextpl);
+//		model.addAttribute("hasNext", hasNext);
+		
 
 		// 이미지
 		Map<Long, String> thumbnails = new HashMap<>();

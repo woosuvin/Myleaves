@@ -51,7 +51,7 @@ span.pick {
 /* 카드 이미지 조정 */
 .imgSize {
 	width: 100%;
-	height: 15em;
+	height: 250px;
 	object-fit: cover;
 }
 

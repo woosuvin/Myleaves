@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log(planteriorId, userId)
 
 			if (userId === 'admin') {
-				if (mngrCount < 4) {
+				if (mngrCount < 8) {
 					const data = { planteriorId, userId };
 
 					axios.post('/planterior/home/like', data)
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							console.log(error);
 						});
 				} else {
-					alert('MD 픽은 최대 4개 이하만 가능합니다.');
+					alert('MD 픽은 최대 8개 이하만 가능합니다.');
 				}
 			} else {
 				const data = { planteriorId, userId };
