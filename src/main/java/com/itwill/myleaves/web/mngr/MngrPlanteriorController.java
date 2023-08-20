@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.itwill.myleaves.repository.planterior.Bookmark;
 import com.itwill.myleaves.repository.planterior.Planterior;
 import com.itwill.myleaves.service.palnterior.MypageService;
+import com.itwill.myleaves.service.palnterior.PlanteriorService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,32 +23,29 @@ import lombok.extern.slf4j.Slf4j;
 public class MngrPlanteriorController {
 
 	private final MypageService mypageService;
+	private final PlanteriorService planteriorService;
 
 	// 북마크 가져오기 -> 삭제는 js가 담당함.
 	@GetMapping
 	public String read(Model model) {
-		log.info("read");
+		//log.info("read");
 		String user = "admin";
 
 		// 북마크 가져오기
 		List<Bookmark> list = mypageService.bookmarkRead(user);
-		log.info("sizeb={}", list.size());
+		//log.info("sizeb={}", list.size());
 
-		List<Planterior> plist = mypageService.read();
-		log.info("sizep={}", plist.size());
+		List<Planterior> result = new ArrayList<>();
+		
+		for(Bookmark b: list) {
+			Planterior planterior = planteriorService.read(b.getPlanteriorId());
+			//log.info("확인:{}", planterior.getPlanteriorId());
+			result.add(planterior);
+		}
 
 		// 보낼 list
-		List<Planterior> result = new ArrayList<>();
 
-		for (int i = 0; i < plist.size(); i++) {
-			for (int j = 0; j < list.size(); j++) {
-				if (plist.get(i).getPlanteriorId() == list.get(j).getPlanteriorId()) {
-					log.info("result = {}", plist.get(i));
-					result.add(plist.get(i));
-				}
-			}
-		}
-		log.info("size={}", result.size());
+		//log.info("size={}", result.size());
 
 		model.addAttribute("cardList", result);
 		

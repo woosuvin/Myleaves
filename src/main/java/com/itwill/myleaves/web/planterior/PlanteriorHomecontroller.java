@@ -95,7 +95,6 @@ public class PlanteriorHomecontroller {
 
 		// 관리자
 		List<Planterior> result = new ArrayList<>();
-		List<Planterior> plist = mypageService.read();
 		List<Bookmark> listMngr = mypageService.bookmarkRead("admin");
 
 		Map<Long, String> thumbnails1 = new HashMap<>();
@@ -104,12 +103,10 @@ public class PlanteriorHomecontroller {
 		}
 		model.addAttribute("imagesMngr", thumbnails1);
 
-		for (int i = 0; i < plist.size(); i++) {
-			for (int j = 0; j < listMngr.size(); j++) {
-				if (plist.get(i).getPlanteriorId() == listMngr.get(j).getPlanteriorId()) {
-					result.add(plist.get(i));
-				}
-			}
+		for(Bookmark b: listMngr) {
+			Planterior planterior = planteriorService.read(b.getPlanteriorId());
+			//log.info("확인:{}", planterior.getPlanteriorId());
+			result.add(planterior);
 		}
 		model.addAttribute("mngrCount", result.size());
 		model.addAttribute("mngrList", result);
