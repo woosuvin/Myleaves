@@ -6,7 +6,10 @@
 		<div class="mb-5 text-center">
 				<h3>MY QnA</h3>
 		</div>
-		
+		<div th:if="${myQnAlist.empty}">
+        	<p class="text-center">등록된 QnA가 없습니다.</p>
+    	</div>
+	<div th:if="${not myQnAlist.empty}">	
 		<form id="qnamyalldeleteForm" method="post" class="my-2">	
 		   	<table class="table table-hover">
 		   	<colgroup>
@@ -66,6 +69,7 @@
 	    </ul>
 	</nav>
 		<!-- 페이징처리 끝 -->	
+</div>		
 	<script src="/js/info/qna/my_qna_alldelete.js"></script>
 	</main>
 </html>

@@ -6,27 +6,32 @@
 			<div class="mb-5 text-center">
 				<h3>FAQ 상세 페이지</h3>
 			</div>
-			<div class="accordion my-2" id="accordionExample">
-				<div class="accordion-item" th:each="faq, status : ${faqs}" role="tabpanel"
-						aria-labelledby="headingOne">
-					<div class="mb-3">
-						<h2 class="accordion-header" th:id="'heading' + ${status.index}"
-						 style="height: 70px;">
-							<button class="accordion-button collapsed" type="button"
-								style="outline:none !important; box-shadow:none !important;"
-								data-bs-toggle="collapse"
-								th:data-bs-target="'#collapse' + ${status.index}"
-								th:aria-controls="'collapse' + ${status.index}"
-								th:text="${faq.question}"></button>
-						</h2>
-						<div th:id="'collapse' + ${status.index}"
-							class="accordion-collapse collapse"
-							th:aria-labelledby="'heading' + ${status.index}"
-							data-bs-parent="#accordionExample">
-							<div class="accordion-body" th:utext="${faq.answer}"></div>
+			<div th:if="${faqs.empty}">
+        		<p class="text-center">등록된 FAQ가 없습니다.</p>
+    		</div>
+    		<div th:if="${not faqs.empty}">
+				<div class="accordion my-2" id="accordionExample">
+					<div class="accordion-item" th:each="faq, status : ${faqs}" role="tabpanel"
+							aria-labelledby="headingOne">
+						<div class="mb-3">
+							<h2 class="accordion-header" th:id="'heading' + ${status.index}"
+							 style="height: 70px;">
+								<button class="accordion-button collapsed" type="button"
+									style="outline:none !important; box-shadow:none !important;"
+									data-bs-toggle="collapse"
+									th:data-bs-target="'#collapse' + ${status.index}"
+									th:aria-controls="'collapse' + ${status.index}"
+									th:text="${faq.question}"></button>
+							</h2>
+							<div th:id="'collapse' + ${status.index}"
+								class="accordion-collapse collapse"
+								th:aria-labelledby="'heading' + ${status.index}"
+								data-bs-parent="#accordionExample">
+								<div class="accordion-body" th:utext="${faq.answer}"></div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>	
 	</main>
 </html>

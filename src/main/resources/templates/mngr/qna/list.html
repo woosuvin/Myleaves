@@ -7,39 +7,44 @@
     	<div class="mb-5 text-center">
 			<h1 class="my-4" style="text-align: center;">QnA 관리자</h1>
 		</div>
-    	<table class="table table-hover">
-		<thead class="text-center">
-			<tr>
-				<th scope="col">No</th>
-				<th scope="col">제목</th>
-				<th scope="col">작성일</th>
-				<th scope="col">작성상태</th>
-			</tr>
-		</thead>
-		<tbody class="text-center">
-				<tr th:each="qna , qnaStat :${qnas}">
-					<td th:text="${qna.qid}"></td> 
-					<td th:text="${qna.title}"></td>
-					<td th:text="${#temporals.format(qna.createdDate, 'yyyy-MM-dd HH:mm' ) }"></td>
-					
-					<td th:if="${not #strings.isEmpty(qna.an_title)}">
-						<a class="btn btn-secondary" th:href="@{/mngr/qna/detail?qid={id} (id= ${qna.qid})}">확인완료</a>
-					</td>
-					<td th:if="${#strings.isEmpty(qna.an_title)}">
-						<a class="btn btn-outline-dark" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">확인중</a>
-					</td>
+		<div th:if="${qnas.empty}">
+        	<p class="text-center">등록된 QnA가 없습니다.</p>
+    	</div>
+    	<div th:if="${not qnas.empty}">
+	    	<table class="table table-hover">
+			<thead class="text-center">
+				<tr>
+					<th scope="col">No</th>
+					<th scope="col">제목</th>
+					<th scope="col">작성일</th>
+					<th scope="col">작성상태</th>
 				</tr>
-			</tbody>
-		</table>
-		<!-- 페이징처리 시작 -->
-		<div class="text-center">
-			<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
-	            <a th:if="${page != nowPage}" th:href="@{/mngr/qna/list(page=${page - 1})}" th:text="${page}"
-	            class="text-decoration-none text-reset"></a>
-	            <strong th:if="${page==nowPage}" th:text ="${page}" style="color:black"></strong>
-	        </th:block>
-        </div>
-		<!-- 페이징처리 끝 -->	
+			</thead>
+			<tbody class="text-center">
+					<tr th:each="qna , qnaStat :${qnas}">
+						<td th:text="${qna.qid}"></td> 
+						<td th:text="${qna.title}"></td>
+						<td th:text="${#temporals.format(qna.createdDate, 'yyyy-MM-dd HH:mm' ) }"></td>
+						
+						<td th:if="${not #strings.isEmpty(qna.an_title)}">
+							<a class="btn btn-secondary" th:href="@{/mngr/qna/detail?qid={id} (id= ${qna.qid})}">확인완료</a>
+						</td>
+						<td th:if="${#strings.isEmpty(qna.an_title)}">
+							<a class="btn btn-outline-dark" th:href="@{/mngr/qna/modify?qid={id} (id= ${qna.qid})}">확인중</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- 페이징처리 시작 -->
+			<div class="text-center">
+				<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+		            <a th:if="${page != nowPage}" th:href="@{/mngr/qna/list(page=${page - 1})}" th:text="${page}"
+		            class="text-decoration-none text-reset"></a>
+		            <strong th:if="${page==nowPage}" th:text ="${page}" style="color:black"></strong>
+		        </th:block>
+	        </div>
+			<!-- 페이징처리 끝 -->	
 		</div>
+	</div>	
 	</main>
 </html>

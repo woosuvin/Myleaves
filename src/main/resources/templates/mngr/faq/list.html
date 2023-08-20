@@ -6,8 +6,12 @@
 	<main layout:fragment="mngrHome">
 	<div class="container">
 		<div class="mb-5 text-center">
-		<h1 class="my-4" style="text-align: center;">FAQ 관리자</h1>
+			<h1 class="my-4" style="text-align: center;">FAQ 관리자</h1>
 		</div>
+		<div th:if="${faqs.empty}">
+        	<p class="text-center">등록된 FAQ가 없습니다.</p>
+    	</div>
+    	<div th:if="${not faqs.empty}">
 			<table class="table table-hover">
 					<thead class="text-center">
 					<tr>
@@ -25,6 +29,7 @@
 					</tr>		
 				</tbody>
 			</table>
+		</div>	
 			<div class="text-end">
 				<a class="btn btn-outline-dark" th:href="@{/mngr/faq/create}">FAQ 작성하기</a>	
 			</div>
