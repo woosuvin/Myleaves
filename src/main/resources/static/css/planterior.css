@@ -70,6 +70,12 @@ span.pick {
 	margin: 0px 0px 0px 0px;
 }
 
+planteriorButtonEleEnglishName {
+	display: block;
+	overflow: hidden;
+	margin: 0px 0px 0px 0px;
+}
+
 /* 마이페이지- 내가 쓴 글 전용*/
 .planteriorButtonEleMyPost {
 	display: block;

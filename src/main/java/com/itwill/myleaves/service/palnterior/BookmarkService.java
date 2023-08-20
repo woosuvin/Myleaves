@@ -29,7 +29,7 @@ public class BookmarkService {
 	// 그러면 일단 생성일때와 삭제일 때 다 restcontroller에서 넘겨주는 거니까
 	// 되겠다.
 	public Bookmark create(BookmarkDto dto) {
-		log.info("create(dto ={})", dto);
+		//log.info("create(dto ={})", dto);
 		
 		// 엔터티 객체로 변환 
 		Bookmark entity = dto.toEntity();
@@ -44,24 +44,26 @@ public class BookmarkService {
 	
 	// 삭제
 	public void delete(Long PlanteriorId, String userId) {
-		log.info("delete(planterior = {}, userId={})", PlanteriorId, userId);
+		//log.info("delete(planterior = {}, userId={})", PlanteriorId, userId);
 		
 		Bookmark entity = bookmarkRepository.findByPlanteriorIdAndUserId(PlanteriorId, userId);
 		bookmarkRepository.delete(entity);
 	}
 	
-	// 삭제-홈에서 사용
+	// 삭제- 플랜테리어컨트롤러에서 사용
 	public void delete(Long PlanteriorId) {
-		log.info("delete(planterior = {})", PlanteriorId);
+		//log.info("delete(planterior = {})", PlanteriorId);
 		
 		Bookmark entity = bookmarkRepository.findByPlanteriorId(PlanteriorId);
-		bookmarkRepository.delete(entity);
+		if(entity != null) {
+			bookmarkRepository.delete(entity);
+		}
 	}
 	
 	// 읽기
 	@Transactional(readOnly = true)
 	public List<Bookmark> read() {
-		log.info("read()");
+		//log.info("read()");
 		
 		return bookmarkRepository.findAll();
 	}

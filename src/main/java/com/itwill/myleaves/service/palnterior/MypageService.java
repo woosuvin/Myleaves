@@ -42,14 +42,14 @@ public class MypageService {
 	// 수정페이지에 가져오는 것
 	@Transactional(readOnly = true)
 	public Planterior read(Long planteriorId) {
-		log.info("read()");
+		//log.info("read()");
 
 		return planteriorRepository.findAllByPlanteriorId(planteriorId);
 	}
 
 	// 수정
 	public Planterior update(PlanteriorUpdateDto dto) throws IOException {
-		log.info("update(dto = {})", dto);
+		//log.info("update(dto = {})", dto);
 
 		Planterior entity = planteriorRepository.findById(dto.getPlanteriorId()).orElseThrow();
 		entity.update(dto);
@@ -58,7 +58,7 @@ public class MypageService {
 
 	// 삭제
 	public void delete(Long planteriorId) {
-		log.info("delete(planteriorId = {})", planteriorId);
+		//log.info("delete(planteriorId = {})", planteriorId);
 
 		Planterior entity = planteriorRepository.findByPlanteriorId(planteriorId);
 		planteriorRepository.delete(entity);
@@ -83,7 +83,7 @@ public class MypageService {
 	
 	@Transactional(readOnly = true)
 	public List<Planterior> read() {
-		log.info("read()");
+		//log.info("read()");
 
 		return planteriorRepository.findAllByOrderByPlanteriorIdDesc();
 	}

@@ -58,7 +58,7 @@ public class MypagePlanteriorController {
 		
 		Map<Long, String> thumbnails = new HashMap<>();
 		for(Planterior p : list) {
-			log.info("{}", p.getThumbnail());
+			//log.info("{}", p.getThumbnail());
 			thumbnails.put(p.getPlanteriorId(), Base64.getEncoder().encodeToString(p.getThumbnail()));
 		}
 		model.addAttribute("images", thumbnails);
@@ -80,7 +80,7 @@ public class MypagePlanteriorController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/updateDelete")
 	public void planteriorUpdate(Model model, Long planteriorId) {
-		log.info("planteriorUpdate(planteriorId={})", planteriorId);
+		//log.info("planteriorUpdate(planteriorId={})", planteriorId);
 		
 		Planterior list = mypageService.read(planteriorId);
 		PlanteriorCategory plist = categoryService.read(planteriorId);
@@ -101,7 +101,7 @@ public class MypagePlanteriorController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/update")
 	public String update(TotalUpdateDto dto) throws IOException {
-		log.info("update(dto ={})", dto);
+		//log.info("update(dto ={})", dto);
 		
 		categoryService.update(dto.planteriorCategoryUpdateDto());
 		mypageService.update(dto.planteriorUpdateDto());
@@ -112,7 +112,7 @@ public class MypagePlanteriorController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("delete")
 	public String delete(long planteriorId, String userId) {
-		log.info("delete(planteriorId = {})", planteriorId);
+		//log.info("delete(planteriorId = {})", planteriorId);
 		
 		mypageService.delete(planteriorId);
 		bookmarkService.delete(planteriorId);
@@ -123,14 +123,14 @@ public class MypagePlanteriorController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("bookmark")
 	public void bookmarkRead(Model model, String userId, @PageableDefault(page = 0, size = 8) Pageable pageable) {
-		log.info("bookmarkRead");
+		//log.info("bookmarkRead");
 		
 		// 북마크 가져오기
 		Page<Bookmark> list = mypageService.bookmarkRead(userId, pageable);
 		List<Planterior> result = new ArrayList<>();
 		for(Bookmark b: list) {
 			Planterior planterior = planteriorSerivce.read(b.getPlanteriorId());
-			log.info("확인:{}", planterior.getPlanteriorId());
+			//log.info("확인:{}", planterior.getPlanteriorId());
 			result.add(planterior);
 		}
 		
@@ -139,7 +139,7 @@ public class MypagePlanteriorController {
 			if (planterior != null) {
 		        thumbnails.put(planterior.getPlanteriorId(), Base64.getEncoder().encodeToString(planterior.getThumbnail()));
 		    } else {
-		        log.warn("Encountered a null Planterior object.");
+		        //log.warn("Encountered a null Planterior object.");
 		    }
 		}
 		

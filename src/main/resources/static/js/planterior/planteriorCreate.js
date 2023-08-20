@@ -112,12 +112,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				// 클릭한 버튼에 'clicked' 클래스 추가
 				btn.classList.add('clicked');
-				lastClickedBtn = btn;
-				lastClickedValue = e.target.value;
+				lastClickedBtnFilterSecond = btn;
+				lastClickedValueFilterSecond = e.target.value;
 			}
 
 			console.log(e.target.value);
-			inputConditionContent.value += lastClickedValue + ',';
+			inputConditionContent.value += lastClickedValueFilterSecond + ',';
 
 		})
 	}
@@ -144,6 +144,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		inputConditionContent.value = '';
 	});
 
+	const file = document.querySelector('#file');
+	let textContent = '';
+	const preview = document.querySelector('.preview');
+	file.addEventListener('change', () => {
+		const selectedFiles = file.files
+
+		for (const files of selectedFiles) {
+			textContent = `파일명 : ${files.name}`;
+			preview.innerHTML = textContent;
+		}
+	})
 
 	btnCreate.addEventListener('click', (e) => {
 		e.preventDefault();
@@ -154,12 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		const stateContent = document.querySelector('input#stateContent').value;
 		const conditionContent = document.querySelector('input#conditionContent').value;
-		const file = document.querySelector('#file').value;
 
 		// 카테고리 삽입 가능성 존재
 		// 이미지 성공시 !formFile 넣기
 		if (plantName === '' || plantNameEnglish === '' ||
-			stateContent === '' || conditionContent === '') {
+			stateContent === '' || conditionContent === '' || textContent === '') {
 			alert('비어있는 부분을 선택해주세요')
 			return;
 		}

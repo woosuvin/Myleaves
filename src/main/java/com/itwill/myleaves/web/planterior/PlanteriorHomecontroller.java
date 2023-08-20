@@ -120,7 +120,7 @@ public class PlanteriorHomecontroller {
 	// 검색
 	@GetMapping("search")
 	public String filterRead(Model model, PlanteriorCategoryCreateDto dto, Authentication auth) {
-		log.info("filterRead(dto={})", dto);
+		// log.info("filterRead(dto={})", dto);
 
 		if (dto.getConditionContent().isEmpty()) {
 			List<PlanteriorCategory> stateList = categoryService.findState(dto.getStateContent());
@@ -254,20 +254,20 @@ public class PlanteriorHomecontroller {
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/create")
 	public void create() {
-		log.info("planteriorCreate");
+		//log.info("planteriorCreate");
 
 	}
 
 	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/create")
 	public String create(TotalCreateDto dto) throws IOException {
-		log.info("create(dto ={}) post", dto);
+		//log.info("create(dto ={}) post", dto);
 
 		dto.setThumbnail(dto.getFile().getBytes());
 
 		// form에서 가져온 data DB insert
 		Planterior entity = planteriorService.create(dto.planteriorCreateDto());
-		log.info("확인 = {}", entity.getPlanteriorId());
+		//log.info("확인 = {}", entity.getPlanteriorId());
 
 		categoryService.create(dto.planteriorCategoryCreateDto(entity.getPlanteriorId()));
 

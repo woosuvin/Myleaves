@@ -31,10 +31,10 @@ public class BookmarkRestController {
 	@PreAuthorize("hasAnyRole('MEMBER', 'ADMIN')")
 	@PostMapping("/like")
 	public Bookmark createBookmark(@RequestBody BookmarkDto dto) {
-		log.info("createBookmark(dto = {}), dto");
+		//log.info("createBookmark(dto = {}), dto");
 		
 		Bookmark bookmark = bookmarkService.create(dto);
-		log.info("bookmark={}", bookmark);
+		//log.info("bookmark={}", bookmark);
 		
 		return bookmark;
 	}
@@ -44,7 +44,7 @@ public class BookmarkRestController {
 	@DeleteMapping("/delete/{planteriorId}/{userId}")
 	@ResponseBody
 	public ResponseEntity<String> deleteBookmark(@PathVariable long planteriorId, @PathVariable String userId) {
-		log.info("deleteBookmark(planteriorId = {}, userId={})", planteriorId, userId);
+		//log.info("deleteBookmark(planteriorId = {}, userId={})", planteriorId, userId);
 		
 		bookmarkService.delete(planteriorId, userId);
 		
@@ -53,11 +53,11 @@ public class BookmarkRestController {
 	
 	@DeleteMapping("/delete")
 	public ResponseEntity<Integer> deleteMngr(@RequestBody List<BookmarkDto> data) {
-		log.info("deleteMngr(data = {})", data);
+		//log.info("deleteMngr(data = {})", data);
 		
 		for(BookmarkDto dto: data) {
 			long planteriorId = dto.getPlanteriorId();
-			log.info("planteriorId={}", planteriorId );
+			//log.info("planteriorId={}", planteriorId );
 			
 			bookmarkService.delete(planteriorId, dto.getUserId());
 		}

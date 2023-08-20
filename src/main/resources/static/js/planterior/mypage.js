@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const userId = document.querySelector('#userId').value;
 	
 	// 화면 전환
-	const goToHome = function() {
+	const goToHome = function(userId) {
 		window.location.href = `/mypage/planterior/bookmark?userId=${userId}`;
 	}
 	
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			e.preventDefault();
 
 			const planteriorId = imgButtonFill.value;
-			const userId = document.querySelector('#userId').value;
+			const userId = document.querySelector('.userId').value;
 
 			console.log(planteriorId, userId);
 			const data = { planteriorId, userId }
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					console.log(response);
 
 					if (response.data) {
-						goToHome();
+						goToHome(userId);
 					} else {
 						console.log('')
 					}

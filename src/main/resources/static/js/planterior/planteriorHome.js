@@ -78,12 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				// 클릭한 버튼에 'clicked' 클래스 추가
 				btn.classList.add('clicked');
-				lastClickedBtn = btn;
-				lastClickedValue = e.target.value;
+				lastClickedBtnFilterSecond = btn;
+				lastClickedValueFilterSecond = e.target.value;
 			}
 
 			console.log(e.target.value);
-			inputConditionContent.value += lastClickedValue + ',';
+			inputConditionContent.value += lastClickedValueFilterSecond + ',';
+			console.log(inputConditionContent.value)
 
 		})
 	}

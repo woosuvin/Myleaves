@@ -25,15 +25,15 @@ public class PlanteriorService {
 	private final PlanteriorRepository planeteriorRepository;
 	
 	public Planterior create(PlanteriorCreateDto dto) {
-		log.info("create(dto={})",dto);
+		//log.info("create(dto={})",dto);
 		
 		// DTO를 Entity로 변환
 		Planterior entity = dto.toEntity();
-		log.info("save전 entity{} = ", entity);
+		//log.info("save전 entity{} = ", entity);
 		
 		// DB에 저장
 		planeteriorRepository.save(entity);
-		log.info("save 후 entity={} = ", entity );
+		//log.info("save 후 entity={} = ", entity );
 		
 		return entity;
 		
@@ -55,7 +55,7 @@ public class PlanteriorService {
 	// 페이징 처리 미포함된 전체 읽기
 	@Transactional(readOnly = true)
 	public List<Planterior> read() {
-		log.info("read()");
+		//log.info("read()");
 		
 		return planeteriorRepository.findAllByOrderByPlanteriorIdDesc();
 	}

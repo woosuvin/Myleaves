@@ -26,34 +26,34 @@ public class CategoryService {
 
 	@Transactional(readOnly = true)
 	public PlanteriorCategory read(Long planteriorId) {
-		log.info("read()");
+		//log.info("read()");
 
 		return planteriorCategoryRepository.findAllByPlanteriorId(planteriorId);
 	}
 	
 	
 	public List<PlanteriorCategory> findState(String stateContent) {
-		log.info("fidnState(stateContent ={})", stateContent);
+		//log.info("fidnState(stateContent ={})", stateContent);
 
 		return planteriorCategoryRepository.findAllByStateContent(stateContent);
 	}
 
 	public List<PlanteriorCategory> findStateAndCondition(String stateContent, String conditionContent) {
-		log.info("findStateAndCondition(stateContent = {}, conditionContent = {})", stateContent, conditionContent);
+		//log.info("findStateAndCondition(stateContent = {}, conditionContent = {})", stateContent, conditionContent);
 
 		return planteriorCategoryRepository.findAllByStateContentAndConditionContentContainsIgnoreCase(stateContent,
 				conditionContent);
 	}
 
 	public PlanteriorCategory create(PlanteriorCategoryCreateDto dto) {
-		log.info("create(dto = {})", dto);
+		//log.info("create(dto = {})", dto);
 
 		// 변환
 		PlanteriorCategory entity = dto.toEntity();
-		log.info("save전 entity{} = ", entity);
+		//log.info("save전 entity{} = ", entity);
 
 		planteriorCategoryRepository.save(entity);
-		log.info("save 후 entity={} = ", entity);
+		//log.info("save 후 entity={} = ", entity);
 
 		return entity;
 
@@ -61,7 +61,7 @@ public class CategoryService {
 
 	// 수정
 	public void update(PlanteriorCategoryUpdateDto dto) {
-		log.info("update(dto = {})", dto);
+		//log.info("update(dto = {})", dto);
 
 		PlanteriorCategory entity = planteriorCategoryRepository.findById(dto.getPcid()).orElseThrow();
 		entity.update(dto);

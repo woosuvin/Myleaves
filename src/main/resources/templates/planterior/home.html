@@ -87,7 +87,9 @@
 						<div class="card-body">
 							<div class="">
 								<p class="planteriorButtonEle" th:text="${mngrList.plantName}" />
-								<p class="planteriorButtonEle"
+							</div>
+							<div>
+								<p class="planteriorButtonEleEnglishName"
 									th:text="'(' + ${mngrList.plantNameEnglish} +')'" />
 							</div>
 						</div>
@@ -133,13 +135,15 @@
 							<div class="card-body row">
 								<div class="col-9">
 									<p class="planteriorButtonEle" th:text="${list.plantName}" />
-									<p class="planteriorButtonEle"
-										th:text="'(' + ${list.plantNameEnglish} +')'" />
 								</div>
 								<div class="col-3 text-end">
 									<button class="btn-outline-dark none">
 										<img th:src="@{/images/planterior/bookmark.svg}" />
 									</button>
+								</div>
+								<div>
+									<p class="planteriorButtonEleEnglishName"
+										th:text="'(' + ${list.plantNameEnglish} +')'" />
 								</div>
 							</div>
 						</div>
@@ -163,15 +167,16 @@
 								<div class="card-body row">
 									<div class="col-9">
 										<p class="planteriorButtonEle" th:text="${list.plantName}" />
-										<p class="planteriorButtonEle"
-											th:text="'(' + ${list.plantNameEnglish} +')'" />
 									</div>
 									<div class="col-3 text-end">
 										<button class="btn-outline-dark notBookmark">
 											<img th:src="@{/images/planterior/bookmark.svg}" />
 										</button>
 									</div>
-									<div></div>
+									<div>
+										<p class="planteriorButtonEleEnglishName"
+											th:text="'(' + ${list.plantNameEnglish} +')'" />
+									</div>
 								</div>
 							</div>
 						</th:block>
@@ -183,14 +188,16 @@
 									<div class="card-body row">
 										<div class="col-9">
 											<p class="planteriorButtonEle" th:text="${list.plantName}" />
-											<p class="planteriorButtonEle"
-												th:text="'(' + ${list.plantNameEnglish} +')'" />
 										</div>
 										<div class="col-3 text-end">
 											<button class="btn-outline-dark imgButton"
 												th:value="${list.planteriorId}">
 												<img th:src="@{/images/planterior/bookmark.svg}" />
 											</button>
+										</div>
+										<div>
+											<p class="planteriorButtonEleEnglishName"
+												th:text="'(' + ${list.plantNameEnglish} +')'" />
 										</div>
 									</div>
 								</div>
@@ -202,14 +209,16 @@
 									<div class="card-body row">
 										<div class="col-9">
 											<p class="planteriorButtonEle" th:text="${list.plantName}" />
-											<p class="planteriorButtonEle"
-												th:text="'(' + ${list.plantNameEnglish} +')'" />
 										</div>
 										<div class="col-3 text-end">
 											<button class="btn-outline-dark imgButtonFill"
 												th:value="${list.planteriorId}">
 												<img th:src="@{/images/planterior/bookmarkFill.svg}" />
 											</button>
+										</div>
+										<div>
+											<p class="planteriorButtonEleEnglishName"
+												th:text="'(' + ${list.plantNameEnglish} +')'" />
 										</div>
 									</div>
 								</div>
@@ -221,10 +230,11 @@
 		</div>
 		</th:block>
 	</div>
-	<!-- 더보기 버튼 -->
+	<!-- 더보기 버튼
 	<div class="d-flex justify-content-center">
 		<button id="loadMoreButton" class="m-4 btn btn-outline-dark ">더보기</button>
 	</div>
+	 -->
 
 	<!-- end -->
 </main>
