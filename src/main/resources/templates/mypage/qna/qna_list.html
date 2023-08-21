@@ -9,8 +9,8 @@
 		<div th:if="${myQnAlist.empty}">
         	<p class="text-center">등록된 QnA가 없습니다.</p>
     	</div>
-	<div th:if="${not myQnAlist.empty}">
 		
+		<div th:if="${not myQnAlist.empty}">
 		<div class="row p-0 m-0 my-2">
 			<div class="col-6 d-flex justify-content-start p-0">
 				<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
@@ -24,14 +24,16 @@
 		<form id="qnamyalldeleteForm" method="post" class="my-2">	
 		   	<table class="table table-hover">
 		   	<colgroup>
-				<col width="2%">
-				<col width="7%">
-				<col width="2%">
-				<col width="2%">
+				<col width="1%">
+				<col width="1%">
+				<col width="8%">
+				<col width="1%">
+				<col width="1%">
 			</colgroup>
 				<thead class="text-center">
 					<tr>
 						<th scope="col"><input type="checkbox" id="selectAll" /></th>
+						<th scope="col">비밀글</th>
 						<th scope="col">제목</th>
 						<th scope="col">작성일</th>
 						<th scope="col">진행상태</th>
@@ -44,6 +46,8 @@
 							<input type="hidden" id="hiddenSelectedQnaIds" name="hiddenSelectedQnaIds" th:value="${qnalist.qid}" />
 							<input type="hidden" id="hiddenuserId" name="hiddenSelectedQnaIds" th:value="${qnalist.userId}" />
 						</td>
+						<td scope="col" th:if="${qnalist.secret == 1}">🔒</td>
+						<td scope="col" th:if="${qnalist.secret == 0}">🗝</td>
 						<td scope="col">
 							<a th:href="@{/mypage/qna/detail?(userId=${#authentication.name},qid=${qnalist.qid})}" th:text=${qnalist.title}
 							class="text-decoration-none text-reset"></a>
@@ -56,20 +60,7 @@
 			</table>
 		
 		</form>
-		<!-- 
-		<div class="row p-0 m-0 my-2">
-			<div class="col-6 d-flex justify-content-start p-0">
-				<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
-			</div>
-			
-			<div class="col-6 d-flex justify-content-end p-0">
-	        	<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
-			</div>
-		</div>
-		 -->
-		<!-- <div class="col-6 d-flex justify-content-end">
-        	<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
-		</div> -->
+
 		<!-- 페이징처리 시작 -->
         <nav aria-label="...">
 	    <ul class="pagination pagination-sm justify-content-center">

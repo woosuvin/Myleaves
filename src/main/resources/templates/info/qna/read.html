@@ -18,7 +18,7 @@
 				<col width="1%">
 				<col width="8%">
 				<col width="1%">
-				<col width="1%">
+				<col width="2%">
 				<col width="1%">
 			</colgroup>
 			<thead class="text-center">
@@ -33,7 +33,7 @@
 			<tbody class="text-center">
 				<tr th:each="qna: ${qnas}">
 					<td th:if="${qna.secret == 1}">🔒</td>
-					<td th:if="${qna.secret == 0}">🗝
+					<td th:if="${qna.secret == 0}">🗝</td>
 					<td class="d-none" th:text="${qna.qid}" ></td>
 					<td
 						th:if="${qna.secret == 1 && qna.userId == #authentication.name}">
