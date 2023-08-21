@@ -46,12 +46,18 @@
 					    <tr th:each="member : ${members}">
 					        <td class="text-center" th:text="${member.name}"></td>
 					        <td class="text-center" th:text="${member.userId}"></td>
+					        
 					        <td class="text-center" th:if="${member.phone}" th:text="${member.phone.substring(0, 3) + '-' + member.phone.substring(3, 7) + '-' + member.phone.substring(7)}"></td>
 							<td class="text-center" th:unless="${member.phone}">N/A</td>
+							
 					        <td class="text-center" th:text="${member.email}"></td>
-					        <td class="text-center" th:text="${member.birth}"></td>
+					        
+					        <td class="text-center" th:if="${member.birth != null}" th:text="${member.birth}"></td>
+							<td class="text-center" th:unless="${member.birth != null}">N/A</td>
+					        
 					        <td class="text-center" th:text="${#temporals.format(member.joinDate, 'yyyy-MM-dd')}"></td>
-					        <td class="text-center" th:text="${member.gender}"></td>
+					        <td class="text-center" th:if="${member.gender}" th:text="${member.gender}"></td>
+					        <td class="text-center" th:unless="${member.gender}">N/A</td>
 					    </tr>
 					</tbody>
 				</table>

@@ -1,6 +1,7 @@
 package com.itwill.myleaves.repository.member;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface MemberRepository extends JpaRepository<Member, String> {
 
+	Optional<Member> findByEmail(String email);
+	
 	Member findByUserId(String userId);
 
 	Member findByNameAndEmail(String name, String email);

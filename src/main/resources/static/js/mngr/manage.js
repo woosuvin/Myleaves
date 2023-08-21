@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	var labelList1 = new Array();
 	var valueList1 = new Array();
 	var colorList1 = new Array();
-	
+
 	var labelList2 = new Array();
 	var valueList2 = new Array();
 	var colorList2 = new Array();
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		valueList1.push(d.cnt);
 		colorList1.push(colorize());
 	}
-	
+
 	for (var i = 0; i < jData2.length; i++) {
 		var d = jData2[i];
 		labelList2.push(d.month);
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			data: valueList1
 		}]
 	};
-	
+
 	var data2 = {
 		labels: labelList2,
 		datasets: [{
@@ -45,39 +45,43 @@ document.addEventListener('DOMContentLoaded', () => {
 	};
 
 	var options1 = {
-	    responsive: false, // 반응형 비활성화
-	    maintainAspectRatio: false, // 가로:세로 비율 유지 비활성화
-	    title: {
-	        display: true,
-	        text: '성별 가입자 수'
-	    }
+		responsive: false, // 반응형 비활성화
+		maintainAspectRatio: false, // 가로:세로 비율 유지 비활성화
+		plugins: {
+			title: {
+				display: true,
+				text: '성별 가입자'
+			}
+		}
 	};
-	
+
 	var options2 = {
-	    responsive: false, // 반응형 비활성화
-	    maintainAspectRatio: false, // 가로:세로 비율 유지 비활성화
-	    title: {
-	        display: true,
-	        text: '월별 가입자 수'
-	    },
-	    legend: {
-        display: false // 범례 표시하지 않음
-    	}
+		responsive: false, // 반응형 비활성화
+		maintainAspectRatio: false, // 가로:세로 비율 유지 비활성화
+		plugins: {
+			legend: {
+				display: false
+			},
+			title: {
+				display: true,
+				text: '월별 가입자 수'
+			}
+		}
 	};
-	
+
 	var ctx1 = document.getElementById('genderChart1').getContext('2d');
 	var ctx2 = document.getElementById('genderChart2').getContext('2d');
-	
+
 	new Chart(ctx1, {
-	    type: 'pie',
-	    data: data1,
-	    options: options1 // 위에서 설정한 옵션 적용
+		type: 'pie',
+		data: data1,
+		options: options1 // 위에서 설정한 옵션 적용
 	});
-	
+
 	new Chart(ctx2, {
-	    type: 'bar',
-	    data: data2,
-	    options: options2 // 위에서 설정한 옵션 적용
+		type: 'bar',
+		data: data2,
+		options: options2 // 위에서 설정한 옵션 적용
 	});
 
 	function colorize() {

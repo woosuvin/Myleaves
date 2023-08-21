@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		axios.get(reqUrl)
 			.then((response) => {
-				alert(response.data);
+				alert('아이디는 ' + response.data + '입니다.');
 			})
 			.catch((error) => {
 				console.log(error);

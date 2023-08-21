@@ -16,15 +16,17 @@
            text-align: center;
            height: 10vh;
        }
-       table {
-        border-collapse: separate;
-        border-spacing: 0 10px; /* 여기서 10px를 조절하여 원하는 간격을 설정하세요 */
-       }
+       th {
+            padding: 8px;
+        }
+        td {
+            padding: 5px;
+        }
    </style>
 </head>
 <main layout:fragment="main">
 	<div class="center-content">
-		<h3 class="text-content mb-5">비밀번호 변경</h3>
+		<h3 class="text-content mb-5">비밀번호 수정</h3>
 	</div>
 	<div class="center-content mt-3">
 		<table>
@@ -35,18 +37,18 @@
 						   required /></td>
 			</tr>
 			<tr>
-				<th>변경할 비밀번호</th>
-				<td><input type="password" id="newPwd" placeholder="변경할 비밀번호"
+				<th>수정할 비밀번호</th>
+				<td><input type="password" id="newPwd" placeholder="수정할 비밀번호"
 					required /></td>
 			</tr>
 			<tr>
-				<th>변경할 비밀번호 재입력</th>
+				<th>수정할 비밀번호 재입력</th>
 				<td><input type="password" id="re-newPwd"
-					placeholder="변경할 비밀번호 재입력" required /></td>
+					placeholder="수정할 비밀번호 재입력" required /></td>
 			</tr>
 		</table>
 		<div>
-			<button class="btn btn-success" id="btnSubmit">변경 완료</button>
+			<button class="btn btn-outline-dark mt-3" id="btnSubmit">수정 완료</button>
 		</div>
 	</div>
 </main>

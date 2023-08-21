@@ -20,6 +20,14 @@
         .left-text {
             text-align: left;
         }
+	   .error-message {
+	        color: red;
+	        max-height: 2em;
+	        overflow: hidden;
+	        white-space: nowrap;
+	        text-overflow: ellipsis;
+	        padding-top: 0.5em; /* Add padding to the top of the error message */
+	    }
     </style>
 </head>
 <main layout:fragment="main">
@@ -49,6 +57,9 @@
 						   name="pwd"
 						   placeholder="비밀번호"
 						   required />
+					 <!-- 
+					 <p id="pwdErrorMessage" class="error-message" style="color: red;"></p>
+					  -->
 				</div>
 				<div>
 					<div class="left-text">

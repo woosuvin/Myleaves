@@ -3,12 +3,12 @@ package com.itwill.myleaves.service.member;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
-import java.util.TreeMap;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,9 +40,11 @@ public class MemberService implements UserDetailsService {
 	private final MemberRepository memberRepository;
 	private final PasswordEncoder passwordEncoder;
 
+	@Value("${cos.key}")
+	private String cosKey;
+
 	// 회원가입
 	public String registerMember(MemberSignUpDto dto) {
-
 		log.info("registerMember(dto={})", dto);
 
 		Member entity = Member.builder().userId(dto.getUserId()).name(dto.getName())
@@ -58,20 +60,18 @@ public class MemberService implements UserDetailsService {
 	}
 
 	@Transactional
-	public void registerMember(KakaoProfile kakaoProfile) {
-		log.info("registerMember(dto={})", kakaoProfile);
+	public void registerMember(Member kakaoMember) {
+		log.info("registerMember(dto={})", kakaoMember);
 
-		UUID garbagePwd = UUID.randomUUID();
-		log.info("registerMember(uuid={})", garbagePwd);
+//		UUID garbagePwd = UUID.randomUUID();
+//		log.info("registerMember(cosKey={})", cosKey);
+//
+//		Member entity = Member.builder().userId(kakaoProfile.getId())
+//				.name(kakaoProfile.getKakao_account().getProfile().getNickname())
+//				.pwd(cosKey).email(kakaoProfile.getKakao_account().getEmail())
+//				.build();
 
-		Member entity = Member.builder().userId(kakaoProfile.getId())
-				.name(kakaoProfile.getKakao_account().getProfile().getNickname())
-				.pwd(passwordEncoder.encode(garbagePwd.toString())).email(kakaoProfile.getKakao_account().getEmail())
-				.build();
-
-		log.info("registerMember(save 전: entity={})", entity);
-
-		memberRepository.save(entity);
+		memberRepository.save(kakaoMember);
 	}
 
 	@Override
@@ -79,7 +79,8 @@ public class MemberService implements UserDetailsService {
 		log.info("loadUserByUsername(userId={})", userId);
 
 		UserDetails user = memberRepository.findByUserId(userId);
-
+		log.info("loadUserByUsername(user={})", user);
+		
 		if (user != null) {
 			return user;
 		}
@@ -305,46 +306,52 @@ public class MemberService implements UserDetailsService {
 	 * @return
 	 */
 	public String readMonth() {
-        List<Member> members = memberRepository.findAll();
+		List<Member> members = memberRepository.findAll();
 
-        List<MemberJoinDateDto> months = new ArrayList<>();
-        for (int i = 1; i <= 12; i++) {
-        	MemberJoinDateDto monthDto = new MemberJoinDateDto();
-            monthDto.setMonth(i);
-            monthDto.setCnt(0); // Initialize count to 0
+		List<MemberJoinDateDto> months = new ArrayList<>();
+		for (int i = 1; i <= 12; i++) {
+			MemberJoinDateDto monthDto = new MemberJoinDateDto();
+			monthDto.setMonth(i);
+			monthDto.setCnt(0); // Initialize count to 0
 
-            months.add(monthDto);
-        }
+			months.add(monthDto);
+		}
 
-        for (Member member : members) {
-            // Assuming joinDate is of type LocalDateTime
-        	
-        	try {
-        		Month joinMonth = member.getJoinDate().getMonth();
-        		
-        		for (MemberJoinDateDto monthDto : months) {
-        			if (monthDto.getMonth() == joinMonth.getValue()) {
-        				monthDto.setCnt(monthDto.getCnt() + 1);
-        				break;
-        			}
-        		}
-        	} catch (Exception e) {
+		for (Member member : members) {
+			// Assuming joinDate is of type LocalDateTime
+
+			try {
+				Month joinMonth = member.getJoinDate().getMonth();
+
+				for (MemberJoinDateDto monthDto : months) {
+					if (monthDto.getMonth() == joinMonth.getValue()) {
+						monthDto.setCnt(monthDto.getCnt() + 1);
+						break;
+					}
+				}
+			} catch (Exception e) {
 //        		log.info(null);
-        	}
-        }
+			}
+		}
 
-        Gson gson = new Gson();
-        JsonArray jArray = new JsonArray();
+		Gson gson = new Gson();
+		JsonArray jArray = new JsonArray();
 
-        for (MemberJoinDateDto monthDto : months) {
-            JsonObject object = new JsonObject();
-            object.addProperty("month", monthDto.getMonth());
-            object.addProperty("cnt", monthDto.getCnt());
-            jArray.add(object);
-        }
+		for (MemberJoinDateDto monthDto : months) {
+			JsonObject object = new JsonObject();
+			object.addProperty("month", monthDto.getMonth());
+			object.addProperty("cnt", monthDto.getCnt());
+			jArray.add(object);
+		}
 
-        String json = gson.toJson(jArray);
+		String json = gson.toJson(jArray);
 
-        return json;
-    }
+		return json;
+	}
+	@Transactional(readOnly = true)
+	public Member findMember(String userId) {
+		log.info("findMember(userId={})", userId);
+
+		return memberRepository.findByUserId(userId);
+	}
 }

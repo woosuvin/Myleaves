@@ -44,6 +44,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	
+	// OAuth2.0
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	
 	// email 인증
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     
@@ -70,4 +73,3 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
