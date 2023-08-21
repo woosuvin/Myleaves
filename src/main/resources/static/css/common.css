@@ -81,7 +81,12 @@ footer {
 .nav-link {
 	color: black;
 	margin: 0px 10px;
-	font-weight: lighter
+	font-weight: lighter;
+	transition: color 0.3s;
+}
+
+.nav-link:hover {
+	color: #006334;
 }
 
 /*푸터 설명 줄바꿈*/
@@ -131,7 +136,7 @@ footer {
 
 .thumbnail-soldout-store {
 	object-fit: cover;
-	height: 250px;
+	height: 300px;
 	width: -webkit-fill-available;
 	opacity: 50%
 }
@@ -146,7 +151,7 @@ footer {
 
 .thumbnail-onsale-store {
 	object-fit: cover;
-	height: 250px;
+	height: 300px;
 	width: -webkit-fill-available;
 }
 
@@ -157,58 +162,78 @@ footer {
 	color: black;
 }
 
-.thumbnail-onSale-buy {
+.main-thumbnail-onSale-buy {
 	object-fit: cover;
 	height: 250px;
+	width: -webkit-fill-available;
+}
+
+.thumbnail-onSale-buy {
+	object-fit: cover;
+	height: 300px;
 	width: -webkit-fill-available;
 }
 
 .thumbnail-onSale-buy-label {
-	background: hotpink;
-	border: 1px solid black;
-	padding: 3px 15px 3px 15px;
-	position: absolute;
-	top: 5%;
-	right: 5%;
-	font-size: 10pt;
+    padding: 8px 12px 8px 12px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    font-size: 10pt;
+    font-weight: bold;
+    background: rgba(255, 117, 222);
 }
 
-.thumbnail-onNego-buy {
+.main-thumbnail-onNego-buy {
 	object-fit: cover;
 	height: 250px;
 	width: -webkit-fill-available;
 }
 
-.thumbnail-onNego-buy-label {
-	background: mediumaquamarine;
-	border: 1px solid black;
-	padding: 3px 15px 3px 15px;
-	position: absolute;
-	top: 5%;
-	right: 5%;
-	font-size: 10pt;
+.thumbnail-onNego-buy {
+	object-fit: cover;
+	height: 300px;
+	width: -webkit-fill-available;
 }
 
-.thumbnail-soldout-buy {
+.thumbnail-onNego-buy-label {
+    padding: 8px 12px 8px 12px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    font-size: 10pt;
+    font-weight: bold;
+    background: rgba(2, 187, 119);
+}
+
+.main-thumbnail-soldout-buy {
 	object-fit: cover;
 	height: 250px;
 	width: -webkit-fill-available;
 	opacity: 50%;
 }
 
+.thumbnail-soldout-buy {
+	object-fit: cover;
+	height: 300px;
+	width: -webkit-fill-available;
+	opacity: 50%;
+}
+
 .thumbnail-soldout-buy-label {
-	background: darkgray;
-	border: 1px solid black;
-	padding: 3px 15px 3px 15px;
-	position: absolute;
-	top: 5%;
-	right: 5%;
-	font-size: 10pt;
+    padding: 8px 12px 8px 12px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    font-size: 10pt;
+    font-weight: bold;
+    background: darkgray;
 }
 
 /* main page */
 .mainH2 {
 	margin-bottom: 0px;
+	margin-left: 12px;
 	font-family: 'ChosunNm';
 }
 
@@ -223,11 +248,11 @@ a.mainMore:visited {
 }
 
 a.mainMore:hover {
-	color: #3B7CFF;
+	color: #006334;
 }
 
 a.mainMore:active {
-	color: #3B7CFF;
+	color: #006334;
 }
 
 .mainMore {
@@ -261,11 +286,70 @@ a.mainMore:active {
 	width: 50%;
 }
 
-.planteriorImage {
-	flex: 1;
-	width: 50%
+.communityTitle {
+	  height: 20px;
+	  width: 245px;
+	  padding: 0;
+	  overflow: hidden;
+	  position: relative;
+	  display: inline-block;
+	  margin: 0 5px 0 5px;
+	  text-align: left;
+	  text-decoration: none;
+	  text-overflow: ellipsis;
+	  white-space: nowrap;
+	  color: #000;
 }
 
+.red-text {
+    color: red;
+}
+
+.carousel-inner { /* 이미지 슬라이드 크기 고정 */
+     width: auto;
+     height: 300px;
+     margin-bottom:50px;
+}
+
+.carousel-item {
+     /* width: auto; */
+     height: inherit;
+}
+
+.carousel-item > a > img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.carousel-item > img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.carousel-indicators [data-bs-target] {
+	background-color: #02BB77;
+	width: 60px;
+}
+
+.carousel-indicators {
+    bottom:-50px;
+}
+
+/* 카드 이미지 조정 */
+.imgSize {
+	width: 100%;
+	height: 250px;
+	object-fit: cover;
+}
+
+/* 책갈피 버튼 조정 */
+.planteriorButton {
+	float: right;
+	border: none;
+	background-color: transparent;
+}
 
 /* 페이징.. */
 .pagination { 
