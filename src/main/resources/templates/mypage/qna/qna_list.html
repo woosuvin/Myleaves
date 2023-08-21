@@ -9,7 +9,18 @@
 		<div th:if="${myQnAlist.empty}">
         	<p class="text-center">등록된 QnA가 없습니다.</p>
     	</div>
-	<div th:if="${not myQnAlist.empty}">	
+	<div th:if="${not myQnAlist.empty}">
+		
+		<div class="row p-0 m-0 my-2">
+			<div class="col-6 d-flex justify-content-start p-0">
+				<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
+			</div>
+			
+			<!-- <div class="col-6 d-flex justify-content-end p-0">
+	        	<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
+			</div> -->
+		</div>
+		 
 		<form id="qnamyalldeleteForm" method="post" class="my-2">	
 		   	<table class="table table-hover">
 		   	<colgroup>
@@ -45,10 +56,20 @@
 			</table>
 		
 		</form>
-
-		<div class="my-2  d-flex justify-content-end">
+		<!-- 
+		<div class="row p-0 m-0 my-2">
+			<div class="col-6 d-flex justify-content-start p-0">
+				<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
+			</div>
+			
+			<div class="col-6 d-flex justify-content-end p-0">
+	        	<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
+			</div>
+		</div>
+		 -->
+		<!-- <div class="col-6 d-flex justify-content-end">
         	<button class="btn btn-secondary" type="submit" id="btnAllDelete">삭제</button>
-		</div>	
+		</div> -->
 		<!-- 페이징처리 시작 -->
         <nav aria-label="...">
 	    <ul class="pagination pagination-sm justify-content-center">
