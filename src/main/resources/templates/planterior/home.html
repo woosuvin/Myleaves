@@ -28,36 +28,28 @@
 							
 						</li>
 						<li>
-							<input type="button" class="filterBtn btn btn-outline-dark" value="거실" /> 
-							<input type="button" class="filterBtn btn btn-outline-dark" value="주방" />
-							<input type="button" class="filterBtn btn btn-outline-dark" value="욕실" /> 
-							<input type="button" class="filterBtn btn btn-outline-dark" value="방" /> 
-							<input type="button" class="filterBtn btn btn-outline-dark" value="베란다" />
+							<input type="button" class="filterBtn btn btn-outline-dark" value="거실" th:classappend="${stateContent == '거실' ? 'clicked' : ''}" /> 
+							<input type="button" class="filterBtn btn btn-outline-dark" value="주방" th:classappend="${stateContent == '주방' ? 'clicked' : ''}"  />
+							<input type="button" class="filterBtn btn btn-outline-dark" value="욕실" th:classappend="${stateContent == '욕실' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterBtn btn btn-outline-dark" value="방" th:classappend="${stateContent == '방' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterBtn btn btn-outline-dark" value="베란다" th:classappend="${stateContent == '베란다' ? 'clicked' : ''}"/>
 						</li>
 					</ul>
 					<input class="d-none" name="stateContent" id="stateContent" /> <input
 						class="d-none" name="conditionContent" id="conditionContent" />
 					<ul class="d-none list-unstyled secondFilterSection"
 						id="secondFilter">
-						<li><input type="button"
-							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
-							value="초보자용" /> <input type="button"
-							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
-							value="선물하기 좋은" /> <input type="button"
-							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
-							value="공기정화" /> <input type="button"
-							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
-							value="빛이 적어도 되는" /> <input type="button"
-							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
-							value="향기나는" /> <input type="button"
-							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
-							value="반려동물 안전한" /> <input type="button"
-							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
-							value="목대있는" /> <input type="button"
-							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
-							value="흙이 필요없는" /> <input type="button"
-							class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn"
-							value="덩굴로 자라는" /></li>
+						<li class="filterSecond">
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="초보자용" /> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="선물하기 좋은" /> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="공기정화" /> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="빛이 적어도 되는" /> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="향기나는" /> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="반려동물 안전한" /> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="목대있는" /> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="흙이 필요없는" /> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="덩굴로 자라는" />
+						</li>
 					</ul>
 				</div>
 				<!-- condition_content -->
@@ -77,7 +69,10 @@
 
 		<!-- 캐러셀 일단 8개 안되면 4개 -->
 		<input type="hidden" id="mngrCount" th:value="${mngrCount}" />
-		<div class="m-2">
+		<div th:if="${mngrList.empty}">
+        	<p class="text-center">이 달에 선정된 MD 픽이 없습니다.</p>
+    	</div>
+		<div th:if="${not mngrList.empty}" class="m-2">
 			<div class="row row-cols-1 row-cols-md-4 g-4">
 				<div class="col cardBox" th:each="mngrList: ${mngrList}">
 					<div class="card">
@@ -125,8 +120,11 @@
 		<br>
 		<div class="m-2">
 			<!-- 로그인 안 했을 경우 -->
+			<div th:if="${cardList.empty}">
+        		<p class="text-center">플랜테리어가 없습니다.</p>
+    		</div>
 			<th:block sec:authorize="isAnonymous()">
-				<div class="row row-cols-1 row-cols-md-4 g-4">
+				<div th:if="${not cardList.empty}" class="row row-cols-1 row-cols-md-4 g-4">
 					<div class="col cardBox" th:each="list: ${cardList}">
 						<div class="card">
 							<img
@@ -151,8 +149,11 @@
 				</div>
 			</th:block>
 			<!-- 로그인 했을 경우 -->
+			<div th:if="${cardList.empty}">
+        		<p class="text-center">플랜테리어가 없습니다.</p>
+    		</div>
 			<th:block sec:authorize="isAuthenticated()">
-				<div class="row row-cols-1 row-cols-md-4 g-4">
+				<div th:if="${not cardList.empty}" class="row row-cols-1 row-cols-md-4 g-4">
 					<div class="col" th:each="list: ${cardList}">
 						<div>
 							<input type="hidden" class="userId" name="userId"
@@ -227,8 +228,8 @@
 					</div>
 					<!-- cardlist -->
 				</div>
+			</th:block>
 		</div>
-		</th:block>
 	</div>
 	<!-- 더보기 버튼
 	<div class="d-flex justify-content-center">

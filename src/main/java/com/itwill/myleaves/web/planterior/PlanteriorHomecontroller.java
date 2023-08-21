@@ -121,6 +121,7 @@ public class PlanteriorHomecontroller {
 
 		if (dto.getConditionContent().isEmpty()) {
 			List<PlanteriorCategory> stateList = categoryService.findState(dto.getStateContent());
+			model.addAttribute("stateContent", dto.getStateContent());
 			List<Planterior> list = planteriorService.read();
 			List<Bookmark> bookList = bookmarkService.read();
 
@@ -183,8 +184,19 @@ public class PlanteriorHomecontroller {
 			return "planterior/home";
 
 		} else {
+			
 			List<PlanteriorCategory> stateList = categoryService.findStateAndCondition(dto.getStateContent(),
 					dto.getConditionContent());
+			model.addAttribute("stateContent", dto.getStateContent());
+			
+			Map<String, String> conditionContentMap = new HashMap<>();
+			String[] results = dto.getConditionContent().split(",");
+	        for(int i = 0; i < results.length; i++) {
+	        	conditionContentMap.put(results[i], results[i]);
+	        }
+	        // log.info("확인 {}", conditionContentMap.size());
+	        model.addAttribute("map", conditionContentMap);
+			
 			List<Planterior> list = planteriorService.read();
 			List<Bookmark> bookList = bookmarkService.read();
 

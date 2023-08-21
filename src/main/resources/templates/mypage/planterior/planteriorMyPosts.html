@@ -14,7 +14,11 @@
 				<small> 카드 선택시 해당 글을 수정 및 삭제 가능합니다. </small>
 			</h4>
 		</div>
-		<div class="m-2">
+		
+		<div th:if="${cardList.empty}">
+        	<p class="text-center">등록된 플랜테리어가 없습니다.</p>
+    	</div>
+		<div th:if="${not cardList.empty}" class="m-2">
 			<div class="row row-cols-1 row-cols-md-4 g-4">
 				<div class="col" th:each="list: ${cardList}">
 					<a

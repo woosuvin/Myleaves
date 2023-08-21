@@ -31,6 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			// li 삽입할 ul 요소를 찾음
 			const secondFilter = document.querySelector('#secondFilter');
+			
+			// 넘어온 값 설정
+			if (filterBtn.classList.contains('clicked')) {
+				filterBtn.classList.remove('clicked');
+				secondFilter.classList.add('d-none');
+				inputStateContent.value = ''
+				for (const btn of filterSecondBtns) {
+					btn.classList.remove('clicked');
+					inputConditionContent.value = ''
+				}
+				return;
+			}
+			
 			// 이미 'clicked' 클래스가 추가된 버튼을 다시 클릭한 경우
 			if (filterBtn === lastClickedBtn) {
 				filterBtn.classList.remove('clicked');
@@ -166,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log(planteriorId, userId)
 
 			if (userId === 'admin') {
-				if (mngrCount < 8) {
+				if (mngrCount < 4) {
 					const data = { planteriorId, userId };
 
 					axios.post('/planterior/home/like', data)
@@ -181,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
 							console.log(error);
 						});
 				} else {
-					alert('MD 픽은 최대 8개 이하만 가능합니다.');
+					alert('MD 픽은 최대 4개 이하만 가능합니다.');
 				}
 			} else {
 				const data = { planteriorId, userId };
