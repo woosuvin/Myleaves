@@ -1,6 +1,6 @@
 package com.itwill.myleaves.web.info;
 
-import java.util.List;
+
 
 import org.springframework.data.domain.Page;
 
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwill.myleaves.dto.qna.QnACreateDto;
-import com.itwill.myleaves.dto.qna.QnASearchAndPageDto;
+
 import com.itwill.myleaves.dto.qna.QnAUpdateDto;
 import com.itwill.myleaves.repository.qna.QnA;
 import com.itwill.myleaves.service.qna.QnAService;
@@ -55,16 +55,10 @@ public class QnAController {
 	 */
 	@GetMapping
 	public String qnaList(Model model, @PageableDefault(page = 0, size = 10, sort = "qid", direction = Sort.Direction.DESC) Pageable pageable) {
-		log.info("QnA My list()");
+		//log.info("QnA My list()");
 
 		Page<QnA> list = qnaService.read(pageable);
 		
-		 
-		
-		/*
-		 * int nowPage = list.getPageable().getPageNumber()+ 1; // 현재페이지
-		 */		 
-		 
 		 int nowPage;
 		    if (list.isEmpty()) {
 		        nowPage = 0; // 데이터가 없을 경우 페이지 번호를 1로 설정
@@ -104,33 +98,7 @@ public class QnAController {
 	    return "info/qna/read";
 	}
 
-	/*
-	 * QnA 검색 기능
-	 * 
-	 * @PreAuthorize("hasRole('MEMBER')")
-	 * 
-	 * @GetMapping("/search") public String searchQnA(QnASearchAndPageDto dto, Model
-	 * model, @PageableDefault(page=0, size=10, sort="qid",
-	 * direction=Sort.Direction.DESC) Pageable pageable) { log.info("search(dto={})"
-	 * , dto);
-	 * 
-	 * Page<QnA> list = qnaService.searchQnA(dto , pageable);
-	 * 
-	 * int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지 int maxPage =
-	 * list.getTotalPages();
-	 * 
-	 * int visiblePageCount = 5; // 한 번에 표시될 페이지 번호의 갯수 int halfVisiblePageCount =
-	 * visiblePageCount / 2;
-	 * 
-	 * int startPage = Math.max(nowPage - halfVisiblePageCount, 1); int endPage =
-	 * Math.min(startPage + visiblePageCount - 1, maxPage);
-	 * 
-	 * model.addAttribute("qnas", list); model.addAttribute("nowPage", nowPage);
-	 * model.addAttribute("startPage", startPage); model.addAttribute("endPage",
-	 * endPage);
-	 * 
-	 * return "info/qna/read"; }
-	 */
+	
 
 	/*
 	 * QnA 새 글 작성하기
@@ -138,14 +106,14 @@ public class QnAController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/create")
 	public void create() {
-		log.info("QNA create() GET");
+		//log.info("QNA create() GET");
 
 	}
 
 	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/create")
 	public String create(QnACreateDto dto) {
-		log.info("QnA create(dto={}) POST", dto);
+		//log.info("QnA create(dto={}) POST", dto);
 
 		qnaService.create(dto);
 
@@ -158,7 +126,7 @@ public class QnAController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping({ "/detail", "/modify" })
 	public void detailQnA(Long qid, Model model) {
-		log.info("QnA read(id={})", qid);
+		//log.info("QnA read(id={})", qid);
 
 		QnA qna = qnaService.read(qid);
 
@@ -171,7 +139,7 @@ public class QnAController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/update")
 	public String update(QnAUpdateDto dto) {
-		log.info("update dto={}", dto);
+		//log.info("update dto={}", dto);
 
 		qnaService.update(dto);
 
@@ -184,7 +152,7 @@ public class QnAController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/delete")
 	public String delete(long qid) {
-		log.info("delete(id={})", qid);
+		//log.info("delete(id={})", qid);
 
 		qnaService.delete(qid);
 

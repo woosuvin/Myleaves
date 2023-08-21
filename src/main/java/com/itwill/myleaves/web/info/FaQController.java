@@ -23,11 +23,10 @@ public class FaQController {
 	
 	/*
 	 * FaQ 메인 리스트 페이지
-	 * 로그인??... 굳이
 	 */
 	@GetMapping
 	public String readFaQ(Model model) {
-		log.info("FaQ read()");
+		//log.info("FaQ read()");
 		
 		List<FaQ> list = faqService.read();
 		

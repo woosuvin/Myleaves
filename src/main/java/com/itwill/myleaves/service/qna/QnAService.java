@@ -30,7 +30,7 @@ public class QnAService {
 	 */
 	@Transactional(readOnly = true)
 	public Page<QnA> read(Pageable pageable) {
-		log.info("read()");
+		//log.info("read()");
 
 		return qnaRepository.findAll(pageable);
 	}
@@ -40,7 +40,7 @@ public class QnAService {
 	 */
 	@Transactional(readOnly = true)
 	public QnA read(Long qid) {
-		log.info("read(qid={})", qid);
+		//log.info("read(qid={})", qid);
 		return qnaRepository.findById(qid).orElseThrow();
 	}
 
@@ -49,13 +49,13 @@ public class QnAService {
 	 */
 	@Transactional(readOnly = true)
 	public QnA create(QnACreateDto dto) {
-		log.info("QnA(dto={})", dto);
+		//log.info("QnA(dto={})", dto);
 
 		QnA entity = dto.toEntity();
-		log.info("before entity={}", entity);
+		//log.info("before entity={}", entity);
 
 		qnaRepository.saveAndFlush(entity);
-		log.info("after entity={}", entity);
+		//log.info("after entity={}", entity);
 
 		return entity;
 	}
@@ -65,7 +65,7 @@ public class QnAService {
 	 */
 	@Transactional
 	public void update(QnAUpdateDto dto) {
-		log.info("update(dto={})", dto);
+		//log.info("update(dto={})", dto);
 
 		QnA entity = qnaRepository.findById(dto.getQid()).orElseThrow();
 
@@ -77,7 +77,7 @@ public class QnAService {
 	 * QnA 글 삭제하기
 	 */
 	public void delete(Long qid) {
-		log.info("delete{}", qid);
+		//log.info("delete{}", qid);
 		qnaRepository.deleteById(qid);
 	}
 
@@ -86,36 +86,12 @@ public class QnAService {
 	 */
 	@Transactional
 	public void updateMngr(QnAMngrUpdateDto dto) {
-		log.info("QnAMngr(dto={}", dto);
+		//log.info("QnAMngr(dto={}", dto);
 
 		QnA entity = qnaRepository.findById(dto.getQid()).orElseThrow();
 
 		entity.updateMngr(dto);
 	}
 
-	/*
-	 * QnA 사용자 검색 기능
-	 */
-	@Transactional(readOnly = true)
-	public Page<QnA> searchQnA(QnASearchAndPageDto dto , Pageable pageable) {
-		log.info("searchQnA(dto={}", dto);
-		Page<QnA> list = null;
-		switch (dto.getType()) {
-		case "t":
-			list = qnaRepository.findByTitleContainsIgnoreCaseOrderByQidDesc(dto.getKeyword(), pageable);
-			break;
-		case "c":
-			list = qnaRepository.findByContentContainsIgnoreCaseOrderByQidDesc(dto.getKeyword(), pageable);
-			break;
-		case "tc":
-			list = qnaRepository.searchBykeyword(dto.getKeyword(), pageable);
-			break;
-		case "a":
-			list = qnaRepository.findByUserIdContainsIgnoreCaseOrderByQidDesc(dto.getKeyword() ,pageable);
-			break;
-		}
-
-		return list;
-	}
 
 }

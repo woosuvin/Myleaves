@@ -1,8 +1,6 @@
 package com.itwill.myleaves.web.mngr;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +35,7 @@ public class MngrQnAController {
 	 */
 	@GetMapping("/list")
 	public void mngrqna(Model model ,@PageableDefault(page=0, size=10, sort="qid", direction=Sort.Direction.DESC) Pageable pageable) {
-		log.info("mngrqna list");
+		//log.info("mngrqna list");
 		
 		Page<QnA> list = qnaService.read(pageable);
 		
@@ -60,7 +58,7 @@ public class MngrQnAController {
 	  @PreAuthorize("hasRole('ADMIN')")
 	  @GetMapping({"/modify", "/detail"}) 
 	  public void modifyMngrQna(Long qid, Model model) {
-		  log.info("QnA Mngr modify(id={})" , qid);
+		  //log.info("QnA Mngr modify(id={})" , qid);
 		  
 		  QnA qna = qnaService.read(qid);
 		  
@@ -74,7 +72,7 @@ public class MngrQnAController {
 	  @PreAuthorize("hasRole('ADMIN')")
 	  @PostMapping("/update")
 	  public String updateMngrQna(QnAMngrUpdateDto dto) {
-		  log.info("QnA Update mngr(dto={})" , dto );
+		  //log.info("QnA Update mngr(dto={})" , dto );
 		  
 		  qnaService.updateMngr(dto);
 		  
