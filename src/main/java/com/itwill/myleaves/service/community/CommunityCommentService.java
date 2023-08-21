@@ -25,7 +25,7 @@ public class CommunityCommentService {
 	
 	@Transactional(readOnly = true)
 	public List<CommunityComment> read(long id) {
-		log.info("read(communityId={})", id);
+//		log.info("read(communityId={})", id);
 		
 		// 1. communityId로 게시글 검색 
 		Community communityId = communityRepository.findById(id).orElseThrow();
@@ -38,7 +38,7 @@ public class CommunityCommentService {
 
 	
 	public CommunityComment create(CommunityCommentCreateDto dto) {
-		log.info("create(dto={})", dto);
+//		log.info("create(dto={})", dto);
 		
 		// 1. dto의 커뮤니티 ID로 Community 엔터티 검색
 		Community communityId = communityRepository.findById(dto.getCommunityId()).orElseThrow();
@@ -65,7 +65,7 @@ public class CommunityCommentService {
 	}
 	
 	public void delete(long communityCommentId) {
-		log.info("delete(communityCommentId={})", communityCommentId);
+//		log.info("delete(communityCommentId={})", communityCommentId);
 		
 		// DB COMMUNITY_COMMENT 테이블에서 ID로 엔터티 삭제
 		communityCommentRepository.deleteById(communityCommentId);
@@ -73,7 +73,7 @@ public class CommunityCommentService {
 
 	@Transactional
 	public void update(long communityCommentId, CommunityCommentUpdateDto dto) {
-		log.info("update(communityCommentId={}, dto={})", communityCommentId, dto);
+//		log.info("update(communityCommentId={}, dto={})", communityCommentId, dto);
 		
 		// 1. 댓글 아이디로 DB에서 엔터티 검색
 		CommunityComment entity = communityCommentRepository.findById(communityCommentId).orElseThrow();
@@ -85,7 +85,7 @@ public class CommunityCommentService {
 
 	// 해당 게시글의 댓글 개수 
 	public long countByCommunityId(Community communityId) {
-		log.info("countByCommunity(communityId={})", communityId);
+//		log.info("countByCommunity(communityId={})", communityId);
 		
 		// return communityCommentRepository.countByCommunityId(communityId.getCommunityId());
 		 return communityCommentRepository.countByCommunityId(communityId);

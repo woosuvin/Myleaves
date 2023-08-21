@@ -31,7 +31,7 @@ public class MyPageCommunityController {
 
 	@GetMapping("/my_posts")
 	public void read(Model model, @RequestParam("userId") String userId, @PageableDefault(page=0, size=10, sort="communityId", direction=Sort.Direction.DESC) Pageable pageable) {
-		log.info("my_posts Controller read()");
+//		log.info("my_posts Controller read()");
 
 		Page<Community> list = mypageCommunityService.read(userId, pageable);
 		 int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
@@ -46,7 +46,7 @@ public class MyPageCommunityController {
 
 	@GetMapping("/my_comments")
 	public void readPostsAndComments(Model model, @RequestParam("userId") String userId,  @PageableDefault(page=0, size=10, sort="communityId", direction=Sort.Direction.DESC) Pageable pageable) {
-		log.info("my_comments Controller read()");
+//		log.info("my_comments Controller read()");
 
 //	    List<Community> postList = mypageCommunityService.read(userId);
 

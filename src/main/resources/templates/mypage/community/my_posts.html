@@ -10,6 +10,9 @@
 	<div class="text-center mb-5">
 		<h3>내가 쓴 글</h3>
 	</div>
+	<div class="text-start">
+      <button class="btn delete-button btn-secondary my-2">삭제</button>
+    </div>
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -27,14 +30,12 @@
 				<td><a class="link-dark link-underline-opacity-0" th:href="@{/community/detail?id={id} (id = ${post.communityId})}">
 				<span th:text="${post.title}"></span></a></td>
 				<td class="text-center"><span th:text="${post.userId}"></span></td>
-				<td class="text-center"><span th:text="${ #temporals.format(post.createdDate, 'yy-MM-dd HH:mm:ss')}"></span></td>
+				<td class="text-center"><span th:text="${ #temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></span></td>
 				<td><span id="communityId" class="d-none" th:text="${post.communityId}"></span></td>
 			</tr>
 		</tbody>
 	</table>
-	<div class="text-start">
-      <button class="btn delete-button btn-secondary my-2">삭제</button>
-    </div>
+	
 <!-- 	<form th:action="@{/mypage/community/search}">
 	<input type="hidden" name="userId" th:value="${ #authentication.name }"/>
 	<div class="row">

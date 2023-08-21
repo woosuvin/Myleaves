@@ -39,7 +39,7 @@ public class CommunityHomeController {
 	
 	@GetMapping
 	public String post(Model model, @PageableDefault(page=0, size=10, sort="communityId", direction=Sort.Direction.DESC) Pageable pageable) { 
-		log.info("community home");
+//		log.info("community home");
 		
 		// 포스트 목록 검색
 	    Page<Community> list = communityService.read(pageable);
@@ -53,7 +53,7 @@ public class CommunityHomeController {
 	    model.addAttribute("posts", list);
 	    model.addAttribute("commentCountMap", commentCountMap);
 	    
-	    log.info("commentCountMap: {}", commentCountMap);
+//	    log.info("commentCountMap: {}", commentCountMap);
 
 	    
 	    int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
@@ -74,14 +74,14 @@ public class CommunityHomeController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/create")
 	public void create() {
-		log.info("create() Get");
+//		log.info("create() Get");
 		
 	}
 	
 	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/create")
 	public String create(CommunityCreateDto dto) {
-		log.info("create(dto={}) POST", dto);
+//		log.info("create(dto={}) POST", dto);
 		
 		// form에서 submit된 내용을 DB 테이블에 insert
 		communityService.create(dto);
@@ -94,9 +94,10 @@ public class CommunityHomeController {
 	 * @param model @id 
 	 * @return String 
 	 */
+	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/detail") 
 	public String read(long id, Model model) {
-		log.info("read(id={})", id);
+//		log.info("read(id={})", id);
 		
 		// COMMUNITY 테이블에서 id에 해당하는 게시글을 검색
 		Community communityId = communityService.read(id);
@@ -118,7 +119,7 @@ public class CommunityHomeController {
 	 */
 	@GetMapping("/modify") 
 	public String modify(long communityId, Model model) {
-		log.info("read(communityId={})", communityId);
+//		log.info("read(communityId={})", communityId);
 		
 		// COMMUNITY 테이블에서 id에 해당하는 게시글을 검색
 		Community post = communityService.read(communityId);
@@ -135,7 +136,7 @@ public class CommunityHomeController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/delete")
 	public String delete(Long communityId) {
-		log.info("delete(communityId={})", communityId);
+//		log.info("delete(communityId={})", communityId);
 		
 	communityService.delete(communityId);
 	
@@ -154,11 +155,11 @@ public class CommunityHomeController {
 	@DeleteMapping("/deleteposts")
 	public ResponseEntity<Integer> deleteByCheckbox(
 			@RequestBody List<CommunityDeleteDto> selectedCommunityIds) {
-		log.info("deleteByCheckbox(selectedCommunityIds={})", selectedCommunityIds);
+//		log.info("deleteByCheckbox(selectedCommunityIds={})", selectedCommunityIds);
 
 		for (CommunityDeleteDto communityDeleteDto : selectedCommunityIds) {
 			long communityId = communityDeleteDto.getCommunityId();
-			log.info("communityId={}", communityId);
+//			log.info("communityId={}", communityId);
 
 			communityService.delete(communityId);
 			communityCommentService.deleteComment(communityId);
@@ -171,7 +172,7 @@ public class CommunityHomeController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping("/update")
 	public String update(CommunityUpdateDto dto) { // communityId, title, content 
-		log.info("update(dto={})", dto.getCommunityId());
+//		log.info("update(dto={})", dto.getCommunityId());
 		
 		communityService.update(dto);
 		
@@ -180,7 +181,7 @@ public class CommunityHomeController {
 	
 	@GetMapping("/search")
 	public String search(CommunitySearchDto dto, Model model,  @PageableDefault(page=0, size=10, sort="communityId", direction=Sort.Direction.DESC) Pageable pageable) {
-		log.info("search(dto={})", dto);
+//		log.info("search(dto={})", dto);
 		
 		Page<Community> list = communityService.search(dto, pageable);
 	    int nowPage = list.getPageable().getPageNumber() + 1; // 현재페이지
@@ -194,8 +195,8 @@ public class CommunityHomeController {
 	        commentCountMap.put(post.getCommunityId(), commentCount);
 	    }
 	    model.addAttribute("commentCountMap", commentCountMap);
-        
 		model.addAttribute("posts", list);
+		
 	    model.addAttribute("nowPage",nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);

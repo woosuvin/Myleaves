@@ -26,7 +26,7 @@ public class CommunityService {
 	// 커뮤니티 게시글 전체 리스트
 	@Transactional(readOnly = true)
 	public Page<Community> read(Pageable pageable) {
-		log.info("read()");
+//		log.info("read()");
 
 		return communityRepository.findAll(pageable);
 	}
@@ -34,23 +34,23 @@ public class CommunityService {
 
 	// DB COMMUNITY 테이블에 엔터티 insert 
 	public Community create(CommunityCreateDto dto) {
-		log.info("create(dto={})", dto);
+//		log.info("create(dto={})", dto);
 
 		
 		// DTO를 Entity로 변환:
 		Community entity = dto.toEntity();
-		log.info("entity={}", entity);
+//		log.info("entity={}", entity);
 		
 		// DB 테이블에 저장 
 		communityRepository.save(entity);
-		log.info("entity={}", entity);
+//		log.info("entity={}", entity);
 		
 		return entity;
 	}
 
     @Transactional(readOnly = true)
 	public Community read(Long communityId) {
-		log.info("read(communityId={})", communityId);
+//		log.info("read(communityId={})", communityId);
 		
 		
 		return communityRepository.findById(communityId).orElseThrow();
@@ -58,7 +58,7 @@ public class CommunityService {
 
 
 	public void delete(Long communityId) {
-		log.info("delete(communityId={})", communityId);
+//		log.info("delete(communityId={})", communityId);
 		
 		communityRepository.deleteById(communityId);
 		
@@ -67,7 +67,7 @@ public class CommunityService {
 
 	@Transactional
 	public void update(CommunityUpdateDto dto) {
-		log.info("update(dto={})", dto.getCommunityId());
+//		log.info("update(dto={})", dto.getCommunityId());
 		Community entity = communityRepository.findById(dto.getCommunityId()).orElseThrow();
 		
 		entity.update(dto);

@@ -34,7 +34,7 @@ public class CommunityCommentRestController {
     @PreAuthorize("hasRole('MEMBER')") 
 	@GetMapping("/all/{id}")
 	public ResponseEntity<List<CommunityComment>> all(@PathVariable long id) {
-		log.info("all(communityId)={}", id);
+//		log.info("all(communityId)={}", id);
 
 		List<CommunityComment> list = communityCommentService.read(id);
 		return ResponseEntity.ok(list);
@@ -47,10 +47,10 @@ public class CommunityCommentRestController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@PostMapping
 	public ResponseEntity<CommunityComment> create(@RequestBody CommunityCommentCreateDto dto) {
-		log.info("Create(dto={})", dto);
+//		log.info("Create(dto={})", dto);
 
 		CommunityComment communityComment = communityCommentService.create(dto);
-		log.info("communityComment={}", communityComment);
+//		log.info("communityComment={}", communityComment);
 
 		return ResponseEntity.ok(communityComment);
 	}
@@ -59,7 +59,7 @@ public class CommunityCommentRestController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@DeleteMapping("/{communityCommentId}")
 	public ResponseEntity<String> delete(@PathVariable long communityCommentId) {
-		log.info("delete(communityCommentId)={}", communityCommentId);
+//		log.info("delete(communityCommentId)={}", communityCommentId);
 
 		communityCommentService.delete(communityCommentId);
 
@@ -69,11 +69,11 @@ public class CommunityCommentRestController {
 	@DeleteMapping("/deletecomments")
 	public ResponseEntity<Integer> deleteByCheckbox(
 			@RequestBody List<CommunityCommentDeleteDto> selectedCommunityCommentIds) {
-		log.info("deleteByCheckbox(selectedCommunityCommentIds={})", selectedCommunityCommentIds);
+//		log.info("deleteByCheckbox(selectedCommunityCommentIds={})", selectedCommunityCommentIds);
 
 		for (CommunityCommentDeleteDto communityCommentDeleteDto : selectedCommunityCommentIds) {
 			long communityCommentId = communityCommentDeleteDto.getCommunityCommentId();
-			log.info("communityCommentId={}", communityCommentId);
+//			log.info("communityCommentId={}", communityCommentId);
 
 			communityCommentService.delete(communityCommentId);
 		}
@@ -86,7 +86,7 @@ public class CommunityCommentRestController {
 	@PutMapping("/{communityCommentId}")
 	public ResponseEntity<String> update(@PathVariable long communityCommentId,
 			@RequestBody CommunityCommentUpdateDto dto) {
-		log.info("update(dto={})", dto);
+//		log.info("update(dto={})", dto);
 
 		communityCommentService.update(communityCommentId, dto);
 
