@@ -104,8 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// 리셋 버튼 선택
 	const filter_reset_btn = document.querySelector('#filter_reset_btn');
-	filter_reset_btn.addEventListener('click', () => {
+	filter_reset_btn.addEventListener('click', (e) => {
 
+		e.preventDefault();
+		
 		// 버튼의 선택 해제
 		for (const filterBtn of filterBtns) {
 			filterBtn.classList.remove('clicked');
@@ -121,6 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		// 값 초기화
 		inputStateContent.value = '';
 		inputConditionContent.value = '';
+		
+		// 화면이동
+		goToHome();
+		
+		
 	});
 
 
