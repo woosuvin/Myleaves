@@ -55,7 +55,7 @@
 				<div class="card my-3" th:if="${not #strings.isEmpty(qna.an_title)}">
 					<div class="card-body">
 						<h4 class="card-text" th:text="${qna.an_title}" ></h4>
-						<div class="card-text" id="content" style="height: 10rem"th:text="${qna.an_content}"></div>
+						<div class="card-text" id="content" style="height: 10rem"th:utext="${qna.an_content}"></div>
 						
 						<!-- 관리자가 답변한 답변 날짜 -->
 						<hr />
@@ -64,8 +64,8 @@
 				</div> 
 			<div class="my-3" style="text-align: center;">
 				<a class="btn btn-outline-dark" th:href="@{/info/qna}">목록</a>
-				<a class="btn btn-outline-dark" th:href="@{/info/qna/modify?qid={id} (id = ${qna.qid}) }">수정</a>
+				<a th:if="${#authentication.name== qna.userId}" class="btn btn-outline-dark" th:href="@{/info/qna/modify?qid={id} (id = ${qna.qid}) }">수정</a>
 			</div>	
-		</div>
+		</div> 
 	</main>
 </html>

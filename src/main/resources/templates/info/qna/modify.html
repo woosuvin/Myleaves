@@ -47,7 +47,7 @@
 						<p class="card-text text-end small mb-3 me-3" id="answer_date" th:text="${#temporals.format(qna.modifiedDate, 'yyyy-mm-dd HH:mm' ) }"></p>	
 					</div>
 				</div>
-				<div style="text-align: right;">
+				<div style="text-align: right;" th:if="${#authentication.name== qna.userId}">
 					<!-- 수정버튼은 관리자가 확인중일시 수정 버튼 가능 c:if 써야함 -->
 					<button class="btn btn-outline-dark" id="btnUpdate" th:if="${#strings.isEmpty(qna.an_title)}">수정</button>
 					<button class="btn btn-secondary" id = "btnDelete">삭제</button>

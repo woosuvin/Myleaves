@@ -31,7 +31,7 @@
 						<hr />
 						<div class="my-2">
 							<label class="form-label d-none" for="content">내용</label>
-							<div class="card-text" id="content" style="height: 10rem" th:text="${qna.content}"></div>
+							<div class="card-text" id="content" style="height: 10rem" th:utext="${qna.content}"></div>
 						</div>
 						
 						<hr />
@@ -39,7 +39,8 @@
 						<p class="card-text text-end small" id="created_date" th:text="${#temporals.format(qna.createdDate, 'yyyy-MM-dd HH:mm' ) }"></p>
 					</div>
 				</div>
-					<!-- 관리자 답변 -->
+				
+				<!-- 관리자 답변 -->
 				<div class="card my-4">
 					<div class="card-body">	
 						<div class="my-2">
@@ -62,6 +63,10 @@
 			</div>
 			
 	</div>
-	<script src="/js/info/qna/qna_update_mngr.js"></script> 		
+	<th:block layout:fragment="myscripts">
+		<script src="/js/info/qna/qna_summernote.js"></script>
+		<script src="/js/info/qna/qna_update_mngr.js"></script> 
+		</th:block>
+			
 </main>
 </html>
