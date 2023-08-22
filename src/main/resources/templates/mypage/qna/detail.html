@@ -5,11 +5,7 @@
 	<main layout:fragment="main">
 		<div class="container my-4">
 			<div class="mb-5 text-center">
-				<h3>QnA 마이페이지 상세페이지</h3>
-			</div>
-			<div class="my-3" style="text-align: right;" >
-						<!-- 수정버튼은 관리자가 확인중일시 수정 버튼 가능 c:if 써야함 -->
-						<a class="btn btn-outline-dark" th:href="@{/mypage/qna/modify?(userId=${#authentication.name},qid=${myqnas.qid})}">설정</a>
+				<h3>MY QnA</h3>
 			</div>
 			<div class="card my-2">
 				<div class="card-body my-2">
@@ -31,8 +27,8 @@
 							<div class="my-2">
 								<div class="card-text">
 									<label class="form-label d-none" for="content">내용</label>
-			                    	<textarea class="form-control d-none" id="content" th:text="${myqnas.content}" readonly></textarea>
-									<div class="card-text" id="content" style="height: 10rem" th:text="${myqnas.content}"></div>
+			                    	<textarea class="form-control d-none" id="content"  th:utext="${myqnas.content}" readonly></textarea>
+									<div class="card-text" id="content" style="height: 10rem"  th:utext="${myqnas.content}"></div>
 								</div>
 							</div>
 							<br />
@@ -46,10 +42,10 @@
 							<hr />
 							<div  class="my-2">
 								<div class="card-text">
-									<p class="card-text text-end small mb-3 me-3" id="answer_date" th:text="${#temporals.format(myqnas.createdDate, 'yyyy-mm-dd HH:mm' ) }"></p>
+									<p class="card-text text-end small mb-3 me-3" id="answer_date" th:text="${#temporals.format(myqnas.createdDate, 'yyyy-MM-dd HH:mm' ) }"></p>
 		                        	<label class="form-label d-none" for="createdTime">작성시간</label>
 		                        	<input class="form-control d-none" id="createdTime"
-		                       		th:value="${#temporals.format(myqnas.createdDate, 'yy-mm-dd HH:mm' ) }"readonly />
+		                       		th:value="${#temporals.format(myqnas.createdDate, 'yy-MM-dd HH:mm' ) }"readonly />
 		                    	</div>
 							</div>
 					</form>
@@ -59,11 +55,14 @@
 			<div class="card my-4" th:if="${not #strings.isEmpty(myqnas.an_title)}">
 				<div class="card-body">
 					<h4 class="card-text" th:text="${myqnas.an_title}" ></h4>
-						<div class="card-text" id="content" style="height: 10rem"th:text="${myqnas.an_content}"></div>
+						<div class="card-text" id="content" style="height: 10rem" th:utext="${myqnas.an_content}"></div>
 							<!-- 관리자가 답변한 답변 날짜 -->
 							<hr />
 							<p class="card-text text-end small mb-3 me-3" id="answer_date" th:text="${#temporals.format(myqnas.modifiedDate, 'yyyy-mm-dd HH:mm' ) }"></p>	
 				</div>
+			</div>
+			<div class="my-3" style="text-align: right;" >
+				<a class="btn btn-outline-dark" th:href="@{/mypage/qna/modify?(userId=${#authentication.name},qid=${myqnas.qid})}">수정</a>
 			</div> 
 		</div>
 	

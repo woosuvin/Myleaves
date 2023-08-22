@@ -35,7 +35,7 @@ public class MypageQnAController {
 	 */
 	@GetMapping("/qna_list")
 	public void qnaList(Model model, String userId , @PageableDefault(page=0, size=10, sort="qid", direction=Sort.Direction.DESC) Pageable pageable) {
-		log.info("QnA My list()");
+		//log.info("QnA My list()");
 		
 		Page<QnA> list = mypageqnaService.allread(userId , pageable);
 		
@@ -57,7 +57,7 @@ public class MypageQnAController {
 	 */
 	@GetMapping({"/detail","/modify"})
 	public void detailMyQnA(Long qid, String userId, Model model) {
-		log.info("QnA My Detai;(id={}, userId={})" , qid, userId);
+		//log.info("QnA My Detai;(id={}, userId={})" , qid, userId);
 		
 		QnA myqna = mypageqnaService.readMyDetail(userId, qid);
 		
@@ -69,7 +69,7 @@ public class MypageQnAController {
 	 */
 	@PostMapping("/update")
 	public String update(QnAUpdateDto dto) {
-        log.info("update dto={}" , dto);
+        //log.info("update dto={}" , dto);
         
         mypageqnaService.updateMyQna(dto);
         
@@ -81,7 +81,7 @@ public class MypageQnAController {
 	 */
 	@PostMapping("/delete")    
     public String delete(long qid , String userId) {
-        log.info("delete(id={})" , qid);
+        //log.info("delete(id={})" , qid);
    
         mypageqnaService.deleteMyQna(qid);
         

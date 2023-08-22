@@ -15,11 +15,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.itwill.myleaves.repository.community.Community;
+import com.itwill.myleaves.repository.planterior.Bookmark;
+import com.itwill.myleaves.repository.planterior.Planterior;
 import com.itwill.myleaves.repository.sellbuy.Sell;
 import com.itwill.myleaves.repository.store.Store;
 import com.itwill.myleaves.service.community.CommunityCommentService;
 import com.itwill.myleaves.service.community.CommunityService;
 import com.itwill.myleaves.service.home.HomeService;
+import com.itwill.myleaves.service.palnterior.MypageService;
+import com.itwill.myleaves.service.palnterior.PlanteriorService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +37,9 @@ public class HomeController {
 	private final CommunityCommentService communityCommentService;
 	private final HomeService homeService;
 	private final CommunityService communityService;
+	private final PlanteriorService planteriorService;
+	private final MypageService mypageService;
+	
 
 	/**
 	 * 사용자 home page
@@ -41,7 +48,7 @@ public class HomeController {
 	 * @return
 	 */
 	@GetMapping("/")
-	public String home(Model model, @PageableDefault(page=0, size=10, sort="communityId", direction=Sort.Direction.DESC) Pageable pageable) {
+	public String home(Model model, @PageableDefault(page=0, size=14, sort="communityId", direction=Sort.Direction.DESC) Pageable pageable) {
 		log.info("home");
 		// 입양 목록 불러오기
 		List<Sell> sellList = homeService.readSellList();
@@ -77,6 +84,26 @@ public class HomeController {
 		model.addAttribute("commentCountMap", commentCountMap);
 
 		// 플랜테리어 MD픽 목록 불러오기
+		List<Planterior> planteriorList = planteriorService.read();
+		List<Planterior> result = new ArrayList<>();
+		List<Planterior> plist = mypageService.read();
+		List<Bookmark> listMngr = mypageService.bookmarkRead("admin");
+
+		Map<Long, String> thumbnails1 = new HashMap<>();
+		for (Planterior p : planteriorList) {
+			thumbnails1.put(p.getPlanteriorId(), Base64.getEncoder().encodeToString(p.getThumbnail()));
+		}
+		model.addAttribute("imagesMngr", thumbnails1);
+
+		for (int i = 0; i < plist.size(); i++) {
+			for (int j = 0; j < listMngr.size(); j++) {
+				if (plist.get(i).getPlanteriorId() == listMngr.get(j).getPlanteriorId()) {
+					result.add(plist.get(i));
+				}
+			}
+		}
+		model.addAttribute("mngrCount", result.size());
+		model.addAttribute("mngrList", result);
 		
 		return "/main/home";
 	}

@@ -12,7 +12,10 @@
 			<h3>플랜테리어 북마크</h3>
 		</div>
 		<div class="m-2">
-			<div class="row row-cols-1 row-cols-md-4 g-4">
+			<div th:if="${cardList.empty}">
+	        	<p class="text-center">북마크한 플랜테리어가 없습니다.</p>
+	    	</div>
+			<div th:if="${not cardList.empty}" class="row row-cols-1 row-cols-md-4 g-4">
 				<div class="col" th:each="list: ${cardList}">
 					<input type="hidden" class="userId" name="userId" th:value="${#authentication.name}" /> 
 					<input type="hidden" id="plantName" th:value="${list.plantName}" /> 
@@ -21,13 +24,16 @@
 						<img class="imgSize" th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
 						<div class="card-body row">
 							<div class="col-9 text-start">
-								<p class="planteriorButtonEle"
-									th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+								<p class="planteriorButtonEle" th:text="${list.plantName}" />
 							</div>
 							<div class="col-3 text-end">
 								<button class="imgButtonFill btn-outline-dark" th:value="${list.planteriorId}">
 									<img th:src="@{/images/planterior/bookmarkFill.svg}" />
 								</button>
+							</div>
+							<div>
+								<p class="planteriorButtonEleEnglishName text-start"
+									th:text="'(' + ${list.plantNameEnglish} +')'" />
 							</div>
 						</div>
 					</div>

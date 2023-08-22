@@ -15,9 +15,9 @@ import com.itwill.myleaves.repository.faq.FaQ;
 import com.itwill.myleaves.service.faq.FaQService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
+
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/mngr/faq")
@@ -31,8 +31,7 @@ public class MngrFAQController {
 	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/list")
 	public void mngrListFaq(Model model) {
-		
-		log.info("mngrListfaq()");
+		//log.info("mngrListfaq()");
 		
 		List<FaQ> list = faqService.read();
 		
@@ -46,13 +45,13 @@ public class MngrFAQController {
 	
 	@GetMapping("/create")
     public void create() {
-        log.info("create() GET");
+        //log.info("create() GET");
 	}
 	
 	
 	 @PostMapping("/create") 
 	 public String create(FaQCreateDto dto) {
-		log.info("FaQ create(dto={}) POST" , dto); 
+		//log.info("FaQ create(dto={}) POST" , dto); 
 	 	faqService.create(dto);
 	  
 	 	return "redirect:/mngr/faq/list"; 
@@ -64,7 +63,7 @@ public class MngrFAQController {
 	
 	@GetMapping("/detail")
 	public void detailFaq(Long fqid , Model model) {
-        log.info("detailFaq(id={})" , fqid);
+        //log.info("detailFaq(id={})" , fqid);
         
         FaQ faq = faqService.read(fqid);
         model.addAttribute("faq" , faq);
@@ -76,7 +75,7 @@ public class MngrFAQController {
 	
 	@PostMapping("/update")
 	public String updateFaq(FaQUpdateDto dto) {
-		log.info("updatefaq dto={}" , dto);
+		//log.info("updatefaq dto={}" , dto);
 		
 		faqService.update(dto);
 		
@@ -88,7 +87,7 @@ public class MngrFAQController {
 	 */
 	@PostMapping("/delete")
 	public String deleteFaq(long fqid) {
-		log.info("deleteFaQ(fqid={})" , fqid);
+		//log.info("deleteFaQ(fqid={})" , fqid);
 		
 		faqService.delete(fqid);
 		

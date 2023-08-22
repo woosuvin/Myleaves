@@ -3,6 +3,7 @@ package com.itwill.myleaves.web.mngr;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class MngrPlanteriorController {
 	private final PlanteriorService planteriorService;
 
 	// 북마크 가져오기 -> 삭제는 js가 담당함.
+	@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping
 	public String read(Model model) {
 		//log.info("read");

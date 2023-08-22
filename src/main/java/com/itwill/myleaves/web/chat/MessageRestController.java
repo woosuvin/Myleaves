@@ -33,7 +33,7 @@ public class MessageRestController {
     
     @PostMapping("/chat/create")
     public ResponseEntity<String> create(@RequestBody ChatCreateDto dto) {
-    	log.info("dto={}", dto);
+    	//log.info("dto={}", dto);
     	chatService.create(dto);
     	return ResponseEntity.ok("success");
     }

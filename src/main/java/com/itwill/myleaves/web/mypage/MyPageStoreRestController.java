@@ -24,7 +24,7 @@ public class MyPageStoreRestController {
 	
 	@PutMapping("/orderDetail/{orderId}")
 	public ResponseEntity<String> update(@PathVariable long orderId, @RequestBody TotalOrderReasonUpdateDto dto) {
-		log.info("update(orderId={}, dto={})", orderId, dto);
+		//log.info("update(orderId={}, dto={})", orderId, dto);
 		totalOrderService.updateReason(orderId, dto);
 		return ResponseEntity.ok("Success");
 	}

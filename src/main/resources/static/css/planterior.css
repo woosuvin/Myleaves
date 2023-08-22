@@ -27,9 +27,12 @@ p.plants_title {
 	color:white;
 }
 
-/*.filterSecondBtn*/
 button.filterBtn {
-	position: relative
+	position: relative;
+}
+
+.filterSecond {
+	line-height: 270%;
 }
 
 button#filter_reset_btn img {

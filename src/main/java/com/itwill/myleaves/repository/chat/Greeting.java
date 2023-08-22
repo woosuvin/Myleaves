@@ -1,4 +1,4 @@
-package com.itwill.myleaves.stomp;
+package com.itwill.myleaves.repository.chat;
 
 import java.time.LocalDateTime;
 

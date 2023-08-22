@@ -12,9 +12,9 @@ import com.itwill.myleaves.repository.faq.FaQRepository;
 
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
+
 @Service
 @RequiredArgsConstructor
 public class FaQService {
@@ -31,7 +31,7 @@ public class FaQService {
 	 */
 	@Transactional(readOnly = true)
 	public List<FaQ> read(){
-		log.info("read()");
+		//log.info("read()");
 		
 		return faqRepository.findByOrderByFqidDesc();
 	}
@@ -40,7 +40,7 @@ public class FaQService {
 	 */
 	@Transactional(readOnly = true)
 	public FaQ read(Long fqid) {
-		log.info("read(fqid={})" , fqid);
+		//log.info("read(fqid={})" , fqid);
 		return faqRepository.findById(fqid).orElseThrow();
 	}
 	
@@ -50,13 +50,13 @@ public class FaQService {
 	
 	@Transactional(readOnly = true)
 	public FaQ create(FaQCreateDto dto) {
-		log.info("FaQ(dto={})", dto);
+		//log.info("FaQ(dto={})", dto);
 		
 		FaQ entity = dto.toEntity();
-		log.info("before Save entity={}", entity);
+		//log.info("before Save entity={}", entity);
 		
 		faqRepository.saveAndFlush(entity);
-		log.info("after Save entity={}", entity);
+		//log.info("after Save entity={}", entity);
 		
 		return entity;
 	}
@@ -67,7 +67,7 @@ public class FaQService {
 	 */
 	@Transactional
 	public void update(FaQUpdateDto dto) {
-		log.info("updatefaq(dto={})" , dto);
+		//log.info("updatefaq(dto={})" , dto);
 		
 		FaQ entity = faqRepository.findById(dto.getFqid()).orElseThrow();
 		
@@ -79,12 +79,7 @@ public class FaQService {
 	 */
 
 	public void delete(Long fqid) {
-	       log.info("delete{}" , fqid);
+	       //log.info("delete{}" , fqid);
 	       faqRepository.deleteById(fqid);   
 	    }
-	
-	
-	/**
-	 * 사용자
-	 */
 }

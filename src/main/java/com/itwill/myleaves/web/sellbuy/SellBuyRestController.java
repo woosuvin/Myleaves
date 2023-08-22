@@ -32,7 +32,7 @@ public class SellBuyRestController {
 	 */
 	@PostMapping("/sellbuy/sold")
 	public ResponseEntity<String> create(@RequestBody BuyCreateDto dto) {
-		log.info("dto={}", dto);
+		//log.info("dto={}", dto);
 		buyService.create(dto);
 		sellService.update(dto.getSellId(), dto.getSold());
 		return ResponseEntity.ok("success");
