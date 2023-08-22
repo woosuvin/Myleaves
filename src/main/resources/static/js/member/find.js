@@ -38,9 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		axios.get(reqUrl)
 			.then((response) => {
-				alert('아이디는 ' + response.data + '입니다.');
+				if (response.data == '회원정보가 존재하지 않습니다.') {
+					alert('회원정보가 존재하지 않습니다.');
+				} else {
+					alert('아이디는 ' + response.data + '입니다.');
+				}
 			})
 			.catch((error) => {
+				console.log(1);
 				console.log(error);
 			})
 	});

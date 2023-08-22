@@ -48,26 +48,26 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 
 	private final MemberService memberService;
-	//private final KakaoProfileService kakaoProfileService;
+	// private final KakaoProfileService kakaoProfileService;
 	private final AuthenticationManager authenticationManager;
 	private final PasswordEncoder passwordEncoder;
 	private final HttpServletRequest request;
-	
+
 	@Value("${cos.key}")
 	private String cosKey;
 
 	@GetMapping("/signup")
 	public void signUp() {
-		log.info("signup()");
+//		log.info("signup()");
 	}
 
 	@PostMapping("/signup")
 	public String signUp(MemberSignUpDto dto) {
-		log.info("signUp(dto={}) POST", dto);
+//		log.info("signUp(dto={}) POST", dto);
 
 		// 회원 가입 서비스 호출
 		String id = memberService.registerMember(dto);
-		log.info("회원 가입 id={}", id);
+//		log.info("회원 가입 id={}", id);
 
 		// 회원가입 이후에 로그인 화면으로 이동
 		return "redirect:/member/login";
@@ -75,7 +75,7 @@ public class MemberController {
 
 	@GetMapping("/login")
 	public void login(@RequestParam(name = "error", required = false) String error, Model model) {
-		log.info("login(error={})", error);
+//		log.info("login(error={})", error);
 
 		if (error != null) {
 			model.addAttribute("errorMsg", "아이디 또는 비밀번호가 일치하지 않습니다.");
@@ -84,12 +84,12 @@ public class MemberController {
 
 	@GetMapping("/find")
 	public void find() {
-		log.info("find()");
+//		log.info("find()");
 	}
 
 	@GetMapping("/kakao/callback")
-	public String kakaoCallback(String code) {
-		log.info("kakaoCallback(code={})", code);
+	public String kakaoCallback(String code, HttpServletRequest request) {
+//		log.info("kakaoCallback(code={})", code);
 
 		// POST 방식으로 key=value 데이터를 요청 (카카오 쪽으로)
 		// Retrofit2 - 안드로이드
@@ -133,7 +133,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 
-		log.info("kakaoCallback(oauthToken={})", oauthToken.getAccess_token());
+//		log.info("kakaoCallback(oauthToken={})", oauthToken.getAccess_token());
 
 		// POST 방식으로 key=value 데이터를 요청 (카카오 쪽으로)
 		// Retrofit2 - 안드로이드
@@ -174,35 +174,49 @@ public class MemberController {
 		}
 
 		// member 오브젝트: name, password, email
-		log.info("kakaoCallback(kakao id={}, kakao email={}) kakao username={} kakao gender={} ", kakaoProfile.getId(),
-				kakaoProfile.getKakao_account().getEmail(), kakaoProfile.getKakao_account().getProfile().getNickname());
-		
-		Member kakaoMember = Member.builder().userId(kakaoProfile.getId())
-				.name(kakaoProfile.getKakao_account().getProfile().getNickname())
-				.pwd(passwordEncoder.encode(cosKey)).email(kakaoProfile.getKakao_account().getEmail())
-				.build();
+//		log.info("kakaoCallback(kakao id={}, kakao email={}) kakao username={} kakao gender={} ", kakaoProfile.getId(),
+//				kakaoProfile.getKakao_account().getEmail(), kakaoProfile.getKakao_account().getProfile().getNickname());
 
-		log.info("kakaoCallback(kakaoMember={})", kakaoMember);
-		
+		Member kakaoMember = Member.builder().userId(kakaoProfile.getId())
+				.name(kakaoProfile.getKakao_account().getProfile().getNickname()).pwd(passwordEncoder.encode(cosKey))
+				.email(kakaoProfile.getKakao_account().getEmail()).build();
+
+//		log.info("kakaoCallback(kakaoMember={})", kakaoMember);
+
 		// 가입자 혹은 비가입자 처리
 		Member originMember = memberService.findMember(kakaoMember.getUserId());
 		if (originMember == null) {
-			System.out.println("기존 회원이 아니기에 자동 회원가입을 진행합니다");
+//			System.out.println("기존 회원이 아니기에 자동 회원가입을 진행합니다");
 			memberService.registerMember(kakaoMember);
 		}
 
-		System.out.println("자동 로그인을 진행합니다.");
-		
-		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken(kakaoMember.getUserId(), cosKey));
-		SecurityContextHolder.getContext().setAuthentication(authentication);
-		log.info("kakaoCallback(authentication={})", authentication);
-		
+//		System.out.println("자동 로그인을 진행합니다.");
+
+//		Authentication authentication = authenticationManager
+//				.authenticate(new UsernamePasswordAuthenticationToken(kakaoMember.getUserId(), cosKey));
+//		SecurityContextHolder.getContext().setAuthentication(authentication);
+//		log.info("kakaoCallback(authentication={})", authentication);
+
 //		HttpSession session = request.getSession();
 //		session.setAttribute("userAuthentication", authentication);
-		
+
 //		log.info("kakaoCallback(session={})", session);
-		
+
+		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(kakaoMember.getUserId(), cosKey);
+
+		// Authenticate the user
+		Authentication authentication = authenticationManager.authenticate(authRequest);
+		SecurityContext securityContext = SecurityContextHolder.getContext();
+		securityContext.setAuthentication(authentication);
+
+		// Create a new session and add the security context.
+		HttpSession session = request.getSession(true);
+		session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
+
+		// ------------------------------------------
+		//session.setAttribute("auth", authentication);
+		// ------------------------------------------
+
 		return "redirect:/";
 	}
 }

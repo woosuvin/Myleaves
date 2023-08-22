@@ -45,23 +45,23 @@ public class MemberService implements UserDetailsService {
 
 	// 회원가입
 	public String registerMember(MemberSignUpDto dto) {
-		log.info("registerMember(dto={})", dto);
+//		log.info("registerMember(dto={})", dto);
 
 		Member entity = Member.builder().userId(dto.getUserId()).name(dto.getName())
 				.pwd(passwordEncoder.encode(dto.getPwd())).gender(dto.getGender()).birth(dto.getBirth())
 				.phone(dto.getPhone()).email(dto.getEmail()).build();
 
-		log.info("save 전: entity={}", entity);
+//		log.info("save 전: entity={}", entity);
 
 		memberRepository.save(entity);
-		log.info("save 후: entity={}", entity);
+//		log.info("save 후: entity={}", entity);
 
 		return entity.getUserId();
 	}
 
 	@Transactional
 	public void registerMember(Member kakaoMember) {
-		log.info("registerMember(dto={})", kakaoMember);
+//		log.info("registerMember(dto={})", kakaoMember);
 
 //		UUID garbagePwd = UUID.randomUUID();
 //		log.info("registerMember(cosKey={})", cosKey);
@@ -76,10 +76,10 @@ public class MemberService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		log.info("loadUserByUsername(userId={})", userId);
+//		log.info("loadUserByUsername(userId={})", userId);
 
 		UserDetails user = memberRepository.findByUserId(userId);
-		log.info("loadUserByUsername(user={})", user);
+//		log.info("loadUserByUsername(user={})", user);
 		
 		if (user != null) {
 			return user;
@@ -94,7 +94,7 @@ public class MemberService implements UserDetailsService {
 	 * @return 전체 회원수
 	 */
 	public int read() {
-		log.info("read()");
+//		log.info("read()");
 
 		List<Member> members = memberRepository.findAll();
 		int size = members.size();
@@ -110,7 +110,7 @@ public class MemberService implements UserDetailsService {
 	 * @return userId
 	 */
 	public String read(String name, String email) {
-		log.info("read(name={}, email={})", name, email);
+//		log.info("read(name={}, email={})", name, email);
 
 		Member entity = memberRepository.findByNameAndEmail(name, email);
 
@@ -126,7 +126,7 @@ public class MemberService implements UserDetailsService {
 
 	@Transactional
 	public String modifyPwd(String userId) {
-		log.info("modifyPwd()");
+//		log.info("modifyPwd()");
 
 		StringBuffer newPwd = new StringBuffer();
 		Random rnd = new Random();
@@ -154,20 +154,20 @@ public class MemberService implements UserDetailsService {
 
 	@Transactional
 	public void update(MemberUpdateDto dto) {
-		log.info("update(dto={})", dto);
+//		log.info("update(dto={})", dto);
 
 		Member member = memberRepository.findByUserId(dto.getUserId());
-		log.info("update(member={} SAVE 전", member);
+//		log.info("update(member={} SAVE 전", member);
 
 		member.update(dto);
-		log.info("update(memeber={} SAVE 후", member);
+//		log.info("update(memeber={} SAVE 후", member);
 	}
 
 	public List<Member> readWithPaging(Criteria cri) {
-		log.info("readWithPaging()");
+//		log.info("readWithPaging()");
 
 		List<Member> members = memberRepository.readWithPaging(cri.getPageNum(), cri.getAmount());
-		// log.info("read(members={})", members);
+//	    log.info("read(members={})", members);
 
 		return members;
 	}
@@ -350,7 +350,7 @@ public class MemberService implements UserDetailsService {
 	}
 	@Transactional(readOnly = true)
 	public Member findMember(String userId) {
-		log.info("findMember(userId={})", userId);
+//		log.info("findMember(userId={})", userId);
 
 		return memberRepository.findByUserId(userId);
 	}

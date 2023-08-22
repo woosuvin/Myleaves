@@ -22,7 +22,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		String loginId = request.getParameter("userId");
 		String password = request.getParameter("pwd");
 		log.info("onAuthenticationSuccess(userId={}, pwd={})", loginId, password);
-		
+		log.info("onAuthenticationSuccess(authentication)={}", authentication);
 		
 		// 이전에 방문하려던 페이지 정보 가져오기
 		SavedRequest savedRequest = new HttpSessionRequestCache().getRequest(request, response);

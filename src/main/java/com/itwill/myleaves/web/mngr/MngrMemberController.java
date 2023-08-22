@@ -31,7 +31,7 @@ public class MngrMemberController {
 //		log.info("manage()");
 
 		List<Member> members = memberService.readWithPaging(cri);
-//		log.info("manage(members={})", members);
+		log.info("manage(members={}, cri={})", members, cri);
 		int size = memberService.read();
 		log.info("manage(size={})", size);
 		

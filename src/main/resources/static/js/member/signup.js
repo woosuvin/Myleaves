@@ -11,10 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	let isMatchedId;
 	//let isValidPwd;
 
+	const inputPhone = document.querySelector('input[name=phone]'); // 휴대폰 번호 입력 필드를 선택합니다.
+
+	inputPhone.addEventListener('input', (event) => {
+		event.target.value = event.target.value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자를 모두 제거합니다.
+	});
+
 	inputId.addEventListener('blur', function() {
 		const id = inputId.value;
 		//const idPattern = /^(?=.{5,20}$)([a-z]+$|[a-z0-9]+$|[a-z0-9_\-]+$|[a-z_\-]+)$/;
-//
+		//
 		//if (!idPattern.test(id)) {
 		//	idErrorMessage.textContent = '5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.';
 		//	isMatchedId = false;
@@ -22,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		//	idErrorMessage.textContent = '';
 		//	isMatchedId = true;
 		//}
-//
+		//
 		const reqUrl = '/member/check/id';
 
 		axios.get(reqUrl, { params: { inputId: id } })
@@ -30,10 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (response.data !== 'fail') {
 					idErrorMessage.textContent = '이미 존재하는 아이디입니다.';
 					isMatchedId = false;
-					
+
 				} //else if (!idPattern.test(id)) {
-					//idErrorMessage.textContent = '5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.';
-					//isMatchedId = false;
+				//idErrorMessage.textContent = '5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.';
+				//isMatchedId = false;
 				//} 
 				else {
 					idErrorMessage.textContent = '';
@@ -100,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (isMatched) {
 			if (isMatchedId) {
 				//if (isValidPwd) {
-					form.submit();
+				form.submit();
 				//} else {
 				//	alert('비밀번호를 확인해주세요');
 				//}
