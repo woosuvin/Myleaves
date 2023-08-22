@@ -194,8 +194,8 @@ public class PlanteriorHomecontroller {
 	        for(int i = 0; i < results.length; i++) {
 	        	conditionContentMap.put(results[i], results[i]);
 	        }
-	        // log.info("확인 {}", conditionContentMap.size());
-	        model.addAttribute("map", conditionContentMap);
+	        
+	        model.addAttribute("conditionContentMap", conditionContentMap);
 			
 			List<Planterior> list = planteriorService.read();
 			List<Bookmark> bookList = bookmarkService.read();

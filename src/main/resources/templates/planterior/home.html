@@ -37,18 +37,32 @@
 					</ul>
 					<input class="d-none" name="stateContent" id="stateContent" /> <input
 						class="d-none" name="conditionContent" id="conditionContent" />
-					<ul class="d-none list-unstyled secondFilterSection"
+					<ul th:if="${conditionContentMap == null or conditionContentMap.isEmpty()}" class="d-none list-unstyled secondFilterSection"
 						id="secondFilter">
 						<li class="filterSecond">
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="초보자용" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="선물하기 좋은" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="공기정화" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="빛이 적어도 되는" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="향기나는" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="반려동물 안전한" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="목대있는" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="흙이 필요없는" /> 
-							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="덩굴로 자라는" />
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="초보자용" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('초보자용') && conditionContentMap['초보자용'] == '초보자용' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="선물하기 좋은" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('선물하기 좋은') && conditionContentMap['선물하기 좋은'] == '선물하기 좋은' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="공기정화" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('공기정화') && conditionContentMap['공기정화'] == '공기정화' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="빛이 적어도 되는" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('빛이 적어도 되는') && conditionContentMap['빛이 적어도 되는'] == '빛이 적어도 되는' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="향기나는" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('향기나는') && conditionContentMap['향기나는'] == '향기나는' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="반려동물 안전한" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('반려동물 안전한') && conditionContentMap['반려동물 안전한'] == '반려동물 안전한' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="목대있는" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('목대있는') && conditionContentMap['목대있는'] == '목대있는' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="흙이 필요없는" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('흙이 필요없는') && conditionContentMap['흙이 필요없는'] == '흙이 필요없는' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="덩굴로 자라는" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('덩굴로 자라는') && conditionContentMap['덩굴로 자라는'] == '덩굴로 자라는' ? 'clicked' : ''}"/>
+						</li>
+					</ul>
+					<ul th:if="${conditionContentMap != null and not conditionContentMap.isEmpty()}" class="list-unstyled secondFilterSection"
+						id="secondFilter">
+						<li class="filterSecond">
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="초보자용" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('초보자용') && conditionContentMap['초보자용'] == '초보자용' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="선물하기 좋은" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('선물하기 좋은') && conditionContentMap['선물하기 좋은'] == '선물하기 좋은' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="공기정화" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('공기정화') && conditionContentMap['공기정화'] == '공기정화' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="빛이 적어도 되는" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('빛이 적어도 되는') && conditionContentMap['빛이 적어도 되는'] == '빛이 적어도 되는' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="향기나는" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('향기나는') && conditionContentMap['향기나는'] == '향기나는' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="반려동물 안전한" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('반려동물 안전한') && conditionContentMap['반려동물 안전한'] == '반려동물 안전한' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="목대있는" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('목대있는') && conditionContentMap['목대있는'] == '목대있는' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="흙이 필요없는" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('흙이 필요없는') && conditionContentMap['흙이 필요없는'] == '흙이 필요없는' ? 'clicked' : ''}"/> 
+							<input type="button" class="filterSecondBtn btn btn-outline-dark" id="filterSecondBtn" value="덩굴로 자라는" th:classappend="${conditionContentMap != null && conditionContentMap.containsKey('덩굴로 자라는') && conditionContentMap['덩굴로 자라는'] == '덩굴로 자라는' ? 'clicked' : ''}"/>
 						</li>
 					</ul>
 				</div>
@@ -120,10 +134,10 @@
 		<br>
 		<div class="m-2">
 			<!-- 로그인 안 했을 경우 -->
-			<div th:if="${cardList.empty}">
-        		<p class="text-center">플랜테리어가 없습니다.</p>
-    		</div>
 			<th:block sec:authorize="isAnonymous()">
+				<div th:if="${cardList.empty}">
+	        		<p class="text-center">플랜테리어가 없습니다.</p>
+	    		</div>
 				<div th:if="${not cardList.empty}" class="row row-cols-1 row-cols-md-4 g-4">
 					<div class="col cardBox" th:each="list: ${cardList}">
 						<div class="card">
@@ -149,10 +163,10 @@
 				</div>
 			</th:block>
 			<!-- 로그인 했을 경우 -->
-			<div th:if="${cardList.empty}">
-        		<p class="text-center">플랜테리어가 없습니다.</p>
-    		</div>
 			<th:block sec:authorize="isAuthenticated()">
+				<div th:if="${cardList.empty}">
+	        		<p class="text-center">플랜테리어가 없습니다.</p>
+	    		</div>
 				<div th:if="${not cardList.empty}" class="row row-cols-1 row-cols-md-4 g-4">
 					<div class="col" th:each="list: ${cardList}">
 						<div>
