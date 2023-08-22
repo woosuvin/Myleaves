@@ -24,13 +24,16 @@
 						<img class="imgSize" th:src="@{'data:image/png;base64,'+${images.get(list.planteriorId)}}" />
 						<div class="card-body row">
 							<div class="col-9 text-start">
-								<p class="planteriorButtonEle"
-									th:text="${list.plantName} + '(' + ${list.plantNameEnglish} +')'" />
+								<p class="planteriorButtonEle" th:text="${list.plantName}" />
 							</div>
 							<div class="col-3 text-end">
 								<button class="imgButtonFill btn-outline-dark" th:value="${list.planteriorId}">
 									<img th:src="@{/images/planterior/bookmarkFill.svg}" />
 								</button>
+							</div>
+							<div>
+								<p class="planteriorButtonEleEnglishName text-start"
+									th:text="'(' + ${list.plantNameEnglish} +')'" />
 							</div>
 						</div>
 					</div>
