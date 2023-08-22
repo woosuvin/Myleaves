@@ -27,7 +27,7 @@ public class MngrOrderRestController {
 	 */
 	@PutMapping("/order/{orderId}")
 	public ResponseEntity<String> update(@PathVariable long orderId, @RequestBody TotalOrderStatusUpdateDto dto) {
-		log.info("update(orderId={}, dto={})", orderId, dto);
+		//log.info("update(orderId={}, dto={})", orderId, dto);
 		totalOrderService.update(orderId, dto);
 		return ResponseEntity.ok("Success");
 	}

@@ -34,8 +34,4 @@ public class MypageStoreService {
 		return list;
 	}
 	
-//	public List<StoreWish> readWish(Long itemId){
-//		return storeWishRepository.findByItemId(itemId);
-//	}
-	
 }

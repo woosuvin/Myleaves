@@ -31,9 +31,9 @@ public class ChatRestController {
 	 
 	  	@PostMapping("/startChat")
 	    public ResponseEntity<Long> startChat(@RequestBody ChatRoomCreateDto dto) {
-		  	log.info("dto = {}", dto);
+		  	//log.info("dto = {}", dto);
 	        ChatRoom checkedChatRooms = chatService.readChatRoom(dto.getMyId(), dto.getOtherId(), dto.getSellId());
-	        log.info("checkedChatRooms={}", checkedChatRooms);
+	        //log.info("checkedChatRooms={}", checkedChatRooms);
 	        
 	        if (checkedChatRooms != null) { // DB에 있으면
 	            return ResponseEntity.ok(chatService.readChatRoom(dto.getMyId(), dto.getOtherId(), dto.getSellId()).getRoomId());

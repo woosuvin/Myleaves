@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.util.HtmlUtils;
 
 import com.itwill.myleaves.repository.chat.Chat;
-import com.itwill.myleaves.stomp.Greeting;
+import com.itwill.myleaves.repository.chat.Greeting;
 
 @Controller
 public class MessageController {

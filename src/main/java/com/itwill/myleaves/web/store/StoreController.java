@@ -37,7 +37,7 @@ public class StoreController {
 	
 	@GetMapping("/list")
 	public void read(Model model, @PageableDefault(page = 0, size = 8) Pageable pageable) {
-		log.info("storeList:GET");
+		//log.info("storeList:GET");
 		
 		Page<Store> list = storeService.readUserPage(pageable);
 		model.addAttribute("stores", list);
@@ -61,16 +61,13 @@ public class StoreController {
 	@PreAuthorize("hasRole('MEMBER')")
 	@GetMapping("/detail")
 	public void read(String userId, long itemId, Model model) {
-		log.info("read(itemId={})", itemId);
+		//log.info("read(itemId={})", itemId);
 		
 		List<StoreWish> storeWishList = storeService.readStoreWish(itemId);
-		log.info("{}", storeWishList);
+		//log.info("{}", storeWishList);
 		
 		Boolean result = null;
-//		List<StoreWish> wishlist = mypageStoreService.readWish(itemId);
-//		for(StoreWish wish : wishlist) {
-//			result = (wish.getUserId().equals(userId))? true:false;
-//		}
+		
 		for (StoreWish x : storeWishList) {
 			if (x.getUserId().equals(userId)) {
 				result = true;

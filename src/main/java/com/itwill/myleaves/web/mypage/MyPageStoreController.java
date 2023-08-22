@@ -78,7 +78,7 @@ public class MyPageStoreController {
 //		log.info("read()");
 		Page<TotalOrder> list = orderService.read(userId, pageable);
 		model.addAttribute("totalOrders", list);
-		log.info("getTotalPages{}", list.getTotalPages());
+		//log.info("getTotalPages{}", list.getTotalPages());
 		int totalPage = list.getTotalPages()-1;
 		int nowPage = list.getPageable().getPageNumber()+1; //지금 페이지 0 + 1 => 1 페이지부터 시작
 		int startPage = Math.max(nowPage-4, 1);
