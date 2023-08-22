@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		if(sold === 1 || sold === 2) {
 			reqUrl = `/sellbuy/update/${sellId}/${sold}`;
 			data = { sellId, sold };
-			const check = confirm('거래 상태 변경?');
+			const check = confirm('변경하시겠습니까?');
 			if (check) {
 				axios.put(reqUrl, data)
 				.then((response) => {
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		if(sold === 3) {
 			reqUrl = '/sellbuy/sold';
 			data = { sellId, sellerId, buyerId, sold };
-			const check = confirm('거래 상태 변경?');
+			const check = confirm('변경하시겠습니까?');
 			if (check) {
 				axios.post(reqUrl, data)
 					.then((response) => {

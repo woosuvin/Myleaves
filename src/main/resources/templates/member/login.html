@@ -5,9 +5,6 @@
 <head>
 	<style>
         .center-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
             text-align: center;
             height: 10vh;
@@ -26,14 +23,13 @@
 		<div class="center-content">
 			<h3 class="text-center mb-5"> 로그인</h3>
 		</div>
-		<div class="center-content">
-			<form class="mt-5" id="login-form" method="post" th:action="@{ /member/login }"
-				  style="width: 207px; height: 185px;">
+		<div class="center-content w-25 mx-auto">
+			<form class="mt-5" id="login-form" method="post" th:action="@{ /member/login }">
 				<div>
-					<div class="left-text">
+					<div class="left-text my-2">
 						<strong>아이디</strong>
 					</div>
-					<div>
+					<div class="my-2">
 						<input type="text"
 							   class="form-control"
 							   name=userId
@@ -42,10 +38,10 @@
 					</div>
 				</div>
 				<div>
-					<div class="left-text">
+					<div class="left-text my-2">
 						<strong>비밀번호</strong>
 					</div>
-					<div>
+					<div class="my-2">
 						<input type="password"
 							   class="form-control"
 							   name=pwd
@@ -56,10 +52,10 @@
 				<div th:if="${errorMsg}" style="color: red;">
             		<p th:text="${errorMsg}"></p>
         		</div>
-        		<div>
+        		<div class="my-2">
 				    <a th:href="@{ /member/find }">아이디/비밀번호 찾기</a>
 				</div>
-				<div>
+				<div class="my-2">
 					<input type="submit"
 						   class="btn btn-success"
 						   id="btn-login"
