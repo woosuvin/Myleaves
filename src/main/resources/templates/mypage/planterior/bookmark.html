@@ -48,20 +48,20 @@
 			<nav id="paging-block">
 				<ul class="pagination justify-content-md-center">
 					<li class="page-item">
-						<a class="page-link" th:href="@{/mypage/planterior/my_posts(userId=${#authentication.name}, page=${0})}"> &laquo; </a>
+						<a class="page-link" th:href="@{/mypage/planterior/bookmark(userId=${#authentication.name}, page=${0})}"> &laquo; </a>
 					</li>
 					<li th:each="page : ${#numbers.sequence(startPage, endPage)}"
 						class="paging-item page-item"
 						th:classappend="${page == nowPage} ? 'active' : ''">
 							<a class="page-link link-dark"
-								th:href="@{/mypage/planterior/my_posts(userId=${#authentication.name}, page=${page -1})}" 
+								th:href="@{/mypage/planterior/bookmark(userId=${#authentication.name}, page=${page -1})}" 
 								th:text="${page}"
 								th:value="${page}">
 							</a>
 					</li>
 					<li class="page-item">
 						<a class="page-link"
-						th:href="@{/mypage/planterior/my_posts(userId=${#authentication.name}, page=${totalPage})}"> &raquo; </a>
+						th:href="@{/mypage/planterior/bookmark(userId=${#authentication.name}, page=${totalPage})}"> &raquo; </a>
 					</li>
 				</ul>
 			</nav>
