@@ -329,7 +329,7 @@ a.mainMore:active {
 }
 
 .carousel-indicators [data-bs-target] {
-	background-color: #02BB77;
+	background-color: darkgray;
 	width: 60px;
 }
 
