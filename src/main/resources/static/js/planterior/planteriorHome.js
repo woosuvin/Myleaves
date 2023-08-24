@@ -27,6 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	let lastClickedValue = null; // 마지막으로 클릭한 버튼의 값 추적
 
 	for (const filterBtn of filterBtns) {
+		
+		if (filterBtn.classList.contains('clicked')) {
+			inputStateContent.value = filterBtn.value;
+			console.log(inputStateContent.value)
+		}
+		
 		filterBtn.addEventListener('click', (e) => {
 
 			// li 삽입할 ul 요소를 찾음
@@ -81,7 +87,22 @@ document.addEventListener('DOMContentLoaded', () => {
 	let lastClickedValueFilterSecond = null;
 	const filterSecondBtns = document.querySelectorAll('input.filterSecondBtn');
 	for (let btn of filterSecondBtns) {
+		
+		if (btn.classList.contains('clicked')) {
+			inputConditionContent.value = btn.value;
+			console.log(inputConditionContent.value)
+		}
+		
 		btn.addEventListener('click', (e) => {
+			
+			// db에서 넘어온 값 처리
+			if (btn.classList.contains('clicked')) {
+				btn.classList.remove('clicked');
+				inputStateContent.value = ''
+				inputConditionContent.value = ''
+				return;
+			}
+			
 			// 이미 'clicked' 클래스가 추가된 버튼을 다시 클릭한 경우
 			if (btn === lastClickedBtnFilterSecond) {
 				btn.classList.remove('clicked');
