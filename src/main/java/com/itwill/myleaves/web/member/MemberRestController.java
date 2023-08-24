@@ -23,40 +23,40 @@ public class MemberRestController {
 	
 	@GetMapping("/confirm")
 	public ResponseEntity<String> emailConfirm(String email) throws Exception {
-	    log.info("emailConfirm(email={})", email);
+//	    log.info("emailConfirm(email={})", email);
 
 	    String confirm = emailService.sendSimpleMessage(email);
-	    log.info("emailConfirm(confirm={})", confirm);
+//	    log.info("emailConfirm(confirm={})", confirm);
 
 	    return ResponseEntity.ok(confirm);
 	}
 	
 	@GetMapping("/find/id")
 	public ResponseEntity<String> findId(String name, String email) {
-		log.info("findId(name={}, email={})", name, email);
+//		log.info("findId(name={}, email={})", name, email);
 		
 		String userId = memberService.read(name, email);
-		log.info("findId(userId={})", userId);
+//		log.info("findId(userId={})", userId);
 		
 		return ResponseEntity.ok(userId);
 	}
 	
 	@GetMapping("/check/id")
 	public ResponseEntity<String> checkId(String inputId) {
-		log.info("checkId(inputId={})", inputId);
+//		log.info("checkId(inputId={})", inputId);
 		
 		String userId = memberService.read(inputId);
-		log.info("checkId(userId={})", userId);
+//		log.info("checkId(userId={})", userId);
 		
 		return ResponseEntity.ok(userId);
 	}
 	
 	@GetMapping("/modify/pwd")
 	public ResponseEntity<String> modifyPwd(@RequestParam String userId) {
-		log.info("modifyPwd(userId={})", userId);
+//		log.info("modifyPwd(userId={})", userId);
 		
 		String newPwd = memberService.modifyPwd(userId);
-		log.info("modifyPwd(newPwd={}", newPwd);
+//		log.info("modifyPwd(newPwd={}", newPwd);
 		
 		return ResponseEntity.ok(newPwd);
 	}

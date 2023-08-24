@@ -158,7 +158,9 @@
 			</table>
 		</div>
 	</div>
+	<a th:href="@{/store/list}">
 	<input class="mainPic" type="image" th:src="@{/images/common/storeBanner.png}">
+	</a>
 	<div class="container-fluid container py-5" style="padding-top: 1rem!important; padding-bottom: 5rem!important;">
 		<div class="row my-3" style="margin-bottom: 1.5rem!important;">
 			<h2 class="col-11 mainH2">내풀잎스 스토어</h2>
@@ -212,11 +214,13 @@
 			</div>
 		</div>
 	</div>
+	<a th:href="@{/planterior}">
 	<input class="mainPic" type="image" th:src="@{/images/common/planteriorBanner.png}">
+	</a>
 	<div class="container-fluid container py-5" style="padding-top: 1rem!important; padding-bottom: 5rem!important;">
 		<div class="row my-3" style="margin-bottom: 1.5rem!important;">
 			<h2 class="col-11 mainH2">베스트 플랜테리어</h2>
-			<a class="col-1 mainMore" th:href="@{/store/list}">더보기></a>
+			<a class="col-1 mainMore" th:href="@{/planterior}">더보기></a>
 		</div>
 				<input type="hidden" id="mngrCount" th:value="${mngrCount}" />
 		<div class="m-2">

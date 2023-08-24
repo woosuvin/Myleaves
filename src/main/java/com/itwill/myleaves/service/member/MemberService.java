@@ -53,7 +53,7 @@ public class MemberService implements UserDetailsService {
 
 //		log.info("save 전: entity={}", entity);
 
-		memberRepository.save(entity);
+//		memberRepository.save(entity);
 //		log.info("save 후: entity={}", entity);
 
 		return entity.getUserId();
@@ -119,7 +119,7 @@ public class MemberService implements UserDetailsService {
 		} else {
 			String userId = entity.getUserId();
 
-			log.info("read={}", userId);
+//			log.info("read={}", userId);
 			return userId;
 		}
 	}

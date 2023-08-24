@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				if (response.data !== 'fail') {
 					idErrorMessage.textContent = '이미 존재하는 아이디입니다.';
 					isMatchedId = false;
+					console.log('1');
 
 				} //else if (!idPattern.test(id)) {
 				//idErrorMessage.textContent = '5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.';
@@ -44,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				else {
 					idErrorMessage.textContent = '';
 					isMatchedId = true;
+					console.log('2');
 				}
 			})
 			.catch((error) => {
@@ -102,7 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	btnJoin.addEventListener('click', (e) => {
 		e.preventDefault();
-
+		console.log(isMatchedId);
+		
 		if (isMatched) {
 			if (isMatchedId) {
 				//if (isValidPwd) {
